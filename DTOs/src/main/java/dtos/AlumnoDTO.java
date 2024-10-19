@@ -61,5 +61,10 @@ public class AlumnoDTO extends UsuarioDTO{
     public void setPromedio(float promedio) {
         this.promedio = promedio;
     }
+
+    @Override
+    public String toString() {
+        return "AlumnoDTO{" + "semestre=" + semestre + ", promedio=" + promedio + '}';
+    }
      
 }
