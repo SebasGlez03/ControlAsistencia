@@ -52,4 +52,19 @@ public class MaestroDTO extends UsuarioDTO {
     public void setMateria(List<String> materias) {
         this.materias = materias;
     }
+    
+    /**
+     * Agrega una materia al final de la lista
+     * @param materia 
+     */
+    public void agregarMateria(String materia){
+        materias.add(materia);
+    }
+    /**
+     * Elimina una materia dentro de la lista usando el nombre como referencia
+     * @param materia 
+     */
+    public void eliminarMateria(String materia){
+        materias.remove(materia);
+    }
 }
