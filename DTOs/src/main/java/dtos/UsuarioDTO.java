@@ -12,7 +12,7 @@ public class UsuarioDTO {
 
     protected String nombre;
     protected String correo;
-    protected Long id;
+    protected int id;
     protected String contrasenia;
 
     /**
@@ -29,7 +29,7 @@ public class UsuarioDTO {
      * @param id id del usuario
      * @param contrasenia contrasenia del usuario
      */
-    public UsuarioDTO(String nombre, String correo, Long id, String contrasenia) {
+    public UsuarioDTO(String nombre, String correo, int id, String contrasenia) {
         this.nombre = nombre;
         this.correo = correo;
         this.id = id;
@@ -91,7 +91,7 @@ public class UsuarioDTO {
      *
      * @return id del usuario
      */
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
@@ -100,7 +100,7 @@ public class UsuarioDTO {
      *
      * @param id id del usuario
      */
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
