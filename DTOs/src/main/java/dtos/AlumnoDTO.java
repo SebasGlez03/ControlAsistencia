@@ -29,6 +29,25 @@ public class AlumnoDTO extends UsuarioDTO{
         this.semestre = semestre;
         this.promedio = promedio;
     }
+
+     /**
+     * Constructor con parámetros que permite inicializar los atributos heredados de UsuarioDTO
+     * y los atributos específicos de AlumnoDTO (semestre y promedio)
+     * @param semestre El semestre actual del alumno
+     * @param promedio El promedio académico del alumno
+     * @param nombre El nombre del alumno (heredado de UsuarioDTO)
+     * @param correo El correo electrónico del alumno (heredado de UsuarioDTO)
+     * @param contrasenia La contraseña del alumno (heredado de UsuarioDTO)
+     */
+    public AlumnoDTO(int semestre, float promedio, String nombre, String correo, String contrasenia) {
+        // Llamada al constructor de la clase base UsuarioDTO
+        super(nombre, correo, contrasenia);
+        this.semestre = semestre;
+        this.promedio = promedio;
+    }
+
+    
+    
     
     /**
      * Obtiene el semestre actual del alumno
