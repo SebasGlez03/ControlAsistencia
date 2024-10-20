@@ -33,10 +33,10 @@ public class FrmLogin extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1000, 750));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblLogoItson.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\Cosas\\Git Repositories\\ControlAsistencia\\GUIs\\src\\resources\\logoItson.png")); // NOI18N
+        lblLogoItson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoItson.png"))); // NOI18N
         getContentPane().add(lblLogoItson, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, -1));
 
-        lblBackground.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\Cosas\\Git Repositories\\ControlAsistencia\\GUIs\\src\\resources\\background.png")); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.png"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
