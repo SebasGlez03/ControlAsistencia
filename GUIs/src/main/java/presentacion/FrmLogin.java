@@ -26,9 +26,12 @@ public class FrmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        Hola = new javax.swing.JLabel();
         lblLogoItson = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
+        txtContrasenia = new javax.swing.JTextField();
+        btnAceptar = new javax.swing.JLabel();
+        btnClose = new javax.swing.JLabel();
+        lblFormLogin = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -36,21 +39,31 @@ public class FrmLogin extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1000, 750));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanel1MouseClicked(evt);
-            }
-        });
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        Hola.setText("jLabel1");
-        jPanel1.add(Hola, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 40, -1, -1));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 50, 40));
-
         lblLogoItson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoItson.png"))); // NOI18N
         getContentPane().add(lblLogoItson, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, -1));
+        getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 270, 30));
+        getContentPane().add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 270, 30));
+
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnAceptar.png"))); // NOI18N
+        btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAceptarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 490, -1, -1));
+
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnClose.png"))); // NOI18N
+        btnClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCloseMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, -1, -1));
+
+        lblFormLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/loginForm.png"))); // NOI18N
+        getContentPane().add(lblFormLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 270, -1, -1));
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.png"))); // NOI18N
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -59,9 +72,13 @@ public class FrmLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+    private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
+
+    }//GEN-LAST:event_btnAceptarMouseClicked
+
+    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
         dispose();
-    }//GEN-LAST:event_jPanel1MouseClicked
+    }//GEN-LAST:event_btnCloseMouseClicked
 
     /**
      * @param args the command line arguments
@@ -99,9 +116,12 @@ public class FrmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Hola;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel btnAceptar;
+    private javax.swing.JLabel btnClose;
     private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblFormLogin;
     private javax.swing.JLabel lblLogoItson;
+    private javax.swing.JTextField txtContrasenia;
+    private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }
