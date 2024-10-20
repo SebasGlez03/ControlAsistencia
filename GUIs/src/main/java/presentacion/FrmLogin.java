@@ -26,12 +26,28 @@ public class FrmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        Hola = new javax.swing.JLabel();
         lblLogoItson = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setSize(new java.awt.Dimension(1000, 750));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Hola.setText("jLabel1");
+        jPanel1.add(Hola, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 40, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 20, 50, 40));
 
         lblLogoItson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoItson.png"))); // NOI18N
         getContentPane().add(lblLogoItson, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, -1));
@@ -40,7 +56,12 @@ public class FrmLogin extends javax.swing.JFrame {
         getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        dispose();
+    }//GEN-LAST:event_jPanel1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,6 +99,8 @@ public class FrmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Hola;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblLogoItson;
     // End of variables declaration//GEN-END:variables
