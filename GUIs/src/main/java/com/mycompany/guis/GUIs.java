@@ -1,7 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package com.mycompany.guis;
 
 /**
@@ -10,7 +9,5 @@ package com.mycompany.guis;
  */
 public class GUIs {
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
-    }
+    
 }

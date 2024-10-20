@@ -26,24 +26,18 @@ public class FrmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblLogoItson = new javax.swing.JLabel();
+        lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 750));
         setSize(new java.awt.Dimension(1000, 750));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/multimedia/background.png"))); // NOI18N
+        lblLogoItson.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\Cosas\\Git Repositories\\ControlAsistencia\\GUIs\\src\\resources\\logoItson.png")); // NOI18N
+        getContentPane().add(lblLogoItson, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        lblBackground.setIcon(new javax.swing.ImageIcon("C:\\Users\\PC\\Desktop\\Cosas\\Git Repositories\\ControlAsistencia\\GUIs\\src\\resources\\background.png")); // NOI18N
+        getContentPane().add(lblBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -84,6 +78,7 @@ public class FrmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblBackground;
+    private javax.swing.JLabel lblLogoItson;
     // End of variables declaration//GEN-END:variables
 }
