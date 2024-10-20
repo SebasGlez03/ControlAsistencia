@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author PC
@@ -73,11 +75,16 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
-
+        JOptionPane.showMessageDialog(this, "Presionaste el boton aceptar!", "Success!", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnAceptarMouseClicked
 
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
-        dispose();
+        int reply = JOptionPane.showConfirmDialog(this,
+                "¿Estás seguro que deseas cerrar la aplicación?",
+                "Cerrar aplicación", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            dispose();
+        }
     }//GEN-LAST:event_btnCloseMouseClicked
 
     /**
