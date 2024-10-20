@@ -4,10 +4,14 @@
  */
 package controlUsuario;
 
+import dtos.UsuarioDTO;
+
 /**
  *
  * @author PC
  */
 public class ControlUsuario {
+    
+    private UsuarioDTO usuario;
     
 }
