@@ -18,4 +18,5 @@
         <maven.compiler.target>22</maven.compiler.target>
         <exec.mainClass>com.mycompany.controlalumno.ControlAlumno</exec.mainClass>
     </properties>
+    <name>SubsistemaAlumno</name>
 </project>
