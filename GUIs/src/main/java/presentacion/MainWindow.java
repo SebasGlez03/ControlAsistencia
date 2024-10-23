@@ -4,22 +4,44 @@
  */
 package presentacion;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Ragzard
  */
-public class FrmScanQR extends javax.swing.JFrame {
-    
+public class MainWindow extends javax.swing.JFrame {
+
     int xx, xy;
 
     /**
-     * Creates new form FrmScanQR
+     * Creates new form MainWindow
      */
-    public FrmScanQR() {
+    public MainWindow() {
         initComponents();
-        
-        this.setLocationRelativeTo(null);
+
+        this.setLocationRelativeTo(null); //Centra la ventana de la app
+
+        InicioPanel inicio = new InicioPanel(this); //Vista principal
+        changeContentPane(inicio);
+
+        System.out.println("Entro al constructor");
     }
+
+    /**
+     * Cambia el contenido del 'mainContentPanel' al panel dado por el
+     * parametro.
+     *
+     * @param actualPanel un objeto de tipo JPanel.
+     */
+    protected void changeContentPane(JPanel actualPanel) {
+        this.mainContentPanel.removeAll();
+        this.mainContentPanel.add(actualPanel);
+        this.mainContentPanel.revalidate();
+        this.mainContentPanel.repaint();
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,23 +56,9 @@ public class FrmScanQR extends javax.swing.JFrame {
         btnExit = new javax.swing.JLabel();
         btnMinimize = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        ContentPanel = new java.awt.Panel();
-        headerPanel = new javax.swing.JPanel();
-        lblImgClass = new javax.swing.JLabel();
-        btnReturn = new javax.swing.JLabel();
-        ItsonLogo = new javax.swing.JLabel();
-        lblClassName = new javax.swing.JLabel();
-        lblCodeClass = new javax.swing.JLabel();
-        lblHourClass1 = new javax.swing.JLabel();
-        txtPIN = new javax.swing.JTextField();
-        lblScanCam = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        camDecorator = new javax.swing.JLabel();
-        camBackground = new javax.swing.JLabel();
-        btnCancel = new javax.swing.JLabel();
+        mainContentPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(27, 57, 166));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -68,6 +76,7 @@ public class FrmScanQR extends javax.swing.JFrame {
         });
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/Exit.png"))); // NOI18N
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnExitMouseClicked(evt);
@@ -75,6 +84,7 @@ public class FrmScanQR extends javax.swing.JFrame {
         });
 
         btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/Minimize.png"))); // NOI18N
+        btnMinimize.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMinimizeMouseClicked(evt);
@@ -115,75 +125,16 @@ public class FrmScanQR extends javax.swing.JFrame {
 
         getContentPane().add(decoratorBar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        ContentPanel.setBackground(new java.awt.Color(27, 57, 166));
-        ContentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        headerPanel.setBackground(new java.awt.Color(2, 24, 133));
-        headerPanel.setPreferredSize(new java.awt.Dimension(1000, 120));
-        headerPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblImgClass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/image.png"))); // NOI18N
-        headerPanel.add(lblImgClass, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 19, -1, -1));
-
-        btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/btnReturn.png"))); // NOI18N
-        btnReturn.setPreferredSize(new java.awt.Dimension(20, 20));
-        headerPanel.add(btnReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 40, 20, 30));
-
-        ItsonLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/Logo ITSON.png"))); // NOI18N
-        headerPanel.add(ItsonLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, -10, -1, -1));
-
-        lblClassName.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        lblClassName.setForeground(new java.awt.Color(255, 255, 255));
-        lblClassName.setText("Nombre alumno");
-        headerPanel.add(lblClassName, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 19, -1, -1));
-
-        lblCodeClass.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblCodeClass.setForeground(new java.awt.Color(255, 255, 255));
-        lblCodeClass.setText("01293924");
-        headerPanel.add(lblCodeClass, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 70, 140, -1));
-
-        lblHourClass1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblHourClass1.setForeground(new java.awt.Color(255, 255, 255));
-        lblHourClass1.setText("Ing. Software");
-        headerPanel.add(lblHourClass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
-
-        ContentPanel.add(headerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        txtPIN.setBackground(new java.awt.Color(53, 53, 53));
-        txtPIN.setForeground(new java.awt.Color(255, 255, 255));
-        txtPIN.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtPIN.setAutoscrolls(false);
-        txtPIN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
-        txtPIN.setPreferredSize(new java.awt.Dimension(101, 30));
-        ContentPanel.add(txtPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 110, -1));
-
-        lblScanCam.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        lblScanCam.setForeground(new java.awt.Color(255, 255, 255));
-        lblScanCam.setText("Escanea el Código QR");
-        ContentPanel.add(lblScanCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 160, -1, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("PIN");
-        ContentPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 300, -1, -1));
-
-        camDecorator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/Cam decorator.png"))); // NOI18N
-        ContentPanel.add(camDecorator, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, -1, -1));
-
-        camBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/Background.png"))); // NOI18N
-        ContentPanel.add(camBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, -1, -1));
-
-        btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/Cancel btn.png"))); // NOI18N
-        ContentPanel.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 580, -1, -1));
-
-        getContentPane().add(ContentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 35, 1000, 720));
+        mainContentPanel.setPreferredSize(new java.awt.Dimension(1000, 720));
+        mainContentPanel.setRequestFocusEnabled(false);
+        mainContentPanel.setLayout(new java.awt.CardLayout());
+        getContentPane().add(mainContentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 35, 1000, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         this.dispose();
-      
     }//GEN-LAST:event_btnExitMouseClicked
 
     private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked
@@ -213,50 +164,36 @@ public class FrmScanQR extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmScanQR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmScanQR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmScanQR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmScanQR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmScanQR().setVisible(true);
+                new MainWindow().setVisible(true);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Panel ContentPanel;
-    private javax.swing.JLabel ItsonLogo;
-    private javax.swing.JLabel btnCancel;
     private javax.swing.JLabel btnExit;
     private javax.swing.JLabel btnMinimize;
-    private javax.swing.JLabel btnReturn;
-    private javax.swing.JLabel camBackground;
-    private javax.swing.JLabel camDecorator;
     private java.awt.Panel decoratorBar;
-    private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel lblClassName;
-    private javax.swing.JLabel lblCodeClass;
-    private javax.swing.JLabel lblHourClass1;
-    private javax.swing.JLabel lblImgClass;
-    private javax.swing.JLabel lblScanCam;
-    private javax.swing.JTextField txtPIN;
+    private javax.swing.JPanel mainContentPanel;
     // End of variables declaration//GEN-END:variables
 }
