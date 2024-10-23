@@ -45,7 +45,7 @@ public class InicioMenu extends javax.swing.JPanel {
 
         btnAsistencia = new javax.swing.JLabel();
         btnClases = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        btnCloseMenu = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setForeground(new java.awt.Color(255, 255, 0));
@@ -62,13 +62,13 @@ public class InicioMenu extends javax.swing.JPanel {
         btnClases.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         add(btnClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 268, 45));
 
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCloseMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCloseMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+                btnCloseMenuMouseClicked(evt);
             }
         });
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 26, 30, 35));
+        add(btnCloseMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 26, 30, 35));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MenuAbierto.jpg"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -79,15 +79,15 @@ public class InicioMenu extends javax.swing.JPanel {
         mainWindow.changeContentPane(scanQR);
     }//GEN-LAST:event_btnAsistenciaMouseClicked
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    private void btnCloseMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMenuMouseClicked
         inicioPanel.closeMenu();
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_btnCloseMenuMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAsistencia;
     private javax.swing.JLabel btnClases;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel btnCloseMenu;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
