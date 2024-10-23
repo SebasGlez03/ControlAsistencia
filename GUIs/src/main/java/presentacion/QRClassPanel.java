@@ -64,6 +64,7 @@ public class QRClassPanel extends javax.swing.JPanel {
         headerPanel1.add(lblImgClass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 19, -1, -1));
 
         btnReturn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/btnReturn.png"))); // NOI18N
+        btnReturn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReturn1.setPreferredSize(new java.awt.Dimension(20, 20));
         btnReturn1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

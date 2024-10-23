@@ -76,6 +76,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/Exit.png"))); // NOI18N
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnExitMouseClicked(evt);
@@ -83,6 +84,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/Minimize.png"))); // NOI18N
+        btnMinimize.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMinimizeMouseClicked(evt);

@@ -60,6 +60,7 @@ public class ScanQRPanel extends javax.swing.JPanel {
         headerPanel.add(lblImgClass, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 19, -1, -1));
 
         btnReturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/btnReturn.png"))); // NOI18N
+        btnReturn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReturn.setPreferredSize(new java.awt.Dimension(20, 20));
         btnReturn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

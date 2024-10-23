@@ -36,6 +36,10 @@ public class InicioPanel extends javax.swing.JPanel {
         this.mainMenuContentPanel.revalidate();
         this.mainMenuContentPanel.repaint();
     }
+    
+    protected void closeMenu(){
+        this.mainMenuContentPanel.setVisible(false);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,6 +66,7 @@ public class InicioPanel extends javax.swing.JPanel {
         add(mainMenuContentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 0, 268, 283));
 
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu desplegable.png"))); // NOI18N
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMenuMouseClicked(evt);

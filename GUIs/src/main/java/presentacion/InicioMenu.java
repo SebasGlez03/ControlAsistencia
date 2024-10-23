@@ -29,9 +29,9 @@ public class InicioMenu extends javax.swing.JPanel {
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
         
-        this.btnAsistencia.setOpaque(false);
-        this.btnAsistencia.setBackground(opacidad);
         
+        
+        //this.jLabel1.setBorder(new );
     }
 
     /**
@@ -43,44 +43,50 @@ public class InicioMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAsistencia = new javax.swing.JButton();
+        btnAsistencia = new javax.swing.JLabel();
+        btnClases = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setForeground(new java.awt.Color(255, 255, 0));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnAsistencia.setBorder(null);
+        btnAsistencia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAsistencia.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAsistenciaMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAsistenciaMouseExited(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAsistenciaMouseClicked(evt);
             }
         });
         add(btnAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 86, 268, 45));
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("jLabel1");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 80, 50));
+        btnClases.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        add(btnClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 268, 45));
+
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 26, 30, 35));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MenuAbierto.jpg"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAsistenciaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAsistenciaMouseEntered
-        this.btnAsistencia.setOpaque(true);
-    }//GEN-LAST:event_btnAsistenciaMouseEntered
+    private void btnAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAsistenciaMouseClicked
+        ScanQRPanel scanQR = new ScanQRPanel(mainWindow, inicioPanel);
+        mainWindow.changeContentPane(scanQR);
+    }//GEN-LAST:event_btnAsistenciaMouseClicked
 
-    private void btnAsistenciaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAsistenciaMouseExited
-        this.btnAsistencia.setOpaque(false);
-    }//GEN-LAST:event_btnAsistenciaMouseExited
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        inicioPanel.closeMenu();
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAsistencia;
+    private javax.swing.JLabel btnAsistencia;
+    private javax.swing.JLabel btnClases;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
