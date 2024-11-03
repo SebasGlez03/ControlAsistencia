@@ -1,0 +1,48 @@
+CREATE DATABASE controlAsistencia;
+
+USE controlAsistencia;
+
+CREATE TABLE usuarios(
+	idUsuario INT AUTO_INCREMENT PRIMARY KEY,
+	nombre VARCHAR(50),
+    apellidoPaterno VARCHAR(50),
+    apellidoMaterno VARCHAR(50),
+	correo VARCHAR(50),
+	contrasenia VARCHAR(25)
+);
+
+CREATE TABLE alumnos(
+	idAlumno INT AUTO_INCREMENT PRIMARY KEY,
+    semestre INT,
+    idUsuario INT,
+    FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
+);
+
+CREATE TABLE maestros(
+	idMaestro INT AUTO_INCREMENT PRIMARY KEY,
+    idUsuario INT,
+    FOREIGN KEY (idUsuario) REFERENCES usuarios(idUsuario)
+);
+
+CREATE TABLE materias(
+	idMateria INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50),
+    semestreImpartido INT
+);
+
+# Relaciones de Usuarios con Materias
+CREATE TABLE maestrosImpartenMateria(
+	idMaestrosImpartenMateria INT AUTO_INCREMENT PRIMARY KEY,
+    idMaestro INT,
+    idMateria INT,
+    FOREIGN KEY (idMaestro) REFERENCES maestros(idMaestro),
+    FOREIGN KEY (idMateria) REFERENCES materias(idMateria)
+);
+
+CREATE TABLE alumnosCursanMateria(
+	idAlumnosCursanMateria INT AUTO_INCREMENT PRIMARY KEY,
+    idAlumno INT,
+    idMateria INT,
+    FOREIGN KEY (idAlumno) REFERENCES alumnos(idAlumno),
+    FOREIGN KEY (idMateria) REFERENCES materias(idMateria)
+);
