@@ -8,6 +8,7 @@ import dto.AlumnoDTO;
 import dto.MaestroDTO;
 import dto.UsuarioDTO;
 import entidades.Alumno;
+import javax.swing.JOptionPane;
 import persistencia.IPersistencia;
 
 /**
@@ -35,7 +36,11 @@ public class FachadaUsuario implements IUsuario {
 
     @Override
     public void agregarAlumno(AlumnoDTO alumno) {
-        this.persistenciaDAO.agregarAlumno(convertirAlumnoDTOaEntidad(alumno));
+        try {
+            this.persistenciaDAO.agregarAlumno(convertirAlumnoDTOaEntidad(alumno));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error al agregar el alumno: " + e, "Error al agregar aumno", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override
