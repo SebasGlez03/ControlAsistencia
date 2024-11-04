@@ -1,5 +1,7 @@
 package subsistemaUsuario;
 
+import entidades.Alumno;
+import entidades.Maestro;
 import entidades.Usuario;
 
 /**
@@ -80,5 +82,18 @@ public class ControlUsuario {
         validarNombre(usuario.getNombre());
         validarCorreo(usuario.getCorreo());
         validarContrasenia(usuario.getContrasenia());
+    }
+    
+    public void obtenerTipoDeUsuario(Usuario usuario){
+        Alumno alumno = new Alumno();
+        Maestro maestro = new Maestro();
+        
+        /*
+        Se necesita realizar un modo en el que se revise toda la lista de alumnos y de maestro para verificar que
+        en toda la lista de alumnos/maestros existe algun id que sea igual al que se recibe del usuario.
+        */
+        
+        
+    
     }
 }
