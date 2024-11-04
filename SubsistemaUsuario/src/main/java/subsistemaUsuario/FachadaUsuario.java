@@ -4,8 +4,9 @@
  */
 package subsistemaUsuario;
 
+import dto.AlumnoDTO;
+import dto.MaestroDTO;
 import dto.UsuarioDTO;
-import entidades.Alumno;
 import persistencia.IPersistencia;
 
 /**
@@ -32,23 +33,23 @@ public class FachadaUsuario implements IUsuario {
     }
 
     @Override
-    public UsuarioDTO agregarAlumno() {
+    public void agregarAlumno(AlumnoDTO alumno) {
         // Se tiene que converitr el DTO a una entidad
-        this.persistenciaDAO.agregarAlumno(Alumno alumno);
+        return this.persistenciaDAO.agregarAlumno(alumno);
     }
 
     @Override
-    public UsuarioDTO agregarMaestro() {
+    public void agregarMaestro(MaestroDTO maestro) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public UsuarioDTO eliminarAlumno() {
+    public void eliminarAlumno(AlumnoDTO alumno) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public UsuarioDTO eliminarMaestro() {
+    public void eliminarMaestro(MaestroDTO maestro) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

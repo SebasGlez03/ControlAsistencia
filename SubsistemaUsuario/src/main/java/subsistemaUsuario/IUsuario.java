@@ -4,6 +4,8 @@
  */
 package subsistemaUsuario;
 
+import dto.AlumnoDTO;
+import dto.MaestroDTO;
 import dto.UsuarioDTO;
 
 /**
@@ -27,30 +29,26 @@ public interface IUsuario {
     /**
      * Agrega un nuevo alumno al sistema.
      *
-     * @return El objeto Usuario que representa al alumno agregado.
      */
-    public UsuarioDTO agregarAlumno();
+    public void agregarAlumno(AlumnoDTO alumno);
 
     /**
      * Agrega un nuevo maestro al sistema.
      *
-     * @return El objeto Usuario que representa al maestro agregado.
      */
-    public UsuarioDTO agregarMaestro();
+    public void agregarMaestro(MaestroDTO maestro);
 
     /**
      * Elimina un alumno del sistema.
      *
-     * @return El objeto Usuario que representa al alumno eliminado.
      */
-    public UsuarioDTO eliminarAlumno();
+    public void eliminarAlumno(AlumnoDTO alumno);
 
     /**
      * Elimina un maestro del sistema.
      *
-     * @return El objeto Usuario que representa al maestro eliminado.
      */
-    public UsuarioDTO eliminarMaestro();
+    public void eliminarMaestro(MaestroDTO maestro);
 
     /**
      * Agrega una clase a un alumno.
