@@ -4,99 +4,99 @@
  */
 package persistencia;
 
-import dto.AlumnoDTO;
-import dto.MaestroDTO;
-import dto.UsuarioDTO;
+import entidades.Alumno;
+import entidades.Maestro;
+import entidades.Usuario;
 
 /**
- * Interfaz IPersistencia que define los métodos para realizar operaciones de 
- * persistencia sobre los objetos UsuarioDTO, AlumnoDTO y MaestroDTO.
- * 
+ * Interfaz IPersistencia que define los métodos para realizar operaciones de
+ * persistencia sobre los objetos Usuario, Alumno y Maestro.
+ *
  * @author sebastian
  */
 public interface IPersistencia {
-    
+
     /**
      * Obtiene un usuario del sistema.
      *
-     * @param usuario el objeto UsuarioDTO que se desea obtener.
+     * @param usuario el objeto Usuario que se desea obtener.
      */
-    public void obtenerUsuario(UsuarioDTO usuario);
-    
+    public void obtenerUsuario(Usuario usuario);
+
     /**
      * Obtiene un alumno del sistema.
      *
-     * @param alumno el objeto AlumnoDTO que se desea obtener.
+     * @param alumno el objeto Alumno que se desea obtener.
      */
-    public void obtenerAlumno(AlumnoDTO alumno);
-    
+    public void obtenerAlumno(Alumno alumno);
+
     /**
      * Obtiene un maestro del sistema.
      *
-     * @param maestro el objeto MaestroDTO que se desea obtener.
+     * @param maestro el objeto Maestro que se desea obtener.
      */
-    public void obtenerMaestro(MaestroDTO maestro);
-    
+    public void obtenerMaestro(Maestro maestro);
+
     /**
      * Agrega un nuevo usuario al sistema.
      *
-     * @param usuario el objeto UsuarioDTO que se desea agregar.
+     * @param usuario el objeto Usuario que se desea agregar.
      */
-    public void agregarUsuario(UsuarioDTO usuario);
-    
+    public void agregarUsuario(Usuario usuario);
+
     /**
      * Agrega un nuevo alumno al sistema.
      *
-     * @param alumno el objeto AlumnoDTO que se desea agregar.
+     * @param alumno el objeto Alumno que se desea agregar.
      */
-    public void agregarAlumno(AlumnoDTO alumno);
-    
+    public void agregarAlumno(Alumno alumno);
+
     /**
      * Agrega un nuevo maestro al sistema.
      *
-     * @param maestro el objeto MaestroDTO que se desea agregar.
+     * @param maestro el objeto Maestro que se desea agregar.
      */
-    public void agregarMaestro(MaestroDTO maestro);
-    
+    public void agregarMaestro(Maestro maestro);
+
     /**
      * Elimina un usuario del sistema.
      *
-     * @param usuario el objeto UsuarioDTO que se desea eliminar.
+     * @param usuario el objeto Usuario que se desea eliminar.
      */
-    public void eliminarUsuario(UsuarioDTO usuario);
-    
+    public void eliminarUsuario(Usuario usuario);
+
     /**
      * Elimina un alumno del sistema.
      *
-     * @param alumno el objeto AlumnoDTO que se desea eliminar.
+     * @param alumno el objeto Alumno que se desea eliminar.
      */
-    public void eliminarAlumno(AlumnoDTO alumno);
-    
+    public void eliminarAlumno(Alumno alumno);
+
     /**
      * Elimina un maestro del sistema.
      *
-     * @param maestro el objeto MaestroDTO que se desea eliminar.
+     * @param maestro el objeto Maestro que se desea eliminar.
      */
-    public void eliminarMaestro(MaestroDTO maestro);
-    
+    public void eliminarMaestro(Maestro maestro);
+
     /**
      * Modifica los datos de un usuario en el sistema.
      *
-     * @param usuario el objeto UsuarioDTO que se desea modificar.
+     * @param usuario el objeto Usuario que se desea modificar.
      */
-    public void modificarUsuario(UsuarioDTO usuario);
-    
+    public void modificarUsuario(Usuario usuario);
+
     /**
      * Modifica los datos de un alumno en el sistema.
      *
-     * @param alumno el objeto AlumnoDTO que se desea modificar.
+     * @param alumno el objeto Alumno que se desea modificar.
      */
-    public void modificarAlumno(AlumnoDTO alumno);
-    
+    public void modificarAlumno(Alumno alumno);
+
     /**
      * Modifica los datos de un maestro en el sistema.
      *
-     * @param maestro el objeto MaestroDTO que se desea modificar.
+     * @param maestro el objeto Maestro que se desea modificar.
      */
-    public void modificarMaestro(MaestroDTO maestro);
+    public void modificarMaestro(Maestro maestro);
 }

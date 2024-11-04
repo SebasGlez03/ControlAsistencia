@@ -4,9 +4,9 @@
  */
 package persistencia;
 
-import dto.AlumnoDTO;
-import dto.MaestroDTO;
-import dto.UsuarioDTO;
+import entidades.Alumno;
+import entidades.Maestro;
+import entidades.Usuario;
 
 /**
  *
@@ -15,62 +15,62 @@ import dto.UsuarioDTO;
 public class FachadaPersistencia implements IPersistencia{
 
     @Override
-    public void obtenerUsuario(UsuarioDTO usuario) {
+    public void obtenerUsuario(Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void obtenerAlumno(AlumnoDTO alumno) {
+    public void obtenerAlumno(Alumno alumno) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void obtenerMaestro(MaestroDTO maestro) {
+    public void obtenerMaestro(Maestro maestro) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void agregarUsuario(UsuarioDTO usuario) {
+    public void agregarUsuario(Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void agregarAlumno(AlumnoDTO alumno) {
+    public void agregarAlumno(Alumno alumno) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void agregarMaestro(MaestroDTO maestro) {
+    public void agregarMaestro(Maestro maestro) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void eliminarUsuario(UsuarioDTO usuario) {
+    public void eliminarUsuario(Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void eliminarAlumno(AlumnoDTO alumno) {
+    public void eliminarAlumno(Alumno alumno) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void eliminarMaestro(MaestroDTO maestro) {
+    public void eliminarMaestro(Maestro maestro) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void modificarUsuario(UsuarioDTO usuario) {
+    public void modificarUsuario(Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void modificarAlumno(AlumnoDTO alumno) {
+    public void modificarAlumno(Alumno alumno) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void modificarMaestro(MaestroDTO maestro) {
+    public void modificarMaestro(Maestro maestro) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

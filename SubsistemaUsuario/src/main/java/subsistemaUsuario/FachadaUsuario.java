@@ -5,6 +5,7 @@
 package subsistemaUsuario;
 
 import dto.UsuarioDTO;
+import entidades.Alumno;
 import persistencia.IPersistencia;
 
 /**
@@ -32,7 +33,8 @@ public class FachadaUsuario implements IUsuario {
 
     @Override
     public UsuarioDTO agregarAlumno() {
-        this.persistenciaDAO.agregarAlumno(alumno);
+        // Se tiene que converitr el DTO a una entidad
+        this.persistenciaDAO.agregarAlumno(Alumno alumno);
     }
 
     @Override
