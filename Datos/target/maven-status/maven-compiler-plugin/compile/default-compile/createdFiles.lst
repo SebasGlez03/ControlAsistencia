@@ -1,2 +1,4 @@
-persistencia\Datos.class
+persistencia\FachadaPersistencia.class
 persistencia\IPersistencia.class
+dao\Datos.class
+persistencia\Datos.class

@@ -4,7 +4,7 @@
  */
 package subsistemaUsuario;
 
-import entidades.Usuario;
+import dto.UsuarioDTO;
 
 /**
  * Esta interfaz define las operaciones relacionadas con la gestión de usuarios
@@ -22,35 +22,35 @@ public interface IUsuario {
      * @param contrasenia La contraseña del usuario.
      * @return true si la sesión se inicia correctamente, false de lo contrario.
      */
-    public boolean iniciarSesion(Usuario id, Usuario contrasenia);
+    public boolean iniciarSesion(UsuarioDTO id, UsuarioDTO contrasenia);
 
     /**
      * Agrega un nuevo alumno al sistema.
      *
      * @return El objeto Usuario que representa al alumno agregado.
      */
-    public Usuario agregarAlumno();
+    public UsuarioDTO agregarAlumno();
 
     /**
      * Agrega un nuevo maestro al sistema.
      *
      * @return El objeto Usuario que representa al maestro agregado.
      */
-    public Usuario agregarMaestro();
+    public UsuarioDTO agregarMaestro();
 
     /**
      * Elimina un alumno del sistema.
      *
      * @return El objeto Usuario que representa al alumno eliminado.
      */
-    public Usuario eliminarAlumno();
+    public UsuarioDTO eliminarAlumno();
 
     /**
      * Elimina un maestro del sistema.
      *
      * @return El objeto Usuario que representa al maestro eliminado.
      */
-    public Usuario eliminarMaestro();
+    public UsuarioDTO eliminarMaestro();
 
     /**
      * Agrega una clase a un alumno.
