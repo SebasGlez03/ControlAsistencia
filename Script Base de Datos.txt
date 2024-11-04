@@ -46,3 +46,20 @@ CREATE TABLE alumnosCursanMateria(
     FOREIGN KEY (idAlumno) REFERENCES alumnos(idAlumno),
     FOREIGN KEY (idMateria) REFERENCES materias(idMateria)
 );
+
+CREATE TABLE asistencias(
+	idAsistencia INT AUTO_INCREMENT PRIMARY KEY,
+    fechaHora DATETIME,
+    idMateria INT,
+    FOREIGN KEY (idMateria) REFERENCES materias(idMateria)
+);
+
+# Relacion Alumnos y Asistencias
+CREATE TABLE alumnosAsistencias(
+	idAlumnosAsistencia INT AUTO_INCREMENT PRIMARY KEY,
+    estado INT,
+    idAlumno INT,
+    idAsistencia INT,
+    FOREIGN KEY (idAlumno) REFERENCES alumnos(idAlumno),
+    FOREIGN KEY (idAsistencia) REFERENCES asistencias(idAsistencia)
+);
