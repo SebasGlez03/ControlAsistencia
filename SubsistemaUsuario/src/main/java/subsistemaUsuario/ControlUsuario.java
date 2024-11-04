@@ -1,8 +1,8 @@
 package subsistemaUsuario;
 
-import entidades.Alumno;
-import entidades.Maestro;
-import entidades.Usuario;
+import dto.AlumnoDTO;
+import dto.MaestroDTO;
+import dto.UsuarioDTO;
 
 /**
  * La clase ControlUsuario se encarga de validar los datos de un usuario,
@@ -77,16 +77,25 @@ public class ControlUsuario {
      * @param usuario El usuario a validar.
      * @throws IllegalArgumentException Si algún atributo del usuario es inválido.
      */
-    public void validarUsuario(Usuario usuario) {
+    public void validarUsuario(UsuarioDTO usuario) {
         // Aquí puedes implementar la validación de otros atributos del usuario si es necesario
         validarNombre(usuario.getNombre());
         validarCorreo(usuario.getCorreo());
         validarContrasenia(usuario.getContrasenia());
     }
     
-    public void obtenerTipoDeUsuario(Usuario usuario){
-        Alumno alumno = new Alumno();
-        Maestro maestro = new Maestro();
+    
+    public void obtenerTipoDeUsuario(UsuarioDTO usuario){
+        AlumnoDTO alumno = new AlumnoDTO();
+        MaestroDTO maestro = new MaestroDTO();
+        
+        if (usuario.getId() == alumno.getId()){
+            System.out.println("Regresa un alumno");
+        } else if (usuario.getId() == maestro.getId()){
+            
+        } else{
+            System.out.println("nuase nada");
+        }
         
         /*
         Se necesita realizar un modo en el que se revise toda la lista de alumnos y de maestro para verificar que
