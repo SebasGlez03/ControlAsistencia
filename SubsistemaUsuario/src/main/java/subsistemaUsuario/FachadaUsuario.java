@@ -7,6 +7,7 @@ package subsistemaUsuario;
 import dto.AlumnoDTO;
 import dto.MaestroDTO;
 import dto.UsuarioDTO;
+import entidades.Alumno;
 import persistencia.IPersistencia;
 
 /**
@@ -35,7 +36,7 @@ public class FachadaUsuario implements IUsuario {
     @Override
     public void agregarAlumno(AlumnoDTO alumno) {
         // Se tiene que converitr el DTO a una entidad
-        return this.persistenciaDAO.agregarAlumno(alumno);
+        this.persistenciaDAO.agregarAlumno(alumno);
     }
 
     @Override
@@ -61,6 +62,22 @@ public class FachadaUsuario implements IUsuario {
     @Override
     public void agregarClaseMaestro() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Alumno convertirAlumnoDTOaEntidad(AlumnoDTO dto) {
+
+        Alumno alumno = new Alumno();
+
+        alumno.setId(dto.getId());
+        alumno.setNombre(dto.getNombre());
+        alumno.setApellidoPaterno(dto.getApellidoPaterno());
+        alumno.setApellidoMaterno(dto.getApellidoMaterno());
+        alumno.setCorreo(dto.getCorreo());
+        alumno.setContrasenia(dto.getContrasenia());
+        alumno.setSemestre(dto.getSemestre());
+        alumno.setPromedio(dto.getPromedio());
+
+        return alumno;
     }
 
 }
