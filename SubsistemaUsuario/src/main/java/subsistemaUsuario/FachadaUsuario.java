@@ -35,8 +35,7 @@ public class FachadaUsuario implements IUsuario {
 
     @Override
     public void agregarAlumno(AlumnoDTO alumno) {
-        // Se tiene que converitr el DTO a una entidad
-        this.persistenciaDAO.agregarAlumno(alumno);
+        this.persistenciaDAO.agregarAlumno(convertirAlumnoDTOaEntidad(alumno));
     }
 
     @Override
@@ -64,6 +63,12 @@ public class FachadaUsuario implements IUsuario {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /**
+     * Metodo que convierte un AlumnoDTO a un AlumnoEntidad
+     *
+     * @param dto AlumnoDTO que se transformara a AlumnoEntidad
+     * @return Alumno de tipo Entidad
+     */
     public Alumno convertirAlumnoDTOaEntidad(AlumnoDTO dto) {
 
         Alumno alumno = new Alumno();
