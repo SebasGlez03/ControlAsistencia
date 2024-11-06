@@ -4,23 +4,33 @@
  */
 package presentacion;
 
+import subsubsistemaqr.FachadaQR;
+import subsubsistemaqr.IQR;
+
 /**
  *
  * @author Ragzard
  */
 public class QRClassPanel extends javax.swing.JPanel {
-
+    
     MainWindow mainWindow;
     InicioPanel inicioPanel;
-    
+    IQR iqr = new FachadaQR();
+
     /**
      * Creates new form QRClassPanel
+     *
+     * @param mainwindow
+     * @param inicioPanel
      */
     public QRClassPanel(MainWindow mainwindow, InicioPanel inicioPanel) {
         initComponents();
         
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
+        
+        this.lblPIN.setText(iqr.generarQR().getContenido());
+        
     }
 
     /**
@@ -45,7 +55,7 @@ public class QRClassPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblPIN = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -113,10 +123,10 @@ public class QRClassPanel extends javax.swing.JPanel {
         jLabel2.setText("PIN:");
         ContentPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 500, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("0000");
-        ContentPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 500, -1, -1));
+        lblPIN.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblPIN.setForeground(new java.awt.Color(255, 255, 255));
+        lblPIN.setText("0000");
+        ContentPanel.add(lblPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 500, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -154,7 +164,6 @@ public class QRClassPanel extends javax.swing.JPanel {
     private javax.swing.JLabel imgQR;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -165,5 +174,6 @@ public class QRClassPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblCodeClass1;
     private javax.swing.JLabel lblHourClass2;
     private javax.swing.JLabel lblImgClass1;
+    private javax.swing.JLabel lblPIN;
     // End of variables declaration//GEN-END:variables
 }

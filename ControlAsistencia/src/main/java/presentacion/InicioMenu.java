@@ -60,6 +60,11 @@ public class InicioMenu extends javax.swing.JPanel {
         add(btnAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 86, 268, 45));
 
         btnClases.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClases.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnClasesMouseClicked(evt);
+            }
+        });
         add(btnClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 268, 45));
 
         btnCloseMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -82,6 +87,11 @@ public class InicioMenu extends javax.swing.JPanel {
     private void btnCloseMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMenuMouseClicked
         inicioPanel.closeMenu();
     }//GEN-LAST:event_btnCloseMenuMouseClicked
+
+    private void btnClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasesMouseClicked
+        QRClassPanel qrPanel = new QRClassPanel(mainWindow, inicioPanel);
+        mainWindow.changeContentPane(qrPanel);
+    }//GEN-LAST:event_btnClasesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
