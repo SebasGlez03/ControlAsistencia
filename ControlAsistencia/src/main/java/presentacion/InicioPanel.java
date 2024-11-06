@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import dto.UsuarioDTO;
 import javax.swing.JPanel;
 
 /**

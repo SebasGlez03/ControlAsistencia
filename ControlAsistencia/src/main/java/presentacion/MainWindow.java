@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import dto.UsuarioDTO;
 import javax.swing.JPanel;
 
 /**
@@ -13,6 +14,7 @@ import javax.swing.JPanel;
 public class MainWindow extends javax.swing.JFrame {
 
     int xx, xy;
+    UsuarioDTO usuarioDTO;
 
     /**
      * Creates new form MainWindow

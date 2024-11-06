@@ -89,20 +89,10 @@ public class ControlUsuario {
     }
 
     public void obtenerTipoDeUsuario(UsuarioDTO usuario) {
-        AlumnoDTO alumno = new AlumnoDTO();
-        MaestroDTO maestro = new MaestroDTO();
-
-        if (usuario.getId() == alumno.getId()) {
-            System.out.println("Regresa un alumno");
-        } else if (usuario.getId() == maestro.getId()) {
-
-        } else {
-            System.out.println("nuase nada");
-        }
 
         /*
-        Se necesita realizar un modo en el que se revise toda la lista de alumnos y de maestro para verificar que
-        en toda la lista de alumnos/maestros existe algun id que sea igual al que se recibe del usuario.
+        Aqui va la logica tras haber obtenido el tipo del usuario mediante los
+        subsistemas
          */
     }
 
