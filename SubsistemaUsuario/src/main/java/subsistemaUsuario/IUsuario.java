@@ -29,30 +29,46 @@ public interface IUsuario {
     /**
      * Agrega un nuevo alumno al sistema.
      *
-     * @param alumno
+     * @param alumno Alumno a agregar en el sistema.
      */
     public void agregarAlumno(AlumnoDTO alumno);
 
     /**
      * Agrega un nuevo maestro al sistema.
      *
-     * @param maestro
+     * @param maestro Maestro a agregar en el sistema.
      */
     public void agregarMaestro(MaestroDTO maestro);
 
     /**
      * Elimina un alumno del sistema.
      *
-     * @param alumno
+     * @param alumno Alumno a eliminar en el sistema.
      */
     public void eliminarAlumno(AlumnoDTO alumno);
 
     /**
      * Elimina un maestro del sistema.
      *
-     * @param maestro
+     * @param maestro Maestro a eliminar en el sistema.
      */
     public void eliminarMaestro(MaestroDTO maestro);
+
+    /**
+     * Modifica un alumno del sistema.
+     *
+     * @param alumno Alumno a modificar en el sistema.
+     * @param alumnoModificado Alumno con la nueva informacion a agregar.
+     */
+    public void modificarAlumno(AlumnoDTO alumno, AlumnoDTO alumnoModificado);
+
+    /**
+     * Modifica un maestro del sistema.
+     *
+     * @param maestro Maestro a modificar en el sistema.
+     * @param maestroModificado Maestro con la nueva informacion a agregar.
+     */
+    public void modificarMaestro(MaestroDTO maestro, MaestroDTO maestroModificado);
 
     /**
      * Agrega una clase a un alumno.
