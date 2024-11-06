@@ -1,11 +1,8 @@
 package subsistemaUsuario;
 
-import dto.AlumnoDTO;
-import dto.MaestroDTO;
 import dto.UsuarioDTO;
 import entidades.Alumno;
 import entidades.Maestro;
-import javax.swing.JOptionPane;
 import mock.BaseDatosMock;
 
 /**
