@@ -16,7 +16,7 @@ import mock.BaseDatosMock;
  * @author PC
  */
 public class FachadaUsuario implements IUsuario {
-
+    
     BaseDatosMock bd = new BaseDatosMock();
     ControlUsuario controlUsuario = new ControlUsuario();
 
@@ -33,12 +33,12 @@ public class FachadaUsuario implements IUsuario {
     public FachadaUsuario() {
         // Esto es para la version Mock
     }
-
+    
     @Override
     public boolean iniciarSesion(int id, String contrasenia) {
         return controlUsuario.iniciarSesion(id, contrasenia);
     }
-
+    
     @Override
     public void agregarAlumno(AlumnoDTO alumno) {
 //        try {
@@ -48,27 +48,38 @@ public class FachadaUsuario implements IUsuario {
 //        }
 
         bd.agregarAlumno(convertirAlumnoDTOaEntidad(alumno));
-
+        
     }
-
+    
     @Override
     public void agregarMaestro(MaestroDTO maestro) {
         bd.agregarMaestro(convertirMaestroDTOaEntidad(maestro));
     }
-
+    
     @Override
     public void eliminarAlumno(AlumnoDTO alumno) {
         bd.eliminarAlumno(convertirAlumnoDTOaEntidad(alumno));
     }
-
+    
     @Override
     public void eliminarMaestro(MaestroDTO maestro) {
         bd.eliminarMaestro(convertirMaestroDTOaEntidad(maestro));
     }
-
+    
+    @Override
+    public void modificarAlumno(AlumnoDTO alumno, AlumnoDTO alumnoModificado) {
+        bd.modificarAlumno(convertirAlumnoDTOaEntidad(alumno),
+                convertirAlumnoDTOaEntidad(alumnoModificado));
+    }
+    
+    public void modificarMaestro(MaestroDTO maestro, MaestroDTO maestroModificado) {
+        bd.modificarMaestro(convertirMaestroDTOaEntidad(maestro),
+                convertirMaestroDTOaEntidad(maestroModificado));
+    }
+    
     @Override
     public void agregarClaseAlumno() {
-
+        
     }
 
     // Se le agrego que reciba un maestro al cual le va a agregar su clase y un
@@ -85,9 +96,9 @@ public class FachadaUsuario implements IUsuario {
      * @return Alumno de tipo Entidad
      */
     public Alumno convertirAlumnoDTOaEntidad(AlumnoDTO dto) {
-
+        
         Alumno alumno = new Alumno();
-
+        
         alumno.setId(dto.getId());
         alumno.setNombre(dto.getNombre());
         alumno.setApellidoPaterno(dto.getApellidoPaterno());
@@ -96,7 +107,7 @@ public class FachadaUsuario implements IUsuario {
         alumno.setContrasenia(dto.getContrasenia());
         alumno.setSemestre(dto.getSemestre());
         alumno.setPromedio(dto.getPromedio());
-
+        
         return alumno;
     }
 
@@ -107,9 +118,9 @@ public class FachadaUsuario implements IUsuario {
      * @return Maestro de tipo Entidad
      */
     public Maestro convertirMaestroDTOaEntidad(MaestroDTO dto) {
-
+        
         Maestro maestro = new Maestro();
-
+        
         maestro.setId(dto.getId());
         maestro.setNombre(dto.getNombre());
         maestro.setApellidoPaterno(dto.getApellidoPaterno());
@@ -117,9 +128,9 @@ public class FachadaUsuario implements IUsuario {
         maestro.setCorreo(dto.getCorreo());
         maestro.setContrasenia(dto.getContrasenia());
         maestro.setMaterias(dto.getMaterias());
-
+        
         return maestro;
-
+        
     }
-
+    
 }
