@@ -17,13 +17,7 @@ public class FachadaAlumno implements IAlumno{
     }
     
     @Override
-    public void EscanearQR(){}
-    @Override
-    public void RegistrarAlumno(){}
-    @Override
-    public void EditarAlumno(){}
-    @Override
-    public void EliminarAlumno(){}    
+    public void EscanearQR(){}      
     @Override
     public void BuscarAlumno(){}
     

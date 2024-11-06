@@ -9,9 +9,6 @@ package SubsistemaAlumno;
  * @author joel_
  */
 public interface IAlumno {
-   public void EscanearQR();
-   public void RegistrarAlumno();
-   public void EditarAlumno();
-   public void EliminarAlumno();    
+   public void EscanearQR();    
    public void BuscarAlumno(); 
 }
