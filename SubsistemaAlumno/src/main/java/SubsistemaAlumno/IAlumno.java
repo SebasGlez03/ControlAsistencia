@@ -9,6 +9,13 @@ package SubsistemaAlumno;
  * @author joel_
  */
 public interface IAlumno {
-   public void EscanearQR();    
+    
+   /**
+    * escanea un codigoQR en el sistema
+    */ 
+   public void EscanearQR();
+   /**
+    * busca a un Alumno en el sistema
+    */
    public void BuscarAlumno(); 
 }
