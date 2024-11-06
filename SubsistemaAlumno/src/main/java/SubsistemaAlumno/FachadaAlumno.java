@@ -4,18 +4,16 @@
  */
 package SubsistemaAlumno;
 import dto.AlumnoDTO;
+import persistencia.IPersistencia;
 /**
  *
  * @author joel_
  */
 public class FachadaAlumno implements IAlumno{
-    private AlumnoDTO alumnoDTO;
+    private IPersistencia persistenciaDAO;
 
-    public FachadaAlumno() {
-    }
-
-    public FachadaAlumno(AlumnoDTO alumnoDTO) {
-        this.alumnoDTO = alumnoDTO;
+    public FachadaAlumno(IPersistencia persistenciaDAO) {
+        this.persistenciaDAO=persistenciaDAO;
     }
     
     @Override
