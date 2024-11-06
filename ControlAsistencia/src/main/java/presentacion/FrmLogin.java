@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import dto.UsuarioDTO;
 import javax.swing.JOptionPane;
 import subsistemaUsuario.FachadaUsuario;
 import subsistemaUsuario.IUsuario;
@@ -78,10 +79,12 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void btnAceptarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseClicked
         //JOptionPane.showMessageDialog(this, "Presionaste el boton aceptar!", "Success!", JOptionPane.INFORMATION_MESSAGE);
-        MainWindow mainWindow = new MainWindow();
+
         IUsuario usuario = new FachadaUsuario();
 
         boolean valicacionIniciarSesion = usuario.iniciarSesion(Integer.parseInt(txtId.getText()), txtContrasenia.getText());
+
+        MainWindow mainWindow = new MainWindow();
 
         if (valicacionIniciarSesion == true) {
             mainWindow.setVisible(true);
