@@ -24,29 +24,33 @@ public interface IUsuario {
      * @param contrasenia La contraseña del usuario.
      * @return true si la sesión se inicia correctamente, false de lo contrario.
      */
-    public boolean iniciarSesion(UsuarioDTO id, UsuarioDTO contrasenia);
+    public boolean iniciarSesion(int id, String contrasenia);
 
     /**
      * Agrega un nuevo alumno al sistema.
      *
+     * @param alumno
      */
     public void agregarAlumno(AlumnoDTO alumno);
 
     /**
      * Agrega un nuevo maestro al sistema.
      *
+     * @param maestro
      */
     public void agregarMaestro(MaestroDTO maestro);
 
     /**
      * Elimina un alumno del sistema.
      *
+     * @param alumno
      */
     public void eliminarAlumno(AlumnoDTO alumno);
 
     /**
      * Elimina un maestro del sistema.
      *
+     * @param maestro
      */
     public void eliminarMaestro(MaestroDTO maestro);
 

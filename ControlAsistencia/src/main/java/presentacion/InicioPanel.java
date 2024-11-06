@@ -13,17 +13,17 @@ import javax.swing.JPanel;
 public class InicioPanel extends javax.swing.JPanel {
 
     MainWindow mainWindow;
-    
+
     /**
      * Creates new form InicioPanel
      */
     public InicioPanel(MainWindow mainwindow) {
         initComponents();
-        
+
         this.mainWindow = mainwindow;
         this.mainMenuContentPanel.setVisible(false);
     }
-    
+
     /**
      * Cambia el contenido del 'mainContentPanel' al panel dado por el
      * parametro.
@@ -36,8 +36,8 @@ public class InicioPanel extends javax.swing.JPanel {
         this.mainMenuContentPanel.revalidate();
         this.mainMenuContentPanel.repaint();
     }
-    
-    protected void closeMenu(){
+
+    protected void closeMenu() {
         this.mainMenuContentPanel.setVisible(false);
     }
 
@@ -51,6 +51,8 @@ public class InicioPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         mainMenuContentPanel = new javax.swing.JPanel();
+        lblNombre = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
         btnMenu = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
@@ -64,6 +66,14 @@ public class InicioPanel extends javax.swing.JPanel {
         });
         mainMenuContentPanel.setLayout(new java.awt.CardLayout());
         add(mainMenuContentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(732, 0, 268, 283));
+
+        lblNombre.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(102, 102, 102));
+        add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 280, 20));
+
+        lblId.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblId.setForeground(new java.awt.Color(51, 51, 51));
+        add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, 90, 20));
 
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu desplegable.png"))); // NOI18N
         btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -89,7 +99,7 @@ public class InicioPanel extends javax.swing.JPanel {
         InicioMenu menu = new InicioMenu(mainWindow, this);
         changeContentPane(menu);
         this.mainMenuContentPanel.setVisible(true);
-        
+
     }//GEN-LAST:event_btnMenuMouseClicked
 
     private void fondoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fondoMouseEntered
@@ -101,14 +111,17 @@ public class InicioPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         /*NO BORRAR ESTE EVENTO :)
           Evita que el menu principal se cierre antes de tiempo.
-        */
-        
+         */
+
     }//GEN-LAST:event_mainMenuContentPanelMouseExited
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnMenu;
     private javax.swing.JLabel fondo;
+    private javax.swing.JLabel lblId;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JPanel mainMenuContentPanel;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,6 +3,10 @@ package subsistemaUsuario;
 import dto.AlumnoDTO;
 import dto.MaestroDTO;
 import dto.UsuarioDTO;
+import entidades.Alumno;
+import entidades.Maestro;
+import javax.swing.JOptionPane;
+import mock.BaseDatosMock;
 
 /**
  * La clase ControlUsuario se encarga de validar los datos de un usuario,
@@ -101,4 +105,34 @@ public class ControlUsuario {
         en toda la lista de alumnos/maestros existe algun id que sea igual al que se recibe del usuario.
          */
     }
+
+    // Se agrego con el paquete de pruebas de base de datos mock
+    public boolean iniciarSesion(int id, String contrasenia) {
+
+        BaseDatosMock bd = new BaseDatosMock();
+
+        validarContrasenia(contrasenia);
+
+        for (Alumno alumno : bd.getAlumnos()) {
+            if (id == alumno.getId()) {
+                if (contrasenia.equals(alumno.getContrasenia())) {
+                    return true;
+                }
+                return false;
+            } else {
+                for (Maestro maestro : bd.getMaestros()) {
+                    if (id == maestro.getId()) {
+                        if (contrasenia.equals(alumno.getContrasenia())) {
+                            return true;
+                        }
+                        return false;
+                    }
+
+                }
+            }
+        }
+
+        return false;
+    }
+
 }
