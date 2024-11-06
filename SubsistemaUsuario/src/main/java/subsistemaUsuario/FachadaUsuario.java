@@ -8,8 +8,8 @@ import dto.AlumnoDTO;
 import dto.MaestroDTO;
 import dto.UsuarioDTO;
 import entidades.Alumno;
-import javax.swing.JOptionPane;
-import persistencia.IPersistencia;
+import entidades.Maestro;
+import mock.BaseDatosMock;
 
 /**
  *
@@ -17,52 +17,62 @@ import persistencia.IPersistencia;
  */
 public class FachadaUsuario implements IUsuario {
 
-    private IPersistencia persistenciaDAO;
+    BaseDatosMock bd = new BaseDatosMock();
+    ControlUsuario controlUsuario = new ControlUsuario();
 
+    //private IPersistencia persistenciaDAO;
     /**
      * Constructor de la clase que implementa la conexion con la clase de
      * persistencia de datos.
      *
      * @param persistenciaDAO conexion con los datos de la base de datos
      */
-    public FachadaUsuario(IPersistencia persistenciaDAO) {
-        this.persistenciaDAO = persistenciaDAO;
+//    public FachadaUsuario(IPersistencia persistenciaDAO) {
+//        //this.persistenciaDAO = persistenciaDAO;
+//    }
+    public FachadaUsuario() {
+        // Esto es para la version Mock
     }
 
     @Override
-    public boolean iniciarSesion(UsuarioDTO id, UsuarioDTO contrasenia) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean iniciarSesion(int id, String contrasenia) {
+        return controlUsuario.iniciarSesion(id, contrasenia);
     }
 
     @Override
     public void agregarAlumno(AlumnoDTO alumno) {
-        try {
-            this.persistenciaDAO.agregarAlumno(convertirAlumnoDTOaEntidad(alumno));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error al agregar el alumno: " + e, "Error al agregar aumno", JOptionPane.ERROR_MESSAGE);
-        }
+//        try {
+//            this.persistenciaDAO.agregarAlumno(convertirAlumnoDTOaEntidad(alumno));
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Ha ocurrido un error al agregar el alumno: " + e, "Error al agregar aumno", JOptionPane.ERROR_MESSAGE);
+//        }
+
+        bd.agregarAlumno(convertirAlumnoDTOaEntidad(alumno));
+
     }
 
     @Override
     public void agregarMaestro(MaestroDTO maestro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        bd.agregarMaestro(convertirMaestroDTOaEntidad(maestro));
     }
 
     @Override
     public void eliminarAlumno(AlumnoDTO alumno) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        bd.eliminarAlumno(convertirAlumnoDTOaEntidad(alumno));
     }
 
     @Override
     public void eliminarMaestro(MaestroDTO maestro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        bd.eliminarMaestro(convertirMaestroDTOaEntidad(maestro));
     }
 
     @Override
     public void agregarClaseAlumno() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
     }
 
+    // Se le agrego que reciba un maestro al cual le va a agregar su clase y un
+    // string con el nombre de la materia a agregar
     @Override
     public void agregarClaseMaestro() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -88,6 +98,28 @@ public class FachadaUsuario implements IUsuario {
         alumno.setPromedio(dto.getPromedio());
 
         return alumno;
+    }
+
+    /**
+     * Metodo que convierte un MaestroDTO a un MaestroEntidad
+     *
+     * @param dto MaestroDTO que se transfotrma a MaestroEntidad
+     * @return Maestro de tipo Entidad
+     */
+    public Maestro convertirMaestroDTOaEntidad(MaestroDTO dto) {
+
+        Maestro maestro = new Maestro();
+
+        maestro.setId(dto.getId());
+        maestro.setNombre(dto.getNombre());
+        maestro.setApellidoPaterno(dto.getApellidoPaterno());
+        maestro.setApellidoMaterno(dto.getApellidoMaterno());
+        maestro.setCorreo(dto.getCorreo());
+        maestro.setContrasenia(dto.getContrasenia());
+        maestro.setMaterias(dto.getMaterias());
+
+        return maestro;
+
     }
 
 }

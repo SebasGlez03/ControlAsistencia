@@ -13,7 +13,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>Datos</artifactId>
+            <artifactId>BaseDatosMock</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
