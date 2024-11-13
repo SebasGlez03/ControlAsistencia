@@ -3,7 +3,10 @@ package subsistemaUsuario;
 import dto.UsuarioDTO;
 import entidades.Alumno;
 import entidades.Maestro;
+import entidades.Usuario;
 import mock.BaseDatosMock;
+import persistencia.FachadaPersistencia;
+import persistencia.IPersistencia;
 
 /**
  * La clase ControlUsuario se encarga de validar los datos de un usuario,
@@ -95,28 +98,14 @@ public class ControlUsuario {
 
     // Se agrego con el paquete de pruebas de base de datos mock
     public boolean iniciarSesion(int id, String contrasenia) {
-
-        BaseDatosMock bd = new BaseDatosMock();
+        //BaseDatosMock bd = new BaseDatosMock();
+        IPersistencia datos = new FachadaPersistencia();
 
         validarContrasenia(contrasenia);
 
-        for (Alumno alumno : bd.getAlumnos()) {
-            if (id == alumno.getMatricula()) {
-                if (contrasenia.equals(alumno.getContrasenia())) {
-                    return true;
-                }
-                return false;
-            } else {
-                for (Maestro maestro : bd.getMaestros()) {
-                    if (id == maestro.getMatricula()) {
-                        if (contrasenia.equals(alumno.getContrasenia())) {
-                            return true;
-                        }
-                        return false;
-                    }
-
-                }
-            }
+        Usuario usuario = datos.obtenerUsuario(id);
+        if (usuario.getContrasenia().equals(contrasenia)) {
+            return true;
         }
 
         return false;
