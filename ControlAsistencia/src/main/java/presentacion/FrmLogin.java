@@ -84,9 +84,8 @@ public class FrmLogin extends javax.swing.JFrame {
 
         boolean valicacionIniciarSesion = usuario.iniciarSesion(Integer.parseInt(txtId.getText()), txtContrasenia.getText());
 
-        MainWindow mainWindow = new MainWindow();
-
         if (valicacionIniciarSesion == true) {
+            MainWindow mainWindow = new MainWindow();
             mainWindow.setVisible(true);
             this.dispose();
         }

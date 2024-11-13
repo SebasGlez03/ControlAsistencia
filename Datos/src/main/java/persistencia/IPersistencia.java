@@ -22,7 +22,7 @@ public interface IPersistencia {
      * @param usuario el objeto Usuario que se desea obtener.
      * @return Objeto de tipo Usuario con la informacion del usuario a obtener
      */
-    public Usuario obtenerUsuario(Usuario usuario);
+    public Usuario obtenerUsuario(int matricula);
 
     /**
      * Agrega un nuevo usuario al sistema.

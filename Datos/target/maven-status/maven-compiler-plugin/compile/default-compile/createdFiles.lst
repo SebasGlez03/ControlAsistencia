@@ -1,2 +1,5 @@
+dao\UsuarioDAO.class
 dao\MaestroDAO.class
+persistencia\FachadaPersistencia.class
 persistencia\IPersistencia.class
+dao\AlumnoDAO.class

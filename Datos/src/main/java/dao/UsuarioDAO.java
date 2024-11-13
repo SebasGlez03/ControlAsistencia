@@ -19,24 +19,24 @@ public class UsuarioDAO {
     public UsuarioDAO() {
     }
 
-    public Usuario obtenerUsuario(Usuario usuario) {
+    public Usuario obtenerUsuario(int matricula) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
         MongoCollection<Document> collection = database.getCollection("usuarios");
 
-        Document query = new Document("matricula", usuario.getMatricula());
+        Document query = new Document("matricula", matricula);
         Document usuarios = collection.find(query).first();
 
         System.out.println("Usuario leido: " + usuarios.toJson());
 
-        int matricula = usuarios.getInteger("matricula");
+        int matriculaObtener = usuarios.getInteger("matricula");
         String nombre = usuarios.getString("nombre");
         String apellidoPaterno = usuarios.getString("apellidoPaterno");
         String apellidoMaterno = usuarios.getString("apellidoMaterno");
         String correo = usuarios.getString("correo");
         String contrasenia = usuarios.getString("contrasenia");
 
-        Usuario usuarioObtenido = new Usuario(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
+        Usuario usuarioObtenido = new Usuario(matriculaObtener, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
 
         return usuarioObtenido;
 

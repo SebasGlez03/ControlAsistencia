@@ -2,11 +2,7 @@ package subsistemaUsuario;
 
 import dto.AlumnoDTO;
 import dto.UsuarioDTO;
-import SubsistemaAlumno.ControlAlumno;
-import entidades.Alumno;
-import entidades.Maestro;
 import entidades.Usuario;
-import mock.BaseDatosMock;
 import persistencia.FachadaPersistencia;
 import persistencia.IPersistencia;
 
@@ -120,11 +116,18 @@ public class ControlUsuario {
         validarContrasenia(contrasenia);
 
         Usuario usuario = datos.obtenerUsuario(id);
-        if (usuario.getContrasenia().equals(contrasenia)) {
-            return true;
-        }
+        String contraseniaUsuario = usuario.getContrasenia();
 
-        return false;
+        return prueba(contraseniaUsuario, contrasenia);
+
+    }
+
+    public boolean prueba(String contraseniaDAO, String contraseniaEnviada) {
+        if (contraseniaDAO.equals(contraseniaEnviada)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
