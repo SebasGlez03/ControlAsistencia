@@ -25,9 +25,9 @@ import org.bson.types.ObjectId;
 public class FachadaPersistencia implements IPersistencia {
     
     @Override
-    public Usuario obtenerUsuario(Usuario usuario) {
+    public Usuario obtenerUsuario(int matricula) {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
-        return usuarioDAO.obtenerUsuario(usuario);
+        return usuarioDAO.obtenerUsuario(matricula);
     }
     
     @Override
