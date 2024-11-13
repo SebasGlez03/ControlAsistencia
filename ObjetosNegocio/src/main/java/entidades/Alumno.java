@@ -39,22 +39,22 @@ public class Alumno extends Usuario {
      *
      * @param semestre Semestre que cursa el alumno
      * @param promedio Promedio del alumno
-     * @param id Id del usuario
+     * @param matricula Id del usuario
      * @param nombre Nombre del usuario
      * @param apellidoPaterno Apellido paterno del usuario
      * @param apellidoMaterno Apellido materno del usuario
      * @param correo Correo del usuario
      * @param contrasenia Contrasenia del usuario
      */
-    public Alumno(int semestre, float promedio, int id, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
-        super(id, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
+    public Alumno(int semestre, float promedio, int matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
+        super(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
         this.semestre = semestre;
         this.promedio = promedio;
     }
 
     /**
      * Constructur qeu inicializa los valores de los atributos de la clase
-     * Alumno y de su clase padre Usuario (A excepcion de su ID)
+     * Alumno y de su clase padre Usuario (A excepcion de su Matricula)
      *
      * @param semestre Semestre que cursa el alumno
      * @param promedio Promedio del alumno

@@ -4,7 +4,12 @@
  */
 package persistencia;
 
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import entidades.Usuario;
+import java.util.Date;
+import org.bson.Document;
 
 /**
  *
@@ -14,11 +19,15 @@ public class FachadaPersistencia implements IPersistencia {
 
     @Override
     public void obtenerUsuario(Usuario usuario) {
-        ConexionBD conexion = new ConexionBD();
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("usuarios");
+        
+        Document documentRestaurante = new Document();
+        documentRestaurante.append("nombre", "Restaurante sebas");
+        documentRestaurante.append("rating", 3.5);
+        documentRestaurante.append("fechaInauguracion", new Date());
 
-        conexion.crearConexion();
-        
-        
     }
 
     @Override
