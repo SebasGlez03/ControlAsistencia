@@ -14,7 +14,7 @@ import entidades.Usuario;
  */
 public class UsuarioDTO {
 
-    private int id; // Identificador único del usuario
+    private int matricula; // Identificador único del usuario
     private String nombre; // Nombre del usuario
     private String apellidoPaterno; // Apellido paterno del usuario
     private String apellidoMaterno; // Apellido materno del usuario
@@ -30,15 +30,15 @@ public class UsuarioDTO {
     /** 
      * Constructor que inicializa todos los atributos del usuario.
      * 
-     * @param id Identificador único del usuario
+     * @param matricula Identificador único del usuario
      * @param nombre Nombre del usuario
      * @param apellidoPaterno Apellido paterno del usuario
      * @param apellidoMaterno Apellido materno del usuario
      * @param correo Correo electrónico del usuario
      * @param contrasenia Contraseña del usuario
      */
-    public UsuarioDTO(int id, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
-        this.id = id;
+    public UsuarioDTO(int matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
+        this.matricula = matricula;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -52,7 +52,7 @@ public class UsuarioDTO {
      * @param usuario Objeto Usuario del cual se obtienen los datos
      */
     public UsuarioDTO(Usuario usuario) {
-        this.id = usuario.getId();
+        this.matricula = usuario.getMatricula();
         this.nombre = usuario.getNombre();
         this.apellidoPaterno = usuario.getApellidoPaterno();
         this.apellidoMaterno = usuario.getApellidoMaterno();
@@ -82,17 +82,17 @@ public class UsuarioDTO {
      * 
      * @return El identificador único del usuario
      */
-    public int getId() {
-        return id;
+    public int getMatricula() {
+        return matricula;
     }
 
     /** 
      * Establece el identificador del usuario.
      * 
-     * @param id Identificador único del usuario
+     * @param matricula Identificador único del usuario
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
     }
 
     /** 

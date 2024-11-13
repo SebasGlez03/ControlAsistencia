@@ -21,7 +21,7 @@ public interface IPersistencia {
      *
      * @param usuario el objeto Usuario que se desea obtener.
      */
-    public void obtenerUsuario(Usuario usuario);
+    public Usuario obtenerUsuario(Usuario usuario);
 
     /**
      * Agrega un nuevo usuario al sistema.
@@ -41,7 +41,9 @@ public interface IPersistencia {
      * Modifica los datos de un usuario en el sistema.
      *
      * @param usuario el objeto Usuario que se desea modificar.
+     * @param usuarioModificado el objeto Usuario con la informacion a
+     * modificar.
      */
-    public void modificarUsuario(Usuario usuario);
+    public void modificarUsuario(Usuario usuario, Usuario usuarioModificado);
 
 }

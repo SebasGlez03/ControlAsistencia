@@ -100,7 +100,7 @@ public class FachadaUsuario implements IUsuario {
 
         Alumno alumno = new Alumno();
 
-        alumno.setId(dto.getId());
+        alumno.setMatricula(dto.getMatricula());
         alumno.setNombre(dto.getNombre());
         alumno.setApellidoPaterno(dto.getApellidoPaterno());
         alumno.setApellidoMaterno(dto.getApellidoMaterno());
@@ -122,7 +122,7 @@ public class FachadaUsuario implements IUsuario {
 
         Maestro maestro = new Maestro();
 
-        maestro.setId(dto.getId());
+        maestro.setMatricula(dto.getMatricula());
         maestro.setNombre(dto.getNombre());
         maestro.setApellidoPaterno(dto.getApellidoPaterno());
         maestro.setApellidoMaterno(dto.getApellidoMaterno());

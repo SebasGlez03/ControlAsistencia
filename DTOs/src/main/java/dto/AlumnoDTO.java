@@ -33,7 +33,7 @@ public class AlumnoDTO extends UsuarioDTO {
      * @param alumno Objeto Alumno del cual se obtienen el semestre y promedio
      */
     public AlumnoDTO(Usuario usuario, Alumno alumno) {
-        super.setId(usuario.getId());
+        super.setMatricula(usuario.getMatricula());
         super.setNombre(usuario.getNombre());
         super.setApellidoPaterno(usuario.getApellidoPaterno());
         super.setApellidoMaterno(usuario.getApellidoMaterno());
