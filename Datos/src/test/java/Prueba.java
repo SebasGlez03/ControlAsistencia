@@ -18,10 +18,10 @@ public class Prueba {
         
         IPersistencia bd = new FachadaPersistencia();
 
-//        bd.agregarAlumno(alumno);
+        bd.eliminarUsuario(alumno);
         System.out.println(bd.obtenerAlumno(alumno).toString());
         
-        bd.eliminarUsuario(alumno);
+        
     }
     
 }
