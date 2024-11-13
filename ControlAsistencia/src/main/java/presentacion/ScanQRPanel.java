@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ragzard
@@ -12,13 +15,13 @@ public class ScanQRPanel extends javax.swing.JPanel {
 
     MainWindow mainWindow;
     InicioPanel inicioPanel;
-    
+
     /**
      * Creates new form ScanQRPanel
      */
     public ScanQRPanel(MainWindow mainwindow, InicioPanel inicioPanel) {
         initComponents();
-        
+
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
     }
@@ -95,6 +98,11 @@ public class ScanQRPanel extends javax.swing.JPanel {
         txtPIN.setAutoscrolls(false);
         txtPIN.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         txtPIN.setPreferredSize(new java.awt.Dimension(101, 30));
+        txtPIN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPINKeyPressed(evt);
+            }
+        });
         ContentPanel.add(txtPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 110, -1));
 
         lblScanCam.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -114,6 +122,12 @@ public class ScanQRPanel extends javax.swing.JPanel {
         ContentPanel.add(camBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 190, -1, -1));
 
         btnCancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/Cancel btn.png"))); // NOI18N
+        btnCancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelMouseClicked(evt);
+            }
+        });
         ContentPanel.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 580, -1, -1));
 
         add(ContentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 720));
@@ -122,6 +136,22 @@ public class ScanQRPanel extends javax.swing.JPanel {
     private void btnReturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReturnMouseClicked
         mainWindow.changeContentPane(inicioPanel);
     }//GEN-LAST:event_btnReturnMouseClicked
+
+    private void txtPINKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPINKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            // Aquí pones el código que quieres ejecutar cuando se presiona Enter
+            if (Integer.parseInt(txtPIN.getText()) == 123) {
+                JOptionPane.showMessageDialog(this, "Se ha registrado su asistencia", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Pin no valido", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+    }//GEN-LAST:event_txtPINKeyPressed
+
+    private void btnCancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseClicked
+        mainWindow.changeContentPane(inicioPanel);
+    }//GEN-LAST:event_btnCancelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

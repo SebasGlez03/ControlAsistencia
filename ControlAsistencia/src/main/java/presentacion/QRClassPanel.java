@@ -4,6 +4,10 @@
  */
 package presentacion;
 
+import entidades.Alumno;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import subsubsistemaqr.FachadaQR;
 import subsubsistemaqr.IQR;
 
@@ -12,10 +16,12 @@ import subsubsistemaqr.IQR;
  * @author Ragzard
  */
 public class QRClassPanel extends javax.swing.JPanel {
-    
+
     MainWindow mainWindow;
     InicioPanel inicioPanel;
     IQR iqr = new FachadaQR();
+
+    List<Alumno> listaAlumnosMock = new ArrayList<>();
 
     /**
      * Creates new form QRClassPanel
@@ -25,12 +31,54 @@ public class QRClassPanel extends javax.swing.JPanel {
      */
     public QRClassPanel(MainWindow mainwindow, InicioPanel inicioPanel) {
         initComponents();
-        
+
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
-        
+
+        Alumno alumno1 = new Alumno(4, 8.2f, 927384, "Pedro", "Ramirez", "Valenzuela", "pedro@gmail.com", "contrasenia");
+        Alumno alumno2 = new Alumno(5, 8.75f, 123456, "Juan", "Pérez", "Gómez", "juan.perez@correo.com", "contrasenia123");
+        Alumno alumno3 = new Alumno(3, 9.10f, 234567, "Ana", "Ramírez", "López", "ana.ramirez@correo.com", "seguridad321");
+        Alumno alumno4 = new Alumno(7, 7.50f, 345678, "Carlos", "Martínez", "Vázquez", "carlos.martinez@correo.com", "abc123");
+        Alumno alumno5 = new Alumno(2, 6.80f, 456789, "Marta", "Sánchez", "Pérez", "marta.sanchez@correo.com", "clave987");
+        Alumno alumno6 = new Alumno(8, 9.50f, 567890, "Luis", "González", "Morales", "luis.gonzalez@correo.com", "pass456");
+        Alumno alumno7 = new Alumno(4, 8.20f, 678901, "Elena", "Fernández", "Torres", "elena.fernandez@correo.com", "qwerty2024");
+        Alumno alumno8 = new Alumno(6, 9.00f, 789012, "Pedro", "Díaz", "Serrano", "pedro.diaz@correo.com", "contraseña789");
+
+        listaAlumnosMock.add(alumno1);
+        listaAlumnosMock.add(alumno2);
+        listaAlumnosMock.add(alumno3);
+        listaAlumnosMock.add(alumno4);
+        listaAlumnosMock.add(alumno5);
+        listaAlumnosMock.add(alumno6);
+        listaAlumnosMock.add(alumno7);
+        listaAlumnosMock.add(alumno8);
+
+        llenarTablaUsuariosMock(listaAlumnosMock);
+
         this.lblPIN.setText(iqr.generarQR().getContenido());
-        
+
+    }
+
+    public void llenarTablaUsuariosMock(List<Alumno> listaMock) {
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tablaAlumnos.getModel();
+
+        if (modeloTabla.getRowCount() > 0) {
+            for (int i = modeloTabla.getRowCount() - 1; i > -1; i--) {
+                modeloTabla.removeRow(i);
+            }
+        }
+
+        if (listaMock != null) {
+            listaMock.forEach(row -> {
+                Object[] fila = new Object[7];
+                fila[0] = row.getMatricula();
+                fila[1] = row.getNombre();
+                fila[2] = row.getApellidoPaterno();
+
+                modeloTabla.addRow(fila);
+            });
+        }
+
     }
 
     /**
@@ -54,6 +102,7 @@ public class QRClassPanel extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
+        tablaAlumnos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         lblPIN = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -116,6 +165,28 @@ public class QRClassPanel extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Alumnos");
         ContentPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, -1, -1));
+
+        tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Matricula", "Nombre", "Apellido Paterno"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaAlumnos);
+
         ContentPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 340, 490));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
@@ -175,5 +246,6 @@ public class QRClassPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblHourClass2;
     private javax.swing.JLabel lblImgClass1;
     private javax.swing.JLabel lblPIN;
+    private javax.swing.JTable tablaAlumnos;
     // End of variables declaration//GEN-END:variables
 }
