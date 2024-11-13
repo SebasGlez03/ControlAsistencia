@@ -32,10 +32,17 @@ public class Prueba {
 
         IPersistencia bd = new FachadaPersistencia();
 
+<<<<<<< HEAD
 //        bd.agregarMaestro(maestro);
 //        System.out.println(bd.obtenerMaestro(maestro).toString());
         bd.modificarMaestro(maestro, maestroModificacion);
 //        bd.eliminarUsuario(alumno);
+=======
+        bd.eliminarUsuario(alumno);
+        System.out.println(bd.obtenerAlumno(alumno).toString());
+        
+        
+>>>>>>> Nomar
     }
 
 }

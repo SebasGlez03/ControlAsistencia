@@ -1,6 +1,8 @@
 package subsistemaUsuario;
 
+import dto.AlumnoDTO;
 import dto.UsuarioDTO;
+import SubsistemaAlumno.ControlAlumno;
 import entidades.Alumno;
 import entidades.Maestro;
 import entidades.Usuario;
@@ -88,13 +90,27 @@ public class ControlUsuario {
         validarContrasenia(usuario.getContrasenia());
     }
 
-    public void obtenerTipoDeUsuario(UsuarioDTO usuario) {
+    public String obtenerTipoDeUsuario(UsuarioDTO usuario) {
+        
+    BaseDatosMock bd = new BaseDatosMock(); // Instanciamos la base de datos mock
 
-        /*
-        Aqui va la logica tras haber obtenido el tipo del usuario mediante los
-        subsistemas
-         */
+    // Verificar si el usuario es un Alumno usando ControlAlumno
+    ControlAlumno controlAlumno = new ControlAlumno();
+    AlumnoDTO alumnoDTO = controlAlumno.obtenerTipoUsuario(usuario);
+
+    if (alumnoDTO != null) {
+        return "Alumno"; // Si se encuentra al alumno, retorna "Alumno"
     }
+
+    // Verificar si el usuario es un Maestro
+    for (Maestro maestro : bd.getMaestros()) {
+        if (usuario.getMatricula() == maestro.getMatricula()) { // Verifica que el id coincida con el maestro
+            return "Maestro"; // Si es un maestro, retorna "Maestro"
+        }
+    }
+
+    return "Desconocido"; // Si no se encuentra el usuario en ninguna de las listas, retorna "Desconocido"
+}
 
     // Se agrego con el paquete de pruebas de base de datos mock
     public boolean iniciarSesion(int id, String contrasenia) {

@@ -97,9 +97,8 @@ public class ControlMaestro {
     }
     
     private boolean alumnoInscrito(Alumno alumno) {
-    // Lógica para verificar si el alumno esta inscrito en alguna clase del maestro
-    // Por ejemplo, podríamos verificar en una lista de alumnos inscritos para cada materia
-    return true; // Este es solo un ejemplo, debes implementar la logica real
+   
+    return true; 
     }
     
 }
