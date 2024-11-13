@@ -12,7 +12,7 @@ import java.sql.SQLException;
  * @author sebastian
  */
 public interface IConexionBD {
-    
-    public Connection crearConexion() throws SQLException;
-    
+
+    public void crearConexion();
+
 }
