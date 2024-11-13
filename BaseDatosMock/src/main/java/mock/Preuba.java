@@ -37,7 +37,7 @@ public class Preuba {
         materias.add("Ciencias");
         materias3.add("Fisica");
 
-        a.setId(7);
+        a.setMatricula(7);
         a.setNombre("Juan");
         a.setApellidoPaterno("Lopez");
         a.setApellidoMaterno("Perez");
@@ -46,7 +46,7 @@ public class Preuba {
         a.setPromedio((float) 8.2);
         a.setSemestre(5);
 
-        a2.setId(6);
+        a2.setMatricula(6);
         a2.setNombre("Pedro");
         a2.setApellidoPaterno("Gutierrez");
         a2.setApellidoMaterno("Hernandez");
@@ -55,7 +55,7 @@ public class Preuba {
         a2.setPromedio((float) 9.6);
         a2.setSemestre(2);
 
-        a3.setId(5);
+        a3.setMatricula(5);
         a3.setNombre("Carlos");
         a3.setApellidoPaterno("Martinez");
         a3.setApellidoMaterno("Tapia");
@@ -64,7 +64,7 @@ public class Preuba {
         a3.setPromedio((float) 8.2);
         a3.setSemestre(5);
 
-        a4.setId(4);
+        a4.setMatricula(4);
         a4.setNombre("Alfonzo");
         a4.setApellidoPaterno("Ramirez");
         a4.setApellidoMaterno("Perez");
@@ -73,7 +73,7 @@ public class Preuba {
         a4.setPromedio((float) 8.2);
         a4.setSemestre(5);
 
-        m.setId(3);
+        m.setMatricula(3);
         m.setNombre("Paco");
         m.setApellidoPaterno("Gonzalez");
         m.setApellidoMaterno("Herrera");
@@ -81,7 +81,7 @@ public class Preuba {
         m.setContrasenia("123321");
         m.setMaterias(materias);
 
-        m2.setId(2);
+        m2.setMatricula(2);
         m2.setNombre("Hector");
         m2.setApellidoPaterno("Alejandria");
         m2.setApellidoMaterno("Olivera");
@@ -89,7 +89,7 @@ public class Preuba {
         m2.setContrasenia("123321");
         m2.setMaterias(materias2);
 
-        m3.setId(1);
+        m3.setMatricula(1);
         m3.setNombre("Sandra");
         m3.setApellidoPaterno("Lopez");
         m3.setApellidoMaterno("Perez");
@@ -135,7 +135,7 @@ public class Preuba {
         System.out.println("Alumno sin modificar:");
         System.out.println(a);
         Alumno aMod = new Alumno();
-        aMod.setId(7);
+        aMod.setMatricula(7);
         aMod.setNombre("Modificacion");
         aMod.setApellidoPaterno("Modificacion");
         aMod.setApellidoMaterno("Modificacion");
@@ -150,7 +150,7 @@ public class Preuba {
         System.out.println("Maestro sin modificar:");
         System.out.println(m2);
         Maestro mMod = new Maestro();
-        mMod.setId(2);
+        mMod.setMatricula(2);
         mMod.setNombre("Momomomo");
         mMod.setApellidoPaterno("Momomomo");
         mMod.setApellidoMaterno("Momomomo");
