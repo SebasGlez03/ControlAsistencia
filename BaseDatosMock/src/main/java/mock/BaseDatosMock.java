@@ -48,8 +48,8 @@ public class BaseDatosMock {
     // Metodo para modificar el alumno de la lista
     public void modificarAlumno(Alumno alumno, Alumno alumnoModificacion) {
         for (Alumno a : alumnosDAOmock) {
-            if (a.getId() == alumno.getId()) {
-                a.setId(alumnoModificacion.getId());
+            if (a.getMatricula() == alumno.getMatricula()) {
+                a.setMatricula(alumnoModificacion.getMatricula());
                 a.setNombre(alumnoModificacion.getNombre());
                 a.setApellidoPaterno(alumnoModificacion.getApellidoPaterno());
                 a.setApellidoMaterno(alumnoModificacion.getApellidoMaterno());
@@ -65,8 +65,8 @@ public class BaseDatosMock {
     // Metodo para modificar el maestro de la lista
     public void modificarMaestro(Maestro maestro, Maestro maestroModificado) {
         for (Maestro m : maestrosDAOmock) {
-            if (m.getId() == maestroModificado.getId()) {
-                m.setId(maestroModificado.getId());
+            if (m.getMatricula() == maestroModificado.getMatricula()) {
+                m.setMatricula(maestroModificado.getMatricula());
                 m.setNombre(maestroModificado.getNombre());
                 m.setApellidoPaterno(maestroModificado.getApellidoPaterno());
                 m.setApellidoMaterno(maestroModificado.getApellidoMaterno());
@@ -98,7 +98,7 @@ public class BaseDatosMock {
 
         List<Alumno> alumnosLlenos = new ArrayList<>();
 
-        a.setId(7);
+        a.setMatricula(7);
         a.setNombre("Juan");
         a.setApellidoPaterno("Lopez");
         a.setApellidoMaterno("Perez");
@@ -107,7 +107,7 @@ public class BaseDatosMock {
         a.setPromedio((float) 8.2);
         a.setSemestre(5);
 
-        a2.setId(6);
+        a2.setMatricula(6);
         a2.setNombre("Pedro");
         a2.setApellidoPaterno("Gutierrez");
         a2.setApellidoMaterno("Hernandez");
@@ -116,7 +116,7 @@ public class BaseDatosMock {
         a2.setPromedio((float) 9.6);
         a2.setSemestre(2);
 
-        a3.setId(5);
+        a3.setMatricula(5);
         a3.setNombre("Carlos");
         a3.setApellidoPaterno("Martinez");
         a3.setApellidoMaterno("Tapia");
@@ -125,7 +125,7 @@ public class BaseDatosMock {
         a3.setPromedio((float) 8.2);
         a3.setSemestre(5);
 
-        a4.setId(4);
+        a4.setMatricula(4);
         a4.setNombre("Alfonzo");
         a4.setApellidoPaterno("Ramirez");
         a4.setApellidoMaterno("Perez");
@@ -155,7 +155,7 @@ public class BaseDatosMock {
 
         List<Maestro> maestrosLlenos = new ArrayList<>();
 
-        m.setId(3);
+        m.setMatricula(3);
         m.setNombre("Paco");
         m.setApellidoPaterno("Gonzalez");
         m.setApellidoMaterno("Herrera");
@@ -163,7 +163,7 @@ public class BaseDatosMock {
         m.setContrasenia("123321");
         m.setMaterias(materias);
 
-        m2.setId(2);
+        m2.setMatricula(2);
         m2.setNombre("Hector");
         m2.setApellidoPaterno("Alejandria");
         m2.setApellidoMaterno("Olivera");
@@ -171,7 +171,7 @@ public class BaseDatosMock {
         m2.setContrasenia("123321");
         m2.setMaterias(materias2);
 
-        m3.setId(1);
+        m3.setMatricula(1);
         m3.setNombre("Sandra");
         m3.setApellidoPaterno("Lopez");
         m3.setApellidoMaterno("Perez");

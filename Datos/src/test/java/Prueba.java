@@ -1,5 +1,5 @@
 
-import entidades.Usuario;
+import entidades.Alumno;
 import persistencia.FachadaPersistencia;
 import persistencia.IPersistencia;
 
@@ -12,15 +12,16 @@ import persistencia.IPersistencia;
  * @author PC
  */
 public class Prueba {
-
+    
     public static void main(String[] args) {
-        Usuario usuario = new Usuario(1234456, "Pedro", "Perez", "Martinez", "pedro@gmail.com", "contrasenia");
-
-        IPersistencia bd = new FachadaPersistencia();
+        Alumno alumno = new Alumno(6, (float) 8.2, 235612, "Carlos", "Rivera", "Martinez", "carlos@gmail.com", "hdfags");
         
-        bd.agregarUsuario(usuario);
+        IPersistencia bd = new FachadaPersistencia();
 
-        System.out.println(bd.obtenerUsuario(usuario).toString());
+//        bd.agregarAlumno(alumno);
+        System.out.println(bd.obtenerAlumno(alumno).toString());
+        
+        bd.eliminarUsuario(alumno);
     }
-
+    
 }

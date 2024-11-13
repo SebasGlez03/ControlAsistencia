@@ -20,6 +20,7 @@ public interface IPersistencia {
      * Obtiene un usuario del sistema.
      *
      * @param usuario el objeto Usuario que se desea obtener.
+     * @return Objeto de tipo Usuario con la informacion del usuario a obtener
      */
     public Usuario obtenerUsuario(Usuario usuario);
 
@@ -46,4 +47,26 @@ public interface IPersistencia {
      */
     public void modificarUsuario(Usuario usuario, Usuario usuarioModificado);
 
+    /**
+     * Obtiene un alumno del sistema.
+     *
+     * @param alumno El objeto Alumno que se desea obtener.
+     * @return Objeto de tipo Alumno con la informacion del Alumno a obtener
+     */
+    public Alumno obtenerAlumno(Alumno alumno);
+
+    /**
+     * Agrega un nuevo alumno al sistema.
+     *
+     * @param alumno El objeto Alumno que se desea agregar.
+     */
+    public void agregarAlumno(Alumno alumno);
+
+    /**
+     * Modifica los datos de un alumno en el sistema.
+     *
+     * @param alumno El objeto Alumno que se desea modificar.
+     * @param alumnoModificado El objeto Alumno con la informacion a modificar.
+     */
+    public void modificarAlumno(Alumno alumno, Alumno alumnoModificado);
 }
