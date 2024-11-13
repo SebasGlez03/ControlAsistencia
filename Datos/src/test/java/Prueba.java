@@ -21,13 +21,20 @@ public class Prueba {
         listaMaterias.add("Matematicas");
         listaMaterias.add("Calculo");
 
+        List<String> listaMaterias2 = new ArrayList();
+
+        listaMaterias2.add("Ciencias");
+        listaMaterias2.add("Quimica");
+
         Maestro maestro = new Maestro(listaMaterias, 9876, "Manuel", "Martines", "Montes", "manuel@gmail.com", "algobien");
+
+        Maestro maestroModificacion = new Maestro(listaMaterias2, 9876, "Pancho", "Test", "Test", "test@gmail.com", "test");
 
         IPersistencia bd = new FachadaPersistencia();
 
-        bd.agregarMaestro(maestro);
-//        System.out.println(bd.obtenerAlumno(alumno).toString());
-
+//        bd.agregarMaestro(maestro);
+//        System.out.println(bd.obtenerMaestro(maestro).toString());
+        bd.modificarMaestro(maestro, maestroModificacion);
 //        bd.eliminarUsuario(alumno);
     }
 

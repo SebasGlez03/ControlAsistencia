@@ -85,4 +85,13 @@ public interface IPersistencia {
      */
     public void agregarMaestro(Maestro maestro);
 
+    /**
+     * Modifica los datos de un maestro en el sistema.
+     *
+     * @param maestro El objeto Maestro que se desea modificar.
+     * @param maestroModificado El objeto Maestro con la informacion a
+     * modificar.
+     */
+    public void modificarMaestro(Maestro maestro, Maestro maestroModificado);
+
 }
