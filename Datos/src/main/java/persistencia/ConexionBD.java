@@ -16,7 +16,7 @@ import org.bson.Document;
 public class ConexionBD implements IConexionBD {
 
     final String SERVER = "localhost";
-    final String BASE_DATOS = "controlasistencia";
+    final String BASE_DATOS = "cia";
     final String COLLECTION = "controlasistencia";
     final int PUERTO = 27017;
 
