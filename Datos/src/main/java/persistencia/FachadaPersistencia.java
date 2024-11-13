@@ -14,7 +14,11 @@ public class FachadaPersistencia implements IPersistencia {
 
     @Override
     public void obtenerUsuario(Usuario usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ConexionBD conexion = new ConexionBD();
+
+        conexion.crearConexion();
+        
+        
     }
 
     @Override
