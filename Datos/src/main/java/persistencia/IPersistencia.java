@@ -69,4 +69,20 @@ public interface IPersistencia {
      * @param alumnoModificado El objeto Alumno con la informacion a modificar.
      */
     public void modificarAlumno(Alumno alumno, Alumno alumnoModificado);
+
+    /**
+     * Obtiene un maestro del sistema.
+     *
+     * @param maestro El objeto Maestro que se desea obtener.
+     * @return Objeto de tipo Maestro con la informacion del Maestro a obtener.
+     */
+    public Maestro obtenerMaestro(Maestro maestro);
+
+    /**
+     * Agrega un nuevo maestro al sistema.
+     *
+     * @param maestro El objeto Maestro que se desea agregar.
+     */
+    public void agregarMaestro(Maestro maestro);
+
 }

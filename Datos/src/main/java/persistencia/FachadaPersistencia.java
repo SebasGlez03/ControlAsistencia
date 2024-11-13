@@ -7,11 +7,15 @@ package persistencia;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import dao.AlumnoDAO;
+import dao.UsuarioDAO;
 import entidades.Alumno;
 import entidades.Maestro;
 import entidades.Usuario;
+import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -21,149 +25,101 @@ public class FachadaPersistencia implements IPersistencia {
 
     @Override
     public Usuario obtenerUsuario(Usuario usuario) {
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase database = mongoClient.getDatabase("cia");
-        MongoCollection<Document> collection = database.getCollection("usuarios");
-
-        Document query = new Document("matricula", usuario.getMatricula());
-        Document usuarios = collection.find(query).first();
-
-        System.out.println("Usuario leido: " + usuarios.toJson());
-
-        int matricula = usuarios.getInteger("matricula");
-        String nombre = usuarios.getString("nombre");
-        String apellidoPaterno = usuarios.getString("apellidoPaterno");
-        String apellidoMaterno = usuarios.getString("apellidoMaterno");
-        String correo = usuarios.getString("correo");
-        String contrasenia = usuarios.getString("contrasenia");
-
-        Usuario usuarioObtenido = new Usuario(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
-
-        return usuarioObtenido;
-
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.obtenerUsuario(usuario);
     }
 
     @Override
     public void agregarUsuario(Usuario usuario) {
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase database = mongoClient.getDatabase("cia");
-        MongoCollection<Document> collection = database.getCollection("usuarios");
-
-        Document documentUsuario = new Document();
-        documentUsuario.append("matricula", usuario.getMatricula());
-        documentUsuario.append("nombre", usuario.getNombre());
-        documentUsuario.append("apellidoPaterno", usuario.getApellidoPaterno());
-        documentUsuario.append("apellidoMaterno", usuario.getApellidoMaterno());
-        documentUsuario.append("correo", usuario.getCorreo());
-        documentUsuario.append("contrasenia", usuario.getContrasenia());
-
-        collection.insertOne(documentUsuario);
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        usuarioDAO.agregarUsuario(usuario);
     }
 
     @Override
     public void eliminarUsuario(Usuario usuario) {
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase database = mongoClient.getDatabase("cia");
-        MongoCollection<Document> collection = database.getCollection("usuarios");
-
-        Document query = new Document("matricula", usuario.getMatricula());
-
-        collection.deleteOne(query);
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        usuarioDAO.eliminarUsuario(usuario);
     }
 
     @Override
     public void modificarUsuario(Usuario usuario, Usuario usuarioModificado) {
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase database = mongoClient.getDatabase("cia");
-        MongoCollection<Document> collection = database.getCollection("usuarios");
-
-        Document query = new Document("matricula", usuario.getMatricula());
-
-        // Define los cambios que se van a realizar
-        Document update = new Document("$set", new Document()
-                .append("nombre", usuarioModificado.getNombre())
-                .append("apellidoPaterno", usuarioModificado.getApellidoPaterno())
-                .append("apellidoMaterno", usuarioModificado.getApellidoMaterno())
-                .append("correo", usuarioModificado.getCorreo())
-                .append("contrasenia", usuarioModificado.getContrasenia())
-        );
-
-        // Modifica el primer documento que coincida con el filtro
-        collection.updateOne(query, update);
-
-        System.out.println("Usuario modificado correctamente");
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        usuarioDAO.modificarUsuario(usuario, usuarioModificado);
     }
 
     @Override
     public Alumno obtenerAlumno(Alumno alumno) {
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase database = mongoClient.getDatabase("cia");
-        MongoCollection<Document> collection = database.getCollection("usuarios");
-
-        Document query = new Document("matricula", alumno.getMatricula());
-        Document alumnos = collection.find(query).first();
-
-        System.out.println("Alumno leido: " + alumnos.toJson());
-
-        int matricula = alumnos.getInteger("matricula");
-        String nombre = alumnos.getString("nombre");
-        String apellidoPaterno = alumnos.getString("apellidoPaterno");
-        String apellidoMaterno = alumnos.getString("apellidoMaterno");
-        String correo = alumnos.getString("correo");
-        String contrasenia = alumnos.getString("contrasenia");
-        int semestre = alumnos.getInteger("semestre");
-        double promedio = alumnos.getDouble("promedio");
-
-        Alumno alumnoObtenido = new Alumno(semestre, (float) promedio, matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
-
-        return alumnoObtenido;
+        AlumnoDAO alumnoDAO = new AlumnoDAO();
+        return alumnoDAO.obtenerAlumno(alumno);
 
     }
 
     @Override
     public void agregarAlumno(Alumno alumno) {
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase database = mongoClient.getDatabase("cia");
-        MongoCollection<Document> collection = database.getCollection("usuarios");
-
-        Document documentAlumno = new Document();
-        documentAlumno.append("matricula", alumno.getMatricula());
-        documentAlumno.append("nombre", alumno.getNombre());
-        documentAlumno.append("apellidoPaterno", alumno.getApellidoPaterno());
-        documentAlumno.append("apellidoMaterno", alumno.getApellidoMaterno());
-        documentAlumno.append("correo", alumno.getCorreo());
-        documentAlumno.append("contrasenia", alumno.getContrasenia());
-        documentAlumno.append("semestre", alumno.getSemestre());
-        documentAlumno.append("promedio", alumno.getPromedio());
-
-        collection.insertOne(documentAlumno);
+        AlumnoDAO alumnoDAO = new AlumnoDAO();
+        alumnoDAO.agregarAlumno(alumno);
     }
 
     @Override
     public void modificarAlumno(Alumno alumno, Alumno alumnoModificado) {
+        AlumnoDAO alumnoDAO = new AlumnoDAO();
+        alumnoDAO.modificarAlumno(alumno, alumnoModificado);
+    }
+
+//    @Override
+//    public Maestro obtenerMaestro(Maestro maestro) {
+//        MongoClient mongoClient = new MongoClient("localhost", 27017);
+//        MongoDatabase database = mongoClient.getDatabase("cia");
+//        MongoCollection<Document> collection = database.getCollection("usuarios");
+//
+//        Document query = new Document("matricula", maestro.getMatricula());
+//        Document maestros = collection.find(query).first();
+//
+//        System.out.println("Alumno leido: " + maestros.toJson());
+//
+//        int matricula = maestros.getInteger("matricula");
+//        String nombre = maestros.getString("nombre");
+//        String apellidoPaterno = maestros.getString("apellidoPaterno");
+//        String apellidoMaterno = maestros.getString("apellidoMaterno");
+//        String correo = maestros.getString("correo");
+//        String contrasenia = maestros.getString("contrasenia");
+//        String materias = maestros.getString("clasesImpartidas");
+//
+//        return maestro;
+//
+//    }
+//    
+    @Override
+    public Maestro obtenerMaestro(Maestro maestro) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void agregarMaestro(Maestro maestro) {
+        // Esta clase recibe una lista que actualmente es mock ya que no es parte de nuestro caso de uso
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
         MongoCollection<Document> collection = database.getCollection("usuarios");
 
-        Document query = new Document("matricula", alumno.getMatricula());
+        List<Document> clasesLista = new ArrayList();
 
-        // Define los cambios que se van a realizar
-        Document update = new Document("$set", new Document()
-                .append("nombre", alumnoModificado.getNombre())
-                .append("apellidoPaterno", alumnoModificado.getApellidoPaterno())
-                .append("apellidoMaterno", alumnoModificado.getApellidoMaterno())
-                .append("correo", alumnoModificado.getCorreo())
-                .append("contrasenia", alumnoModificado.getContrasenia())
-                .append("semestre", alumnoModificado.getSemestre())
-                .append("promedio", alumno.getPromedio())
-        );
+        for (String clase : maestro.getMaterias()) {
+            Document documentClase = new Document();
+            documentClase.append("id", new ObjectId());
+            documentClase.append("nombreClase", clase);
+            clasesLista.add(documentClase);
+        }
 
-        // Modifica el primer documento que coincida con el filtro
-        collection.updateOne(query, update);
+        Document documentMaestro = new Document();
+        documentMaestro.append("matricula", maestro.getMatricula());
+        documentMaestro.append("nombre", maestro.getNombre());
+        documentMaestro.append("apellidoPaterno", maestro.getApellidoPaterno());
+        documentMaestro.append("apellidoMaterno", maestro.getApellidoMaterno());
+        documentMaestro.append("correo", maestro.getCorreo());
+        documentMaestro.append("contrasenia", maestro.getContrasenia());
+        documentMaestro.append("clasesImpartidas", clasesLista);
 
-        System.out.println("Alumno modificado correctamente");
+        collection.insertOne(documentMaestro);
     }
-
-    
 
 }
