@@ -6,7 +6,7 @@ package subsistemaUsuario;
 
 import dto.AlumnoDTO;
 import dto.MaestroDTO;
-import dto.UsuarioDTO;
+import entidades.Usuario;
 
 /**
  * Esta interfaz define las operaciones relacionadas con la gestión de usuarios
@@ -79,4 +79,6 @@ public interface IUsuario {
      * Agrega una clase a un maestro.
      */
     public void agregarClaseMaestro();
+    
+    public Usuario getUsuario(int id);
 }

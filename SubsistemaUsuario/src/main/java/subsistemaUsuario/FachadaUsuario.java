@@ -6,9 +6,9 @@ package subsistemaUsuario;
 
 import dto.AlumnoDTO;
 import dto.MaestroDTO;
-import dto.UsuarioDTO;
 import entidades.Alumno;
 import entidades.Maestro;
+import entidades.Usuario;
 import mock.BaseDatosMock;
 
 /**
@@ -132,6 +132,10 @@ public class FachadaUsuario implements IUsuario {
 
         return maestro;
 
+    }
+    
+    public Usuario getUsuario(int id){
+       return controlUsuario.getUsuario(id);
     }
 
 }

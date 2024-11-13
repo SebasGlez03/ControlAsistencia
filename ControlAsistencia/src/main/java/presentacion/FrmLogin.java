@@ -4,7 +4,6 @@
  */
 package presentacion;
 
-import dto.UsuarioDTO;
 import javax.swing.JOptionPane;
 import subsistemaUsuario.FachadaUsuario;
 import subsistemaUsuario.IUsuario;
@@ -85,7 +84,7 @@ public class FrmLogin extends javax.swing.JFrame {
         boolean valicacionIniciarSesion = usuario.iniciarSesion(Integer.parseInt(txtId.getText()), txtContrasenia.getText());
 
         if (valicacionIniciarSesion == true) {
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(usuario.getUsuario(Integer.parseInt(txtId.getText())));
             mainWindow.setVisible(true);
             this.dispose();
         }

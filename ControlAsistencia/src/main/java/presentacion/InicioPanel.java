@@ -4,7 +4,9 @@
  */
 package presentacion;
 
-import dto.UsuarioDTO;
+import entidades.Usuario;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JPanel;
 
 /**
@@ -14,6 +16,7 @@ import javax.swing.JPanel;
 public class InicioPanel extends javax.swing.JPanel {
 
     MainWindow mainWindow;
+    Usuario usuario;
 
     /**
      * Creates new form InicioPanel
@@ -23,8 +26,22 @@ public class InicioPanel extends javax.swing.JPanel {
 
         this.mainWindow = mainwindow;
         this.mainMenuContentPanel.setVisible(false);
+                
+                
     }
 
+    public InicioPanel(MainWindow mainWindow, Usuario usuario){
+        initComponents();
+        this.mainWindow = mainWindow;
+        this.mainMenuContentPanel.setVisible(false);
+        
+        this.usuario = usuario;
+        
+        this.lblId.setText(String.valueOf(usuario.getMatricula())); 
+        this.lblNombre.setText(usuario.getNombre()); 
+           
+    }
+    
     /**
      * Cambia el contenido del 'mainContentPanel' al panel dado por el
      * parametro.
@@ -42,6 +59,9 @@ public class InicioPanel extends javax.swing.JPanel {
         this.mainMenuContentPanel.setVisible(false);
     }
 
+    public Set<String> hashSet = new HashSet<String>();
+
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -1,8 +1,11 @@
 package subsistemaUsuario;
 
+import SubsistemaAlumno.ControlAlumno;
 import dto.AlumnoDTO;
 import dto.UsuarioDTO;
+import entidades.Maestro;
 import entidades.Usuario;
+import mock.BaseDatosMock;
 import persistencia.FachadaPersistencia;
 import persistencia.IPersistencia;
 
@@ -128,6 +131,14 @@ public class ControlUsuario {
         } else {
             return false;
         }
+    }
+    
+    public Usuario getUsuario(int id){
+        IPersistencia datos = new FachadaPersistencia();
+        
+        return datos.obtenerUsuario(id);
+        
+       
     }
 
 }

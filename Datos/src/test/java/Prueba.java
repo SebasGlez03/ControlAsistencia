@@ -26,23 +26,17 @@ public class Prueba {
         listaMaterias2.add("Ciencias");
         listaMaterias2.add("Quimica");
 
-        Maestro maestro = new Maestro(listaMaterias, 9876, "Manuel", "Martines", "Montes", "manuel@gmail.com", "algobien");
+        Maestro alumno = new Maestro(listaMaterias, 247933, "Nomar Alberto Limon Quintero", "", "", "nomar@gmail.com", "12345");
 
         Maestro maestroModificacion = new Maestro(listaMaterias2, 9876, "Pancho", "Test", "Test", "test@gmail.com", "test");
 
         IPersistencia bd = new FachadaPersistencia();
 
-<<<<<<< HEAD
-//        bd.agregarMaestro(maestro);
-//        System.out.println(bd.obtenerMaestro(maestro).toString());
-        bd.modificarMaestro(maestro, maestroModificacion);
-//        bd.eliminarUsuario(alumno);
-=======
-        bd.eliminarUsuario(alumno);
-        System.out.println(bd.obtenerAlumno(alumno).toString());
+
+        bd.agregarUsuario(alumno);
+
         
         
->>>>>>> Nomar
     }
 
 }

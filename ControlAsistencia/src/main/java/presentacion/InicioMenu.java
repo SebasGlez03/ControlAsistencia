@@ -44,8 +44,10 @@ public class InicioMenu extends javax.swing.JPanel {
     private void initComponents() {
 
         btnAsistencia = new javax.swing.JLabel();
-        btnClases = new javax.swing.JLabel();
+        btnCerrarSesion = new javax.swing.JLabel();
         btnCloseMenu = new javax.swing.JLabel();
+        btnCalendario = new javax.swing.JLabel();
+        btnClases = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setForeground(new java.awt.Color(255, 255, 0));
@@ -59,13 +61,13 @@ public class InicioMenu extends javax.swing.JPanel {
         });
         add(btnAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 86, 268, 45));
 
-        btnClases.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnClases.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnClasesMouseClicked(evt);
+                btnCerrarSesionMouseClicked(evt);
             }
         });
-        add(btnClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 268, 45));
+        add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 268, 45));
 
         btnCloseMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCloseMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -75,6 +77,22 @@ public class InicioMenu extends javax.swing.JPanel {
         });
         add(btnCloseMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(225, 26, 30, 35));
 
+        btnCalendario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCalendario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCalendarioMouseClicked(evt);
+            }
+        });
+        add(btnCalendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 268, 45));
+
+        btnClases.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClases.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnClasesMouseClicked(evt);
+            }
+        });
+        add(btnClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 268, 45));
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MenuAbierto.jpg"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -82,13 +100,25 @@ public class InicioMenu extends javax.swing.JPanel {
     private void btnAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAsistenciaMouseClicked
         ScanQRPanel scanQR = new ScanQRPanel(mainWindow, inicioPanel);
         mainWindow.changeContentPane(scanQR);
+        
     }//GEN-LAST:event_btnAsistenciaMouseClicked
 
     private void btnCloseMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMenuMouseClicked
         inicioPanel.closeMenu();
     }//GEN-LAST:event_btnCloseMenuMouseClicked
 
+    private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
+        FrmLogin login = new FrmLogin();
+        login.setVisible(true);
+        mainWindow.dispose();
+    }//GEN-LAST:event_btnCerrarSesionMouseClicked
+
+    private void btnCalendarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalendarioMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCalendarioMouseClicked
+
     private void btnClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasesMouseClicked
+        // TODO add your handling code here:
         QRClassPanel qrPanel = new QRClassPanel(mainWindow, inicioPanel);
         mainWindow.changeContentPane(qrPanel);
     }//GEN-LAST:event_btnClasesMouseClicked
@@ -96,6 +126,8 @@ public class InicioMenu extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnAsistencia;
+    private javax.swing.JLabel btnCalendario;
+    private javax.swing.JLabel btnCerrarSesion;
     private javax.swing.JLabel btnClases;
     private javax.swing.JLabel btnCloseMenu;
     private javax.swing.JLabel jLabel2;

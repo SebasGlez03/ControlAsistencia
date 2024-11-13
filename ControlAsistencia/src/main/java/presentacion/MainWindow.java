@@ -5,6 +5,7 @@
 package presentacion;
 
 import dto.UsuarioDTO;
+import entidades.Usuario;
 import javax.swing.JPanel;
 
 /**
@@ -15,6 +16,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     int xx, xy;
     UsuarioDTO usuarioDTO;
+    Usuario usuario;
 
     /**
      * Creates new form MainWindow
@@ -26,10 +28,33 @@ public class MainWindow extends javax.swing.JFrame {
 
         InicioPanel inicio = new InicioPanel(this); //Vista principal
         changeContentPane(inicio);
-
+        
+        
+        
         System.out.println("Entro al constructor");
     }
+    
+    public MainWindow(Usuario usuario){
+        
+        initComponents();
+        
+        this.setLocationRelativeTo(null); //Centra la ventana de la app
+        this.usuario = usuario;
+        InicioPanel inicio = new InicioPanel(this, getUsuario()); //Vista principal
+        changeContentPane(inicio);
+        
+        
+        
+        System.out.println("Entro al constructor");
+        
+    }
 
+    public Usuario getUsuario(){
+        return usuario;
+    }
+    
+    
+    
     /**
      * Cambia el contenido del 'mainContentPanel' al panel dado por el
      * parametro.
