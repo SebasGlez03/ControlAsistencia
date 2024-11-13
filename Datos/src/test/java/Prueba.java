@@ -1,5 +1,7 @@
 
-import entidades.Alumno;
+import entidades.Maestro;
+import java.util.ArrayList;
+import java.util.List;
 import persistencia.FachadaPersistencia;
 import persistencia.IPersistencia;
 
@@ -12,16 +14,21 @@ import persistencia.IPersistencia;
  * @author PC
  */
 public class Prueba {
-    
+
     public static void main(String[] args) {
-        Alumno alumno = new Alumno(6, (float) 8.2, 235612, "Carlos", "Rivera", "Martinez", "carlos@gmail.com", "hdfags");
-        
+        List<String> listaMaterias = new ArrayList();
+
+        listaMaterias.add("Matematicas");
+        listaMaterias.add("Calculo");
+
+        Maestro maestro = new Maestro(listaMaterias, 9876, "Manuel", "Martines", "Montes", "manuel@gmail.com", "algobien");
+
         IPersistencia bd = new FachadaPersistencia();
 
-//        bd.agregarAlumno(alumno);
-        System.out.println(bd.obtenerAlumno(alumno).toString());
-        
-        bd.eliminarUsuario(alumno);
+        bd.agregarMaestro(maestro);
+//        System.out.println(bd.obtenerAlumno(alumno).toString());
+
+//        bd.eliminarUsuario(alumno);
     }
-    
+
 }
