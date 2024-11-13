@@ -34,7 +34,7 @@ public class MaestroDTO extends UsuarioDTO {
      * imparte
      */
     public MaestroDTO(Usuario usuario, Maestro maestro) {
-        super.setId(usuario.getId());
+        super.setMatricula(usuario.getMatricula());
         super.setNombre(usuario.getNombre());
         super.setApellidoPaterno(usuario.getApellidoPaterno());
         super.setApellidoMaterno(usuario.getApellidoMaterno());

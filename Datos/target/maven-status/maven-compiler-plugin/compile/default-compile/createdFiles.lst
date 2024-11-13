@@ -1,5 +1,5 @@
+dao\UsuarioDAO.class
+dao\MaestroDAO.class
 persistencia\FachadaPersistencia.class
-persistencia\IConexionBD.class
 persistencia\IPersistencia.class
-dao\Datos.class
-persistencia\ConexionBD.class
+dao\AlumnoDAO.class

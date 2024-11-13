@@ -65,7 +65,7 @@ public class ControlAlumno {
      * @return
      */
     public AlumnoDTO validarAlumno(AlumnoDTO alumnoDTO) {
-        String id = Integer.toString(alumnoDTO.getId());
+        String id = Integer.toString(alumnoDTO.getMatricula());
         if (!id.matches("^00000[1-9]{6}&")) {
             throw new IllegalArgumentException("ID invalida");
         } else {
@@ -79,14 +79,14 @@ public class ControlAlumno {
      * @param alumnoDTO
      */
     public void BuscarAlumno(AlumnoDTO alumnoDTO) {
-        String id = Integer.toString(alumnoDTO.getId());
+        String id = Integer.toString(alumnoDTO.getMatricula());
 
         if (!id.matches("^00000[1-9]{6}&")) {
             throw new IllegalArgumentException("El Alumno no existe");
         } else {
             System.out.println(alumnoDTO.getNombre() + " "
                     + alumnoDTO.getApellidoPaterno() + " " + alumnoDTO.getApellidoMaterno());
-            System.out.println(alumnoDTO.getId());
+            System.out.println(alumnoDTO.getMatricula());
             System.out.println(alumnoDTO.getSemestre());
         }
     }
@@ -96,8 +96,8 @@ public class ControlAlumno {
         AlumnoDTO alumnoDTO = new AlumnoDTO();
 
         for (Alumno alumno : bd.getAlumnos()) {
-            if (usuario.getId() == alumno.getId()) {
-                alumnoDTO.setId(alumno.getId());
+            if (usuario.getMatricula() == alumno.getMatricula()) {
+                alumnoDTO.setMatricula(alumno.getMatricula());
                 alumnoDTO.setNombre(alumno.getNombre());
                 alumnoDTO.setApellidoPaterno(alumno.getApellidoPaterno());
                 alumnoDTO.setApellidoMaterno(alumno.getApellidoMaterno());

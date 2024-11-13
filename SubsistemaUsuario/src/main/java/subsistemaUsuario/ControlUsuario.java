@@ -101,14 +101,14 @@ public class ControlUsuario {
         validarContrasenia(contrasenia);
 
         for (Alumno alumno : bd.getAlumnos()) {
-            if (id == alumno.getId()) {
+            if (id == alumno.getMatricula()) {
                 if (contrasenia.equals(alumno.getContrasenia())) {
                     return true;
                 }
                 return false;
             } else {
                 for (Maestro maestro : bd.getMaestros()) {
-                    if (id == maestro.getId()) {
+                    if (id == maestro.getMatricula()) {
                         if (contrasenia.equals(alumno.getContrasenia())) {
                             return true;
                         }

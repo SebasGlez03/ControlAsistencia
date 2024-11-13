@@ -13,7 +13,7 @@ package entidades;
 public class Usuario {
 
     // Atributos protegidos del usuario
-    protected int id; // Identificador único del usuario
+    protected int matricula; // Identificador único del usuario
     protected String nombre; // Nombre del usuario
     protected String apellidoPaterno; // Apellido paterno del usuario
     protected String apellidoMaterno; // Apellido materno del usuario
@@ -27,15 +27,15 @@ public class Usuario {
     /**
      * Constructor con parámetros para inicializar todos los atributos.
      *
-     * @param id Identificador único del usuario
+     * @param matricula Identificador único del usuario
      * @param nombre Nombre del usuario
      * @param apellidoPaterno Apellido paterno del usuario
      * @param apellidoMaterno Apellido materno del usuario
      * @param correo Correo electrónico del usuario
      * @param contrasenia Contraseña del usuario
      */
-    public Usuario(int id, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
-        this.id = id;
+    public Usuario(int matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
+        this.matricula = matricula;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -65,19 +65,19 @@ public class Usuario {
     /**
      * Obtiene el identificador único del usuario.
      *
-     * @return id del usuario.
+     * @return matricula del usuario.
      */
-    public int getId() {
-        return id;
+    public int getMatricula() {
+        return matricula;
     }
 
     /**
      * Establece el identificador único del usuario.
      *
-     * @param id Identificador único a asignar.
+     * @param matricula Identificador único a asignar.
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setMatricula(int matricula) {
+        this.matricula = matricula;
     }
 
     /**
@@ -178,7 +178,7 @@ public class Usuario {
      */
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", correo=" + correo + ", contrasenia=" + contrasenia + '}';
+        return "Usuario{" + "matricula=" + matricula + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", correo=" + correo + ", contrasenia=" + contrasenia + '}';
     }
 
 }
