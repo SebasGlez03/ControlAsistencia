@@ -4,8 +4,12 @@
  */
 package subsistemaMaestro;
 
+import dto.MaestroDTO;
+import dto.UsuarioDTO;
 import entidades.Alumno;
 import entidades.Maestro;
+import java.util.AbstractMap;
+import mock.BaseDatosMock;
 
 /**
  *
@@ -45,23 +49,6 @@ public class ControlMaestro {
         System.out.println("Clase de " + materia + " impartida");
     }
 
-    /**
-     * Remueve una clase asignada al maestro
-     * Verifica que la materia no sea nula ni vacia y que ya este asignada al maestro
-     * @param materia Nombre de la materia a quitar
-     * @throws IllegalArgumentException si la materia es nula, vacia o no esta asignada al maestro
-     */
-    public void quitarClase(String materia) {
-        if (materia == null || materia.isEmpty()) {
-            throw new IllegalArgumentException("La materia no puede ser nula o vacia");
-        }
-        if (!maestro.getMaterias().contains(materia)) {
-            throw new IllegalArgumentException("La materia no esta asignada al maestro y no se puede quitar");
-        }
-        maestro.getMaterias().remove(materia); // Quita la materia de la lista
-        System.out.println("Clase de " + materia + " quitada");
-    }
-
      /**
      * Evalua a un alumno
      * Verifica que el alumno cumpla con los criterios de promedio y que este inscrito en alguna materia del maestro
@@ -90,15 +77,26 @@ public class ControlMaestro {
      * @throws IllegalArgumentException si el criterio es nulo o vacio
      */
     public void buscarMaestro(String criterio) {
-        if (criterio == null || criterio.isEmpty()) {
-            throw new IllegalArgumentException("Debe especificar un criterio de busqueda");
+        
+        BaseDatosMock bd = new BaseDatosMock();
+        
+        for(Maestro maestro: bd.getMaestros()){
+            if (maestro.getNombre().equals(criterio) ||
+                    Integer.parseInt(criterio)==maestro.getMatricula()){
+                System.out.println(maestro.toString());
+            }
         }
-        System.out.println("Busqueda de maestro con criterio: " + criterio);
     }
     
+    //pendiente
     private boolean alumnoInscrito(Alumno alumno) {
-   
-    return true; 
+        
+        BaseDatosMock bd = new BaseDatosMock();
+        
+        for(Maestro maestro:bd.getMaestros()){
+            
+        }
+        return true; 
     }
     
 }

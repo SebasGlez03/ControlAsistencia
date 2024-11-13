@@ -14,7 +14,6 @@ public interface IMaestro {
     boolean validarMaestro();
     void registrarMaestro();
     void editarMaestro();
-    void eliminarMaestro();
-    void buscarMaestro();
+    void buscarMaestro(String s);
     
 }

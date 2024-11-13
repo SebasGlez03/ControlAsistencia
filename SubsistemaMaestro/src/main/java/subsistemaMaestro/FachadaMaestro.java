@@ -5,6 +5,9 @@
 package subsistemaMaestro;
 
 import entidades.Maestro;
+import mock.BaseDatosMock;
+import subsistemaMaestro.ControlMaestro;
+import dao.*;
 
 /**
  *
@@ -50,28 +53,39 @@ public class FachadaMaestro implements IMaestro {
     /**
      * Realiza la búsqueda de información del maestro.
      * Este método podría contener la lógica para buscar información en una base de datos.
+     * @param s
      */
     @Override
-    public void buscarMaestro() {
+    public void buscarMaestro(String s) {
         
-        System.out.println("Buscando información del maestro: " + maestro.getNombre());
+        ControlMaestro cm = new ControlMaestro(maestro);
+        System.out.println("Buscando información del maestro: ");
         
+        cm.buscarMaestro(s);
     }
 
-
+    /**
+     * Realiza un registro del maestro a la base de datos
+     */
     @Override
     public void registrarMaestro() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        //luego me corrigen, atte: joel
+        UsuarioDAO udao= new UsuarioDAO();
+        MaestroDAO mdao= new MaestroDAO();
+        
+        udao.agregarUsuario(maestro);
+        mdao.agregarMaestro(maestro);
     }
 
     @Override
     public void editarMaestro() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Maestro newMaestro;
+        
+        MaestroDAO mdao = new MaestroDAO();
+        
+        //mdao.modificarMaestro(maestro, newMaestro);
     }
-
-    @Override
-    public void eliminarMaestro() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }  
+ 
     
 }
