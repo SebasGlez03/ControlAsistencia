@@ -23,16 +23,17 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-<<<<<<< HEAD
             <artifactId>Datos</artifactId>
-=======
-            <artifactId>SubsistemaAlumno</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>SubsistemaMaestro</artifactId>
->>>>>>> Nomar
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SubsistemaAlumno</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
