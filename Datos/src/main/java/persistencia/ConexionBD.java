@@ -4,9 +4,10 @@
  */
 package persistencia;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 
 /**
  *
@@ -16,20 +17,19 @@ public class ConexionBD implements IConexionBD {
 
     final String SERVER = "localhost";
     final String BASE_DATOS = "controlasistencia";
-    private final String CADENA_CONEXION = "jdbc:mysql://" + SERVER + "/" + BASE_DATOS;
-    final String USUARIO = "root";
-    final String CONTRASEÑA = "root";
+    final String COLLECTION = "controlasistencia";
+    final int PUERTO = 27017;
 
     /**
      * Metodo que crea la conexion con la base de datos
-     *
-     * @return conexion con la base de datos
-     * @throws SQLException Posible excepcion
      */
     @Override
-    public Connection crearConexion() throws SQLException {
-        Connection conexion = DriverManager.getConnection(CADENA_CONEXION, USUARIO, CONTRASEÑA);
-        return conexion;
+    public void crearConexion() {
+
+        MongoClient mongoClient = new MongoClient(SERVER, PUERTO);
+        MongoDatabase database = mongoClient.getDatabase(BASE_DATOS);
+        MongoCollection<Document> collection = database.getCollection(COLLECTION);
+
     }
 
 }

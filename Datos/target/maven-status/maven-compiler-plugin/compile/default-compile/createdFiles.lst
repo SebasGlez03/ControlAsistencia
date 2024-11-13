@@ -2,5 +2,4 @@ persistencia\FachadaPersistencia.class
 persistencia\IConexionBD.class
 persistencia\IPersistencia.class
 dao\Datos.class
-persistencia\Datos.class
 persistencia\ConexionBD.class

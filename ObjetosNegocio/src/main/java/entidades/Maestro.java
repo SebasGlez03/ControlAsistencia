@@ -21,6 +21,39 @@ public class Maestro extends Usuario {
     }
 
     /**
+     * Constructor que inicializa los atributos de la clase Maestro y los de su
+     * clase padre Usuario
+     *
+     * @param materias Materias que imparte el maestro
+     * @param id Id del usuario
+     * @param nombre Nombre del usuario
+     * @param apellidoPaterno Apellido paterno del usuario
+     * @param apellidoMaterno Apellido materno del usuario
+     * @param correo Correo del usuario
+     * @param contrasenia Contrasenia del usuario
+     */
+    public Maestro(List<String> materias, int id, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
+        super(id, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
+        this.materias = materias;
+    }
+
+    /**
+     * Constructor que iniclaiza los atributos de la clase Maestro y los de su
+     * clase padre Usuario (A excepcion de su ID)
+     *
+     * @param materias Materias que imparte el maestro
+     * @param nombre Nombre del usuario
+     * @param apellidoPaterno Apellido paterno del usuario
+     * @param apellidoMaterno Apellido materno del usuario
+     * @param correo Correo del usuario
+     * @param contrasenia Contrasenia del usuario
+     */
+    public Maestro(List<String> materias, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
+        super(nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
+        this.materias = materias;
+    }
+
+    /**
      * Constructor que inicializa el maestro con una lista de materias.
      *
      * @param materias Lista de materias que el maestro impartirá.
