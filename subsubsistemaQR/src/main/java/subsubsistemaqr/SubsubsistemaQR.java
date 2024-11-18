@@ -17,18 +17,20 @@ public class SubsubsistemaQR {
         Date fecha = new Date();
         QR qrTest = new QR("1234", fecha);
 
-        System.out.println("---[ GENERAR QR ]---");
+//        System.out.println("---[ GENERAR QR ]---");
+//
+//        System.out.println(iQR.generarQR().getContenido());
+//
+//        System.out.println("---[ ESCANEAR QR ]---");
+//        System.out.println(iQR.escanearQR(1234, qrTest));
+//
+//        System.out.println("---[ ACTUALIZAR QR ]---");
+//
+//        System.out.println("QR por actualizar: " + qrTest.getContenido());
+//        iQR.actualizarQR(qrTest);
+//        System.out.println("QR actualizado: " + iQR.actualizarQR(qrTest).getContenido());
 
-        System.out.println(iQR.generarQR().getContenido());
-
-        System.out.println("---[ ESCANEAR QR ]---");
-        System.out.println(iQR.escanearQR(1234, qrTest));
-
-        System.out.println("---[ ACTUALIZAR QR ]---");
-
-        System.out.println("QR por actualizar: " + qrTest.getContenido());
-        iQR.actualizarQR(qrTest);
-        System.out.println("QR actualizado: " + iQR.actualizarQR(qrTest).getContenido());
+        iQR.generarQR();
 
     }
 }

@@ -4,7 +4,14 @@
  */
 package subsubsistemaqr;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import entidades.QR;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Date;
 
 /**
@@ -32,11 +39,29 @@ public class ControlQR {
      *
      * @return un objeto con el QR.
      */
-    public QR generarQR() {
-        return new QR(String.valueOf(generarPIN()), new Date());
+    public QR generarQR(){
+        String contenido = transformarIntAString(generarPIN());
+        Date fechaCreacion = new Date();
+
+        String QRtext = contenido + "  |  " + transformarDateAString(fechaCreacion);
+        String path = "C:\\Users\\PC\\Desktop\\Cosas\\Git Repositories\\ControlAsistencia\\ControlAsistencia\\src\\main\\resources\\QRClassResources\\CodigoQR.jpg";
+
+        try{
+        BitMatrix matrix = new MultiFormatWriter().encode(QRtext, BarcodeFormat.QR_CODE, 295, 295);
+        
+
+        MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
+        
+
+        System.out.println("Codigo QR generado correctamente en la direccion: " + Paths.get(path));
+        } catch (WriterException we){
+            System.out.println("Ocurrio un error al generar el QR: " + we);
+        } catch (IOException ioe){
+            System.out.println("Ocurrio un error al generar el QR: " + ioe);
+        }
+
+        return new QR(contenido, fechaCreacion);
     }
-    
-    
 
     /**
      * Verifica que el QR cumpla con el formato correcto.
@@ -59,5 +84,25 @@ public class ControlQR {
         String cadena = String.valueOf(base) + String.valueOf(num2);
 
         return Integer.parseInt(cadena);
+    }
+
+    /**
+     * Transforma el contenido del QR a un valor String
+     *
+     * @param contenido Informacion que contiene el QR
+     * @return La informacion del contenido en formato String
+     */
+    public String transformarIntAString(int contenido) {
+        return String.valueOf(contenido);
+    }
+
+    /**
+     * Transforma el contendio del QR a un valor String
+     *
+     * @param fecha Fecha en la que se genero el QR
+     * @return Fecha en la que se genero el QR en formato String
+     */
+    public String transformarDateAString(Date fecha) {
+        return String.valueOf(fecha);
     }
 }
