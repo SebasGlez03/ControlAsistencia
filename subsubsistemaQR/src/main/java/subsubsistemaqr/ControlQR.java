@@ -13,8 +13,8 @@ import entidades.QR;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,8 +40,6 @@ public class ControlQR {
     public void setPin(int pin) {
         this.pin = pin;
     }
-    
-    
 
     /**
      * Genera un PIN aleatorio de 4 digitos
@@ -54,7 +52,7 @@ public class ControlQR {
         for (int i = 0; i < 3; i++) {
             pin = adjuntarNumerosEnteros(pin, (int) ((Math.random() * 10)));
         }
-        
+
         setPin(pin);
         return pin;
     }
@@ -86,6 +84,31 @@ public class ControlQR {
         }
 
         return new QR(contenido, fechaCreacion);
+    }
+
+    /**
+     * Metodo que valida el escaneo del QR
+     *
+     * @param pin pin del que se va a leer
+     * @return true si el pin es correcto, falso si el campo esta vacio o el pin
+     * es incorrecto
+     */
+    public boolean escanearQR(int pin) {
+        if (pin == getPin()) {
+            JOptionPane.showMessageDialog(null, "Se ha registrado su asistencia", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+        if (String.valueOf(pin).equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingresa el codigo en el campo", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (String.valueOf(pin).isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingresa el codigo en el campo", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            JOptionPane.showMessageDialog(null, "Pin no valido", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
     }
 
     /**

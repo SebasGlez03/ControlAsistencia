@@ -242,6 +242,8 @@ public class QRClassPanel extends javax.swing.JPanel {
 
     private void btnReturn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReturn1MouseClicked
         mainWindow.changeContentPane(inicioPanel);
+        inicioPanel.setPin(iqr.obtenerPIN());
+        System.out.println("Se regreso el pin: " + iqr.obtenerPIN() + " de la clase QRClassPanel a la clase: " + inicioPanel.getClass());
     }//GEN-LAST:event_btnReturn1MouseClicked
 
 

@@ -17,6 +17,7 @@ public class InicioPanel extends javax.swing.JPanel {
 
     MainWindow mainWindow;
     Usuario usuario;
+    int pin;
 
     /**
      * Creates new form InicioPanel
@@ -29,6 +30,16 @@ public class InicioPanel extends javax.swing.JPanel {
                 
                 
     }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
+    }
+    
+    
 
     public InicioPanel(MainWindow mainWindow, Usuario usuario){
         initComponents();
@@ -119,6 +130,8 @@ public class InicioPanel extends javax.swing.JPanel {
 //        new FrmInicioMenu().setVisible(true);
         InicioMenu menu = new InicioMenu(mainWindow, this);
         changeContentPane(menu);
+        menu.setPin(pin);
+        System.out.println("Se mando el pin: " + pin + " a la clase: " + menu.getClass());
         this.mainMenuContentPanel.setVisible(true);
 
     }//GEN-LAST:event_btnMenuMouseClicked

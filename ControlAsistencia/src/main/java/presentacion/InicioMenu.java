@@ -14,6 +14,7 @@ public class InicioMenu extends javax.swing.JPanel {
 
     MainWindow mainWindow;
     InicioPanel inicioPanel;
+    int pin;
     
     Color transparente = new Color(0, 0, 0, 0);
     Color opacidad = new Color(0, 0, 0, 50);
@@ -33,6 +34,16 @@ public class InicioMenu extends javax.swing.JPanel {
         
         //this.jLabel1.setBorder(new );
     }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -99,6 +110,8 @@ public class InicioMenu extends javax.swing.JPanel {
 
     private void btnAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAsistenciaMouseClicked
         ScanQRPanel scanQR = new ScanQRPanel(mainWindow, inicioPanel);
+        scanQR.setPin(pin);
+        System.out.println("Se mando el pin: " + pin + " a la clase: " + scanQR.getClass());
         mainWindow.changeContentPane(scanQR);
         
     }//GEN-LAST:event_btnAsistenciaMouseClicked

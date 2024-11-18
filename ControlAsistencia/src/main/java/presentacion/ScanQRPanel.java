@@ -6,6 +6,8 @@ package presentacion;
 
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import subsubsistemaqr.FachadaQR;
+import subsubsistemaqr.IQR;
 
 /**
  *
@@ -16,6 +18,9 @@ public class ScanQRPanel extends javax.swing.JPanel {
     MainWindow mainWindow;
     InicioPanel inicioPanel;
 
+    IQR iqr = new FachadaQR();
+    int pin;
+
     /**
      * Creates new form ScanQRPanel
      */
@@ -24,6 +29,14 @@ public class ScanQRPanel extends javax.swing.JPanel {
 
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
+    }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
     }
 
     /**
@@ -140,8 +153,14 @@ public class ScanQRPanel extends javax.swing.JPanel {
     private void txtPINKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPINKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             // Aquí pones el código que quieres ejecutar cuando se presiona Enter
-            if (Integer.parseInt(txtPIN.getText()) == 123) {
+            if (Integer.parseInt(txtPIN.getText()) == pin) {
                 JOptionPane.showMessageDialog(this, "Se ha registrado su asistencia", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if (txtPIN.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Ingresa el codigo en el campo", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            else if (txtPIN.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingresa el codigo en el campo", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Pin no valido", "Error", JOptionPane.ERROR_MESSAGE);
             }
