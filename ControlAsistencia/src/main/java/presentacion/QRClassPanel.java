@@ -60,7 +60,7 @@ public class QRClassPanel extends javax.swing.JPanel {
         llenarTablaUsuariosMock(listaAlumnosMock);
 
         mostrarQR();
-//        this.lblPIN.setText(iqr.generarQR().getContenido());
+        this.lblPIN.setText(String.valueOf(iqr.obtenerPIN()));
 
     }
 

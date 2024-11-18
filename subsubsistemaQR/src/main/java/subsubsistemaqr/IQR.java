@@ -42,4 +42,10 @@ public interface IQR {
      * @return direccion de tipo String del QR generado
      */
     public String obtenerPathQR();
+    
+    /**
+     * Metodo que obtiene el pin de el QR generado
+     * @return pin generado del QR
+     */
+    public int obtenerPIN();
 }

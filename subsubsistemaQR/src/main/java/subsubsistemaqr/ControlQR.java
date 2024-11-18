@@ -23,6 +23,7 @@ import java.util.Date;
 public class ControlQR {
 
     private String tempFilePath;
+    private int pin;
 
     public String getTempFilePath() {
         return tempFilePath;
@@ -31,6 +32,16 @@ public class ControlQR {
     public void setTempFilePath(String tempFilePath) {
         this.tempFilePath = tempFilePath;
     }
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
+    }
+    
+    
 
     /**
      * Genera un PIN aleatorio de 4 digitos
@@ -43,6 +54,8 @@ public class ControlQR {
         for (int i = 0; i < 3; i++) {
             pin = adjuntarNumerosEnteros(pin, (int) ((Math.random() * 10)));
         }
+        
+        setPin(pin);
         return pin;
     }
 
