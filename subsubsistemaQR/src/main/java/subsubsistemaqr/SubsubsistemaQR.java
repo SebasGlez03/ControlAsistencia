@@ -16,6 +16,7 @@ public class SubsubsistemaQR {
         IQR iQR = new FachadaQR();
         Date fecha = new Date();
         QR qrTest = new QR("1234", fecha);
+        String basePath = System.getProperty("user.dir");
 
 //        System.out.println("---[ GENERAR QR ]---");
 //
@@ -30,7 +31,9 @@ public class SubsubsistemaQR {
 //        iQR.actualizarQR(qrTest);
 //        System.out.println("QR actualizado: " + iQR.actualizarQR(qrTest).getContenido());
 
+        
         iQR.generarQR();
+        System.out.println("El QR se genero en la direccion: " + iQR.obtenerPathQR());
 
     }
 }

@@ -35,4 +35,11 @@ public interface IQR {
      * @return true : false
      */
     public boolean escanearQR(int pin, QR qr);
+
+    /**
+     * Metodo que obtiene la ubicacion de el QR generado
+     *
+     * @return direccion de tipo String del QR generado
+     */
+    public String obtenerPathQR();
 }

@@ -55,4 +55,11 @@ public class FachadaQR implements IQR {
         return (String.valueOf(pin).equals(qr.getContenido()));
     }
 
+    @Override
+    public String obtenerPathQR() {
+        return cQR.getTempFilePath();
+    }
+    
+    
+
 }

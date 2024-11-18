@@ -11,6 +11,8 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import entidades.QR;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
 
@@ -19,6 +21,16 @@ import java.util.Date;
  * @author Ragzard
  */
 public class ControlQR {
+
+    private String tempFilePath;
+
+    public String getTempFilePath() {
+        return tempFilePath;
+    }
+
+    public void setTempFilePath(String tempFilePath) {
+        this.tempFilePath = tempFilePath;
+    }
 
     /**
      * Genera un PIN aleatorio de 4 digitos
@@ -39,25 +51,25 @@ public class ControlQR {
      *
      * @return un objeto con el QR.
      */
-    public QR generarQR(){
+    public QR generarQR() {
         String contenido = transformarIntAString(generarPIN());
         Date fechaCreacion = new Date();
 
-        String QRtext = contenido + "  |  " + transformarDateAString(fechaCreacion);
-        String path = "C:\\Users\\PC\\Desktop\\Cosas\\Git Repositories\\ControlAsistencia\\ControlAsistencia\\src\\main\\resources\\QRClassResources\\CodigoQR.jpg";
+        try {
+            String QRtext = contenido + "  |  " + transformarDateAString(fechaCreacion);
+            Path tempFile = Files.createTempFile("CodigoQR", ".jpg");
+            String tempFilePath = tempFile.toAbsolutePath().toString();
+            setTempFilePath(tempFilePath);
 
-        try{
-        BitMatrix matrix = new MultiFormatWriter().encode(QRtext, BarcodeFormat.QR_CODE, 295, 295);
-        
+            BitMatrix matrix = new MultiFormatWriter().encode(QRtext, BarcodeFormat.QR_CODE, 295, 295);
 
-        MatrixToImageWriter.writeToPath(matrix, "jpg", Paths.get(path));
-        
+            MatrixToImageWriter.writeToPath(matrix, "jpg", tempFile);
 
-        System.out.println("Codigo QR generado correctamente en la direccion: " + Paths.get(path));
-        } catch (WriterException we){
-            System.out.println("Ocurrio un error al generar el QR: " + we);
-        } catch (IOException ioe){
-            System.out.println("Ocurrio un error al generar el QR: " + ioe);
+            System.out.println("Codigo QR generado correctamente en la direccion: " + tempFile);
+        } catch (WriterException we) {
+            System.out.println("Ocurrio un error al generar el QR: " + we.getMessage());
+        } catch (IOException ioe) {
+            System.out.println("Ocurrio un error al generar el QR: " + ioe.getMessage());
         }
 
         return new QR(contenido, fechaCreacion);
