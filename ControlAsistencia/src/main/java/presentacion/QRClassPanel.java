@@ -5,8 +5,12 @@
 package presentacion;
 
 import entidades.Alumno;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import subsubsistemaqr.FachadaQR;
 import subsubsistemaqr.IQR;
@@ -55,7 +59,8 @@ public class QRClassPanel extends javax.swing.JPanel {
 
         llenarTablaUsuariosMock(listaAlumnosMock);
 
-        this.lblPIN.setText(iqr.generarQR().getContenido());
+        mostrarQR();
+//        this.lblPIN.setText(iqr.generarQR().getContenido());
 
     }
 
@@ -79,6 +84,21 @@ public class QRClassPanel extends javax.swing.JPanel {
             });
         }
 
+    }
+
+    private void mostrarQR() {
+        iqr.generarQR();
+        
+        try {
+            BufferedImage qrImage = ImageIO.read(new File(iqr.obtenerPathQR()));
+            
+            ImageIcon qrIcon = new ImageIcon(qrImage);
+            
+            imgQR.setIcon(qrIcon);
+        } catch (Exception e){
+            e.printStackTrace();
+            System.out.println("Error al manejar el archivo QR: " + e.getMessage());
+        }
     }
 
     /**
@@ -151,9 +171,7 @@ public class QRClassPanel extends javax.swing.JPanel {
         headerPanel1.add(lblHourClass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
 
         ContentPanel.add(headerPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        imgQR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/QRClassResources/QR.png"))); // NOI18N
-        ContentPanel.add(imgQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, -1, -1));
+        ContentPanel.add(imgQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 295, 295));
 
         jSeparator1.setBackground(new java.awt.Color(26, 42, 97));
         jSeparator1.setForeground(new java.awt.Color(26, 42, 97));

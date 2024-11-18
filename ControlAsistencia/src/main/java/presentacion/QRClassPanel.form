@@ -149,14 +149,9 @@
           </SubComponents>
         </Container>
         <Component class="javax.swing.JLabel" name="imgQR">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/QRClassResources/QR.png"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="600" y="190" width="-1" height="-1"/>
+              <AbsoluteConstraints x="600" y="190" width="295" height="295"/>
             </Constraint>
           </Constraints>
         </Component>
