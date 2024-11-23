@@ -128,6 +128,9 @@ public class InicioMenu extends javax.swing.JPanel {
 
     private void btnCalendarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCalendarioMouseClicked
         // TODO add your handling code here:
+        FrmCalendario cale = new FrmCalendario();
+        cale.setVisible(true);
+        mainWindow.dispose();
     }//GEN-LAST:event_btnCalendarioMouseClicked
 
     private void btnClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasesMouseClicked
