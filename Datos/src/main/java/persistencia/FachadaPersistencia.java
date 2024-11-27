@@ -4,19 +4,14 @@
  */
 package persistencia;
 
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import dao.AlumnoDAO;
+import dao.EventoDAO;
 import dao.MaestroDAO;
 import dao.UsuarioDAO;
 import entidades.Alumno;
+import entidades.Evento;
 import entidades.Maestro;
 import entidades.Usuario;
-import java.util.ArrayList;
-import java.util.List;
-import org.bson.Document;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -85,6 +80,22 @@ public class FachadaPersistencia implements IPersistencia {
     public void modificarMaestro(Maestro maestro, Maestro maestroModificado) {
         MaestroDAO maestroDAO = new MaestroDAO();
         maestroDAO.modificarMaestro(maestro, maestroModificado);
+    }
+    
+    
+    public Evento obtenerEvento(Evento evento){
+        EventoDAO eventoDAO = new EventoDAO();
+        return eventoDAO.obtenerEvento(evento);
+    }
+    
+    public void agregarEvento(Evento evento){
+        EventoDAO eventoDAO = new EventoDAO();
+        eventoDAO.agregarEvento(evento);
+    }
+    
+    public void modificarEvento(Evento evento, Evento eventoModificado){
+        EventoDAO eventoDAO = new EventoDAO();
+        eventoDAO.modificarEvento(evento, eventoModificado);
     }
     
 }
