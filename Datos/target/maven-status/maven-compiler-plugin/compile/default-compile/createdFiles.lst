@@ -3,3 +3,4 @@ dao\MaestroDAO.class
 persistencia\FachadaPersistencia.class
 persistencia\IPersistencia.class
 dao\AlumnoDAO.class
+dao\EventoDAO.class
