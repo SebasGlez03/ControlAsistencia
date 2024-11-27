@@ -57,7 +57,7 @@ public class EventoDAO {
         
     }
     
-    public void modifcarEvento(Evento evento, Evento eventoModificado){
+    public void modificarEvento(Evento evento, Evento eventoModificado){
         
          MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
