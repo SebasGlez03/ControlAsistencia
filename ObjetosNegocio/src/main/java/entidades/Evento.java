@@ -11,7 +11,9 @@ public class Evento {
     private String titulo;       // Título del evento
     private String descripcion;  // Descripción del evento
     private Date fecha;          // Fecha en la que se realiza el evento
-
+    private String horaInicio;
+    private String horaFinal;
+    
     /**
      * Constructor por defecto.
      */
@@ -36,10 +38,12 @@ public class Evento {
      * @param descripcion la descripción del evento
      * @param fecha la fecha en la que se realizará el evento
      */
-    public Evento(String titulo, String descripcion, Date fecha) {
+    public Evento(String titulo, String descripcion, Date fecha, String horaInicio, String horaFinal) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fecha = fecha;
+        this.horaInicio = horaInicio;
+        this.horaFinal = horaFinal;
     }
 
     /**
@@ -96,7 +100,43 @@ public class Evento {
         this.fecha = fecha;
     }
 
-    
+    /**
+    * Obtiene la hora de inicio del evento.
+    * 
+    * @return una cadena que representa la hora de inicio del evento
+    */
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    /**
+     * Establece la hora de inicio del evento.
+     * 
+     * @param horaInicio la hora de inicio del evento en formato de cadena
+     */
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    /**
+     * Obtiene la hora final del evento.
+     * 
+     * @return una cadena que representa la hora final del evento
+     */
+    public String getHoraFinal() {
+        return horaFinal;
+    }
+
+    /**
+     * Establece la hora final del evento.
+     * 
+     * @param horaFinal la hora final del evento en formato de cadena
+     */
+    public void setHoraFinal(String horaFinal) {
+        this.horaFinal = horaFinal;
+    }
+
+
     /**
      * Devuelve una representación en forma de cadena del evento.
      * 
@@ -104,8 +144,12 @@ public class Evento {
      */
     @Override
     public String toString() {
-        return "Evento{" + "titulo=" + titulo + ", descripcion=" + descripcion + ", fecha=" + fecha + '}';
+        return "Evento{" + "titulo=" + titulo + ", descripcion=" + descripcion + ", fecha=" + fecha + ", fechaInicio=" + horaInicio + ", fechaFinal=" + horaFinal + '}';
     }
+
+    
+    
+    
 
     
    

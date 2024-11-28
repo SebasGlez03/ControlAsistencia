@@ -7,7 +7,6 @@ package dao;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.internal.connection.Time;
 import entidades.Evento;
 import java.util.Date;
 import org.bson.Document;
@@ -33,10 +32,12 @@ public class EventoDAO {
         String titulo = eventos.getString("titulo");
         String descripcion = eventos.getString("descripcion");
         Date fecha = eventos.getDate("fecha");
+        String horaInicio = eventos.getString("horaInicio");
+        String horaFinal = eventos.getString("horaFinal");
 
 
         // Crear el objeto Evento
-        Evento eventoObtenido = new Evento(titulo, descripcion, fecha);
+        Evento eventoObtenido = new Evento(titulo, descripcion, fecha, horaInicio, horaFinal);
 
         return eventoObtenido;
         
@@ -52,6 +53,8 @@ public class EventoDAO {
         documentEvento.append("titulo", evento.getTitulo());
         documentEvento.append("descripcion", evento.getDescripcion());
         documentEvento.append("fecha", evento.getFecha());
+        documentEvento.append("horaInicio", evento.getHoraInicio());
+        documentEvento.append("horaFinal", evento.getHoraFinal());
 
         collection.insertOne(documentEvento);
         
@@ -70,6 +73,8 @@ public class EventoDAO {
                 .append("titulo", eventoModificado.getTitulo())
                 .append("descripcion", eventoModificado.getDescripcion())
                 .append("fecha", eventoModificado.getFecha())
+                .append("horaInicio", eventoModificado.getHoraInicio())
+                .append("horaFinal", eventoModificado.getHoraFinal())
         );
 
         // Modifica el primer documento que coincida con el filtro

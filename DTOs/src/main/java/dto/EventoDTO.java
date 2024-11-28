@@ -16,7 +16,8 @@ public class EventoDTO {
     private String titulo;       // Título del evento
     private String descripcion;  // Descripción del evento
     private Date fecha;          // Fecha en la que se realiza el evento
-
+    private String horaInicio;
+    private String horaFinal;
     /**
      * Constructor por defecto.
      */
@@ -43,10 +44,12 @@ public class EventoDTO {
      * @param horaInicio la hora de inicio del evento
      * @param horaFinal la hora de finalización del evento
      */
-    public EventoDTO(String titulo, String descripcion, Date fecha) {
+    public EventoDTO(String titulo, String descripcion, Date fecha, String horaInicio, String horaFinal) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fecha = fecha;
+        this.horaInicio = horaInicio;
+        this.horaFinal = horaFinal;
     }
 
     /**
@@ -102,6 +105,43 @@ public class EventoDTO {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    /**
+    * Obtiene la hora de inicio del evento.
+    * 
+    * @return una cadena que representa la hora de inicio del evento
+    */
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    /**
+     * Establece la hora de inicio del evento.
+     * 
+     * @param horaInicio la hora de inicio del evento en formato de cadena
+     */
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    /**
+     * Obtiene la hora final del evento.
+     * 
+     * @return una cadena que representa la hora final del evento
+     */
+    public String getHoraFinal() {
+        return horaFinal;
+    }
+
+    /**
+     * Establece la hora final del evento.
+     * 
+     * @param horaFinal la hora final del evento en formato de cadena
+     */
+    public void setHoraFinal(String horaFinal) {
+        this.horaFinal = horaFinal;
+    }
+
 
 
     
