@@ -28,4 +28,5 @@
         <maven.compiler.target>22</maven.compiler.target>
         <exec.mainClass>com.mycompany.subsistemaregistros.Registros</exec.mainClass>
     </properties>
+    <name>SubsistemaRegistrosClase</name>
 </project>
