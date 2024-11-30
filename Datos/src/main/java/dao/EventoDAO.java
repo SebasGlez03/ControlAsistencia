@@ -31,13 +31,17 @@ public class EventoDAO {
          // Extraer valores
         String titulo = eventos.getString("titulo");
         String descripcion = eventos.getString("descripcion");
-        Date fecha = eventos.getDate("fecha");
+        Date fechaInicio = eventos.getDate("fechaInicio");
+        Date fechaFinal = eventos.getDate("fechaFinal");
         String horaInicio = eventos.getString("horaInicio");
         String horaFinal = eventos.getString("horaFinal");
+        String campus = eventos.getString("campus");
+        String categoria = eventos.getString("categoria");
+                
 
 
         // Crear el objeto Evento
-        Evento eventoObtenido = new Evento(titulo, descripcion, fecha, horaInicio, horaFinal);
+        Evento eventoObtenido = new Evento(titulo, descripcion, fechaInicio, fechaFinal, horaInicio, horaFinal, campus, categoria);
 
         return eventoObtenido;
         
@@ -52,9 +56,12 @@ public class EventoDAO {
         Document documentEvento = new Document();
         documentEvento.append("titulo", evento.getTitulo());
         documentEvento.append("descripcion", evento.getDescripcion());
-        documentEvento.append("fecha", evento.getFecha());
+        documentEvento.append("fechaInicio", evento.getFechaInicio());
+        documentEvento.append("fechaFinal", evento.getFechaFinal());
         documentEvento.append("horaInicio", evento.getHoraInicio());
         documentEvento.append("horaFinal", evento.getHoraFinal());
+        documentEvento.append("campus", evento.getCampus());
+        documentEvento.append("categoria", evento.getCategoria());
 
         collection.insertOne(documentEvento);
         
@@ -72,9 +79,12 @@ public class EventoDAO {
         Document update = new Document("$set", new Document()
                 .append("titulo", eventoModificado.getTitulo())
                 .append("descripcion", eventoModificado.getDescripcion())
-                .append("fecha", eventoModificado.getFecha())
+                .append("fechaInicio", eventoModificado.getFechaInicio())
+                .append("fechaFinal", eventoModificado.getFechaFinal())
                 .append("horaInicio", eventoModificado.getHoraInicio())
                 .append("horaFinal", eventoModificado.getHoraFinal())
+                .append("campus", eventoModificado.getCampus())
+                .append("categoria", eventoModificado.getCategoria())
         );
 
         // Modifica el primer documento que coincida con el filtro
