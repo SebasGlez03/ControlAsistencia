@@ -56,16 +56,16 @@ public class RegistrosClase {
         MongoDatabase database = mongoClient.getDatabase("cia");
         MongoCollection<Document> collection = database.getCollection("Sesiones");
         
-        collection.find()
+        collection.find();
     }
     
-    public List<Materia> listarMateriasDisponibles(){
-        MongoClient mongoClient = new MongoClient("localhost", 27017);
-        MongoDatabase database = mongoClient.getDatabase("cia");
-        MongoCollection<Materia> collection = database.getCollection("clases",Materia.class);
-        
-        
-    }
+//    public List<Materia> listarMateriasDisponibles(){
+//        MongoClient mongoClient = new MongoClient("localhost", 27017);
+//        MongoDatabase database = mongoClient.getDatabase("cia");
+//        MongoCollection<Materia> collection = database.getCollection("clases",Materia.class);
+//        
+//        
+//    }
     /**
     public List<Alumno> obtenerAlumnosPorMateria(Materia materia){
         

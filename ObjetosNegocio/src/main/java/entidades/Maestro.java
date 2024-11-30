@@ -5,6 +5,7 @@
 package entidades;
 
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  * Clase que representa un maestro, que hereda de la clase Usuario. Esta clase
@@ -31,9 +32,10 @@ public class Maestro extends Usuario {
      * @param apellidoMaterno Apellido materno del usuario
      * @param correo Correo del usuario
      * @param contrasenia Contrasenia del usuario
+     * @param rol Rol del usuario
      */
-    public Maestro(List<String> materias, int matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
-        super(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
+    public Maestro(List<String> materias, int matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia, ObjectId rol) {
+        super(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
         this.materias = materias;
     }
 
@@ -47,9 +49,10 @@ public class Maestro extends Usuario {
      * @param apellidoMaterno Apellido materno del usuario
      * @param correo Correo del usuario
      * @param contrasenia Contrasenia del usuario
+     * @param rol Rol del usuario
      */
-    public Maestro(List<String> materias, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
-        super(nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
+    public Maestro(List<String> materias, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia, ObjectId rol) {
+        super(nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
         this.materias = materias;
     }
 

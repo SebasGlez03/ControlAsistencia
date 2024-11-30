@@ -4,6 +4,8 @@
  */
 package entidades;
 
+import org.bson.types.ObjectId;
+
 /**
  * Clase que representa un alumno, que hereda de la clase Usuario. Esta clase
  * añade información específica del alumno, como el semestre en el que se
@@ -45,9 +47,10 @@ public class Alumno extends Usuario {
      * @param apellidoMaterno Apellido materno del usuario
      * @param correo Correo del usuario
      * @param contrasenia Contrasenia del usuario
+     * @param rol Rol del usuario
      */
-    public Alumno(int semestre, float promedio, int matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
-        super(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
+    public Alumno(int semestre, float promedio, int matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia, ObjectId rol) {
+        super(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
         this.semestre = semestre;
         this.promedio = promedio;
     }
@@ -63,9 +66,10 @@ public class Alumno extends Usuario {
      * @param apellidoMaterno Apellido materno del usuario
      * @param correo Correo del usuario
      * @param contrasenia Contrasenia del usuario
+     * @param rol Rol del usuario
      */
-    public Alumno(int semestre, float promedio, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
-        super(nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
+    public Alumno(int semestre, float promedio, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia, ObjectId rol) {
+        super(nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
         this.semestre = semestre;
         this.promedio = promedio;
     }

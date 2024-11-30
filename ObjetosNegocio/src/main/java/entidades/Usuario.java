@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package entidades;
+import org.bson.types.ObjectId;
 
 /**
  * Clase que representa un usuario en el sistema. Contiene información básica
@@ -19,6 +20,7 @@ public class Usuario {
     protected String apellidoMaterno; // Apellido materno del usuario
     protected String correo; // Correo electrónico del usuario
     protected String contrasenia; // Contraseña del usuario
+    protected ObjectId rol;
 
     // Constructor por defecto
     public Usuario() {
@@ -33,14 +35,16 @@ public class Usuario {
      * @param apellidoMaterno Apellido materno del usuario
      * @param correo Correo electrónico del usuario
      * @param contrasenia Contraseña del usuario
+     * @param rol Rol del usuario
      */
-    public Usuario(int matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
+    public Usuario(int matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia, ObjectId rol) {
         this.matricula = matricula;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.correo = correo;
         this.contrasenia = contrasenia;
+        this.rol = rol;
     }
 
     /**
@@ -52,13 +56,15 @@ public class Usuario {
      * @param apellidoMaterno Apellido materno del usuario
      * @param correo Correo electrónico del usuario
      * @param contrasenia Contraseña del usuario
+     * @param rol Rol del usuario
      */
-    public Usuario(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia) {
+    public Usuario(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia, ObjectId rol) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.correo = correo;
         this.contrasenia = contrasenia;
+        this.rol = rol;
     }
 
     // Métodos getters y setters para acceder y modificar los atributos
@@ -171,6 +177,24 @@ public class Usuario {
     }
 
     /**
+     * Obtiene el rol del usuario.
+     *
+     * @return Rol del usuario.
+     */
+    public ObjectId getRol() {
+        return rol;
+    }
+
+    /**
+     * Establece el rol del usuario.
+     *
+     * @param rol Rol del usuario.
+     */
+    public void setRol(ObjectId rol) {
+        this.rol = rol;
+    }
+
+    /**
      * Método que retorna una representación en forma de cadena del objeto
      * Usuario.
      *
@@ -178,7 +202,7 @@ public class Usuario {
      */
     @Override
     public String toString() {
-        return "Usuario{" + "matricula=" + matricula + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", correo=" + correo + ", contrasenia=" + contrasenia + '}';
+        return "Usuario{" + "matricula=" + matricula + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", correo=" + correo + ", contrasenia=" + contrasenia + ", rol=" + rol + '}';
     }
 
 }
