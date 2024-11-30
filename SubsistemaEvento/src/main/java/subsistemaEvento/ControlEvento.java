@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package subsistemaEvento;
 
 import dao.EventoDAO;
 import entidades.Evento;
-import java.util.List;
 
 /**
- *
- * @author limon
+ * Controla las operaciones relacionadas con los eventos, incluyendo agregar, modificar y obtener eventos.
  */
 public class ControlEvento {
     
@@ -34,8 +28,11 @@ public class ControlEvento {
         if (evento.getTitulo() == null || evento.getTitulo().isEmpty()) {
             throw new IllegalArgumentException("El título del evento es obligatorio.");
         }
-        if (evento.getFecha() == null) {
-            throw new IllegalArgumentException("La fecha del evento es obligatoria.");
+        if (evento.getFechaInicio() == null) {
+            throw new IllegalArgumentException("La fecha de inicio del evento es obligatoria.");
+        }
+        if (evento.getFechaFinal() == null) {
+            throw new IllegalArgumentException("La fecha de finalización del evento es obligatoria.");
         }
         
         // Agregar el evento al repositorio (base de datos)
@@ -54,26 +51,36 @@ public class ControlEvento {
         if (eventoModificado.getTitulo() == null || eventoModificado.getTitulo().isEmpty()) {
             throw new IllegalArgumentException("El título del evento es obligatorio.");
         }
-        if (eventoModificado.getFecha() == null) {
-            throw new IllegalArgumentException("La fecha del evento es obligatoria.");
+        if (eventoModificado.getFechaInicio() == null) {
+            throw new IllegalArgumentException("La fecha de inicio del evento es obligatoria.");
+        }
+        if (eventoModificado.getFechaFinal() == null) {
+            throw new IllegalArgumentException("La fecha de finalización del evento es obligatoria.");
         }
 
         // Modificar el evento en el repositorio (base de datos)
         eventoDAO.modificarEvento(evento, eventoModificado);
+        System.out.println("Evento modificado correctamente");
     }
 
     /**
      * Obtiene un evento por su título.
      * 
      * @param titulo el título del evento a buscar
-     * @return el evento encontrado
+     * @return el evento encontrado, o null si no se encuentra
      */
     public Evento obtenerEvento(String titulo) {
+        // Se crea un objeto Evento con el título dado
         Evento evento = new Evento();
         evento.setTitulo(titulo);
         
         // Obtener el evento del repositorio (base de datos)
-        return eventoDAO.obtenerEvento(evento);
+        Evento eventoObtenido = eventoDAO.obtenerEvento(evento);
+        
+        if (eventoObtenido == null) {
+            System.out.println("No se encontró el evento con el título: " + titulo);
+        }
+        
+        return eventoObtenido;
     }
-    
 }
