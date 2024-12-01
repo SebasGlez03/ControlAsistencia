@@ -4,9 +4,7 @@
  */
 package persistencia;
 
-import entidades.Alumno;
-import entidades.Maestro;
-import entidades.Usuario;
+import entidades.*;
 
 /**
  * Interfaz IPersistencia que define los métodos para realizar operaciones de
@@ -93,5 +91,35 @@ public interface IPersistencia {
      * modificar.
      */
     public void modificarMaestro(Maestro maestro, Maestro maestroModificado);
+
+    /**
+     * Obtiene una clase del sistema.
+     *
+     * @param clase El objeto Clase que se desea obtener.
+     * @return Objeto del tipo Clase con la informacion de la clase a obtener.
+     */
+    public Clase obtenerClase(Clase clase);
+
+    /**
+     * Agrega una nueva clase al sistema.
+     *
+     * @param clase El objeto Clase que se desea agregar.
+     */
+    public void agregarClase(Clase clase);
+
+    /**
+     * Elimina una clase del sistema
+     *
+     * @param clase El objeto Clase que se desea eliminar.
+     */
+    public void eliminarClase(Clase clase);
+
+    /**
+     * Modifica los datos de una clase en el sistema.
+     *
+     * @param clase El objeto Clase que se desea modificar.
+     * @param claseModificada El objeto Clase con la informacion a modificar.
+     */
+    public void modificarClase(Clase clase, Clase claseModificada);
 
 }
