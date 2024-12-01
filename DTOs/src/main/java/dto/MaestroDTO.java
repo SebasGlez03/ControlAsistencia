@@ -40,6 +40,7 @@ public class MaestroDTO extends UsuarioDTO {
         super.setApellidoMaterno(usuario.getApellidoMaterno());
         super.setCorreo(usuario.getCorreo());
         super.setContrasenia(usuario.getContrasenia());
+        super.setRol(usuario.getRol());
         this.materias = maestro.getMaterias();
     }
 

@@ -26,14 +26,14 @@ public class Prueba {
         listaMaterias2.add("Ciencias");
         listaMaterias2.add("Quimica");
 
-        Maestro alumno = new Maestro(listaMaterias, 247933, "Nomar Alberto Limon Quintero", "", "", "nomar@gmail.com", "12345");
+//        Maestro alumno = new Maestro(listaMaterias, 247933, "Nomar Alberto Limon Quintero", "", "", "nomar@gmail.com", "12345");
 
-        Maestro maestroModificacion = new Maestro(listaMaterias2, 9876, "Pancho", "Test", "Test", "test@gmail.com", "test");
+//        Maestro maestroModificacion = new Maestro(listaMaterias2, 9876, "Pancho", "Test", "Test", "test@gmail.com", "test");
 
         IPersistencia bd = new FachadaPersistencia();
 
 
-        bd.agregarUsuario(alumno);
+//        bd.agregarUsuario(alumno);
 
         
         

@@ -39,6 +39,7 @@ public class AlumnoDTO extends UsuarioDTO {
         super.setApellidoMaterno(usuario.getApellidoMaterno());
         super.setCorreo(usuario.getCorreo());
         super.setContrasenia(usuario.getContrasenia());
+        super.setRol(usuario.getRol());
         this.semestre = alumno.getSemestre();
         this.promedio = alumno.getPromedio();
     }
