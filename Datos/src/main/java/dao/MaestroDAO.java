@@ -19,9 +19,12 @@ import org.bson.types.ObjectId;
  */
 public class MaestroDAO {
 
-    public MaestroDAO() {
-    }
-
+    /**
+     * Metodo que obtiene un maestro de la base de datos
+     *
+     * @param maestro Objeto de tipo Maestro a obtener de la base de datos
+     * @return Objeto tipo Maestro obtenido
+     */
     public Maestro obtenerMaestro(Maestro maestro) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
@@ -56,6 +59,11 @@ public class MaestroDAO {
 
     }
 
+    /**
+     * Metodo que agrega un maestro en la base de datos
+     *
+     * @param maestro Objeto de tipo Maestro a agregar en la base de datos
+     */
     public void agregarMaestro(Maestro maestro) {
         // Esta clase recibe una lista que actualmente es mock ya que no es parte de nuestro caso de uso
         MongoClient mongoClient = new MongoClient("localhost", 27017);
@@ -84,6 +92,12 @@ public class MaestroDAO {
         collection.insertOne(documentMaestro);
     }
 
+    /**
+     * Metodo que modifica un maestro en la base de datos
+     *
+     * @param maestro Objeto de tipo Maestro a modificar en la base de datos
+     * @param maestroModificado Objeto tipo Maestro que suplira la informacion
+     */
     public void modificarMaestro(Maestro maestro, Maestro maestroModificado) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");

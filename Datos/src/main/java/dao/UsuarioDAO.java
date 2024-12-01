@@ -17,9 +17,12 @@ import org.bson.types.ObjectId;
  */
 public class UsuarioDAO {
 
-    public UsuarioDAO() {
-    }
-
+    /**
+     * Metodo que obtiene un usuario de la base de datos
+     *
+     * @param matricula Objeto de tipo Usuario a obtener de la base de datos
+     * @return Objeto tipo Usuario obtenido
+     */
     public Usuario obtenerUsuario(int matricula) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
@@ -44,6 +47,11 @@ public class UsuarioDAO {
 
     }
 
+    /**
+     * Metodo que agrega un usuario a la base de datos
+     *
+     * @param usuario Objeto de tipo usuario a agregar a la base de datos
+     */
     public void agregarUsuario(Usuario usuario) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
@@ -61,6 +69,11 @@ public class UsuarioDAO {
         collection.insertOne(documentUsuario);
     }
 
+    /**
+     * Metodo que elimina un usuario de la base de datos
+     *
+     * @param usuario Objeto de tipo Usuario a eliminar de la base de datos
+     */
     public void eliminarUsuario(Usuario usuario) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
@@ -71,6 +84,12 @@ public class UsuarioDAO {
         collection.deleteOne(query);
     }
 
+    /**
+     * Metodo que modifica un usuario de la base de datos
+     *
+     * @param usuario Objeto de tipo Usuario a modificar en la base de datos
+     * @param usuarioModificado Objeto tipo Usuario que suplira la informacion
+     */
     public void modificarUsuario(Usuario usuario, Usuario usuarioModificado) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");

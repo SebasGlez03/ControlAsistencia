@@ -16,9 +16,15 @@ import org.bson.Document;
  * @author limon
  */
 public class EventoDAO {
-    
-    public Evento obtenerEvento(Evento evento){
-        
+
+    /**
+     * Metodo que obtiene un evento de la base de datos
+     *
+     * @param evento Objeto de tipo Evento a obtener de la base de datos
+     * @return Objeto tipo Evento obtenido
+     */
+    public Evento obtenerEvento(Evento evento) {
+
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
         MongoCollection<Document> collection = database.getCollection("eventos");
@@ -28,7 +34,7 @@ public class EventoDAO {
 
         System.out.println("Evento leido: " + eventos.toJson());
 
-         // Extraer valores
+        // Extraer valores
         String titulo = eventos.getString("titulo");
         String descripcion = eventos.getString("descripcion");
         Date fechaInicio = eventos.getDate("fechaInicio");
@@ -37,18 +43,21 @@ public class EventoDAO {
         String horaFinal = eventos.getString("horaFinal");
         String campus = eventos.getString("campus");
         String categoria = eventos.getString("categoria");
-                
-
 
         // Crear el objeto Evento
         Evento eventoObtenido = new Evento(titulo, descripcion, fechaInicio, fechaFinal, horaInicio, horaFinal, campus, categoria);
 
         return eventoObtenido;
-        
+
     }
-    
-    public void agregarEvento(Evento evento){
-        
+
+    /**
+     * Metodo que agrega un evento a base de datos
+     *
+     * @param evento Objeto tipo Evento a agregar en la base de datos
+     */
+    public void agregarEvento(Evento evento) {
+
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
         MongoCollection<Document> collection = database.getCollection("eventos");
@@ -64,12 +73,18 @@ public class EventoDAO {
         documentEvento.append("categoria", evento.getCategoria());
 
         collection.insertOne(documentEvento);
-        
+
     }
-    
-    public void modificarEvento(Evento evento, Evento eventoModificado){
-        
-         MongoClient mongoClient = new MongoClient("localhost", 27017);
+
+    /**
+     * Metodo que modifica un evento en la base de datos
+     *
+     * @param evento Objeto de tipo Evento a modificar en la base de datos
+     * @param eventoModificado Objeto de tipo Evento que suplira la informacion
+     */
+    public void modificarEvento(Evento evento, Evento eventoModificado) {
+
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
         MongoCollection<Document> collection = database.getCollection("eventos");
 
@@ -91,6 +106,6 @@ public class EventoDAO {
         collection.updateOne(query, update);
 
         System.out.println("Evento modificado correctamente");
-        
+
     }
 }

@@ -17,6 +17,13 @@ import org.bson.types.ObjectId;
  */
 public class ClaseDAO {
 
+
+    /**
+     * Metodo que obtiene una clase de la base de datos
+     *
+     * @param clase Objeto de tipo Clase a obtener de la base de datos
+     * @return Objeto tipo Clase obtenido
+     */
     public Clase obtenerClase(Clase clase) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
@@ -38,6 +45,11 @@ public class ClaseDAO {
 
     }
 
+    /**
+     * Metodo que agrega una clase a la base de datos
+     *
+     * @param clase Objeto tipo Clase a agregar en la base de datos
+     */
     public void agregarClase(Clase clase) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
@@ -51,6 +63,11 @@ public class ClaseDAO {
 
     }
 
+    /**
+     * Metodo que elimina una clase de la base de datos
+     *
+     * @param clase Objeto tipo Clase a eliminar en la base de datos
+     */
     public void eliminarClase(Clase clase) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
@@ -62,6 +79,12 @@ public class ClaseDAO {
 
     }
 
+    /**
+     * Metodo que modifica una clase de la base de datos
+     *
+     * @param clase Objeto de tipo Clase a modificar en la base de datos
+     * @param claseModificada Objeto tipo Clase que suplira la informacion
+     */
     public void modificarClase(Clase clase, Clase claseModificada) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");

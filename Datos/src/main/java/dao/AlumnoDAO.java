@@ -17,9 +17,12 @@ import org.bson.types.ObjectId;
  */
 public class AlumnoDAO {
 
-    public AlumnoDAO() {
-    }
-
+    /**
+     * Metodo que obtiene un alumno de la base de datos
+     *
+     * @param alumno Objeto de tipo Alumno a obtener de la base de datos
+     * @return Objeto tipo Alumno obtenido
+     */
     public Alumno obtenerAlumno(Alumno alumno) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
@@ -46,6 +49,11 @@ public class AlumnoDAO {
 
     }
 
+    /**
+     * Metodo que agrega un alumno a la base de datos
+     *
+     * @param alumno Objeto de tipo Alumno a agregar en la base de datos
+     */
     public void agregarAlumno(Alumno alumno) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
@@ -61,11 +69,16 @@ public class AlumnoDAO {
         documentAlumno.append("semestre", alumno.getSemestre());
         documentAlumno.append("promedio", alumno.getPromedio());
         documentAlumno.append("rol", alumno.getRol());
-        
 
         collection.insertOne(documentAlumno);
     }
 
+    /**
+     * Metodo que modifica un alumno de la base de datos
+     *
+     * @param alumno Objeto de tipo Alumno a modificar en la base de datos
+     * @param alumnoModificado Objeto tipo Alumno que suplira la informacion
+     */
     public void modificarAlumno(Alumno alumno, Alumno alumnoModificado) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
