@@ -38,6 +38,7 @@ public class MaestroDAO {
         String apellidoMaterno = maestros.getString("apellidoMaterno");
         String correo = maestros.getString("correo");
         String contrasenia = maestros.getString("contrasenia");
+        ObjectId rol = maestros.getObjectId("rol");
         List<Document> clasesImpartidas = maestros.getList("clasesImpartidas", Document.class);
 
         List<String> materias = new ArrayList<>();
@@ -49,7 +50,7 @@ public class MaestroDAO {
             }
         }
 
-        Maestro maestroObtenido = new Maestro(materias, matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
+        Maestro maestroObtenido = new Maestro(materias, matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
 
         return maestroObtenido;
 
@@ -78,6 +79,7 @@ public class MaestroDAO {
         documentMaestro.append("correo", maestro.getCorreo());
         documentMaestro.append("contrasenia", maestro.getContrasenia());
         documentMaestro.append("clasesImpartidas", clasesLista);
+        documentMaestro.append("rol", maestro.getRol());
 
         collection.insertOne(documentMaestro);
     }
@@ -107,6 +109,7 @@ public class MaestroDAO {
                 .append("correo", maestroModificado.getCorreo())
                 .append("contrasenia", maestroModificado.getContrasenia())
                 .append("clasesImpartidas", clasesLista)
+                .append("rol", maestroModificado.getRol())
         );
 
         // Modifica el primer documento que coincida con el filtro

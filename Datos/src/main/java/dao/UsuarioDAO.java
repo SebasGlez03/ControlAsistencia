@@ -9,6 +9,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import entidades.Usuario;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -35,8 +36,9 @@ public class UsuarioDAO {
         String apellidoMaterno = usuarios.getString("apellidoMaterno");
         String correo = usuarios.getString("correo");
         String contrasenia = usuarios.getString("contrasenia");
+        ObjectId rol = usuarios.getObjectId("rol");
 
-        Usuario usuarioObtenido = new Usuario(matriculaObtener, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
+        Usuario usuarioObtenido = new Usuario(matriculaObtener, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
 
         return usuarioObtenido;
 
@@ -54,6 +56,7 @@ public class UsuarioDAO {
         documentUsuario.append("apellidoMaterno", usuario.getApellidoMaterno());
         documentUsuario.append("correo", usuario.getCorreo());
         documentUsuario.append("contrasenia", usuario.getContrasenia());
+        documentUsuario.append("rol", usuario.getRol());
 
         collection.insertOne(documentUsuario);
     }
@@ -82,6 +85,7 @@ public class UsuarioDAO {
                 .append("apellidoMaterno", usuarioModificado.getApellidoMaterno())
                 .append("correo", usuarioModificado.getCorreo())
                 .append("contrasenia", usuarioModificado.getContrasenia())
+                .append("rol", usuarioModificado.getRol())
         );
 
         // Modifica el primer documento que coincida con el filtro

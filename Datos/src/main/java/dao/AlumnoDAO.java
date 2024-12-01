@@ -9,6 +9,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import entidades.Alumno;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -35,10 +36,11 @@ public class AlumnoDAO {
         String apellidoMaterno = alumnos.getString("apellidoMaterno");
         String correo = alumnos.getString("correo");
         String contrasenia = alumnos.getString("contrasenia");
+        ObjectId rol = alumnos.getObjectId("rol");
         int semestre = alumnos.getInteger("semestre");
         double promedio = alumnos.getDouble("promedio");
 
-        Alumno alumnoObtenido = new Alumno(semestre, (float) promedio, matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia);
+        Alumno alumnoObtenido = new Alumno(semestre, (float) promedio, matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
 
         return alumnoObtenido;
 
@@ -58,6 +60,8 @@ public class AlumnoDAO {
         documentAlumno.append("contrasenia", alumno.getContrasenia());
         documentAlumno.append("semestre", alumno.getSemestre());
         documentAlumno.append("promedio", alumno.getPromedio());
+        documentAlumno.append("rol", alumno.getRol());
+        
 
         collection.insertOne(documentAlumno);
     }
@@ -77,7 +81,8 @@ public class AlumnoDAO {
                 .append("correo", alumnoModificado.getCorreo())
                 .append("contrasenia", alumnoModificado.getContrasenia())
                 .append("semestre", alumnoModificado.getSemestre())
-                .append("promedio", alumno.getPromedio())
+                .append("promedio", alumnoModificado.getPromedio())
+                .append("rol", alumnoModificado.getRol())
         );
 
         // Modifica el primer documento que coincida con el filtro
