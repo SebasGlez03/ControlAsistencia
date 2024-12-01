@@ -17,7 +17,7 @@ public interface IPersistencia {
     /**
      * Obtiene un usuario del sistema.
      *
-     * @param usuario el objeto Usuario que se desea obtener.
+     * @param matricula la matricula del usuario a obtener.
      * @return Objeto de tipo Usuario con la informacion del usuario a obtener
      */
     public Usuario obtenerUsuario(int matricula);
