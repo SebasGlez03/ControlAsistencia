@@ -1,8 +1,8 @@
 package subsistemaUsuario;
 
-import SubsistemaAlumno.ControlAlumno;
 import dto.*;
 import entidades.*;
+import java.util.List;
 import persistencia.*;
 
 /**
@@ -172,6 +172,17 @@ public class ControlUsuario {
         IPersistencia datos = new FachadaPersistencia();
 
         datos.modificarUsuario(usuario, usuarioModificado);
+    }
+
+    /**
+     * Metodo que obtiene todos los usuarios de la base de datos
+     *
+     * @return Lista de todos los usuarios de la base de datos
+     */
+    public List<Usuario> obtenerListaUsuarios() {
+        IPersistencia datos = new FachadaPersistencia();
+
+        return datos.obtenerTodosUsuarios();
     }
 
 }

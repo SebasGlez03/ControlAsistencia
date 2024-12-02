@@ -4,13 +4,9 @@
  */
 package subsistemaUsuario;
 
-import dto.AlumnoDTO;
-import dto.MaestroDTO;
 import dto.UsuarioDTO;
-import entidades.Alumno;
-import entidades.Maestro;
 import entidades.Usuario;
-import mock.BaseDatosMock;
+import java.util.List;
 
 /**
  *
@@ -109,6 +105,16 @@ public class FachadaUsuario implements IUsuario {
 
         return usuario;
 
+    }
+
+    /**
+     * Metodo que obtiene toda la lista de usuarios
+     *
+     * @return Lista de usuarios obtenida
+     */
+    @Override
+    public List<Usuario> obtenesListaUsuarios() {
+        return controlUsuario.obtenerListaUsuarios();
     }
 
 }

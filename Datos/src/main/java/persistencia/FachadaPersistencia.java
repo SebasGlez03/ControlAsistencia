@@ -28,6 +28,16 @@ public class FachadaPersistencia implements IPersistencia {
     }
 
     /**
+     * Metodo que obtiene todos los usuarios de la base de datos
+     *
+     * @return Lista de objetos tipo Usuario obtenidos
+     */
+    public List<Usuario> obtenerTodosUsuarios() {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.obtenerTodosUsuarios();
+    }
+
+    /**
      * Obtiene el nombre del rol de un usuario del sistema.
      *
      * @param matricula La matricula del usuario a obtener su rol.

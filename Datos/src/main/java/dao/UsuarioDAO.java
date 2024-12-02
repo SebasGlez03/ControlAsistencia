@@ -56,6 +56,44 @@ public class UsuarioDAO {
     }
 
     /**
+     * Metodo que obtiene todos los usuarios de la base de datos
+     *
+     * @return Lista de objetos tipo Usuario obtenidos
+     */
+    public List<Usuario> obtenerTodosUsuarios() {
+        // Crear una lista para almacenar los usuarios obtenidos
+        List<Usuario> listaUsuarios = new ArrayList<>();
+
+        // Conexión con la base de datos MongoDB
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("usuarios");
+
+        // Recuperar todos los documentos de la colección
+        FindIterable<Document> documentos = collection.find();
+
+        // Iterar sobre cada documento y mapearlo a un objeto Usuario
+        for (Document doc : documentos) {
+            int matricula = doc.getInteger("matricula");
+            String nombre = doc.getString("nombre");
+            String apellidoPaterno = doc.getString("apellidoPaterno");
+            String apellidoMaterno = doc.getString("apellidoMaterno");
+            String correo = doc.getString("correo");
+            String contrasenia = doc.getString("contrasenia");
+            ObjectId rol = doc.getObjectId("rol");
+
+            // Crear un objeto Usuario y agregarlo a la lista
+            Usuario usuario = new Usuario(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
+            listaUsuarios.add(usuario);
+        }
+
+        // Cerrar el cliente MongoDB
+        mongoClient.close();
+
+        return listaUsuarios;
+    }
+
+    /**
      * Metodo que obtiene el rol del usuario de la base de datos
      *
      * @param matricula Matricula tipo int que se relaciona con el usuario de la

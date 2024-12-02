@@ -16,16 +16,31 @@ import javax.swing.*;
  *
  * @author PC
  */
-public class FrmAgregarUsuario extends javax.swing.JFrame {
+public class FrmModificarUsuario extends javax.swing.JFrame {
 
     IUsuario subsUsuario = new FachadaUsuario();
+    UsuarioDTO usuarioRecibido = new UsuarioDTO();
 
     /**
      * Creates new form FrmAgregarUsuario
      */
-    public FrmAgregarUsuario() {
+    public FrmModificarUsuario() {
         initComponents();
         llenarComboBox(comboBoxRol);
+    }
+
+    public FrmModificarUsuario(UsuarioDTO usuarioRecibido) {
+        initComponents();
+        llenarComboBox(comboBoxRol);
+        this.usuarioRecibido = usuarioRecibido;
+
+        txtMatricula.setText(String.valueOf(usuarioRecibido.getMatricula()));
+        txtNombre.setText(usuarioRecibido.getNombre());
+        txtApellidoPaterno.setText(usuarioRecibido.getApellidoPaterno());
+        txtApellidoMaterno.setText(usuarioRecibido.getApellidoMaterno());
+        txtCorreo.setText(usuarioRecibido.getCorreo());
+        txtContrasenia.setText(usuarioRecibido.getContrasenia());
+
     }
 
     /**
@@ -236,30 +251,30 @@ public class FrmAgregarUsuario extends javax.swing.JFrame {
             objectIdMap.put("Admin", new ObjectId("674b87f4549a4c0c82072f8c"));
 
             // Crear el objeto UsuarioDTO
-            UsuarioDTO usuario = new UsuarioDTO();
-            usuario.setMatricula(Integer.parseInt(txtMatricula.getText()));
-            usuario.setNombre(txtNombre.getText());
-            usuario.setApellidoPaterno(txtApellidoPaterno.getText());
-            usuario.setApellidoMaterno(txtApellidoMaterno.getText());
-            usuario.setCorreo(txtCorreo.getText());
-            usuario.setContrasenia(txtContrasenia.getText()); // Encriptar la contraseña
+            UsuarioDTO usuarioModificado = new UsuarioDTO();
+            usuarioModificado.setMatricula(Integer.parseInt(txtMatricula.getText()));
+            usuarioModificado.setNombre(txtNombre.getText());
+            usuarioModificado.setApellidoPaterno(txtApellidoPaterno.getText());
+            usuarioModificado.setApellidoMaterno(txtApellidoMaterno.getText());
+            usuarioModificado.setCorreo(txtCorreo.getText());
+            usuarioModificado.setContrasenia(txtContrasenia.getText()); // Encriptar la contraseña
 
             // Obtener el rol seleccionado
             String selectedRole = (String) comboBoxRol.getSelectedItem(); // Etiqueta seleccionada
             ObjectId selectedRoleId = objectIdMap.get(selectedRole);      // ObjectId asociado
 
             // Establecer el rol como el ObjectId en el UsuarioDTO
-            usuario.setRol(selectedRoleId);
+            usuarioModificado.setRol(selectedRoleId);
 
             // Confirmación en consola (opcional)
-            System.out.println("Usuario creado: " + usuario);
+            System.out.println("Usuario creado para modificar: " + usuarioModificado);
             System.out.println("Rol seleccionado: " + selectedRole + " -> ObjectId: " + selectedRoleId);
 
-            subsUsuario.agregarUsuario(usuario);
+            subsUsuario.modificarUsuario(usuarioRecibido, usuarioModificado);
 
-            JOptionPane.showMessageDialog(this, "El usuario se ha agregado correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            FrmGestionarUsuarios gestionarAlumnos = new FrmGestionarUsuarios();
-            gestionarAlumnos.setVisible(true);
+            JOptionPane.showMessageDialog(this, "El usuario se ha modificado correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            FrmGestionarUsuarios frmGestionarUsuarios = new FrmGestionarUsuarios();
+            frmGestionarUsuarios.setVisible(true);
             this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado: " + e, "Ha ocurrido un Error", JOptionPane.ERROR_MESSAGE);
@@ -292,8 +307,8 @@ public class FrmAgregarUsuario extends javax.swing.JFrame {
     }
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        FrmGestionarUsuarios gestionarAlumnos = new FrmGestionarUsuarios();
-        gestionarAlumnos.setVisible(true);
+        FrmGestionarUsuarios gestionarUsuarios = new FrmGestionarUsuarios();
+        gestionarUsuarios.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -314,20 +329,21 @@ public class FrmAgregarUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmAgregarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmAgregarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmAgregarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmAgregarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmAgregarUsuario().setVisible(true);
+                new FrmModificarUsuario().setVisible(true);
             }
         });
     }

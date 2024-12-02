@@ -6,6 +6,7 @@ package subsistemaUsuario;
 
 import dto.*;
 import entidades.Usuario;
+import java.util.List;
 
 /**
  * Esta interfaz define las operaciones relacionadas con la gestión de usuarios
@@ -62,4 +63,11 @@ public interface IUsuario {
      * @return Nombre de el rol del usuario
      */
     public String getRolUsuario(int id);
+
+    /**
+     * Metodo que obtiene la lista de usuarios
+     *
+     * @return Lista de usuarios obtenida
+     */
+    public List<Usuario> obtenesListaUsuarios();
 }
