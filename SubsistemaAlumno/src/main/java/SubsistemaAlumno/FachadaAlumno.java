@@ -28,7 +28,7 @@ public class FachadaAlumno implements IAlumno {
     }
 
     @Override
-    public void obtenerAlumno(AlumnoDTO alumno) {
+    public AlumnoDTO obtenerAlumno(int matricula) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

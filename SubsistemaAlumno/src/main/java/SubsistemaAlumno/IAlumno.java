@@ -21,9 +21,10 @@ public interface IAlumno {
     /**
      * Metodo que obtiene un alumno del sistema.
      *
-     * @param alumno Alumno obtenido.
+     * @param matricula Matricula del alumno.
+     * @return Objeto alumno obtenido
      */
-    public void obtenerAlumno(AlumnoDTO alumno);
+    public AlumnoDTO obtenerAlumno(int matricula);
 
     /**
      * Agrega un nuevo alumno al sistema.

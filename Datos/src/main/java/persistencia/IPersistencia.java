@@ -66,10 +66,10 @@ public interface IPersistencia {
     /**
      * Obtiene un alumno del sistema.
      *
-     * @param alumno El objeto Alumno que se desea obtener.
+     * @param matricula Matricula del alumno a obtener.
      * @return Objeto de tipo Alumno con la informacion del Alumno a obtener
      */
-    public Alumno obtenerAlumno(Alumno alumno);
+    public Alumno obtenerAlumno(int matricula);
 
     /**
      * Agrega un nuevo alumno al sistema.
@@ -109,10 +109,10 @@ public interface IPersistencia {
      * modificar.
      */
     public void modificarMaestro(Maestro maestro, Maestro maestroModificado);
-    
+
     /**
      * Obtiene un evento específico.
-     * 
+     *
      * @param evento Objeto de tipo Evento a buscar.
      * @return El objeto Evento encontrado o null si no existe.
      */
@@ -120,7 +120,7 @@ public interface IPersistencia {
 
     /**
      * Obtiene un evento por su título.
-     * 
+     *
      * @param titulo El título del evento a buscar.
      * @return El objeto Evento encontrado o null si no existe.
      */
@@ -128,21 +128,21 @@ public interface IPersistencia {
 
     /**
      * Obtiene todos los eventos.
-     * 
+     *
      * @return Una lista con todos los objetos Evento en la base de datos.
      */
     List<Evento> obtenerTodosLosEventos();
 
     /**
      * Agrega un nuevo evento a la base de datos.
-     * 
+     *
      * @param evento El objeto Evento a agregar.
      */
     void agregarEvento(Evento evento);
 
     /**
      * Modifica un evento existente en la base de datos.
-     * 
+     *
      * @param evento El evento a modificar.
      * @param eventoModificado El objeto Evento con la información actualizada.
      */
@@ -200,7 +200,5 @@ public interface IPersistencia {
      * @return Sesion con la informacion de los alumnos y su asistencia.
      */
     public List<Document> obtenerAlumnosSesion(Sesion sesion);
-    
-    
 
 }
