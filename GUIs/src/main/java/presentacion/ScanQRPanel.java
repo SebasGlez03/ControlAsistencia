@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import entidades.Usuario;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import subsubsistemaqr.FachadaQR;
@@ -16,17 +17,21 @@ import subsubsistemaqr.IQR;
 public class ScanQRPanel extends javax.swing.JPanel {
 
     MainWindow mainWindow;
+    Usuario usuario;
     InicioPanel inicioPanel;
 
     IQR iqr = new FachadaQR();
     int pin;
 
     /**
-     * Creates new form ScanQRPanel
+     * 
+     * @param mainwindow
+     * @param inicioPanel
+     * @param usuario 
      */
-    public ScanQRPanel(MainWindow mainwindow, InicioPanel inicioPanel) {
+    public ScanQRPanel(MainWindow mainwindow, InicioPanel inicioPanel, Usuario usuario) {
         initComponents();
-
+        this.usuario = usuario;
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
     }

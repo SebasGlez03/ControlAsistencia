@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import entidades.Usuario;
 import java.awt.Color;
 
 /**
@@ -14,24 +15,24 @@ public class InicioMenu extends javax.swing.JPanel {
 
     MainWindow mainWindow;
     InicioPanel inicioPanel;
+    Usuario usuario;
     int pin;
-    
+
     Color transparente = new Color(0, 0, 0, 0);
     Color opacidad = new Color(0, 0, 0, 50);
 
     /**
-     * Creates new form InicioMenu
      *
-     * @param mainwindow referencia a la ventana principal.
+     * @param mainwindow
+     * @param inicioPanel
+     * @param usuario
      */
-    public InicioMenu(MainWindow mainwindow, InicioPanel inicioPanel) {
+    public InicioMenu(MainWindow mainwindow, InicioPanel inicioPanel, Usuario usuario) {
         initComponents();
 
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
-        
-        
-        
+
         //this.jLabel1.setBorder(new );
     }
 
@@ -41,6 +42,14 @@ public class InicioMenu extends javax.swing.JPanel {
 
     public void setPin(int pin) {
         this.pin = pin;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
     
     
@@ -109,11 +118,11 @@ public class InicioMenu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAsistenciaMouseClicked
-        ScanQRPanel scanQR = new ScanQRPanel(mainWindow, inicioPanel);
+        ScanQRPanel scanQR = new ScanQRPanel(mainWindow, inicioPanel, usuario);
         scanQR.setPin(pin);
         System.out.println("Se mando el pin: " + pin + " a la clase: " + scanQR.getClass());
         mainWindow.changeContentPane(scanQR);
-        
+
     }//GEN-LAST:event_btnAsistenciaMouseClicked
 
     private void btnCloseMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMenuMouseClicked
@@ -135,7 +144,7 @@ public class InicioMenu extends javax.swing.JPanel {
 
     private void btnClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasesMouseClicked
         // TODO add your handling code here:
-        QRClassPanel qrPanel = new QRClassPanel(mainWindow, inicioPanel);
+        QRClassPanel qrPanel = new QRClassPanel(mainWindow, inicioPanel, usuario);
         mainWindow.changeContentPane(qrPanel);
     }//GEN-LAST:event_btnClasesMouseClicked
 

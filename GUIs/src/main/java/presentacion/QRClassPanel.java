@@ -5,6 +5,7 @@
 package presentacion;
 
 import entidades.Alumno;
+import entidades.Usuario;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class QRClassPanel extends javax.swing.JPanel {
 
     MainWindow mainWindow;
     InicioPanel inicioPanel;
+    Usuario usuario;
     IQR iqr = new FachadaQR();
 
     List<Alumno> listaAlumnosMock = new ArrayList<>();
@@ -33,13 +35,11 @@ public class QRClassPanel extends javax.swing.JPanel {
      * @param mainwindow
      * @param inicioPanel
      */
-    public QRClassPanel(MainWindow mainwindow, InicioPanel inicioPanel) {
+    public QRClassPanel(MainWindow mainwindow, InicioPanel inicioPanel, Usuario usuario) {
         initComponents();
-
+        this.usuario = usuario;
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
-
-        
 
         mostrarQR();
         this.lblPIN.setText(String.valueOf(iqr.obtenerPIN()));
@@ -68,16 +68,24 @@ public class QRClassPanel extends javax.swing.JPanel {
 
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     private void mostrarQR() {
         iqr.generarQR();
-        
+
         try {
             BufferedImage qrImage = ImageIO.read(new File(iqr.obtenerPathQR()));
-            
+
             ImageIcon qrIcon = new ImageIcon(qrImage);
-            
+
             imgQR.setIcon(qrIcon);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error al manejar el archivo QR: " + e.getMessage());
         }
@@ -225,6 +233,7 @@ public class QRClassPanel extends javax.swing.JPanel {
     private void btnReturn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReturn1MouseClicked
         mainWindow.changeContentPane(inicioPanel);
         inicioPanel.setPin(iqr.obtenerPIN());
+        inicioPanel.setUsuario(usuario);
         System.out.println("Se regreso el pin: " + iqr.obtenerPIN() + " de la clase QRClassPanel a la clase: " + inicioPanel.getClass());
     }//GEN-LAST:event_btnReturn1MouseClicked
 

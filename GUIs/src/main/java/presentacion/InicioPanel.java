@@ -20,15 +20,31 @@ public class InicioPanel extends javax.swing.JPanel {
     int pin;
 
     /**
-     * Creates new form InicioPanel
+     *
+     * @param mainwindow
      */
     public InicioPanel(MainWindow mainwindow) {
         initComponents();
 
         this.mainWindow = mainwindow;
         this.mainMenuContentPanel.setVisible(false);
-                
-                
+
+    }
+
+    /**
+     *
+     * @param mainWindow
+     * @param usuario
+     */
+    public InicioPanel(MainWindow mainWindow, Usuario usuario) {
+        initComponents();
+        this.mainWindow = mainWindow;
+        this.mainMenuContentPanel.setVisible(false);
+
+        this.usuario = usuario;
+
+        this.lblId.setText(String.valueOf(usuario.getMatricula()));
+        this.lblNombre.setText(usuario.getNombre());
     }
 
     public int getPin() {
@@ -38,21 +54,15 @@ public class InicioPanel extends javax.swing.JPanel {
     public void setPin(int pin) {
         this.pin = pin;
     }
-    
-    
 
-    public InicioPanel(MainWindow mainWindow, Usuario usuario){
-        initComponents();
-        this.mainWindow = mainWindow;
-        this.mainMenuContentPanel.setVisible(false);
-        
-        this.usuario = usuario;
-        
-        this.lblId.setText(String.valueOf(usuario.getMatricula())); 
-        this.lblNombre.setText(usuario.getNombre()); 
-           
+    public Usuario getUsuario() {
+        return usuario;
     }
-    
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     /**
      * Cambia el contenido del 'mainContentPanel' al panel dado por el
      * parametro.
@@ -72,7 +82,6 @@ public class InicioPanel extends javax.swing.JPanel {
 
     public Set<String> hashSet = new HashSet<String>();
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,7 +137,7 @@ public class InicioPanel extends javax.swing.JPanel {
     private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
         // TODO add your handling code here:
 //        new FrmInicioMenu().setVisible(true);
-        InicioMenu menu = new InicioMenu(mainWindow, this);
+        InicioMenu menu = new InicioMenu(mainWindow, this, usuario);
         changeContentPane(menu);
         menu.setPin(pin);
         System.out.println("Se mando el pin: " + pin + " a la clase: " + menu.getClass());
@@ -148,7 +157,6 @@ public class InicioPanel extends javax.swing.JPanel {
          */
 
     }//GEN-LAST:event_mainMenuContentPanelMouseExited
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
