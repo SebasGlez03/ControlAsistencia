@@ -33,7 +33,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         lblLogoItson = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        txtContrasenia = new javax.swing.JTextField();
+        txtContrasenia = new javax.swing.JPasswordField();
         btnAceptar = new javax.swing.JLabel();
         btnClose = new javax.swing.JLabel();
         lblFormLogin = new javax.swing.JLabel();
@@ -47,6 +47,12 @@ public class FrmLogin extends javax.swing.JFrame {
         lblLogoItson.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoItson.png"))); // NOI18N
         getContentPane().add(lblLogoItson, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, -1));
         getContentPane().add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 270, 30));
+
+        txtContrasenia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtContraseniaActionPerformed(evt);
+            }
+        });
         getContentPane().add(txtContrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 270, 30));
 
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnAceptar.png"))); // NOI18N
@@ -108,6 +114,10 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCloseMouseClicked
 
+    private void txtContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtContraseniaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -149,7 +159,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblFormLogin;
     private javax.swing.JLabel lblLogoItson;
-    private javax.swing.JTextField txtContrasenia;
+    private javax.swing.JPasswordField txtContrasenia;
     private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }
