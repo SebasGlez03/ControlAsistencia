@@ -4,7 +4,7 @@
  */
 package presentacion.admin;
 
-import presentacion.admin.usuarios.FrmAdminMenuUsuarios;
+import presentacion.admin.usuarios.FrmGestionarUsuarios;
 import entidades.Usuario;
 import presentacion.FrmLogin;
 
@@ -118,8 +118,8 @@ public class FrmAdminMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
     private void btnUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseClicked
-        FrmAdminMenuUsuarios menuUsuarios = new FrmAdminMenuUsuarios();
-        menuUsuarios.setVisible(true);
+        FrmGestionarUsuarios gestionarUsuarios = new FrmGestionarUsuarios();
+        gestionarUsuarios.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnUsuariosMouseClicked
 
