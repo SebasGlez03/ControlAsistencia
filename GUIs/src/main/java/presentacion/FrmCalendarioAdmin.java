@@ -4,10 +4,12 @@
  */
 package presentacion;
 
-import dto.EventoDTO;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
-import subsistemaEvento.FachadaEvento;
+import entidades.Evento;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+import javax.swing.JOptionPane;
+import persistencia.FachadaPersistencia;
 
 /**
  *
@@ -22,34 +24,39 @@ public class FrmCalendarioAdmin extends javax.swing.JFrame {
     public FrmCalendarioAdmin() {
         initComponents();
         
-        llenarTablaCarrera(ControlEvento.obtenerEvento());
+        
     }
     
-    public void llenarTablaCarrera(List<EventoDTO> listaEvento) {
-    DefaultTableModel modeloTabla = (DefaultTableModel) this.tblEvento.getModel();
+    private void limpiarFormulario() {
+        campoTextoTitulo.setText("");
+        campoTextoDescripcion.setText("");
+        campoDateFechaInicio.setDate(null);
+        campoDateFechaFin.setDate(null);
+        campoTextoHoraInicio.setText("");
+        campoTextoHoraFin.setText("");
+        comboBoxCampus.setSelectedIndex(0); // Selecciona el primer elemento
+        comboBoxCategoria.setSelectedIndex(0);
+    }
+    
+    public Date convertirFechaAPacifico(Date fecha) {
+    // Definir la zona horaria del Pacífico (en este caso, Los Angeles)
+    TimeZone pacifico = TimeZone.getTimeZone("America/Los_Angeles");
 
-    // Limpiar la tabla antes de agregar nuevos datos
-    if (modeloTabla.getRowCount() > 0) {
-        for (int i = modeloTabla.getRowCount() - 1; i > -1; i--) {
-            modeloTabla.removeRow(i);
-        }
+    // Crear un SimpleDateFormat con el formato solo de fecha (sin la hora)
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    sdf.setTimeZone(pacifico);  // Configura la zona horaria
+
+    // Usar el SimpleDateFormat para formatear la fecha
+    String fechaFormateada = sdf.format(fecha);
+
+    try {
+        // Convertir la cadena de texto a Date (sin la hora, solo la fecha)
+        return sdf.parse(fechaFormateada);
+    } catch (Exception e) {
+        e.printStackTrace();
     }
 
-    // Asegurarnos de que la lista no esté vacía
-    if (listaEvento != null && !listaEvento.isEmpty()) {
-        listaEvento.forEach(row -> {
-            Object[] fila = new Object[5]; // Aquí asumimos que son 5 columnas
-            fila[0] = row.getTitulo();
-            fila[1] = row.getDescripcion();
-            
-            // Convertir la fecha a String si es necesario
-            fila[2] = row.getFecha() != null ? row.getFecha().toString() : "";  // Aquí, si `Fecha` es Date, convertirla a String
-            fila[3] = row.getHoraInicio();
-            fila[4] = row.getHoraFinal();
-
-            modeloTabla.addRow(fila);  // Agregar la fila a la tabla
-        });
-    }
+    return null;
 }
 
     /**
@@ -61,62 +68,151 @@ public class FrmCalendarioAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblEvento = new javax.swing.JTable();
         txtEventos = new javax.swing.JLabel();
         Titulo = new javax.swing.JLabel();
         campoTextoTitulo = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         campoTextoDescripcion = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        campoDateFechaFin = new com.toedter.calendar.JDateChooser();
+        campoDateFechaInicio = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        campoTextoHoraFin = new javax.swing.JTextField();
+        campoTextoHoraInicio = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        comboBoxCampus = new javax.swing.JComboBox<>();
+        comboBoxCategoria = new javax.swing.JComboBox<>();
+        btnAgregar = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tblEvento.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Titulo", "Descripcion", "Fecha", "Hora Inicio", "Hora Final", "Editar", "Eliminar"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblEvento);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 730, 120));
 
         txtEventos.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         txtEventos.setText("Administrador de Eventos");
-        getContentPane().add(txtEventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, -1, -1));
+        getContentPane().add(txtEventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         Titulo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         Titulo.setText("Titulo");
-        getContentPane().add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, -1, -1));
-        getContentPane().add(campoTextoTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 220, 30));
+        getContentPane().add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
+        getContentPane().add(campoTextoTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 120, 220, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Descripcion");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, -1));
-        getContentPane().add(campoTextoDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, 220, 80));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, -1, -1));
+        getContentPane().add(campoTextoDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 220, 80));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.png"))); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Fecha fin");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setText("Fecha inicio");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 270, -1, -1));
+        getContentPane().add(campoDateFechaFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 300, 90, 30));
+        getContentPane().add(campoDateFechaInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 300, 100, 30));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Hora inicio");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setText("Hora fin");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, -1, -1));
+        getContentPane().add(campoTextoHoraFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 400, 110, 30));
+        getContentPane().add(campoTextoHoraInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, 130, 30));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setText("Campus");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 460, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText("Categoria");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 550, -1, -1));
+
+        comboBoxCampus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nainari", "Centro", "Navojoa", "Empalme" }));
+        getContentPane().add(comboBoxCampus, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 490, 90, 30));
+
+        comboBoxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Recordatorio", "Taller", "Aviso" }));
+        comboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCategoriaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(comboBoxCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 580, 90, 30));
+
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnAgregar.png"))); // NOI18N
+        btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAgregarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 690, -1, -1));
+
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnCancelar.png"))); // NOI18N
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 690, -1, -1));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrmEvento.png"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void comboBoxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxCategoriaActionPerformed
+
+    private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
+        // TODO add your handling code here:
+        // Recolectar los datos del formulario
+        String titulo = campoTextoTitulo.getText();
+        String descripcion = campoTextoDescripcion.getText();
+        Date fechaInicio = campoDateFechaInicio.getDate(); // Asegúrate de que el componente devuelve un Date
+        Date fechaFin = campoDateFechaFin.getDate();
+        String horaInicio = campoTextoHoraInicio.getText();
+        String horaFin = campoTextoHoraFin.getText();
+        String campus = comboBoxCampus.getSelectedItem().toString();
+        String categoria = comboBoxCategoria.getSelectedItem().toString();
+
+        // Validar datos
+        if (titulo.isEmpty() || descripcion.isEmpty() || fechaInicio == null || fechaFin == null ||
+            horaInicio.isEmpty() || horaFin.isEmpty() || campus.isEmpty() || categoria.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Convertir las fechas a la zona horaria del Pacífico y quitar la hora
+        Date fechaInicioPacifico = convertirFechaAPacifico(fechaInicio);
+        Date fechaFinPacifico = convertirFechaAPacifico(fechaFin);
+
+        // Crear el objeto Evento
+        Evento nuevoEvento = new Evento(titulo, descripcion, fechaInicio, fechaFin, horaInicio, horaFin, campus, categoria);
+
+        // Enviar el objeto a la capa de persistencia
+        FachadaPersistencia fachada = new FachadaPersistencia();
+        fachada.agregarEvento(nuevoEvento);
+
+        // Mostrar mensaje de éxito y limpiar formulario
+        JOptionPane.showMessageDialog(this, "Evento agregado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        limpiarFormulario();
+        System.out.println("Guardado");
+    }//GEN-LAST:event_btnAgregarMouseClicked
+
+    private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -155,12 +251,24 @@ public class FrmCalendarioAdmin extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Titulo;
+    private javax.swing.JLabel btnAgregar;
+    private javax.swing.JLabel btnCancelar;
+    private com.toedter.calendar.JDateChooser campoDateFechaFin;
+    private com.toedter.calendar.JDateChooser campoDateFechaInicio;
     private javax.swing.JTextField campoTextoDescripcion;
+    private javax.swing.JTextField campoTextoHoraFin;
+    private javax.swing.JTextField campoTextoHoraInicio;
     private javax.swing.JTextField campoTextoTitulo;
+    private javax.swing.JComboBox<String> comboBoxCampus;
+    private javax.swing.JComboBox<String> comboBoxCategoria;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblEvento;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel txtEventos;
     // End of variables declaration//GEN-END:variables
 }

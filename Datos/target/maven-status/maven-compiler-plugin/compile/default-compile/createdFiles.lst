@@ -4,4 +4,5 @@ dao\ClaseDAO.class
 dao\UsuarioDAO.class
 dao\MaestroDAO.class
 persistencia\FachadaPersistencia.class
+dao\SesionDAO.class
 dao\EventoDAO.class
