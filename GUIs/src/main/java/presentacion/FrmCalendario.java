@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JSeparator;
 import persistencia.FachadaPersistencia;
 
 /**
@@ -77,7 +78,7 @@ public class FrmCalendario extends javax.swing.JFrame {
     }
 
     private void mostrarEventosEnPanel() {
-        // Limpiar el panel antes de mostrar nuevos eventos
+        // Limpiar el panel de eventos
         panelEventos.removeAll();
 
         // Calcular el índice de inicio y fin de los eventos a mostrar en la página actual
@@ -110,17 +111,25 @@ public class FrmCalendario extends javax.swing.JFrame {
             lblDetalles.setFont(new Font("Arial", Font.PLAIN, 12));
             lblDetalles.setAlignmentX(Component.LEFT_ALIGNMENT);
 
+            // Agregar los elementos al panel
             panelEventos.add(lblTitulo);
             panelEventos.add(lblDetalles);
             panelEventos.add(Box.createRigidArea(new Dimension(0, 10)));  // Espaciado entre eventos
+
+            // Agregar un separador después de cada evento (excepto el último)
+            if (i < fin - 1) {
+                JSeparator separator = new JSeparator();
+                separator.setPreferredSize(new Dimension(panelEventos.getWidth(), 1));  // Establecer el grosor del separador
+                panelEventos.add(separator);
+            }
         }
 
         // Actualizar la interfaz gráfica (revalidar y repintar el panel)
         panelEventos.revalidate();
         panelEventos.repaint();
 
-        // Actualizar los botones de navegación (habilitar/deshabilitar según sea necesario)
-        actualizarBotones();
+    // Actualizar los botones de navegación (habilitar/deshabilitar según sea necesario)
+    actualizarBotones();
     }
 
     // Función para habilitar o deshabilitar los botones de navegación
@@ -163,19 +172,24 @@ public class FrmCalendario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         panelEventos = new javax.swing.JPanel();
-        scrollPaneEventos = new javax.swing.JScrollPane();
         btnAtras = new javax.swing.JButton();
         btnSiguiente = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         calendario.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         calendario.setForeground(new java.awt.Color(255, 255, 255));
         calendario.setText("Calendario");
         getContentPane().add(calendario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        monthChooser.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(monthChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, -1, -1));
+
+        yearChooser.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(yearChooser, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 150, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -188,8 +202,7 @@ public class FrmCalendario extends javax.swing.JFrame {
         jLabel2.setText("Mes:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
 
-        panelEventos.add(scrollPaneEventos);
-
+        panelEventos.setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().add(panelEventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, 530, 490));
 
         btnAtras.setText("Atras");
@@ -208,6 +221,15 @@ public class FrmCalendario extends javax.swing.JFrame {
         });
         getContentPane().add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 690, -1, -1));
 
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnReturn.png"))); // NOI18N
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 40, -1, -1));
+
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frm.png"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -224,6 +246,11 @@ public class FrmCalendario extends javax.swing.JFrame {
         // TODO add your handling code here:
        
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnRegresarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -262,6 +289,7 @@ public class FrmCalendario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
+    private javax.swing.JLabel btnRegresar;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel calendario;
     private javax.swing.JLabel fondo;
@@ -269,7 +297,6 @@ public class FrmCalendario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private com.toedter.calendar.JMonthChooser monthChooser;
     private javax.swing.JPanel panelEventos;
-    private javax.swing.JScrollPane scrollPaneEventos;
     private com.toedter.calendar.JYearChooser yearChooser;
     // End of variables declaration//GEN-END:variables
 }
