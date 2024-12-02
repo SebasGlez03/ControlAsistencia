@@ -69,5 +69,5 @@ public interface IUsuario {
      *
      * @return Lista de usuarios obtenida
      */
-    public List<Usuario> obtenesListaUsuarios();
+    public List<Usuario> obtenerListaUsuarios();
 }

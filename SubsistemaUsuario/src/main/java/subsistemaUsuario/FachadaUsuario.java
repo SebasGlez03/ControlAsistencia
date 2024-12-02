@@ -113,7 +113,7 @@ public class FachadaUsuario implements IUsuario {
      * @return Lista de usuarios obtenida
      */
     @Override
-    public List<Usuario> obtenesListaUsuarios() {
+    public List<Usuario> obtenerListaUsuarios() {
         return controlUsuario.obtenerListaUsuarios();
     }
 

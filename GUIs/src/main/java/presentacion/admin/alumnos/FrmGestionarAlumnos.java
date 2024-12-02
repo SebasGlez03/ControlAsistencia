@@ -32,7 +32,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
      */
     public FrmGestionarAlumnos() {
         initComponents();
-        llenarTablaUsuarios(subsUsuario.obtenesListaUsuarios());
+        llenarTablaUsuarios(subsUsuario.obtenerListaUsuarios());
         botonEliminarEnTabla();
         botonEditarEnTabla();
     }
@@ -118,7 +118,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
                             subsUsuario.eliminarUsuario(usuario);
                             JOptionPane.showMessageDialog(null, "El usuario se ha eliminado correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                             modeloTabla.setRowCount(0);
-                            llenarTablaUsuarios(subsUsuario.obtenesListaUsuarios());
+                            llenarTablaUsuarios(subsUsuario.obtenerListaUsuarios());
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null, "Ha ocurrido un error inesperado al eliminar el usuario: " + ex, "ERROR", JOptionPane.ERROR_MESSAGE);
                         }
