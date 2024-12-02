@@ -133,9 +133,27 @@ public class FachadaUsuario implements IUsuario {
         return maestro;
 
     }
-    
-    public Usuario getUsuario(int id){
-       return controlUsuario.getUsuario(id);
+
+    /**
+     * Metodo que obtiene un objeto usuario
+     *
+     * @param id Matricula del usuario
+     * @return Objeto usuario obtenido
+     */
+    @Override
+    public Usuario getUsuario(int id) {
+        return controlUsuario.getUsuario(id);
+    }
+
+    /**
+     * Metodo que obtiene el rol del usuario
+     *
+     * @param id Matricula del usuario
+     * @return Nombre del rol del usuario
+     */
+    @Override
+    public String getRolUsuario(int id) {
+        return controlUsuario.getRolUsuario(id);
     }
 
 }

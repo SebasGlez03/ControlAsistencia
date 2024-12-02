@@ -5,10 +5,13 @@
 package dao;
 
 import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
+import com.mongodb.client.model.*;
 import entidades.Usuario;
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 /**
@@ -20,7 +23,8 @@ public class UsuarioDAO {
     /**
      * Metodo que obtiene un usuario de la base de datos
      *
-     * @param matricula Objeto de tipo Usuario a obtener de la base de datos
+     * @param matricula Matricula tipo int que se relaciona con el usuario de la
+     * base de datos
      * @return Objeto tipo Usuario obtenido
      */
     public Usuario obtenerUsuario(int matricula) {
@@ -44,6 +48,51 @@ public class UsuarioDAO {
         Usuario usuarioObtenido = new Usuario(matriculaObtener, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
 
         return usuarioObtenido;
+
+    }
+
+    /**
+     * Metodo que obtiene el rol del usuario de la base de datos
+     *
+     * @param matricula Matricula tipo int que se relaciona con el usuario de la
+     * base de datos
+     * @return String con el rol del usuario
+     */
+    public String obtenerRolUsuario(int matricula) {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("usuarios");
+
+        Document query = new Document("matricula", matricula);
+        Document usuarios = collection.find(query).first();
+
+        System.out.println("Usuario leido: " + usuarios.toJson());
+
+        // Obtener el ObjectId del rol del usuario
+        ObjectId rolId = usuarios.getObjectId("rol");
+
+        // Contar con la colecccion de roles
+        MongoCollection<Document> rolesCollection = database.getCollection("rolesUsuario");
+
+        // Realizar la consulta de agregacion para obtener el nombre del rol
+        List<Bson> pipeline = new ArrayList<>();
+
+        //Buscar el rol con el ObjectId
+        pipeline.add(Aggregates.match(Filters.eq("_id", rolId)));
+
+        // Proyeccion para seleccionar el campo "rol" que contiene el nombre del rol
+        pipeline.add(Aggregates.project(Projections.fields(Projections.include("rol"))));
+
+        // Ejecutar la agregacion
+        AggregateIterable<Document> result = rolesCollection.aggregate(pipeline);
+
+        // Si se encuentra el rol, obtener el nombre del rol
+        if (result.iterator().hasNext()) {
+            Document rolDocument = result.iterator().next();
+            return rolDocument.getString("rol");
+        } else {
+            return "Rol no encontrado";
+        }
 
     }
 

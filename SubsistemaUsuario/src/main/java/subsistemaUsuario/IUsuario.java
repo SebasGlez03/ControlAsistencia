@@ -79,6 +79,20 @@ public interface IUsuario {
      * Agrega una clase a un maestro.
      */
     public void agregarClaseMaestro();
-    
+
+    /**
+     * Obtiene un usuario
+     *
+     * @param id Matricula del usuario
+     * @return Objeto usuario obtenido
+     */
     public Usuario getUsuario(int id);
+
+    /**
+     * Metodo que obtiene el rol del usuario
+     *
+     * @param id Matricula del usuario
+     * @return Nombre de el rol del usuario
+     */
+    public String getRolUsuario(int id);
 }

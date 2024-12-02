@@ -28,6 +28,18 @@ public class FachadaPersistencia implements IPersistencia {
     }
 
     /**
+     * Obtiene el nombre del rol de un usuario del sistema.
+     *
+     * @param matricula La matricula del usuario a obtener su rol.
+     * @return String con el nombre del rol del usuario
+     */
+    @Override
+    public String obtenerRolUsuario(int matricula) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.obtenerRolUsuario(matricula);
+    }
+
+    /**
      * Metodo que agrega un usuario a la base de datos
      *
      * @param usuario Objeto de tipo usuario que se desea agregar a la base de

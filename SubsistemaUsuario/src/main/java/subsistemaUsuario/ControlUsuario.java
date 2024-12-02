@@ -90,26 +90,26 @@ public class ControlUsuario {
     }
 
     public String obtenerTipoDeUsuario(UsuarioDTO usuario) {
-        
-    BaseDatosMock bd = new BaseDatosMock(); // Instanciamos la base de datos mock
 
-    // Verificar si el usuario es un Alumno usando ControlAlumno
-    ControlAlumno controlAlumno = new ControlAlumno();
-    AlumnoDTO alumnoDTO = controlAlumno.obtenerTipoUsuario(usuario);
+        BaseDatosMock bd = new BaseDatosMock(); // Instanciamos la base de datos mock
 
-    if (alumnoDTO != null) {
-        return "Alumno"; // Si se encuentra al alumno, retorna "Alumno"
-    }
+        // Verificar si el usuario es un Alumno usando ControlAlumno
+        ControlAlumno controlAlumno = new ControlAlumno();
+        AlumnoDTO alumnoDTO = controlAlumno.obtenerTipoUsuario(usuario);
 
-    // Verificar si el usuario es un Maestro
-    for (Maestro maestro : bd.getMaestros()) {
-        if (usuario.getMatricula() == maestro.getMatricula()) { // Verifica que el id coincida con el maestro
-            return "Maestro"; // Si es un maestro, retorna "Maestro"
+        if (alumnoDTO != null) {
+            return "Alumno"; // Si se encuentra al alumno, retorna "Alumno"
         }
-    }
 
-    return "Desconocido"; // Si no se encuentra el usuario en ninguna de las listas, retorna "Desconocido"
-}
+        // Verificar si el usuario es un Maestro
+        for (Maestro maestro : bd.getMaestros()) {
+            if (usuario.getMatricula() == maestro.getMatricula()) { // Verifica que el id coincida con el maestro
+                return "Maestro"; // Si es un maestro, retorna "Maestro"
+            }
+        }
+
+        return "Desconocido"; // Si no se encuentra el usuario en ninguna de las listas, retorna "Desconocido"
+    }
 
     // Se agrego con el paquete de pruebas de base de datos mock
     public boolean iniciarSesion(int id, String contrasenia) {
@@ -132,13 +132,18 @@ public class ControlUsuario {
             return false;
         }
     }
-    
-    public Usuario getUsuario(int id){
+
+    public Usuario getUsuario(int id) {
         IPersistencia datos = new FachadaPersistencia();
-        
+
         return datos.obtenerUsuario(id);
-        
-       
+
+    }
+
+    public String getRolUsuario(int id) {
+        IPersistencia datos = new FachadaPersistencia();
+
+        return datos.obtenerRolUsuario(id);
     }
 
 }

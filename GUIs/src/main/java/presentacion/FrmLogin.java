@@ -83,10 +83,18 @@ public class FrmLogin extends javax.swing.JFrame {
 
         boolean valicacionIniciarSesion = usuario.iniciarSesion(Integer.parseInt(txtId.getText()), txtContrasenia.getText());
 
+        String rolUsuario = usuario.getRolUsuario(Integer.parseInt(txtId.getText()));
+
         if (valicacionIniciarSesion == true) {
-            MainWindow mainWindow = new MainWindow(usuario.getUsuario(Integer.parseInt(txtId.getText())));
-            mainWindow.setVisible(true);
-            this.dispose();
+            if (rolUsuario.equalsIgnoreCase("admin")) {
+                FrmAdminMenu adminMenu = new FrmAdminMenu();
+                adminMenu.setVisible(true);
+                this.dispose();
+            } else {
+                MainWindow mainWindow = new MainWindow(usuario.getUsuario(Integer.parseInt(txtId.getText())));
+                mainWindow.setVisible(true);
+                this.dispose();
+            }
         }
     }//GEN-LAST:event_btnAceptarMouseClicked
 

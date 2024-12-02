@@ -25,6 +25,14 @@ public interface IPersistencia {
     public Usuario obtenerUsuario(int matricula);
 
     /**
+     * Obtiene el nombre del rol de un usuario del sistema.
+     *
+     * @param matricula La matricula del usuario a obtener su rol.
+     * @return String con el nombre del rol del usuario
+     */
+    public String obtenerRolUsuario(int matricula);
+
+    /**
      * Agrega un nuevo usuario al sistema.
      *
      * @param usuario el objeto Usuario que se desea agregar.
