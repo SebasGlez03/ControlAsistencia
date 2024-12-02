@@ -8,7 +8,9 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import entidades.Evento;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.bson.Document;
 
 /**
@@ -107,5 +109,58 @@ public class EventoDAO {
 
         System.out.println("Evento modificado correctamente");
 
+    }
+    
+    public Evento obtenerEventoPorTitulo(String titulo) {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("eventos");
+
+        Document query = new Document("titulo", titulo);
+        Document eventos = collection.find(query).first();
+
+        if (eventos == null) {
+            return null; // Si no hay coincidencia
+        }
+
+        // Extraer valores
+        String descripcion = eventos.getString("descripcion");
+        Date fechaInicio = eventos.getDate("fechaInicio");
+        Date fechaFinal = eventos.getDate("fechaFinal");
+        String horaInicio = eventos.getString("horaInicio");
+        String horaFinal = eventos.getString("horaFinal");
+        String campus = eventos.getString("campus");
+        String categoria = eventos.getString("categoria");
+
+        // Crear el objeto Evento
+        return new Evento(titulo, descripcion, fechaInicio, fechaFinal, horaInicio, horaFinal, campus, categoria);
+    }
+    
+    public List<Evento> obtenerTodos() {
+        // Conexión a la base de datos
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("eventos");
+
+        // Lista para almacenar los eventos
+        List<Evento> eventos = new ArrayList<>();
+
+        // Obtener todos los documentos de la colección
+        for (Document doc : collection.find()) {
+            String titulo = doc.getString("titulo");
+            String descripcion = doc.getString("descripcion");
+            Date fechaInicio = doc.getDate("fechaInicio");
+            Date fechaFinal = doc.getDate("fechaFinal");
+            String horaInicio = doc.getString("horaInicio");
+            String horaFinal = doc.getString("horaFinal");
+            String campus = doc.getString("campus");
+            String categoria = doc.getString("categoria");
+
+            // Crear un objeto Evento y agregarlo a la lista
+            Evento evento = new Evento(titulo, descripcion, fechaInicio, fechaFinal, horaInicio, horaFinal, campus, categoria);
+            eventos.add(evento);
+        }
+
+        return eventos;
     }
 }

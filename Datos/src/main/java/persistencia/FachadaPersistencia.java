@@ -7,7 +7,6 @@ package persistencia;
 import dao.*;
 import entidades.*;
 import java.util.List;
-import javax.swing.JComboBox;
 import org.bson.Document;
 
 /**
@@ -164,7 +163,17 @@ public class FachadaPersistencia implements IPersistencia {
         EventoDAO eventoDAO = new EventoDAO();
         return eventoDAO.obtenerEvento(evento);
     }
+    
+    public Evento obtenerEventoPorTitulo(String titulo) {
+        EventoDAO eventoDAO = new EventoDAO();
+        return eventoDAO.obtenerEventoPorTitulo(titulo);
+    }
 
+    
+    public List<Evento> obtenerTodosLosEventos() {
+        EventoDAO eventoDAO = new EventoDAO();
+        return eventoDAO.obtenerTodos();
+    }
     /**
      * Metodo que agrega el evento de la base de datos
      *
