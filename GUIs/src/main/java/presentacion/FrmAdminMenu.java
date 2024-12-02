@@ -55,7 +55,6 @@ public class FrmAdminMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1000, 750));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnEventos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnEventos.png"))); // NOI18N
@@ -90,6 +89,11 @@ public class FrmAdminMenu extends javax.swing.JFrame {
 
         btnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnCerrarSesion.png"))); // NOI18N
         btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnCerrarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 150, 50));
 
         imgFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frm.png"))); // NOI18N
@@ -98,6 +102,12 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
+        FrmLogin login = new FrmLogin();
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
     /**
      * @param args the command line arguments

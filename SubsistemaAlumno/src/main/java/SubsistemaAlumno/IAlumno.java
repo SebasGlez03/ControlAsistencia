@@ -19,15 +19,31 @@ public interface IAlumno {
     public void EscanearQR();
 
     /**
-     * busca a un Alumno en el sistema
+     * Metodo que obtiene un alumno del sistema.
+     *
+     * @param alumno Alumno obtenido.
      */
-    public void BuscarAlumno();
+    public void obtenerAlumno(AlumnoDTO alumno);
 
     /**
-     * Metodo que obtiene el tipo del usuario Alumno
+     * Agrega un nuevo alumno al sistema.
      *
-     * @param usuario Usuario para verificar cn el alumno
-     * @return Tipo de usuario alumno;
+     * @param alumno Alumno a agregar en el sistema.
      */
-    public AlumnoDTO obtenerTipoUsuarioAlumno(UsuarioDTO usuario);
+    public void agregarAlumno(AlumnoDTO alumno);
+
+    /**
+     * Elimina un alumno del sistema.
+     *
+     * @param alumno Alumno a eliminar en el sistema.
+     */
+    public void eliminarAlumno(AlumnoDTO alumno);
+
+    /**
+     * Modifica un alumno del sistema.
+     *
+     * @param alumno Alumno a modificar en el sistema.
+     * @param alumnoModificado Alumno con la nueva informacion a agregar.
+     */
+    public void modificarAlumno(AlumnoDTO alumno, AlumnoDTO alumnoModificado);
 }

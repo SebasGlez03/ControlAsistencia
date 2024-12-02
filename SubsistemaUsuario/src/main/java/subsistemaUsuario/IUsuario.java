@@ -4,8 +4,7 @@
  */
 package subsistemaUsuario;
 
-import dto.AlumnoDTO;
-import dto.MaestroDTO;
+import dto.*;
 import entidades.Usuario;
 
 /**
@@ -27,58 +26,26 @@ public interface IUsuario {
     public boolean iniciarSesion(int id, String contrasenia);
 
     /**
-     * Agrega un nuevo alumno al sistema.
+     * Agrega un nuevo usuario al sistema.
      *
-     * @param alumno Alumno a agregar en el sistema.
+     * @param usuario Usuario a agregar al sistema
      */
-    public void agregarAlumno(AlumnoDTO alumno);
-
-    /**
-     * Agrega un nuevo maestro al sistema.
-     *
-     * @param maestro Maestro a agregar en el sistema.
-     */
-    public void agregarMaestro(MaestroDTO maestro);
+    public void agregarUsuario(UsuarioDTO usuario);
 
     /**
      * Elimina un alumno del sistema.
      *
-     * @param alumno Alumno a eliminar en el sistema.
+     * @param usuario Usuario a eliminar del sistema.
      */
-    public void eliminarAlumno(AlumnoDTO alumno);
+    public void eliminarUsuario(UsuarioDTO usuario);
 
     /**
-     * Elimina un maestro del sistema.
+     * Modifica un usuario del sistema.
      *
-     * @param maestro Maestro a eliminar en el sistema.
+     * @param usuario Usuario a modificar en el sistema.
+     * @param usuarioModificado Usuario con la nueva informacion a agregar.
      */
-    public void eliminarMaestro(MaestroDTO maestro);
-
-    /**
-     * Modifica un alumno del sistema.
-     *
-     * @param alumno Alumno a modificar en el sistema.
-     * @param alumnoModificado Alumno con la nueva informacion a agregar.
-     */
-    public void modificarAlumno(AlumnoDTO alumno, AlumnoDTO alumnoModificado);
-
-    /**
-     * Modifica un maestro del sistema.
-     *
-     * @param maestro Maestro a modificar en el sistema.
-     * @param maestroModificado Maestro con la nueva informacion a agregar.
-     */
-    public void modificarMaestro(MaestroDTO maestro, MaestroDTO maestroModificado);
-
-    /**
-     * Agrega una clase a un alumno.
-     */
-    public void agregarClaseAlumno();
-
-    /**
-     * Agrega una clase a un maestro.
-     */
-    public void agregarClaseMaestro();
+    public void modificarUsuario(UsuarioDTO usuario, UsuarioDTO usuarioModificado);
 
     /**
      * Obtiene un usuario

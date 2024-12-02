@@ -5,9 +5,7 @@
 package subsistemaMaestro;
 
 import entidades.Maestro;
-import mock.BaseDatosMock;
-import subsistemaMaestro.ControlMaestro;
-import dao.*;
+import dto.MaestroDTO;
 
 /**
  *
@@ -19,6 +17,7 @@ public class FachadaMaestro implements IMaestro {
 
     /**
      * Constructor que inicializa la Fachada con una instancia de Maestro
+     *
      * @param maestro Instancia del maestro a gestionar
      */
     public FachadaMaestro(Maestro maestro) {
@@ -26,8 +25,8 @@ public class FachadaMaestro implements IMaestro {
     }
 
     /**
-     * Muestra el código QR del maestro.
-     * Este método podría contener la lógica para generar y mostrar un código QR.
+     * Muestra el código QR del maestro. Este método podría contener la lógica
+     * para generar y mostrar un código QR.
      */
     @Override
     public void mostrarQR() {
@@ -37,6 +36,7 @@ public class FachadaMaestro implements IMaestro {
 
     /**
      * Valida la información del maestro, como su identificación y credenciales.
+     *
      * @return true si la validación es exitosa, false en caso contrario
      */
     @Override
@@ -50,42 +50,47 @@ public class FachadaMaestro implements IMaestro {
         return false;
     }
 
-    /**
-     * Realiza la búsqueda de información del maestro.
-     * Este método podría contener la lógica para buscar información en una base de datos.
-     * @param s
-     */
     @Override
-    public void buscarMaestro(String s) {
-        
-        ControlMaestro cm = new ControlMaestro(maestro);
-        System.out.println("Buscando información del maestro: ");
-        
-        cm.buscarMaestro(s);
-    }
-
-    /**
-     * Realiza un registro del maestro a la base de datos
-     */
-    @Override
-    public void registrarMaestro() {
-        
-        //luego me corrigen, atte: joel
-        UsuarioDAO udao= new UsuarioDAO();
-        MaestroDAO mdao= new MaestroDAO();
-        
-        udao.agregarUsuario(maestro);
-        mdao.agregarMaestro(maestro);
+    public void obtenerMaestro(MaestroDTO maestro) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void editarMaestro() {
-        Maestro newMaestro;
-        
-        MaestroDAO mdao = new MaestroDAO();
-        
-        //mdao.modificarMaestro(maestro, newMaestro);
+    public void agregarMaestro(MaestroDTO maestro) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
- 
-    
+
+    @Override
+    public void eliminarMaestro(MaestroDTO maestro) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void modificarMaestro(MaestroDTO maestro, MaestroDTO maestroModificado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    /**
+     * Metodo que convierte un MaestroDTO a un MaestroEntidad
+     *
+     * @param dto MaestroDTO que se transfotrma a MaestroEntidad
+     * @return Maestro de tipo Entidad
+     */
+    public Maestro convertirMaestroDTOaEntidad(MaestroDTO dto) {
+
+        Maestro maestro = new Maestro();
+
+        maestro.setMatricula(dto.getMatricula());
+        maestro.setNombre(dto.getNombre());
+        maestro.setApellidoPaterno(dto.getApellidoPaterno());
+        maestro.setApellidoMaterno(dto.getApellidoMaterno());
+        maestro.setCorreo(dto.getCorreo());
+        maestro.setContrasenia(dto.getContrasenia());
+        maestro.setRol(dto.getRol());
+        maestro.setMaterias(dto.getMaterias());
+
+        return maestro;
+
+    }
+
 }

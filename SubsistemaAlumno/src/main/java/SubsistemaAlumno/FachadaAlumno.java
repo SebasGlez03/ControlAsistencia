@@ -5,8 +5,7 @@
 package SubsistemaAlumno;
 
 import dto.AlumnoDTO;
-import dto.UsuarioDTO;
-import entidades.Usuario;
+import entidades.Alumno;
 import persistencia.IPersistencia;
 
 /**
@@ -25,15 +24,51 @@ public class FachadaAlumno implements IAlumno {
 
     @Override
     public void EscanearQR() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public void BuscarAlumno() {
+    public void obtenerAlumno(AlumnoDTO alumno) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public AlumnoDTO obtenerTipoUsuarioAlumno(UsuarioDTO usuario) {
-        return controlAlumno.obtenerTipoUsuario(usuario);
+    public void agregarAlumno(AlumnoDTO alumno) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void eliminarAlumno(AlumnoDTO alumno) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void modificarAlumno(AlumnoDTO alumno, AlumnoDTO alumnoModificado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    /**
+     * Metodo que convierte un AlumnoDTO a un AlumnoEntidad
+     *
+     * @param dto AlumnoDTO que se transformara a AlumnoEntidad
+     * @return Alumno de tipo Entidad
+     */
+    public Alumno convertirAlumnoDTOaEntidad(AlumnoDTO dto) {
+
+        Alumno alumno = new Alumno();
+
+        alumno.setMatricula(dto.getMatricula());
+        alumno.setNombre(dto.getNombre());
+        alumno.setApellidoPaterno(dto.getApellidoPaterno());
+        alumno.setApellidoMaterno(dto.getApellidoMaterno());
+        alumno.setCorreo(dto.getCorreo());
+        alumno.setContrasenia(dto.getContrasenia());
+        alumno.setRol(dto.getRol());
+        alumno.setSemestre(dto.getSemestre());
+        alumno.setPromedio(dto.getPromedio());
+        alumno.setEstadoAsistencia(dto.getEstadoAsistencia());
+
+        return alumno;
     }
 
 }

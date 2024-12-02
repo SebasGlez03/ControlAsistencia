@@ -1,13 +1,9 @@
 package subsistemaUsuario;
 
 import SubsistemaAlumno.ControlAlumno;
-import dto.AlumnoDTO;
-import dto.UsuarioDTO;
-import entidades.Maestro;
-import entidades.Usuario;
-import mock.BaseDatosMock;
-import persistencia.FachadaPersistencia;
-import persistencia.IPersistencia;
+import dto.*;
+import entidades.*;
+import persistencia.*;
 
 /**
  * La clase ControlUsuario se encarga de validar los datos de un usuario,
@@ -89,29 +85,14 @@ public class ControlUsuario {
         validarContrasenia(usuario.getContrasenia());
     }
 
-    public String obtenerTipoDeUsuario(UsuarioDTO usuario) {
-
-        BaseDatosMock bd = new BaseDatosMock(); // Instanciamos la base de datos mock
-
-        // Verificar si el usuario es un Alumno usando ControlAlumno
-        ControlAlumno controlAlumno = new ControlAlumno();
-        AlumnoDTO alumnoDTO = controlAlumno.obtenerTipoUsuario(usuario);
-
-        if (alumnoDTO != null) {
-            return "Alumno"; // Si se encuentra al alumno, retorna "Alumno"
-        }
-
-        // Verificar si el usuario es un Maestro
-        for (Maestro maestro : bd.getMaestros()) {
-            if (usuario.getMatricula() == maestro.getMatricula()) { // Verifica que el id coincida con el maestro
-                return "Maestro"; // Si es un maestro, retorna "Maestro"
-            }
-        }
-
-        return "Desconocido"; // Si no se encuentra el usuario en ninguna de las listas, retorna "Desconocido"
-    }
-
-    // Se agrego con el paquete de pruebas de base de datos mock
+    /**
+     * Metodo que inicia sesion
+     *
+     * @param id ID del usuario que inicia sesion
+     * @param contrasenia Contrasenia del usuario que inicia sesion
+     * @return True si el usuario se valida correctamente, falso en caso
+     * contrario
+     */
     public boolean iniciarSesion(int id, String contrasenia) {
         //BaseDatosMock bd = new BaseDatosMock();
         IPersistencia datos = new FachadaPersistencia();
@@ -133,6 +114,12 @@ public class ControlUsuario {
         }
     }
 
+    /**
+     * Metodo que obtiene un usuario
+     *
+     * @param id Id del usuario a obtener
+     * @return Objeto usuario obtenido
+     */
     public Usuario getUsuario(int id) {
         IPersistencia datos = new FachadaPersistencia();
 
@@ -140,10 +127,51 @@ public class ControlUsuario {
 
     }
 
+    /**
+     * Metodo que obtiene el nombre del rol del usuario
+     *
+     * @param id Id del usuario a obtener su rol
+     * @return Nombre del rol del usuario
+     */
     public String getRolUsuario(int id) {
         IPersistencia datos = new FachadaPersistencia();
 
         return datos.obtenerRolUsuario(id);
+    }
+
+    /**
+     * Metodo que agrega un usuario a la base de datos
+     *
+     * @param usuario Objeto usuario a agregar
+     */
+    public void agregarUsuario(Usuario usuario) {
+        IPersistencia datos = new FachadaPersistencia();
+
+        datos.agregarUsuario(usuario);
+    }
+
+    /**
+     * Metdo que elimina un usuario de la base de datos
+     *
+     * @param usuario Objeto usuario a eliminar
+     */
+    public void eliminarUsuario(Usuario usuario) {
+        IPersistencia datos = new FachadaPersistencia();
+
+        datos.eliminarUsuario(usuario);
+    }
+
+    /**
+     * Metodo que modifica el usuario de la base de datos
+     *
+     * @param usuario Objeto usuario que se va a modificar
+     * @param usuarioModificado Objeto usuario con la informacion nueva a
+     * agregar
+     */
+    public void modificarUsuario(Usuario usuario, Usuario usuarioModificado) {
+        IPersistencia datos = new FachadaPersistencia();
+
+        datos.modificarUsuario(usuario, usuarioModificado);
     }
 
 }
