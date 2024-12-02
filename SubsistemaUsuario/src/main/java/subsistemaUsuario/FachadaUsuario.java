@@ -24,6 +24,13 @@ public class FachadaUsuario implements IUsuario {
         // Esto es para la version Mock
     }
 
+    /**
+     * Metodo que permite iniciar sesion
+     *
+     * @param id id del usuario
+     * @param contrasenia contrasenia del usuario
+     * @return true si se inicia sesion. false en caso contrario
+     */
     @Override
     public boolean iniciarSesion(int id, String contrasenia) {
         return controlUsuario.iniciarSesion(id, contrasenia);
@@ -51,16 +58,32 @@ public class FachadaUsuario implements IUsuario {
         return controlUsuario.getRolUsuario(id);
     }
 
+    /**
+     * Metodo que agrega un usuario a la base de datos
+     *
+     * @param usuario usuario a agregar
+     */
     @Override
     public void agregarUsuario(UsuarioDTO usuario) {
         controlUsuario.agregarUsuario(convertirUsuarioDTOaEntidad(usuario));
     }
 
+    /**
+     * Metodo que elimina un usuario de la base de datos
+     *
+     * @param usuario usuario a eliminar
+     */
     @Override
     public void eliminarUsuario(UsuarioDTO usuario) {
         controlUsuario.eliminarUsuario(convertirUsuarioDTOaEntidad(usuario));
     }
 
+    /**
+     * Metodo que modifica un usuario de la base de datos
+     *
+     * @param usuario usuario a modificar
+     * @param usuarioModificado usuario con la nueva informacin
+     */
     @Override
     public void modificarUsuario(UsuarioDTO usuario, UsuarioDTO usuarioModificado) {
         controlUsuario.modificarUsuario(convertirUsuarioDTOaEntidad(usuario), convertirUsuarioDTOaEntidad(usuarioModificado));

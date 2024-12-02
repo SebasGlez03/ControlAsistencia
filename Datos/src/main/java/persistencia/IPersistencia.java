@@ -6,6 +6,7 @@ package persistencia;
 
 import entidades.*;
 import java.util.List;
+import javax.swing.JComboBox;
 import org.bson.Document;
 
 /**

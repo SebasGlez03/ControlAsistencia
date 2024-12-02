@@ -2,9 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion;
+package presentacion.admin;
 
+import presentacion.admin.usuarios.FrmAdminMenuUsuarios;
 import entidades.Usuario;
+import presentacion.FrmLogin;
 
 /**
  *
@@ -54,6 +56,7 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         imgFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -79,6 +82,11 @@ public class FrmAdminMenu extends javax.swing.JFrame {
 
         btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnUsuarios.png"))); // NOI18N
         btnUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUsuariosMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 200, 100));
 
         lblAdminMenu.setBackground(new java.awt.Color(255, 255, 255));
@@ -108,6 +116,12 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCerrarSesionMouseClicked
+
+    private void btnUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseClicked
+        FrmAdminMenuUsuarios menuUsuarios = new FrmAdminMenuUsuarios();
+        menuUsuarios.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnUsuariosMouseClicked
 
     /**
      * @param args the command line arguments

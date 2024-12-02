@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import presentacion.admin.FrmAdminMenu;
 import javax.swing.JOptionPane;
 import subsistemaUsuario.FachadaUsuario;
 import subsistemaUsuario.IUsuario;
