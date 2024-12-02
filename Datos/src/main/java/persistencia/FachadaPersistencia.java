@@ -6,6 +6,8 @@ package persistencia;
 
 import dao.*;
 import entidades.*;
+import java.util.List;
+import org.bson.Document;
 
 /**
  *
@@ -216,6 +218,21 @@ public class FachadaPersistencia implements IPersistencia {
     public void modificarClase(Clase clase, Clase claseModificada) {
         ClaseDAO claseDAO = new ClaseDAO();
         claseDAO.modificarClase(clase, claseModificada);
+    }
+
+    @Override
+    public Sesion obtenerSesion(Sesion sesion) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void agregarSesion(Sesion sesion) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Document> obtenerAlumnosSesion(Sesion sesion) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

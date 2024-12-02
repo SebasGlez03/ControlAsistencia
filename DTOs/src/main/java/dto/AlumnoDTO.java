@@ -18,6 +18,7 @@ public class AlumnoDTO extends UsuarioDTO {
 
     private int semestre; // Semestre actual del alumno
     private float promedio; // Promedio académico del alumno
+    private String estadoAsistencia; // Estado de la asistencia del alumno (Presente, Retraso)
 
     /**
      * Constructor vacío para la clase AlumnoDTO.
@@ -42,6 +43,7 @@ public class AlumnoDTO extends UsuarioDTO {
         super.setRol(usuario.getRol());
         this.semestre = alumno.getSemestre();
         this.promedio = alumno.getPromedio();
+        this.estadoAsistencia = alumno.getEstadoAsistencia();
     }
 
     /**
@@ -100,4 +102,23 @@ public class AlumnoDTO extends UsuarioDTO {
     public void setPromedio(float promedio) {
         this.promedio = promedio;
     }
+
+    /**
+     * Obtiene el estado de la asistencia del alumno
+     *
+     * @return Estado de la asistencia obtenido
+     */
+    public String getEstadoAsistencia() {
+        return estadoAsistencia;
+    }
+
+    /**
+     * Establece el estado de la asistencia del alumno
+     *
+     * @param estadoAsistencia Estado de la asistencia a establecer
+     */
+    public void setEstadoAsistencia(String estadoAsistencia) {
+        this.estadoAsistencia = estadoAsistencia;
+    }
+
 }

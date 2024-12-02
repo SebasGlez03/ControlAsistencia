@@ -5,6 +5,8 @@
 package persistencia;
 
 import entidades.*;
+import java.util.List;
+import org.bson.Document;
 
 /**
  * Interfaz IPersistencia que define los métodos para realizar operaciones de
@@ -121,5 +123,28 @@ public interface IPersistencia {
      * @param claseModificada El objeto Clase con la informacion a modificar.
      */
     public void modificarClase(Clase clase, Clase claseModificada);
+
+    /**
+     * Obtiene una sesion del sistema.
+     *
+     * @param sesion El objeto Sesion que se desea obtener.
+     * @return Objeto del tipo Sesion con la informacion a obtener.
+     */
+    public Sesion obtenerSesion(Sesion sesion);
+
+    /**
+     * Agrega una nueva sesion al sistema.
+     *
+     * @param sesion El objeto Sesion que desea agregar.
+     */
+    public void agregarSesion(Sesion sesion);
+
+    /**
+     * Obtiene la lista de los alumnos y su asistencia de una sesion.
+     *
+     * @param sesion Sesion de la que se desea obtener esta informacion.
+     * @return Sesion con la informacion de los alumnos y su asistencia.
+     */
+    public List<Document> obtenerAlumnosSesion(Sesion sesion);
 
 }

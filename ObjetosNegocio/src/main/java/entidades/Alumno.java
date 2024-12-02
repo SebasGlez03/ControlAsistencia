@@ -17,6 +17,7 @@ public class Alumno extends Usuario {
 
     private int semestre; // Semestre actual del alumno
     private float promedio; // Promedio académico del alumno
+    private String estadoAsistencia; // Estado de la asistencia del alumno (Presente, Retraso)
 
     /**
      * Constructor por omision.
@@ -108,6 +109,24 @@ public class Alumno extends Usuario {
      */
     public void setPromedio(float promedio) {
         this.promedio = promedio;
+    }
+
+    /**
+     * Obtiene el estado de la asistencia del alumno.
+     *
+     * @return Estado de la asistencua del alumno
+     */
+    public String getEstadoAsistencia() {
+        return estadoAsistencia;
+    }
+
+    /**
+     * Establece el estado de la asistencia del alumno
+     *
+     * @param estadoAsistencia Estado de la asistencia aestablecer
+     */
+    public void setEstadoAsistencia(String estadoAsistencia) {
+        this.estadoAsistencia = estadoAsistencia;
     }
 
     /**
