@@ -4,17 +4,34 @@
  */
 package presentacion;
 
+import entidades.Usuario;
+
 /**
  *
  * @author PC
  */
 public class FrmAdminMenu extends javax.swing.JFrame {
 
+    Usuario usuario;
+
     /**
      * Creates new form FrmAdminUsuarios
      */
     public FrmAdminMenu() {
         initComponents();
+    }
+
+    public FrmAdminMenu(Usuario usuario) {
+        initComponents();
+        this.usuario = usuario;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     /**

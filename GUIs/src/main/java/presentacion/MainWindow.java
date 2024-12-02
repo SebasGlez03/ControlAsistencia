@@ -27,20 +27,16 @@ public class MainWindow extends javax.swing.JFrame {
 
         InicioPanel inicio = new InicioPanel(this); //Vista principal
         changeContentPane(inicio);
-
-        System.out.println("Entro al constructor");
     }
 
     public MainWindow(Usuario usuario) {
 
         initComponents();
 
-        this.setLocationRelativeTo(null); //Centra la ventana de la app
         this.usuario = usuario;
+        this.setLocationRelativeTo(null); //Centra la ventana de la app
         InicioPanel inicio = new InicioPanel(this, getUsuario()); //Vista principal
         changeContentPane(inicio);
-
-        System.out.println("Entro al constructor");
 
     }
 

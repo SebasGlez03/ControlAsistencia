@@ -137,7 +137,7 @@ public class InicioPanel extends javax.swing.JPanel {
     private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
         // TODO add your handling code here:
 //        new FrmInicioMenu().setVisible(true);
-        InicioMenu menu = new InicioMenu(mainWindow, this, usuario);
+        InicioMenu menu = new InicioMenu(mainWindow, this, getUsuario());
         changeContentPane(menu);
         menu.setPin(pin);
         System.out.println("Se mando el pin: " + pin + " a la clase: " + menu.getClass());

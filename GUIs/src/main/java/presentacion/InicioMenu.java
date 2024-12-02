@@ -30,6 +30,7 @@ public class InicioMenu extends javax.swing.JPanel {
     public InicioMenu(MainWindow mainwindow, InicioPanel inicioPanel, Usuario usuario) {
         initComponents();
 
+        this.usuario = usuario;
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
 
@@ -118,7 +119,7 @@ public class InicioMenu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAsistenciaMouseClicked
-        ScanQRPanel scanQR = new ScanQRPanel(mainWindow, inicioPanel, usuario);
+        ScanQRPanel scanQR = new ScanQRPanel(mainWindow, inicioPanel, getUsuario());
         scanQR.setPin(pin);
         System.out.println("Se mando el pin: " + pin + " a la clase: " + scanQR.getClass());
         mainWindow.changeContentPane(scanQR);

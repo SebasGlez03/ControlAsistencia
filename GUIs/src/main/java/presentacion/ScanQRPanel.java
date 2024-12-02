@@ -24,16 +24,19 @@ public class ScanQRPanel extends javax.swing.JPanel {
     int pin;
 
     /**
-     * 
+     *
      * @param mainwindow
      * @param inicioPanel
-     * @param usuario 
+     * @param usuario
      */
     public ScanQRPanel(MainWindow mainwindow, InicioPanel inicioPanel, Usuario usuario) {
         initComponents();
         this.usuario = usuario;
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
+
+        lblNombreAlumno.setText(usuario.getNombre());
+        lblMatriculaAlumno.setText(String.valueOf(usuario.getMatricula()));
     }
 
     public int getPin() {
@@ -58,9 +61,8 @@ public class ScanQRPanel extends javax.swing.JPanel {
         lblImgClass = new javax.swing.JLabel();
         btnReturn = new javax.swing.JLabel();
         ItsonLogo = new javax.swing.JLabel();
-        lblClassName = new javax.swing.JLabel();
-        lblCodeClass = new javax.swing.JLabel();
-        lblHourClass1 = new javax.swing.JLabel();
+        lblNombreAlumno = new javax.swing.JLabel();
+        lblMatriculaAlumno = new javax.swing.JLabel();
         txtPIN = new javax.swing.JTextField();
         lblScanCam = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -93,20 +95,15 @@ public class ScanQRPanel extends javax.swing.JPanel {
         ItsonLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ScanQRResources/Logo ITSON.png"))); // NOI18N
         headerPanel.add(ItsonLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, -10, -1, -1));
 
-        lblClassName.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        lblClassName.setForeground(new java.awt.Color(255, 255, 255));
-        lblClassName.setText("Nombre alumno");
-        headerPanel.add(lblClassName, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 19, -1, -1));
+        lblNombreAlumno.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
+        lblNombreAlumno.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombreAlumno.setText("Nombre alumno");
+        headerPanel.add(lblNombreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 19, -1, -1));
 
-        lblCodeClass.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblCodeClass.setForeground(new java.awt.Color(255, 255, 255));
-        lblCodeClass.setText("01293924");
-        headerPanel.add(lblCodeClass, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 70, 140, -1));
-
-        lblHourClass1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblHourClass1.setForeground(new java.awt.Color(255, 255, 255));
-        lblHourClass1.setText("Ing. Software");
-        headerPanel.add(lblHourClass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
+        lblMatriculaAlumno.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        lblMatriculaAlumno.setForeground(new java.awt.Color(255, 255, 255));
+        lblMatriculaAlumno.setText("01293924");
+        headerPanel.add(lblMatriculaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, 140, -1));
 
         ContentPanel.add(headerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -160,11 +157,9 @@ public class ScanQRPanel extends javax.swing.JPanel {
             // Aquí pones el código que quieres ejecutar cuando se presiona Enter
             if (Integer.parseInt(txtPIN.getText()) == pin) {
                 JOptionPane.showMessageDialog(this, "Se ha registrado su asistencia", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            }
-            else if (txtPIN.getText().equals("")) {
+            } else if (txtPIN.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, "Ingresa el codigo en el campo", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            else if (txtPIN.getText().isEmpty()) {
+            } else if (txtPIN.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Ingresa el codigo en el campo", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Pin no valido", "Error", JOptionPane.ERROR_MESSAGE);
@@ -187,10 +182,9 @@ public class ScanQRPanel extends javax.swing.JPanel {
     private javax.swing.JLabel camDecorator;
     private javax.swing.JPanel headerPanel;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel lblClassName;
-    private javax.swing.JLabel lblCodeClass;
-    private javax.swing.JLabel lblHourClass1;
     private javax.swing.JLabel lblImgClass;
+    private javax.swing.JLabel lblMatriculaAlumno;
+    private javax.swing.JLabel lblNombreAlumno;
     private javax.swing.JLabel lblScanCam;
     private javax.swing.JTextField txtPIN;
     // End of variables declaration//GEN-END:variables
