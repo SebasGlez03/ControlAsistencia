@@ -5,9 +5,9 @@
 package SubsistemaAlumno;
 
 import dto.AlumnoDTO;
-import dto.UsuarioDTO;
 import entidades.Alumno;
-import mock.BaseDatosMock;
+import persistencia.FachadaPersistencia;
+import persistencia.IPersistencia;
 
 /**
  *
@@ -16,6 +16,7 @@ import mock.BaseDatosMock;
 public class ControlAlumno {
 
     private AlumnoDTO alumno;
+    IPersistencia datos = new FachadaPersistencia();
 
     public ControlAlumno() {
     }
@@ -91,23 +92,28 @@ public class ControlAlumno {
         }
     }
 
-    public AlumnoDTO obtenerTipoUsuario(UsuarioDTO usuario) {
-        BaseDatosMock bd = new BaseDatosMock();
-        AlumnoDTO alumnoDTO = new AlumnoDTO();
+    /**
+     * Metodo que obtiene un alumno de la base de datos
+     *
+     * @param matricula Matricula de el alumno a obtener
+     * @return Objeto tipo AlumnoDTO con el alumno obtenido
+     */
+    public AlumnoDTO obtenerAlumno(int matricula) {
+        Alumno alumnoObtenido = datos.obtenerAlumno(matricula);
+        AlumnoDTO alumno = new AlumnoDTO();
 
-        for (Alumno alumno : bd.getAlumnos()) {
-            if (usuario.getMatricula() == alumno.getMatricula()) {
-                alumnoDTO.setMatricula(alumno.getMatricula());
-                alumnoDTO.setNombre(alumno.getNombre());
-                alumnoDTO.setApellidoPaterno(alumno.getApellidoPaterno());
-                alumnoDTO.setApellidoMaterno(alumno.getApellidoMaterno());
-                alumnoDTO.setCorreo(alumno.getCorreo());
-                alumnoDTO.setContrasenia(alumno.getContrasenia());
-                alumnoDTO.setSemestre(alumno.getSemestre());
-                alumnoDTO.setPromedio(alumno.getPromedio());
-                return alumnoDTO;
-            }
-        }
-        return null;
+        alumno.setMatricula(alumnoObtenido.getMatricula());
+        alumno.setNombre(alumnoObtenido.getNombre());
+        alumno.setApellidoPaterno(alumnoObtenido.getApellidoPaterno());
+        alumno.setApellidoMaterno(alumnoObtenido.getApellidoMaterno());
+        alumno.setCorreo(alumnoObtenido.getCorreo());
+        alumno.setContrasenia(alumnoObtenido.getContrasenia());
+        alumno.setPromedio(alumnoObtenido.getPromedio());
+        alumno.setSemestre(alumnoObtenido.getSemestre());
+        alumno.setRol(alumnoObtenido.getRol());
+
+        return alumno;
+
     }
+
 }

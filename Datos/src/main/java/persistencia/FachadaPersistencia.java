@@ -32,6 +32,7 @@ public class FachadaPersistencia implements IPersistencia {
      *
      * @return Lista de objetos tipo Usuario obtenidos
      */
+    @Override
     public List<Usuario> obtenerTodosUsuarios() {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         return usuarioDAO.obtenerTodosUsuarios();
@@ -89,13 +90,13 @@ public class FachadaPersistencia implements IPersistencia {
     /**
      * Metodo que obtiene un alumno de la base de datos
      *
-     * @param alumno Objeto de tipo alumno a obtener de la base de datos
+     * @param matricula Matricula del alumno a obtener
      * @return Objeto de tipo alumno obtenido
      */
     @Override
-    public Alumno obtenerAlumno(Alumno alumno) {
+    public Alumno obtenerAlumno(int matricula) {
         AlumnoDAO alumnoDAO = new AlumnoDAO();
-        return alumnoDAO.obtenerAlumno(alumno);
+        return alumnoDAO.obtenerAlumno(matricula);
 
     }
 
@@ -173,17 +174,17 @@ public class FachadaPersistencia implements IPersistencia {
         EventoDAO eventoDAO = new EventoDAO();
         return eventoDAO.obtenerEvento(evento);
     }
-    
+
     public Evento obtenerEventoPorTitulo(String titulo) {
         EventoDAO eventoDAO = new EventoDAO();
         return eventoDAO.obtenerEventoPorTitulo(titulo);
     }
 
-    
     public List<Evento> obtenerTodosLosEventos() {
         EventoDAO eventoDAO = new EventoDAO();
         return eventoDAO.obtenerTodos();
     }
+
     /**
      * Metodo que agrega el evento de la base de datos
      *
