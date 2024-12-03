@@ -2,6 +2,9 @@ package subsistemaEvento;
 
 import dao.EventoDAO;
 import entidades.Evento;
+import java.util.List;
+import persistencia.FachadaPersistencia;
+import persistencia.IPersistencia;
 
 /**
  * Controla las operaciones relacionadas con los eventos, incluyendo agregar, modificar y obtener eventos.
@@ -83,4 +86,33 @@ public class ControlEvento {
         
         return eventoObtenido;
     }
+    
+      /**
+     * Elimina un evento del sistema.
+     * 
+     * @param titulo el título del evento a eliminar
+     * @return true si el evento fue eliminado correctamente, false si no se encuentra
+     */
+    public boolean eliminarEvento(String titulo) {
+        // Buscar el evento en la base de datos
+        Evento evento = obtenerEvento(titulo);
+
+        // Si el evento existe, eliminarlo
+        if (evento != null) {
+            // Eliminar el evento del repositorio (base de datos)
+            eventoDAO.eliminarEvento(evento);
+            System.out.println("Evento eliminado correctamente");
+            return true;
+        } else {
+            System.out.println("No se encontró el evento para eliminar");
+            return false;
+        }
+    }
+    
+    public List<Evento> obtenerListaEventos() {
+        IPersistencia datos = new FachadaPersistencia();
+
+        return datos.obtenerTodosEventos();
+    }
+
 }

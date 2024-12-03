@@ -147,6 +147,10 @@ public interface IPersistencia {
      * @param eventoModificado El objeto Evento con la información actualizada.
      */
     void modificarEvento(Evento evento, Evento eventoModificado);
+            
+    void eliminarEvento(Evento evento);
+    
+    public List<Evento> obtenerTodosEventos();
 
     /**
      * Obtiene una clase del sistema.

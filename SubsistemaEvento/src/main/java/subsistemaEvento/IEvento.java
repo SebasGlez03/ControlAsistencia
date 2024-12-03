@@ -5,6 +5,7 @@
 package subsistemaEvento;
 
 import entidades.Evento;
+import java.util.List;
 
 /**
  *
@@ -34,5 +35,9 @@ public interface IEvento {
      * @return el evento encontrado
      */
     Evento obtenerEvento(String titulo);
+    
+    boolean eliminarEvento(String titulo);
+    
+    public List<Evento> obtenerListaEventos();
     
 }

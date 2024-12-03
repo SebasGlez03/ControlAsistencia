@@ -4,8 +4,20 @@
  */
 package presentacion.admin.eventos;
 
+import dto.EventoDTO;
+import entidades.Evento;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import presentacion.admin.FrmAdminMenu;
-import presentacion.admin.usuarios.FrmAgregarUsuario;
+import subsistemaEvento.FachadaEvento;
+import utilerias.JButtonCellEditor;
+import utilerias.JButtonRenderer;
 
 /**
  *
@@ -13,13 +25,149 @@ import presentacion.admin.usuarios.FrmAgregarUsuario;
  */
 public class FrmAdminMenuEventos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmAdminMenuEventos
-     */
+    FachadaEvento fachadaEvento = new FachadaEvento(); // Connect to your Evento facade
+
     public FrmAdminMenuEventos() {
         initComponents();
+        
+        botonEliminarEnTabla();
+        botonEditarEnTabla();
+        llenarTablaEventos(fachadaEvento.obtenerListaEventos()); // Populate table with events
     }
 
+    public void llenarTablaEventos(List<Evento> listaEventos) {
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblEvento.getModel();
+        
+        if (modeloTabla.getRowCount() > 0) {
+            for (int i = modeloTabla.getRowCount() - 1; i > -1; i--) {
+                modeloTabla.removeRow(i);
+            }
+        }
+        
+        if (listaEventos != null) {
+            listaEventos.forEach(row -> {
+                Object[] fila = new Object[6]; // Adjust the columns based on Evento's properties
+                fila[0] = row.getTitulo();
+                fila[1] = row.getDescripcion();
+                fila[2] = row.getFechaInicio();
+                fila[3] = row.getFechaFinal();
+                fila[4] = row.getHoraInicio();
+                fila[5] = row.getHoraFinal();
+                fila[6] = row.getCampus();
+                fila[7] = row.getCategoria();
+                
+                
+                
+                modeloTabla.addRow(fila);
+            });
+        }
+    }
+
+    private void botonEliminarEnTabla() {
+        ActionListener onEliminarClickListener = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtén la fila seleccionada
+                int filaSeleccionada = tblCarrera.getSelectedRow();
+
+                if (filaSeleccionada != -1) { // Verifica que haya una fila seleccionada
+                    // Usa el modelo para obtener los datos de la carrera en esa fila
+                    DefaultTableModel modeloTabla = (DefaultTableModel) tblCarrera.getModel();
+
+                    Long idCarrera = (Long) modeloTabla.getValueAt(filaSeleccionada, 0); // Suponiendo que el ID esté en la columna 0
+                    String nombreCarrera = (String) modeloTabla.getValueAt(filaSeleccionada, 1);
+                    Date tiempoDiario = (Date) modeloTabla.getValueAt(filaSeleccionada, 2);
+                    
+
+                    // Crea un carreraDTO usando los datos obtenidos de la fila
+                    
+                    CarreraDTO carrera = new CarreraDTO();
+                    carrera.setId(idCarrera);
+                    carrera.setNombre(nombreCarrera);
+                    carrera.setTiempoDiario(tiempoDiario);
+        
+                    // Aquí puedes implementar la lógica de eliminación o cualquier otra acción
+//                    System.out.println("Carrera a eliminar: " + carrera.toString());
+                    int respuesta = JOptionPane.showConfirmDialog(
+                            null,
+                            "¿Está seguro de que desea eliminar esta Carrera?",
+                            "Confirmar eliminación",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE
+                    );
+
+                    if (respuesta == JOptionPane.YES_OPTION) {
+                        try {
+                            FachadaPersistencia.eliminarEvento(evento);
+                            JOptionPane.showMessageDialog(null, "La Carrera se ha eliminado correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                            dispose();
+                            FrmAdminMenuEventos frm = new FrmAdminMenuEventos();
+                            frm.setVisible(true);
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, "Ha ocurrido un error inesperado al eliminar la carrera: " + ex, "ERROR", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+
+                }
+            }
+        };
+
+        TableColumnModel modeloColumnas = this.tblCarrera.getColumnModel();
+        modeloColumnas.getColumn(4).setCellRenderer(new JButtonRenderer("Eliminar"));
+        modeloColumnas.getColumn(4).setCellEditor(new JButtonCellEditor("Eliminar", onEliminarClickListener));
+    }
+
+    private void botonEditarEnTabla() {
+     ActionListener onEditarClickListener = new ActionListener() {
+
+         @Override
+         public void actionPerformed(ActionEvent e) {
+             // Obtén la fila seleccionada
+             int filaSeleccionada = tblEvento.getSelectedRow();
+
+             if (filaSeleccionada != -1) { // Verifica que haya una fila seleccionada
+                 // Usa el modelo para obtener los datos de la fila seleccionada
+                 DefaultTableModel modeloTabla = (DefaultTableModel) tblEvento.getModel();
+
+                 // Asigna los valores de la fila seleccionada a las variables del evento
+                 
+                 String titulo = (String) modeloTabla.getValueAt(filaSeleccionada, 0); // Titulo en la columna 1
+                 String descripcion = (String) modeloTabla.getValueAt(filaSeleccionada, 1); // Descripción en la columna 2
+                 Date fechaInicioDate = (Date) modeloTabla.getValueAt(filaSeleccionada, 2); // Fecha de inicio en la columna 3
+                 Date fechaFinDate = (Date) modeloTabla.getValueAt(filaSeleccionada, 3); // Fecha de finalización en la columna 4
+                 String horaInicio = (String) modeloTabla.getValueAt(filaSeleccionada, 4); // Hora de inicio en la columna 5
+                 String horaFin = (String) modeloTabla.getValueAt(filaSeleccionada, 5); // Hora de finalización en la columna 6
+                 String campus = (String) modeloTabla.getValueAt(filaSeleccionada, 6); // Campus en la columna 7
+                 String categoria = (String) modeloTabla.getValueAt(filaSeleccionada, 7); // Categoría en la columna 8
+
+                 // Crea el objeto EventoDTO con los valores obtenidos de la tabla
+                 EventoDTO evento = new EventoDTO();
+                
+                 evento.setTitulo(titulo);
+                 evento.setDescripcion(descripcion);
+                 evento.setFechaInicio(fechaInicioDate);
+                 evento.setFechaFinal(fechaFinDate);
+                 evento.setHoraInicio(horaInicio);
+                 evento.setHoraFinal(horaFin);
+                 evento.setCampus(campus);
+                 evento.setCategoria(categoria);
+
+                 // Aquí puedes implementar la lógica de eliminación o cualquier otra acción
+                    System.out.println("Evento a eliminar: " + evento.toString());
+                    FrmEditarEvento frmEAPU = new FrmEditarEvento(evento);
+                    frmEAPU.setVisible(true);
+             }
+         }
+     };
+
+     // Establece el editor y renderer del botón de la columna "Editar"
+     TableColumnModel modeloColumnas = this.tblEvento.getColumnModel();
+     modeloColumnas.getColumn(9).setCellRenderer(new JButtonRenderer("Editar"));
+     modeloColumnas.getColumn(9).setCellEditor(new JButtonCellEditor("Editar", onEditarClickListener));
+ }
+
+       
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,17 +179,17 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
-        btnModificar = new javax.swing.JButton();
-        btnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblEvento = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel1.setText("Agregar Evento");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, -1, -1));
+        jLabel1.setText("Gestionar Evento");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, -1));
 
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -50,28 +198,6 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 700, -1, -1));
-
-        btnModificar.setBackground(new java.awt.Color(17, 109, 188));
-        btnModificar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificar.setText("Modificar");
-        btnModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 140, 80));
-
-        btnEliminar.setBackground(new java.awt.Color(17, 109, 188));
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEliminar.setText("Eliminar");
-        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 140, 80));
 
         btnAgregar.setBackground(new java.awt.Color(17, 109, 188));
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -82,9 +208,32 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 140, 80));
+        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 670, 120, 40));
 
-        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrmEvento.png"))); // NOI18N
+        tblEvento.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Titulo", "Descripcion", "Fecha inicio", "Fecha fin", "Hora inicio", "Hora fin", "Campus", "Categoria"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblEvento);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 930, -1));
+
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/background.png"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -96,14 +245,6 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
         adminMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnModificarActionPerformed
-
-    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         FrmAgregarEvento agregarEvento = new FrmAgregarEvento();
@@ -148,10 +289,10 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblEvento;
     // End of variables declaration//GEN-END:variables
 }

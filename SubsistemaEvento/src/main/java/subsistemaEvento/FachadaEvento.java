@@ -5,6 +5,7 @@
 package subsistemaEvento;
 
 import entidades.Evento;
+import java.util.List;
 
 /**
  *
@@ -13,7 +14,7 @@ import entidades.Evento;
 public class FachadaEvento implements IEvento{
 
     private IEvento controlEvento;  // Interfaz IEvento que puede ser implementada por ControlEvento
-
+    
     @Override
     public void agregarEvento(Evento evento) {
         controlEvento.agregarEvento(evento);
@@ -28,7 +29,14 @@ public class FachadaEvento implements IEvento{
     public Evento obtenerEvento(String titulo) {
         return controlEvento.obtenerEvento(titulo);
     }
-    
+    public boolean eliminarEvento(String titulo) {
+    return controlEvento.eliminarEvento(titulo);  // Pasa el título al método del controlador
+}
+
+    @Override
+    public List<Evento> obtenerListaEventos() {
+       return controlEvento.obtenerListaEventos();
+    }
     
     
 }

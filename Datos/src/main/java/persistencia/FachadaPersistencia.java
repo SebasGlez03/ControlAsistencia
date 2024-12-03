@@ -206,6 +206,17 @@ public class FachadaPersistencia implements IPersistencia {
         eventoDAO.modificarEvento(evento, eventoModificado);
     }
 
+    public void eliminarEvento(Evento evento){
+        EventoDAO eventoDAO = new EventoDAO();
+        eventoDAO.eliminarEvento(evento);
+    }
+
+    @Override
+    public List<Evento> obtenerTodosEventos() {
+        EventoDAO eventoDAO = new EventoDAO();
+        return eventoDAO.obtenerTodosEventos();
+    }
+    
     /**
      * Metodo que obtiene una clase de la base de datos
      *

@@ -5,6 +5,7 @@
 package dao;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import entidades.Evento;
@@ -162,5 +163,49 @@ public class EventoDAO {
         }
 
         return eventos;
+    }
+    
+    public void eliminarEvento(Evento evento) {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("eventos");
+
+        Document query = new Document("titulo", evento.getTitulo());
+
+        collection.deleteOne(query);
+    }
+    
+    public List<Evento> obtenerTodosEventos() {
+        // Crear una lista para almacenar los usuarios obtenidos
+        List<Evento> listaEventos = new ArrayList<>();
+
+        // Conexión con la base de datos MongoDB
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("eventos");
+
+        // Recuperar todos los documentos de la colección
+        FindIterable<Document> documentos = collection.find();
+
+        // Iterar sobre cada documento y mapearlo a un objeto Usuario
+        for (Document doc : documentos) {
+            String titulo = doc.getString("titulo");
+            String descripcion = doc.getString("descripcion");
+            Date fechaInicio = doc.getDate("fechaInicio");
+            Date fechaFin = doc.getDate("fechaFin");
+            String horaInicio = doc.getString("horaInicio");
+            String horaFin = doc.getString("horaFin");
+            String campus = doc.getString("campus");
+            String categoria = doc.getString("categoria");
+
+            // Crear un objeto Usuario y agregarlo a la lista
+            Evento evento = new Evento(titulo, descripcion, fechaInicio, fechaFin, horaInicio, horaFin, campus, categoria);
+            listaEventos.add(evento);
+        }
+
+        // Cerrar el cliente MongoDB
+        mongoClient.close();
+
+        return listaEventos;
     }
 }
