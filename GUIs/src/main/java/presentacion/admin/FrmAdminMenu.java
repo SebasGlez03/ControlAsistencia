@@ -7,7 +7,8 @@ package presentacion.admin;
 import presentacion.admin.usuarios.FrmGestionarUsuarios;
 import entidades.Usuario;
 import presentacion.FrmLogin;
-
+import presentacion.admin.alumnos.FrmGestionarAlumnos;
+import presentacion.admin.maestro.FrmGestionarMaestro;
 /**
  *
  * @author PC
@@ -74,10 +75,20 @@ public class FrmAdminMenu extends javax.swing.JFrame {
 
         btnMaestros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnMaestros.png"))); // NOI18N
         btnMaestros.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMaestros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMaestrosMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnMaestros, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 270, 200, 100));
 
         btnAlumnos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnAlumnos.png"))); // NOI18N
         btnAlumnos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAlumnosMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 200, 100));
 
         btnUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnUsuarios.png"))); // NOI18N
@@ -122,6 +133,18 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         gestionarUsuarios.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnUsuariosMouseClicked
+
+    private void btnAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlumnosMouseClicked
+        FrmGestionarAlumnos gestionarAlumnos = new FrmGestionarAlumnos();
+        gestionarAlumnos.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAlumnosMouseClicked
+
+    private void btnMaestrosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMaestrosMouseClicked
+        FrmGestionarMaestro gestionarMaestro = new FrmGestionarMaestro();
+        gestionarMaestro.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMaestrosMouseClicked
 
     /**
      * @param args the command line arguments

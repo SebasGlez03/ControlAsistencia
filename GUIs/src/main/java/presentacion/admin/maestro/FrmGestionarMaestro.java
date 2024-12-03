@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion.admin.alumnos;
+package presentacion.admin.maestro;
 
+import presentacion.admin.alumnos.*;
 import presentacion.admin.usuarios.*;
 import dto.UsuarioDTO;
 import entidades.Usuario;
@@ -23,14 +24,14 @@ import utilerias.JButtonRenderer;
  *
  * @author PC
  */
-public class FrmGestionarAlumnos extends javax.swing.JFrame {
+public class FrmGestionarMaestro extends javax.swing.JFrame {
 
     IUsuario subsUsuario = new FachadaUsuario();
 
     /**
      * Creates new form FrmEliminarUsuarioTabla
      */
-    public FrmGestionarAlumnos() {
+    public FrmGestionarMaestro() {
         initComponents();
         llenarTablaUsuarios(subsUsuario.obtenerListaUsuarios());
         botonEliminarEnTabla();
@@ -168,7 +169,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
                     usuario.setContrasenia(contrasenia);
                     usuario.setRol(rol);
 
-                    FrmModificarAlumnos modificarUsuario = new FrmModificarAlumnos(usuario);
+                    FrmModificarMaestro modificarUsuario = new FrmModificarMaestro(usuario);
                     modificarUsuario.setVisible(true);
                     dispose();
 
@@ -225,7 +226,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
 
         lblEliminarUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblEliminarUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        lblEliminarUsuarios.setText("Gestionar Alumnos");
+        lblEliminarUsuarios.setText("Gestionar Usuarios");
 
         tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -315,7 +316,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        FrmAgregarAlumno frmAgregarUsuario = new FrmAgregarAlumno();
+        FrmAgregarMaestro frmAgregarUsuario = new FrmAgregarMaestro();
         frmAgregarUsuario.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -343,14 +344,62 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmGestionarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarMaestro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmGestionarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarMaestro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmGestionarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarMaestro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmGestionarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarMaestro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -371,7 +420,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmGestionarAlumnos().setVisible(true);
+                new FrmGestionarMaestro().setVisible(true);
             }
         });
     }

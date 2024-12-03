@@ -6,11 +6,6 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>SubsistemaUsuario</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
         <dependency>
             <groupId>org.mongodb</groupId>
@@ -28,6 +23,11 @@
             <groupId>org.mongodb</groupId>
             <artifactId>bson</artifactId>
             <version>3.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>ObjetosNegocio</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <properties>
