@@ -224,4 +224,35 @@ public interface IPersistencia {
      */
     public List<Document> obtenerAlumnosSesion(Sesion sesion);
 
+    /**
+     * Metodo que obtiene un qr de la base de datos
+     *
+     * @param qr QR a obtener de la base de datos
+     * @return QR obtenido
+     */
+    public QR obtenerQR(QR qr);
+
+    /**
+     * Metodo que agrega un qr a la base de datos
+     *
+     * @param qr QR a agregar a la base de datos
+     */
+    public void agregarQR(QR qr);
+    
+    /**
+     * Guarda un QR en la base de datos.
+     *
+     * @param qr Objeto QR que se desea guardar.
+     */
+    public void guardarQR(QR qr);
+    
+    /**
+     * Crea una nueva sesión vinculada a un QR en la base de datos.
+     *
+     * @param idSesion ID de la sesión.
+     * @param clase Clase asociada a la sesión.
+     * @param maestro Maestro asociado a la sesión.
+     */
+    public void crearSesion(ObjectId idSesion, Clase clase, Maestro maestro);
+
 }

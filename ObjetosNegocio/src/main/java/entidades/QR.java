@@ -5,6 +5,7 @@
 package entidades;
 
 import java.util.Date;
+import org.bson.types.ObjectId;
 
 /**
  * Clase que representa un código QR. Contiene información sobre el contenido
@@ -16,6 +17,7 @@ public class QR {
 
     private String contenido; // Contenido del código QR
     private Date fechaCreacion; // Fecha de creación del código QR
+    private ObjectId idSesion; // ID de la sesion a la que pertenece el Codigo QR
 
     // Constructor por defecto
     public QR() {
@@ -70,6 +72,24 @@ public class QR {
     }
 
     /**
+     * Metodo que obtiene el id de la sesion
+     *
+     * @return Id de la sesion obtenido
+     */
+    public ObjectId getIdSesion() {
+        return idSesion;
+    }
+
+    /**
+     * Metodo que establece el id de la sesion
+     *
+     * @param idSesion
+     */
+    public void setIdSesion(ObjectId idSesion) {
+        this.idSesion = idSesion;
+    }
+
+    /**
      * Método que retorna una representación en forma de cadena del objeto QR,
      * incluyendo el contenido y la fecha de creación.
      *
@@ -77,7 +97,6 @@ public class QR {
      */
     @Override
     public String toString() {
-        return "QR{" + "contenido=" + contenido + ", fechaCreacion=" + fechaCreacion + '}';
+        return "QR{" + "contenido=" + contenido + ", fechaCreacion=" + fechaCreacion + ", IdSesion=" + idSesion + '}';
     }
-
 }

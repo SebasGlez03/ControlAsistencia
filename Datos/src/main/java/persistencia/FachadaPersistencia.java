@@ -271,19 +271,86 @@ public class FachadaPersistencia implements IPersistencia {
         claseDAO.modificarClase(clase, claseModificada);
     }
 
+    /**
+     * Metodo que obtiene una sesion de la base de datos
+     *
+     * @param sesion Objeto Sesion a buscar en la base de datos
+     * @return Objeto Sesion obtenido
+     */
     @Override
     public Sesion obtenerSesion(Sesion sesion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        SesionDAO sesionDAO = new SesionDAO();
+        return sesionDAO.obtenerSesion(sesion);
     }
 
+    /**
+     * Agrega una nueva sesion al sistema.
+     *
+     * @param sesion El objeto Sesion que desea agregar.
+     */
     @Override
     public void agregarSesion(Sesion sesion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        SesionDAO sesionDAO = new SesionDAO();
+        sesionDAO.agregarSesion(sesion);
     }
 
+    /**
+     * Obtiene la lista de los alumnos y su asistencia de una sesion.
+     *
+     * @param sesion Sesion de la que se desea obtener esta informacion.
+     * @return Sesion con la informacion de los alumnos y su asistencia.
+     */
     @Override
     public List<Document> obtenerAlumnosSesion(Sesion sesion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        SesionDAO sesionDAO = new SesionDAO();
+        return sesionDAO.obtenerSesionAlumnos(sesion);
+    }
+
+    /**
+     * Metodo que obtiene un qr de la base de datos
+     *
+     * @param qr QR a obtener de la base de datos
+     * @return QR obtenido
+     */
+    @Override
+    public QR obtenerQR(QR qr) {
+        QrDAO qrDAO = new QrDAO();
+        return qrDAO.obtenerQR(qr);
+    }
+
+    /**
+     * Metodo que agrega un qr a la base de datos
+     *
+     * @param qr QR a agregar a la base de datos
+     */
+    @Override
+    public void agregarQR(QR qr) {
+        QrDAO qrDAO = new QrDAO();
+        qrDAO.agregarQR(qr);
+    }
+
+    /**
+     * Guarda un QR en la base de datos.
+     *
+     * @param qr Objeto QR que se desea guardar.
+     */
+    @Override
+    public void guardarQR(QR qr) {
+        QrDAO qrDAO = new QrDAO();
+        qrDAO.guardarQR(qr);
+    }
+
+    /**
+     * Crea una nueva sesión vinculada a un QR en la base de datos.
+     *
+     * @param idSesion ID de la sesión.
+     * @param clase Clase asociada a la sesión.
+     * @param maestro Maestro asociado a la sesión.
+     */
+    @Override
+    public void crearSesion(ObjectId idSesion, Clase clase, Maestro maestro) {
+        QrDAO qrDAO = new QrDAO();
+        qrDAO.crearSesion(idSesion, clase, maestro);
     }
 
 }

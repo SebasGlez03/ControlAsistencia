@@ -4,6 +4,8 @@
  */
 package subsubsistemaqr;
 
+import entidades.Clase;
+import entidades.Maestro;
 import entidades.QR;
 
 /**
@@ -48,4 +50,13 @@ public interface IQR {
      * @return pin generado del QR
      */
     public int obtenerPIN();
+    
+    /**
+     * Genera un QR y crea una sesión vinculada.
+     *
+     * @param clase La clase asociada a la sesión.
+     * @param maestro El maestro asociado a la sesión.
+     * @return El QR generado.
+     */
+    public QR generarQR(Clase clase, Maestro maestro);
 }
