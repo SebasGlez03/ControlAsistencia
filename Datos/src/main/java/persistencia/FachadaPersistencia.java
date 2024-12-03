@@ -206,7 +206,7 @@ public class FachadaPersistencia implements IPersistencia {
         eventoDAO.modificarEvento(evento, eventoModificado);
     }
 
-    public void eliminarEvento(Evento evento){
+    public void eliminarEvento(Evento evento) {
         EventoDAO eventoDAO = new EventoDAO();
         eventoDAO.eliminarEvento(evento);
     }
