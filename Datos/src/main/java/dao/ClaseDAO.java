@@ -66,11 +66,13 @@ public class ClaseDAO {
 
         // Iterar sobre cada documento y mapearlo a un objeto Clase
         for (Document doc : documentos) {
+            ObjectId id = doc.getObjectId("_id");
             String nombre = doc.getString("nombre");
             int semestre = doc.getInteger("semestre");
 
             // Crear un objeto Clase y agregarlo a la lista
             Clase clase = new Clase(nombre, semestre);
+            clase.setId(id);
             listaClases.add(clase);
         }
 
@@ -91,6 +93,7 @@ public class ClaseDAO {
         MongoCollection<Document> collection = database.getCollection("clases");
 
         Document documentClase = new Document();
+        documentClase.append("_id", clase.getId());
         documentClase.append("nombre", clase.getNombre());
         documentClase.append("semestre", clase.getSemestre());
 
@@ -129,7 +132,6 @@ public class ClaseDAO {
 
         // Define los cambios que se van a realizar
         Document update = new Document("$set", new Document()
-                .append("_id", claseModificada.getId())
                 .append("nombre", claseModificada.getNombre())
                 .append("semestre", claseModificada.getSemestre())
         );

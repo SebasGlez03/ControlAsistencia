@@ -52,8 +52,8 @@ public class FrmModificarUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        agregarUsuario = new javax.swing.JPanel();
-        lblAdministrarUsuarios1 = new javax.swing.JLabel();
+        modificarUsuario = new javax.swing.JPanel();
+        lblModificarUsuario = new javax.swing.JLabel();
         lblMatricula = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -75,12 +75,12 @@ public class FrmModificarUsuario extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        agregarUsuario.setBackground(new java.awt.Color(27, 57, 166));
-        agregarUsuario.setForeground(new java.awt.Color(27, 57, 166));
+        modificarUsuario.setBackground(new java.awt.Color(27, 57, 166));
+        modificarUsuario.setForeground(new java.awt.Color(27, 57, 166));
 
-        lblAdministrarUsuarios1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        lblAdministrarUsuarios1.setForeground(new java.awt.Color(255, 255, 255));
-        lblAdministrarUsuarios1.setText("Agregar Usuario");
+        lblModificarUsuario.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblModificarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        lblModificarUsuario.setText("Modificar Usuario");
 
         lblMatricula.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblMatricula.setForeground(new java.awt.Color(255, 255, 255));
@@ -140,67 +140,71 @@ public class FrmModificarUsuario extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout agregarUsuarioLayout = new javax.swing.GroupLayout(agregarUsuario);
-        agregarUsuario.setLayout(agregarUsuarioLayout);
-        agregarUsuarioLayout.setHorizontalGroup(
-            agregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(188, 188, 188)
-                .addComponent(lblAdministrarUsuarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(lblMatricula))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(lblNombre))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(lblApellidoPaterno))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(txtApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(lblApellidoMaterno))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(txtApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(lblCorreo))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(lblContrasenia))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(lblRol))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(comboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(430, 430, 430)
-                .addComponent(btnCancelar)
-                .addGap(34, 34, 34)
-                .addComponent(btnAceptar))
+        javax.swing.GroupLayout modificarUsuarioLayout = new javax.swing.GroupLayout(modificarUsuario);
+        modificarUsuario.setLayout(modificarUsuarioLayout);
+        modificarUsuarioLayout.setHorizontalGroup(
+            modificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                .addGroup(modificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(lblMatricula))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(lblNombre))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(lblApellidoPaterno))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(txtApellidoPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(lblApellidoMaterno))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(txtApellidoMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(lblCorreo))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(lblContrasenia))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(txtContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addComponent(lblRol))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(comboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                        .addGap(430, 430, 430)
+                        .addComponent(btnCancelar)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnAceptar))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarUsuarioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(71, 71, 71)))
+                .addGap(38, 38, 38))
         );
-        agregarUsuarioLayout.setVerticalGroup(
-            agregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarUsuarioLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(lblAdministrarUsuarios1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+        modificarUsuarioLayout.setVerticalGroup(
+            modificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modificarUsuarioLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(lblModificarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblMatricula)
                 .addGap(6, 6, 6)
                 .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,12 +233,12 @@ public class FrmModificarUsuario extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(comboBoxRol, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
-                .addGroup(agregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(modificarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelar)
                     .addComponent(btnAceptar)))
         );
 
-        getContentPane().add(agregarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 800));
+        getContentPane().add(modificarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 800));
 
         pack();
         setLocationRelativeTo(null);
@@ -349,18 +353,18 @@ public class FrmModificarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel agregarUsuario;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> comboBoxRol;
-    private javax.swing.JLabel lblAdministrarUsuarios1;
     private javax.swing.JLabel lblApellidoMaterno;
     private javax.swing.JLabel lblApellidoPaterno;
     private javax.swing.JLabel lblContrasenia;
     private javax.swing.JLabel lblCorreo;
     private javax.swing.JLabel lblMatricula;
+    private javax.swing.JLabel lblModificarUsuario;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblRol;
+    private javax.swing.JPanel modificarUsuario;
     private javax.swing.JTextField txtApellidoMaterno;
     private javax.swing.JTextField txtApellidoPaterno;
     private javax.swing.JPasswordField txtContrasenia;
