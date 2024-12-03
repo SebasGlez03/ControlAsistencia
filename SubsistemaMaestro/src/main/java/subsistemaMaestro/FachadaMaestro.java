@@ -14,6 +14,7 @@ import dto.MaestroDTO;
 public class FachadaMaestro implements IMaestro {
 
     private Maestro maestro; // Instancia de Maestro a gestionar
+    ControlMaestro controlMaestro = new ControlMaestro();
 
     /**
      * Constructor que inicializa la Fachada con una instancia de Maestro
@@ -50,24 +51,46 @@ public class FachadaMaestro implements IMaestro {
         return false;
     }
 
+    /**
+     * Metodo que obtiene un maestro de la base de datos
+     *
+     * @param matricula Matricula del maestro a obtener
+     * @return Objeto MaestroDTO obtenido
+     */
     @Override
-    public void obtenerMaestro(MaestroDTO maestro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public MaestroDTO obtenerMaestro(int matricula) {
+        return controlMaestro.obtenerMaestro(matricula);
     }
 
+    /**
+     * Metodo que agrega un maestro a la base de datos
+     *
+     * @param maestro Objeto MaestroDTO a agregar a la base de datos
+     */
     @Override
     public void agregarMaestro(MaestroDTO maestro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        controlMaestro.agregarMaestro(maestro);
     }
 
+    /**
+     * Metodo que elimina un maestro de la base de datos
+     *
+     * @param maestro Obketo MaestroDTO a eliminar de la base de datos
+     */
     @Override
     public void eliminarMaestro(MaestroDTO maestro) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        controlMaestro.eliminarMaestro(maestro);
     }
 
+    /**
+     * Metodo que modifica un maestro de la base de datos
+     *
+     * @param maestro Objeto MaestroDTO a modificar
+     * @param maestroModificado Objeto MaestroDTO con la informacion a suplir
+     */
     @Override
     public void modificarMaestro(MaestroDTO maestro, MaestroDTO maestroModificado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        controlMaestro.modificarMaestro(maestro, maestroModificado);
     }
 
     /**

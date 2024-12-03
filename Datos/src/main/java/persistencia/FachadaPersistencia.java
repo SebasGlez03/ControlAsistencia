@@ -128,14 +128,13 @@ public class FachadaPersistencia implements IPersistencia {
     /**
      * Metodo que obtiene un maestro de la base de datos
      *
-     * @param maestro Objeto tipo Maestro que se desea obtener de la base de
-     * datos
+     * @param matricula Matricula del maestro a obtener
      * @return Objeto tipo Maestro obtenido
      */
     @Override
-    public Maestro obtenerMaestro(Maestro maestro) {
+    public Maestro obtenerMaestro(int matricula) {
         MaestroDAO maestroDAO = new MaestroDAO();
-        return maestroDAO.obtenerMaestro(maestro);
+        return maestroDAO.obtenerMaestro(matricula);
 
     }
 

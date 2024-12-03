@@ -89,10 +89,10 @@ public interface IPersistencia {
     /**
      * Obtiene un maestro del sistema.
      *
-     * @param maestro El objeto Maestro que se desea obtener.
+     * @param matricula Matricula del maestro a obtener.
      * @return Objeto de tipo Maestro con la informacion del Maestro a obtener.
      */
-    public Maestro obtenerMaestro(Maestro maestro);
+    public Maestro obtenerMaestro(int matricula);
 
     /**
      * Agrega un nuevo maestro al sistema.

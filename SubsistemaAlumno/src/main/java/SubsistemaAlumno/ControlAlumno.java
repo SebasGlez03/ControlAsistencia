@@ -122,17 +122,7 @@ public class ControlAlumno {
      * @param alumno Objeto AlumnoDTO con la informacion del alumno
      */
     public void agregarAlumno(AlumnoDTO alumno) {
-        Alumno alumnoAgregar = new Alumno();
-
-        alumnoAgregar.setMatricula(alumno.getMatricula());
-        alumnoAgregar.setNombre(alumno.getNombre());
-        alumnoAgregar.setApellidoPaterno(alumno.getApellidoPaterno());
-        alumnoAgregar.setApellidoMaterno(alumno.getApellidoMaterno());
-        alumnoAgregar.setCorreo(alumno.getCorreo());
-        alumnoAgregar.setContrasenia(alumno.getContrasenia());
-        alumnoAgregar.setPromedio(alumno.getPromedio());
-        alumnoAgregar.setSemestre(alumno.getSemestre());
-        alumnoAgregar.setRol(alumno.getRol());
+        Alumno alumnoAgregar = convertirAlumnoDTOaEntidad(alumno);
 
         datos.agregarAlumno(alumnoAgregar);
     }
@@ -143,17 +133,7 @@ public class ControlAlumno {
      * @param alumno Objeto AlumnoDTO que se va a eliminar
      */
     public void eliminarAlumno(AlumnoDTO alumno) {
-        Alumno alumnoEliminar = new Alumno();
-
-        alumnoEliminar.setMatricula(alumno.getMatricula());
-        alumnoEliminar.setNombre(alumno.getNombre());
-        alumnoEliminar.setApellidoPaterno(alumno.getApellidoPaterno());
-        alumnoEliminar.setApellidoMaterno(alumno.getApellidoMaterno());
-        alumnoEliminar.setCorreo(alumno.getCorreo());
-        alumnoEliminar.setContrasenia(alumno.getContrasenia());
-        alumnoEliminar.setPromedio(alumno.getPromedio());
-        alumnoEliminar.setSemestre(alumno.getSemestre());
-        alumnoEliminar.setRol(alumno.getRol());
+        Alumno alumnoEliminar = convertirAlumnoDTOaEntidad(alumno);
 
         datos.eliminarUsuario(alumnoEliminar);
     }
@@ -166,32 +146,38 @@ public class ControlAlumno {
      * suplir
      */
     public void modificarAlumno(AlumnoDTO alumno, AlumnoDTO alumnoModificado) {
-        Alumno alumnoModificar = new Alumno();
-        Alumno alumnoInfoMod = new Alumno();
 
         // Informacion del alumno
-        alumnoModificar.setMatricula(alumno.getMatricula());
-        alumnoModificar.setNombre(alumno.getNombre());
-        alumnoModificar.setApellidoPaterno(alumno.getApellidoPaterno());
-        alumnoModificar.setApellidoMaterno(alumno.getApellidoMaterno());
-        alumnoModificar.setCorreo(alumno.getCorreo());
-        alumnoModificar.setContrasenia(alumno.getContrasenia());
-        alumnoModificar.setPromedio(alumno.getPromedio());
-        alumnoModificar.setSemestre(alumno.getSemestre());
-        alumnoModificar.setRol(alumno.getRol());
+        Alumno alumnoModificar = convertirAlumnoDTOaEntidad(alumno);
 
         // Informacion del alumno con la nueva informacion
-        alumnoInfoMod.setMatricula(alumno.getMatricula());
-        alumnoInfoMod.setNombre(alumno.getNombre());
-        alumnoInfoMod.setApellidoPaterno(alumno.getApellidoPaterno());
-        alumnoInfoMod.setApellidoMaterno(alumno.getApellidoMaterno());
-        alumnoInfoMod.setCorreo(alumno.getCorreo());
-        alumnoInfoMod.setContrasenia(alumno.getContrasenia());
-        alumnoInfoMod.setPromedio(alumno.getPromedio());
-        alumnoInfoMod.setSemestre(alumno.getSemestre());
-        alumnoInfoMod.setRol(alumno.getRol());
+        Alumno alumnoInfoMod = convertirAlumnoDTOaEntidad(alumnoModificado);
 
         datos.modificarAlumno(alumnoModificar, alumnoInfoMod);
+    }
+
+    /**
+     * Metodo que convierte un AlumnoDTO a un AlumnoEntidad
+     *
+     * @param dto AlumnoDTO que se transformara a AlumnoEntidad
+     * @return Alumno de tipo Entidad
+     */
+    public Alumno convertirAlumnoDTOaEntidad(AlumnoDTO dto) {
+
+        Alumno alumno = new Alumno();
+
+        alumno.setMatricula(dto.getMatricula());
+        alumno.setNombre(dto.getNombre());
+        alumno.setApellidoPaterno(dto.getApellidoPaterno());
+        alumno.setApellidoMaterno(dto.getApellidoMaterno());
+        alumno.setCorreo(dto.getCorreo());
+        alumno.setContrasenia(dto.getContrasenia());
+        alumno.setRol(dto.getRol());
+        alumno.setSemestre(dto.getSemestre());
+        alumno.setPromedio(dto.getPromedio());
+        alumno.setEstadoAsistencia(dto.getEstadoAsistencia());
+
+        return alumno;
     }
 
 }

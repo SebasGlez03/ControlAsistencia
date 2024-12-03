@@ -5,27 +5,34 @@
 package subsistemaMaestro;
 
 import dto.MaestroDTO;
-import dto.UsuarioDTO;
-import entidades.Alumno;
 import entidades.Maestro;
-import java.util.AbstractMap;
-import mock.BaseDatosMock;
+import persistencia.FachadaPersistencia;
+import persistencia.IPersistencia;
 
 /**
  *
  * @author limon
  */
 /**
- * Clase ControlMaestro
- * Esta clase permite realizar operaciones relacionadas con el control de clases impartidas por un maestro,
- * incluyendo la asignacion y remocion de clases, evaluacion de alumnos y busqueda de maestros
+ * Clase ControlMaestro Esta clase permite realizar operaciones relacionadas con
+ * el control de clases impartidas por un maestro, incluyendo la asignacion y
+ * remocion de clases, evaluacion de alumnos y busqueda de maestros
  */
 public class ControlMaestro {
 
     private Maestro maestro; // Instancia de Maestro que se va a controlar
+    IPersistencia datos = new FachadaPersistencia();
+
+    /**
+     * Constructor por omision
+     */
+    public ControlMaestro() {
+
+    }
 
     /**
      * Constructor que inicializa ControlMaestro con una instancia de Maestro
+     *
      * @param maestro Instancia de Maestro a controlar
      */
     public ControlMaestro(Maestro maestro) {
@@ -33,10 +40,12 @@ public class ControlMaestro {
     }
 
     /**
-     * Asigna una clase al maestro
-     * Verifica que la materia no sea nula ni vacia y que sea una materia valida
+     * Asigna una clase al maestro Verifica que la materia no sea nula ni vacia
+     * y que sea una materia valida
+     *
      * @param materia Nombre de la materia a impartir
-     * @throws IllegalArgumentException si la materia es nula o vacia o ya esta en la lista de materias del maestro
+     * @throws IllegalArgumentException si la materia es nula o vacia o ya esta
+     * en la lista de materias del maestro
      */
     public void impartirClase(String materia) {
         if (materia == null || materia.isEmpty()) {
@@ -49,54 +58,85 @@ public class ControlMaestro {
         System.out.println("Clase de " + materia + " impartida");
     }
 
-     /**
-     * Evalua a un alumno
-     * Verifica que el alumno cumpla con los criterios de promedio y que este inscrito en alguna materia del maestro
-     * @param alumno Objeto Alumno a evaluar
-     * @return true si la evaluacion es exitosa
-     * @throws IllegalArgumentException si el alumno es nulo, tiene un promedio insuficiente o no esta inscrito en una clase del maestro
+    /**
+     * Metodo que obtiene un maestro del sistema
+     *
+     * @param matricula Matricula del maestro a obtener
+     * @return Objeto MaestroDTO obtenido
      */
-    public boolean evaluarAlumno(Alumno alumno) {
-        if (alumno == null) {
-            throw new IllegalArgumentException("El alumno no puede ser nulo");
-        }
-        if (alumno.getPromedio() < 6.0) {
-            throw new IllegalArgumentException("El alumno tiene un promedio insuficiente para ser evaluado");
-        }
-        if (!alumnoInscrito(alumno)) {
-            throw new IllegalArgumentException("El alumno no esta inscrito en ninguna clase impartida por este maestro");
-        }
-        System.out.println("Alumno " + alumno.getNombre() + " evaluado");
-        return true; // Ejemplo: la evaluacion fue satisfactoria
+    public MaestroDTO obtenerMaestro(int matricula) {
+        Maestro maestroObtenido = datos.obtenerMaestro(matricula);
+        MaestroDTO maestro = new MaestroDTO();
+
+        maestro.setMatricula(maestroObtenido.getMatricula());
+        maestro.setNombre(maestroObtenido.getNombre());
+        maestro.setApellidoPaterno(maestroObtenido.getApellidoPaterno());
+        maestro.setApellidoMaterno(maestroObtenido.getApellidoMaterno());
+        maestro.setCorreo(maestroObtenido.getCorreo());
+        maestro.setContrasenia(maestroObtenido.getContrasenia());
+        maestro.setRol(maestroObtenido.getRol());
+        maestro.setMaterias(maestroObtenido.getMaterias());
+
+        return maestro;
+
     }
 
     /**
-     * Busca informacion del maestro basado en un criterio
-     * Verifica que el criterio de busqueda no sea nulo ni vacio
-     * @param criterio Criterio de busqueda, como ID o nombre del maestro
-     * @throws IllegalArgumentException si el criterio es nulo o vacio
+     * Metodo que agrega un maestro al sistema
+     *
+     * @param maestro Objeto MaestroDTO a agregar
      */
-    public void buscarMaestro(String criterio) {
-        
-        BaseDatosMock bd = new BaseDatosMock();
-        
-        for(Maestro maestro: bd.getMaestros()){
-            if (maestro.getNombre().equals(criterio) ||
-                    Integer.parseInt(criterio)==maestro.getMatricula()){
-                System.out.println(maestro.toString());
-            }
-        }
+    public void agregarMaestro(MaestroDTO maestro) {
+        Maestro maestroAgregar = convertirMaestroDTOaEntidad(maestro);
+
+        datos.agregarMaestro(maestroAgregar);
     }
-    
-    //pendiente
-    private boolean alumnoInscrito(Alumno alumno) {
-        
-        BaseDatosMock bd = new BaseDatosMock();
-        
-        for(Maestro maestro:bd.getMaestros()){
-            
-        }
-        return true; 
+
+    /**
+     * Metodo que elimina un maestro del sistema
+     *
+     * @param maestro Objeto MaestroDTO a eliminar
+     */
+    public void eliminarMaestro(MaestroDTO maestro) {
+        Maestro maestroEliminar = convertirMaestroDTOaEntidad(maestro);
+
+        datos.eliminarUsuario(maestroEliminar);
     }
-    
+
+    /**
+     * Metodo que modifica un maestro de la base de datos
+     *
+     * @param maestro Objeto MaestroDTO a modificar
+     * @param maestroModificado Objeto MaestroDTO con la informacion a suplir
+     */
+    public void modificarMaestro(MaestroDTO maestro, MaestroDTO maestroModificado) {
+        Maestro maestroModificar = convertirMaestroDTOaEntidad(maestro);
+        Maestro maestroInfoMod = convertirMaestroDTOaEntidad(maestroModificado);
+
+        datos.modificarMaestro(maestroModificar, maestroInfoMod);
+    }
+
+    /**
+     * Metodo que convierte un MaestroDTO a un MaestroEntidad
+     *
+     * @param dto MaestroDTO que se transfotrma a MaestroEntidad
+     * @return Maestro de tipo Entidad
+     */
+    public Maestro convertirMaestroDTOaEntidad(MaestroDTO dto) {
+
+        Maestro maestro = new Maestro();
+
+        maestro.setMatricula(dto.getMatricula());
+        maestro.setNombre(dto.getNombre());
+        maestro.setApellidoPaterno(dto.getApellidoPaterno());
+        maestro.setApellidoMaterno(dto.getApellidoMaterno());
+        maestro.setCorreo(dto.getCorreo());
+        maestro.setContrasenia(dto.getContrasenia());
+        maestro.setRol(dto.getRol());
+        maestro.setMaterias(dto.getMaterias());
+
+        return maestro;
+
+    }
+
 }

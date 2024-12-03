@@ -19,9 +19,10 @@ public interface IMaestro {
     /**
      * Obtiene un maestro del sistema.
      *
-     * @param maestro Maestro obtenido
+     * @param matricula Matricula del maestro a obtener
+     * @return Objeto MaestroDTO obtenido
      */
-    public void obtenerMaestro(MaestroDTO maestro);
+    public MaestroDTO obtenerMaestro(int matricula);
 
     /**
      * Agrega un nuevo maestro al sistema.

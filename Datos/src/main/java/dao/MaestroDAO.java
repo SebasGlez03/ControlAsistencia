@@ -22,20 +22,20 @@ public class MaestroDAO {
     /**
      * Metodo que obtiene un maestro de la base de datos
      *
-     * @param maestro Objeto de tipo Maestro a obtener de la base de datos
+     * @param matricula Matricula del maestro a obtener
      * @return Objeto tipo Maestro obtenido
      */
-    public Maestro obtenerMaestro(Maestro maestro) {
+    public Maestro obtenerMaestro(int matricula) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
         MongoCollection<Document> collection = database.getCollection("usuarios");
 
-        Document query = new Document("matricula", maestro.getMatricula());
+        Document query = new Document("matricula", matricula);
         Document maestros = collection.find(query).first();
 
         System.out.println("Maestro leido: " + maestros.toJson());
 
-        int matricula = maestros.getInteger("matricula");
+        int matriculaObtener = maestros.getInteger("matricula");
         String nombre = maestros.getString("nombre");
         String apellidoPaterno = maestros.getString("apellidoPaterno");
         String apellidoMaterno = maestros.getString("apellidoMaterno");
@@ -53,7 +53,7 @@ public class MaestroDAO {
             }
         }
 
-        Maestro maestroObtenido = new Maestro(materias, matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
+        Maestro maestroObtenido = new Maestro(materias, matriculaObtener, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
 
         return maestroObtenido;
 
