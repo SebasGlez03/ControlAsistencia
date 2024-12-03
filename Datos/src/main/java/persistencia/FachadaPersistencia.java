@@ -8,6 +8,7 @@ import dao.*;
 import entidades.*;
 import java.util.List;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -27,6 +28,12 @@ public class FachadaPersistencia implements IPersistencia {
         return usuarioDAO.obtenerUsuario(matricula);
     }
 
+    @Override
+    public String obtenerNombreRol(ObjectId rolId) {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.obtenerNombreRol(rolId);
+    }
+
     /**
      * Metodo que obtiene todos los usuarios de la base de datos
      *
@@ -36,6 +43,12 @@ public class FachadaPersistencia implements IPersistencia {
     public List<Usuario> obtenerTodosUsuarios() {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         return usuarioDAO.obtenerTodosUsuarios();
+    }
+
+    @Override
+    public List<Document> obtenerTodosUsuariosConRolString() {
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        return usuarioDAO.obtenerTodosUsuariosConRolString();
     }
 
     /**

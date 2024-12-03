@@ -61,7 +61,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
                 fila[3] = row.getApellidoMaterno();
                 fila[4] = row.getCorreo();
                 fila[5] = row.getContrasenia();
-                fila[6] = row.getRol();
+                fila[6] = subsUsuario.getRolUsuarioViaObjectId(row.getRol());
 
                 modeloTabla.addRow(fila);
             });

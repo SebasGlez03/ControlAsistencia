@@ -3,6 +3,7 @@ package subsistemaUsuario;
 import dto.*;
 import entidades.*;
 import java.util.List;
+import org.bson.types.ObjectId;
 import persistencia.*;
 
 /**
@@ -137,6 +138,18 @@ public class ControlUsuario {
         IPersistencia datos = new FachadaPersistencia();
 
         return datos.obtenerRolUsuario(id);
+    }
+
+    /**
+     * Metodo que obtiene el nombre del rol del usuario mediante su ObjectId
+     *
+     * @param rolId ObjectId del rol
+     * @return Nombre del rol del usuario
+     */
+    public String getRolUsuarioViaObjectId(ObjectId rolId) {
+        IPersistencia datos = new FachadaPersistencia();
+
+        return datos.obtenerNombreRol(rolId);
     }
 
     /**

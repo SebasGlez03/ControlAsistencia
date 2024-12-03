@@ -6,8 +6,8 @@ package persistencia;
 
 import entidades.*;
 import java.util.List;
-import javax.swing.JComboBox;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  * Interfaz IPersistencia que define los métodos para realizar operaciones de
@@ -26,11 +26,27 @@ public interface IPersistencia {
     public Usuario obtenerUsuario(int matricula);
 
     /**
+     * Obtiene el rol del usuario en forma de String para mostrarlo
+     *
+     * @param rolId El id del rol a obtener su nombre
+     * @return Nombre del rol en forma de string obtenido
+     */
+    public String obtenerNombreRol(ObjectId rolId);
+
+    /**
      * Metodo que obtiene todos los usuarios de la base de datos
      *
      * @return Lista de objetos tipo Usuario obtenidos
      */
     public List<Usuario> obtenerTodosUsuarios();
+
+    /**
+     * Metodo que obtiene todos los usuarios con su rol de forma String de la
+     * base de datos
+     *
+     * @return Lista de documentos obtenidos
+     */
+    public List<Document> obtenerTodosUsuariosConRolString();
 
     /**
      * Obtiene el nombre del rol de un usuario del sistema.
