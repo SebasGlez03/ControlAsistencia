@@ -30,9 +30,9 @@ public class FrmGestionarEventos extends javax.swing.JFrame {
     public FrmGestionarEventos() {
         initComponents();
         
-        llenarTablaEventos(subEvento.obtenerListaEventos());
         botonEliminarEnTabla();
         botonEditarEnTabla();
+        llenarTablaEventos(subEvento.obtenerListaEventos());
     }
 
     public void llenarTablaEventos(List<Evento> listaEventos) {

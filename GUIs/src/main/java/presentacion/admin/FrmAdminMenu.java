@@ -8,6 +8,7 @@ import presentacion.admin.usuarios.FrmGestionarUsuarios;
 import entidades.Usuario;
 import presentacion.FrmLogin;
 import presentacion.admin.clases.FrmGestionarClase;
+import presentacion.admin.eventos.FrmGestionarEventos;
 
 /**
  *
@@ -63,6 +64,11 @@ public class FrmAdminMenu extends javax.swing.JFrame {
 
         btnEventos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnEventos.png"))); // NOI18N
         btnEventos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEventos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEventosMouseClicked(evt);
+            }
+        });
         getContentPane().add(btnEventos, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 410, 200, 100));
 
         btnSesiones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnSesiones.png"))); // NOI18N
@@ -134,6 +140,12 @@ public class FrmAdminMenu extends javax.swing.JFrame {
         gestionarClase.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnClasesMouseClicked
+
+    private void btnEventosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEventosMouseClicked
+        FrmGestionarEventos gestionarEeventos = new FrmGestionarEventos();
+        gestionarEeventos.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnEventosMouseClicked
 
     /**
      * @param args the command line arguments

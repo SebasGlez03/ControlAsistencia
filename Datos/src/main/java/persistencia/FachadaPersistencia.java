@@ -182,16 +182,19 @@ public class FachadaPersistencia implements IPersistencia {
      * @param evento Objeto de tipo Evento a obtener de la base de datos
      * @return Objeto tipo Evento obtenido
      */
+    @Override
     public Evento obtenerEvento(Evento evento) {
         EventoDAO eventoDAO = new EventoDAO();
         return eventoDAO.obtenerEvento(evento);
     }
 
+    @Override
     public Evento obtenerEventoPorTitulo(String titulo) {
         EventoDAO eventoDAO = new EventoDAO();
         return eventoDAO.obtenerEventoPorTitulo(titulo);
     }
 
+    @Override
     public List<Evento> obtenerTodosLosEventos() {
         EventoDAO eventoDAO = new EventoDAO();
         return eventoDAO.obtenerTodos();
@@ -202,6 +205,7 @@ public class FachadaPersistencia implements IPersistencia {
      *
      * @param evento Objeto de tipo Evento a agregar en la base de datos
      */
+    @Override
     public void agregarEvento(Evento evento) {
         EventoDAO eventoDAO = new EventoDAO();
         eventoDAO.agregarEvento(evento);
@@ -214,11 +218,13 @@ public class FachadaPersistencia implements IPersistencia {
      * @param eventoModificado Objeto de tipo Evento que suplira la informacion
      * del anterior
      */
+    @Override
     public void modificarEvento(Evento evento, Evento eventoModificado) {
         EventoDAO eventoDAO = new EventoDAO();
         eventoDAO.modificarEvento(evento, eventoModificado);
     }
 
+    @Override
     public void eliminarEvento(Evento evento) {
         EventoDAO eventoDAO = new EventoDAO();
         eventoDAO.eliminarEvento(evento);

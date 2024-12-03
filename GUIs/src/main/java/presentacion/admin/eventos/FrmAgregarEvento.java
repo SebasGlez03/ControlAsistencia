@@ -208,7 +208,8 @@ public class FrmAgregarEvento extends javax.swing.JFrame {
         Date fechaFinPacifico = convertirFechaAPacifico(fechaFin);
 
         // Crear el objeto Evento
-        Evento nuevoEvento = new Evento(titulo, descripcion, fechaInicio, fechaFin, horaInicio, horaFin, campus, categoria);
+//        Evento nuevoEvento = new Evento(titulo, descripcion, fechaInicio, fechaFin, horaInicio, horaFin, campus, categoria);
+        Evento nuevoEvento = new Evento(titulo, descripcion, fechaInicioPacifico, fechaFinPacifico, horaInicio, horaFin, campus, categoria);
 
         // Enviar el objeto a la capa de persistencia
         FachadaPersistencia fachada = new FachadaPersistencia();
