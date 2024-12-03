@@ -14,37 +14,53 @@ import persistencia.IPersistencia;
  */
 public class FachadaAlumno implements IAlumno {
 
-    private IPersistencia persistenciaDAO;
-
     private ControlAlumno controlAlumno = new ControlAlumno();
-
-    public FachadaAlumno(IPersistencia persistenciaDAO) {
-        this.persistenciaDAO = persistenciaDAO;
-    }
 
     @Override
     public void EscanearQR() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    /**
+     * Metodo que obtiene un alumno del sistema
+     *
+     * @param matricula Matricula del alumno a obtener
+     * @return Objeto AlumnoDTO obtenido
+     */
     @Override
     public AlumnoDTO obtenerAlumno(int matricula) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return controlAlumno.obtenerAlumno(matricula);
     }
 
+    /**
+     * Metodo que agrega un alumno al sistema
+     *
+     * @param alumno Objeto AlumnoDTO con la informacion de alumno a agregar
+     */
     @Override
     public void agregarAlumno(AlumnoDTO alumno) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        controlAlumno.agregarAlumno(alumno);
     }
 
+    /**
+     * Metodo que elimina un alumno del sistema
+     *
+     * @param alumno Objeto AlumnoDTO a eliminar
+     */
     @Override
     public void eliminarAlumno(AlumnoDTO alumno) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        controlAlumno.eliminarAlumno(alumno);
     }
 
+    /**
+     * Metodo que modifica un alumno del sistema
+     *
+     * @param alumno Objeto AlumnoDTO a modificar
+     * @param alumnoModificado Objeto AlumoDTO con la informacion a suplir
+     */
     @Override
     public void modificarAlumno(AlumnoDTO alumno, AlumnoDTO alumnoModificado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        controlAlumno.modificarAlumno(alumno, alumnoModificado);
     }
 
     /**

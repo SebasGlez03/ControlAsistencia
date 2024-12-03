@@ -116,4 +116,82 @@ public class ControlAlumno {
 
     }
 
+    /**
+     * Metodo que agrega un alumno a la base de datos
+     *
+     * @param alumno Objeto AlumnoDTO con la informacion del alumno
+     */
+    public void agregarAlumno(AlumnoDTO alumno) {
+        Alumno alumnoAgregar = new Alumno();
+
+        alumnoAgregar.setMatricula(alumno.getMatricula());
+        alumnoAgregar.setNombre(alumno.getNombre());
+        alumnoAgregar.setApellidoPaterno(alumno.getApellidoPaterno());
+        alumnoAgregar.setApellidoMaterno(alumno.getApellidoMaterno());
+        alumnoAgregar.setCorreo(alumno.getCorreo());
+        alumnoAgregar.setContrasenia(alumno.getContrasenia());
+        alumnoAgregar.setPromedio(alumno.getPromedio());
+        alumnoAgregar.setSemestre(alumno.getSemestre());
+        alumnoAgregar.setRol(alumno.getRol());
+
+        datos.agregarAlumno(alumnoAgregar);
+    }
+
+    /**
+     * Metodo que elimina un alumno de la base de datos
+     *
+     * @param alumno Objeto AlumnoDTO que se va a eliminar
+     */
+    public void eliminarAlumno(AlumnoDTO alumno) {
+        Alumno alumnoEliminar = new Alumno();
+
+        alumnoEliminar.setMatricula(alumno.getMatricula());
+        alumnoEliminar.setNombre(alumno.getNombre());
+        alumnoEliminar.setApellidoPaterno(alumno.getApellidoPaterno());
+        alumnoEliminar.setApellidoMaterno(alumno.getApellidoMaterno());
+        alumnoEliminar.setCorreo(alumno.getCorreo());
+        alumnoEliminar.setContrasenia(alumno.getContrasenia());
+        alumnoEliminar.setPromedio(alumno.getPromedio());
+        alumnoEliminar.setSemestre(alumno.getSemestre());
+        alumnoEliminar.setRol(alumno.getRol());
+
+        datos.eliminarUsuario(alumnoEliminar);
+    }
+
+    /**
+     * Metodo que modifica un alumno de la base de datos
+     *
+     * @param alumno Objeto AlumnoDTO que se va a modificar
+     * @param alumnoModificado Objeto AlumnoDTO con la informacion nueva a
+     * suplir
+     */
+    public void modificarAlumno(AlumnoDTO alumno, AlumnoDTO alumnoModificado) {
+        Alumno alumnoModificar = new Alumno();
+        Alumno alumnoInfoMod = new Alumno();
+
+        // Informacion del alumno
+        alumnoModificar.setMatricula(alumno.getMatricula());
+        alumnoModificar.setNombre(alumno.getNombre());
+        alumnoModificar.setApellidoPaterno(alumno.getApellidoPaterno());
+        alumnoModificar.setApellidoMaterno(alumno.getApellidoMaterno());
+        alumnoModificar.setCorreo(alumno.getCorreo());
+        alumnoModificar.setContrasenia(alumno.getContrasenia());
+        alumnoModificar.setPromedio(alumno.getPromedio());
+        alumnoModificar.setSemestre(alumno.getSemestre());
+        alumnoModificar.setRol(alumno.getRol());
+
+        // Informacion del alumno con la nueva informacion
+        alumnoInfoMod.setMatricula(alumno.getMatricula());
+        alumnoInfoMod.setNombre(alumno.getNombre());
+        alumnoInfoMod.setApellidoPaterno(alumno.getApellidoPaterno());
+        alumnoInfoMod.setApellidoMaterno(alumno.getApellidoMaterno());
+        alumnoInfoMod.setCorreo(alumno.getCorreo());
+        alumnoInfoMod.setContrasenia(alumno.getContrasenia());
+        alumnoInfoMod.setPromedio(alumno.getPromedio());
+        alumnoInfoMod.setSemestre(alumno.getSemestre());
+        alumnoInfoMod.setRol(alumno.getRol());
+
+        datos.modificarAlumno(alumnoModificar, alumnoInfoMod);
+    }
+
 }
