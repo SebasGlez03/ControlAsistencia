@@ -218,6 +218,12 @@ public class FachadaPersistencia implements IPersistencia {
         return claseDAO.obtenerClase(clase);
     }
 
+    @Override
+    public List<Clase> obtenerTodasClases() {
+        ClaseDAO claseDAO = new ClaseDAO();
+        return claseDAO.obtenerTodasClases();
+    }
+
     /**
      * Metodo que agrega una clase a la base de datos
      *

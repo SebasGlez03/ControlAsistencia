@@ -5,9 +5,12 @@
 package dao;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import entidades.Clase;
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -16,7 +19,6 @@ import org.bson.types.ObjectId;
  * @author PC
  */
 public class ClaseDAO {
-
 
     /**
      * Metodo que obtiene una clase de la base de datos
@@ -43,6 +45,39 @@ public class ClaseDAO {
 
         return claseObtenida;
 
+    }
+
+    /**
+     * Metodo que obtiene la lista de todas las clases de la base de datos
+     *
+     * @return Lista con todas las clases de la base de datos
+     */
+    public List<Clase> obtenerTodasClases() {
+        // Crear una lista para almacenar las clases obtenidas
+        List<Clase> listaClases = new ArrayList<>();
+
+        // Conexión con la base de datos MongoDB
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("clases");
+
+        // Recuperar todos los documentos de la colección
+        FindIterable<Document> documentos = collection.find();
+
+        // Iterar sobre cada documento y mapearlo a un objeto Clase
+        for (Document doc : documentos) {
+            String nombre = doc.getString("nombre");
+            int semestre = doc.getInteger("semestre");
+
+            // Crear un objeto Clase y agregarlo a la lista
+            Clase clase = new Clase(nombre, semestre);
+            listaClases.add(clase);
+        }
+
+        // Cerrar el cliente de mongoDB
+        mongoClient.close();
+
+        return listaClases;
     }
 
     /**

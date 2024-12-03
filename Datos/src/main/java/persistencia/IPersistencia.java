@@ -157,6 +157,13 @@ public interface IPersistencia {
     public Clase obtenerClase(Clase clase);
 
     /**
+     * Obtiene la lista de todas las clases del sistema
+     *
+     * @return Lista con objetos tipo Clase de todas las clases
+     */
+    public List<Clase> obtenerTodasClases();
+
+    /**
      * Agrega una nueva clase al sistema.
      *
      * @param clase El objeto Clase que se desea agregar.
