@@ -177,6 +177,20 @@ public class FachadaPersistencia implements IPersistencia {
     }
 
     /**
+     * Obtiene la lista de materias impartidas por un maestro con sus nombres e
+     * IDs.
+     *
+     * @param matricula Matricula del maestro.
+     * @return Lista de objetos Clase que contienen el ID y nombre de las
+     * materias.
+     */
+    @Override
+    public List<Clase> obtenerMateriasConNombresPorMaestro(int matricula) {
+        MaestroDAO maestroDAO = new MaestroDAO();
+        return maestroDAO.obtenerMateriasConNombresPorMaestro(matricula);
+    }
+
+    /**
      * Metodo que obtiene el evento de la base de datos
      *
      * @param evento Objeto de tipo Evento a obtener de la base de datos

@@ -7,9 +7,12 @@ package dao;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import entidades.Clase;
 import entidades.Maestro;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -130,6 +133,48 @@ public class MaestroDAO {
         collection.updateOne(query, update);
 
         System.out.println("Maestro modificado correctamente");
+    }
+
+    /**
+     * Obtiene la lista de materias impartidas por un maestro con sus nombres e
+     * IDs.
+     *
+     * @param matricula Matricula del maestro.
+     * @return Lista de objetos Clase que contienen el ID y nombre de las
+     * materias.
+     */
+    public List<Clase> obtenerMateriasConNombresPorMaestro(int matricula) {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("usuarios");
+        MongoCollection<Document> collectionClases = database.getCollection("clases");
+
+        // Obtener el documento del maestro
+        Document maestro = collection.find(Filters.eq("matricula", matricula)).first();
+
+        if (maestro != null && maestro.containsKey("materiasImpartidas")) {
+            List<Document> materiasImpartidas = maestro.getList("materiasImpartidas", Document.class);
+            List<ObjectId> idsMaterias = materiasImpartidas.stream()
+                    .map(materia -> materia.getObjectId("id_materia"))
+                    .collect(Collectors.toList());
+
+            // Consultar la colección de materias para obtener sus detalles
+            List<Document> materiasDetalles = collectionClases.find(Filters.in("_id", idsMaterias)).into(new ArrayList<>());
+
+            // Convertir los documentos a objetos Clase usando el constructor vacío y los setters
+            List<Clase> listaClases = new ArrayList<>();
+            for (Document doc : materiasDetalles) {
+                Clase clase = new Clase(); // Constructor vacío
+                clase.setId(doc.getObjectId("_id")); // Configurar el ID
+                clase.setNombre(doc.getString("nombre")); // Configurar el nombre
+                listaClases.add(clase); // Agregar a la lista
+            }
+
+            return listaClases;
+        } else {
+            System.out.println("No se encontró el maestro o no tiene materias asignadas.");
+            return new ArrayList<>();
+        }
     }
 
 }
