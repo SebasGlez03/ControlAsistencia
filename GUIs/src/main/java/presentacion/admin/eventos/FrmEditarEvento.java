@@ -8,6 +8,8 @@ import dto.EventoDTO;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import persistencia.FachadaPersistencia;
+import subsistemaEvento.FachadaEvento;
+import subsistemaEvento.IEvento;
 
 /**
  *
@@ -17,33 +19,34 @@ public class FrmEditarEvento extends javax.swing.JFrame {
 
    
     
-    EventoDTO evento;
+    IEvento subEvento = new FachadaEvento();
+    EventoDTO eventoRecibido = new EventoDTO();
     
     /**
      * Creates new form FrmEditarEvento
      */
     public FrmEditarEvento() {
-        
+        initComponents();
     }
     
-    public FrmEditarEvento(EventoDTO evento) {
+    public FrmEditarEvento(EventoDTO eventoRecibido) {
         initComponents();
         
-        this.evento = evento;
-        mostrarInformacionActualCarrera();
+        
+        this.eventoRecibido = eventoRecibido;
+
+        campoTextoTitulo.setText(String.valueOf(eventoRecibido.getTitulo()));
+        campoTextoDescripcion.setText(eventoRecibido.getDescripcion());
+        campoDateFechaInicio.setDate(eventoRecibido.getFechaInicio());
+        campoDateFechaFin.setDate(eventoRecibido.getFechaFinal());
+        campoTextoHoraInicio.setText(eventoRecibido.getHoraInicio());
+        campoTextoHoraFin.setText(eventoRecibido.getHoraFinal());
+        comboBoxCampus.setSelectedItem(eventoRecibido.getCampus());
+        comboBoxCategoria.setSelectedItem(eventoRecibido.getCategoria());        
     }
 
     
-    public void mostrarInformacionActualCarrera() {
-        campoTextoTitulo.setText(evento.getTitulo());
-        campoTextoDescripcion.setText(evento.getDescripcion());
-        campoDateFechaInicio.setDate(evento.getFechaInicio());
-        campoDateFechaFin.setDate(evento.getFechaFinal()); // Corregido aquí
-        campoTextoHoraInicio.setText(evento.getHoraInicio());
-        campoTextoHoraFin.setText(evento.getHoraFinal());
-        comboBoxCampus.setSelectedItem(evento.getCampus()); // Corregido aquí
-        comboBoxCategoria.setSelectedItem(evento.getCategoria()); // Corregido aquí
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,6 +74,7 @@ public class FrmEditarEvento extends javax.swing.JFrame {
         campoDateFechaFin = new com.toedter.calendar.JDateChooser();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -143,6 +147,15 @@ public class FrmEditarEvento extends javax.swing.JFrame {
         jLabel8.setText("Editar Evento");
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, -1, -1));
 
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnReturn.png"))); // NOI18N
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 700, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrmEvento.png"))); // NOI18N
         jLabel1.setToolTipText("");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -157,6 +170,7 @@ public class FrmEditarEvento extends javax.swing.JFrame {
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
         // TODO add your handling code here:
+       dispose();
     }//GEN-LAST:event_btnCancelarMouseClicked
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
@@ -175,18 +189,18 @@ public class FrmEditarEvento extends javax.swing.JFrame {
 
            // Establece los atributos de la carrera
            // Aquí se puede realizar la lógica para guardar o actualizar el evento
-        evento.setTitulo(titulo);
-        evento.setDescripcion(descripcion);
-        evento.setFechaInicio(fechaInicio);
-        evento.setFechaFinal(fechaFinal);
-        evento.setHoraInicio(horaInicio);
-        evento.setHoraFinal(horaFinal);
-        evento.setCampus(campus);
-        evento.setCategoria(categoria);
+            EventoDTO eventoModificado = new EventoDTO();
+        eventoModificado.setTitulo(titulo);
+        eventoModificado.setDescripcion(descripcion);
+        eventoModificado.setFechaInicio(fechaInicio);
+        eventoModificado.setFechaFinal(fechaFinal);
+        eventoModificado.setHoraInicio(horaInicio);
+        eventoModificado.setHoraFinal(horaFinal);
+        eventoModificado.setCampus(campus);
+        eventoModificado.setCategoria(categoria);
 
-            // Inicializa CarreraNegocio y modifica la carrera
-            FachadaPersistencia fachada = new FachadaPersistencia();
-            fachada.modificarEvento(evento, eventoModificado);
+
+        subEvento.modificarEvento(eventoRecibido, eventoModificado);
 
             JOptionPane.showMessageDialog(this, "La Carrera se ha editado correctamente.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             dispose();
@@ -197,6 +211,11 @@ public class FrmEditarEvento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado: \n" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAgregarMouseClicked
+
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -237,6 +256,7 @@ public class FrmEditarEvento extends javax.swing.JFrame {
     private javax.swing.JLabel Titulo;
     private javax.swing.JLabel btnAgregar;
     private javax.swing.JLabel btnCancelar;
+    private javax.swing.JLabel btnRegresar;
     private com.toedter.calendar.JDateChooser campoDateFechaFin;
     private com.toedter.calendar.JDateChooser campoDateFechaInicio;
     private javax.swing.JTextField campoTextoDescripcion;

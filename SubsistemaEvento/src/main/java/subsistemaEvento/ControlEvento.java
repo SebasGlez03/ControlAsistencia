@@ -1,6 +1,6 @@
 package subsistemaEvento;
 
-import dao.EventoDAO;
+import dto.EventoDTO;
 import entidades.Evento;
 import java.util.List;
 import persistencia.FachadaPersistencia;
@@ -11,14 +11,18 @@ import persistencia.IPersistencia;
  */
 public class ControlEvento {
     
-    private EventoDAO eventoDAO;  // Instancia de EventoDAO para interactuar con la base de datos
-
+    private EventoDTO evento;  // Instancia de EventoDAO para interactuar con la base de datos
+    IPersistencia datos = new FachadaPersistencia();
+    
     /**
      * Constructor de ControlEvento.
      * Inicializa el DAO de eventos.
      */
     public ControlEvento() {
-        this.eventoDAO = new EventoDAO();
+    }
+
+    public ControlEvento(EventoDTO evento) {
+        this.evento = evento;
     }
 
     /**
@@ -26,21 +30,10 @@ public class ControlEvento {
      * 
      * @param evento el evento a agregar
      */
-    public void agregarEvento(Evento evento) {
-        // Validaciones antes de agregar el evento
-        if (evento.getTitulo() == null || evento.getTitulo().isEmpty()) {
-            throw new IllegalArgumentException("El título del evento es obligatorio.");
-        }
-        if (evento.getFechaInicio() == null) {
-            throw new IllegalArgumentException("La fecha de inicio del evento es obligatoria.");
-        }
-        if (evento.getFechaFinal() == null) {
-            throw new IllegalArgumentException("La fecha de finalización del evento es obligatoria.");
-        }
-        
-        // Agregar el evento al repositorio (base de datos)
-        eventoDAO.agregarEvento(evento);
-        System.out.println("Evento agregado correctamente");
+    public void agregarEvento(EventoDTO evento) {
+        Evento eventoAgregar = convertirAlumnoDTOaEntidad(evento);
+
+        datos.agregarEvento(eventoAgregar);
     }
 
     /**
@@ -49,21 +42,14 @@ public class ControlEvento {
      * @param evento el evento original
      * @param eventoModificado el evento con los nuevos datos
      */
-    public void modificarEvento(Evento evento, Evento eventoModificado) {
-        // Validaciones antes de modificar el evento
-        if (eventoModificado.getTitulo() == null || eventoModificado.getTitulo().isEmpty()) {
-            throw new IllegalArgumentException("El título del evento es obligatorio.");
-        }
-        if (eventoModificado.getFechaInicio() == null) {
-            throw new IllegalArgumentException("La fecha de inicio del evento es obligatoria.");
-        }
-        if (eventoModificado.getFechaFinal() == null) {
-            throw new IllegalArgumentException("La fecha de finalización del evento es obligatoria.");
-        }
+    public void modificarEvento(EventoDTO evento, EventoDTO eventoModificado) {
+       // Informacion del alumno
+        Evento eventoModificar = convertirAlumnoDTOaEntidad(evento);
 
-        // Modificar el evento en el repositorio (base de datos)
-        eventoDAO.modificarEvento(evento, eventoModificado);
-        System.out.println("Evento modificado correctamente");
+        // Informacion del alumno con la nueva informacion
+        Evento eventoInfoModi = convertirAlumnoDTOaEntidad(eventoModificado);
+
+        datos.modificarEvento(eventoModificar, eventoInfoModi);
     }
 
     /**
@@ -72,19 +58,21 @@ public class ControlEvento {
      * @param titulo el título del evento a buscar
      * @return el evento encontrado, o null si no se encuentra
      */
-    public Evento obtenerEvento(String titulo) {
-        // Se crea un objeto Evento con el título dado
-        Evento evento = new Evento();
-        evento.setTitulo(titulo);
-        
-        // Obtener el evento del repositorio (base de datos)
-        Evento eventoObtenido = eventoDAO.obtenerEvento(evento);
-        
-        if (eventoObtenido == null) {
-            System.out.println("No se encontró el evento con el título: " + titulo);
-        }
-        
-        return eventoObtenido;
+    public EventoDTO obtenerEvento(String titulo) {
+        Evento eventoObtenido = datos.obtenerEventoPorTitulo(titulo);
+        EventoDTO evento = new EventoDTO();
+
+        evento.setTitulo(eventoObtenido.getTitulo());
+        evento.setDescripcion(eventoObtenido.getDescripcion());
+        evento.setFechaInicio(eventoObtenido.getFechaInicio());
+        evento.setFechaFinal(eventoObtenido.getFechaFinal());
+        evento.setHoraInicio(eventoObtenido.getHoraInicio());
+        evento.setHoraFinal(eventoObtenido.getHoraFinal());
+        evento.setCampus(eventoObtenido.getCampus());
+        evento.setCategoria(eventoObtenido.getCategoria());
+
+
+        return evento;
     }
     
       /**
@@ -93,20 +81,10 @@ public class ControlEvento {
      * @param titulo el título del evento a eliminar
      * @return true si el evento fue eliminado correctamente, false si no se encuentra
      */
-    public boolean eliminarEvento(String titulo) {
-        // Buscar el evento en la base de datos
-        Evento evento = obtenerEvento(titulo);
+    public void eliminarEvento(EventoDTO evento) {
+        Evento eventoEliminar = convertirAlumnoDTOaEntidad(evento);
 
-        // Si el evento existe, eliminarlo
-        if (evento != null) {
-            // Eliminar el evento del repositorio (base de datos)
-            eventoDAO.eliminarEvento(evento);
-            System.out.println("Evento eliminado correctamente");
-            return true;
-        } else {
-            System.out.println("No se encontró el evento para eliminar");
-            return false;
-        }
+        datos.eliminarEvento(eventoEliminar);
     }
     
     public List<Evento> obtenerListaEventos() {
@@ -114,5 +92,20 @@ public class ControlEvento {
 
         return datos.obtenerTodosEventos();
     }
+    public Evento convertirAlumnoDTOaEntidad(EventoDTO dto) {
 
+            Evento evento = new Evento();
+
+            evento.setTitulo(dto.getTitulo());
+            evento.setDescripcion(dto.getDescripcion());
+            evento.setFechaInicio(dto.getFechaInicio());
+            evento.setFechaFinal(dto.getFechaFinal());
+            evento.setHoraInicio(dto.getHoraInicio());
+            evento.setHoraFinal(dto.getHoraFinal());
+            evento.setCampus(dto.getCampus());
+            evento.setCategoria(dto.getCategoria());
+
+
+            return evento;
+    }
 }

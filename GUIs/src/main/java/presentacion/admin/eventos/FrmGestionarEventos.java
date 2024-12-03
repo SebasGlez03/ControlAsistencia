@@ -8,7 +8,6 @@ import dto.EventoDTO;
 import entidades.Evento;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import presentacion.admin.FrmAdminMenu;
 import subsistemaEvento.FachadaEvento;
+import subsistemaEvento.IEvento;
 import utilerias.JButtonCellEditor;
 import utilerias.JButtonRenderer;
 
@@ -23,16 +23,16 @@ import utilerias.JButtonRenderer;
  *
  * @author limon
  */
-public class FrmAdminMenuEventos extends javax.swing.JFrame {
+public class FrmGestionarEventos extends javax.swing.JFrame {
 
-    FachadaEvento fachadaEvento = new FachadaEvento(); // Connect to your Evento facade
+    IEvento subEvento = new FachadaEvento();
 
-    public FrmAdminMenuEventos() {
+    public FrmGestionarEventos() {
         initComponents();
         
+        llenarTablaEventos(subEvento.obtenerListaEventos());
         botonEliminarEnTabla();
         botonEditarEnTabla();
-        llenarTablaEventos(fachadaEvento.obtenerListaEventos()); // Populate table with events
     }
 
     public void llenarTablaEventos(List<Evento> listaEventos) {
@@ -46,7 +46,7 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
         
         if (listaEventos != null) {
             listaEventos.forEach(row -> {
-                Object[] fila = new Object[6]; // Adjust the columns based on Evento's properties
+                Object[] fila = new Object[8]; // Adjust the columns based on Evento's properties
                 fila[0] = row.getTitulo();
                 fila[1] = row.getDescripcion();
                 fila[2] = row.getFechaInicio();
@@ -69,23 +69,32 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Obtén la fila seleccionada
-                int filaSeleccionada = tblCarrera.getSelectedRow();
+                int filaSeleccionada = tblEvento.getSelectedRow();
 
                 if (filaSeleccionada != -1) { // Verifica que haya una fila seleccionada
                     // Usa el modelo para obtener los datos de la carrera en esa fila
-                    DefaultTableModel modeloTabla = (DefaultTableModel) tblCarrera.getModel();
+                    DefaultTableModel modeloTabla = (DefaultTableModel) tblEvento.getModel();
 
-                    Long idCarrera = (Long) modeloTabla.getValueAt(filaSeleccionada, 0); // Suponiendo que el ID esté en la columna 0
-                    String nombreCarrera = (String) modeloTabla.getValueAt(filaSeleccionada, 1);
-                    Date tiempoDiario = (Date) modeloTabla.getValueAt(filaSeleccionada, 2);
-                    
+                    String titulo = (String) modeloTabla.getValueAt(filaSeleccionada, 0); 
+                    String descripcion = (String) modeloTabla.getValueAt(filaSeleccionada, 1);
+                    Date fechaInicio = (Date) modeloTabla.getValueAt(filaSeleccionada, 2);
+                    Date fechaFinal = (Date) modeloTabla.getValueAt(filaSeleccionada, 3);
+                    String horaInicio = (String) modeloTabla.getValueAt(filaSeleccionada, 4);
+                    String horaFinal = (String) modeloTabla.getValueAt(filaSeleccionada, 5);
+                    String campus = (String) modeloTabla.getValueAt(filaSeleccionada, 6);
+                    String categoria = (String) modeloTabla.getValueAt(filaSeleccionada, 7);
 
-                    // Crea un carreraDTO usando los datos obtenidos de la fila
+                    // Crea un eventoDTO usando los datos obtenidos de la fila
                     
-                    CarreraDTO carrera = new CarreraDTO();
-                    carrera.setId(idCarrera);
-                    carrera.setNombre(nombreCarrera);
-                    carrera.setTiempoDiario(tiempoDiario);
+                    EventoDTO evento = new EventoDTO();
+                    evento.setTitulo(titulo);
+                    evento.setDescripcion(descripcion);
+                    evento.setFechaInicio(fechaInicio);
+                    evento.setFechaFinal(fechaFinal);
+                    evento.setHoraInicio(horaInicio);
+                    evento.setHoraFinal(horaFinal);
+                    evento.setCampus(campus);
+                    evento.setCategoria(categoria);
         
                     // Aquí puedes implementar la lógica de eliminación o cualquier otra acción
 //                    System.out.println("Carrera a eliminar: " + carrera.toString());
@@ -99,13 +108,12 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
 
                     if (respuesta == JOptionPane.YES_OPTION) {
                         try {
-                            FachadaPersistencia.eliminarEvento(evento);
-                            JOptionPane.showMessageDialog(null, "La Carrera se ha eliminado correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-                            dispose();
-                            FrmAdminMenuEventos frm = new FrmAdminMenuEventos();
-                            frm.setVisible(true);
+                            subEvento.eliminarEvento(evento);
+                            JOptionPane.showMessageDialog(null, "El usuario se ha eliminado correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                            modeloTabla.setRowCount(0);
+                            llenarTablaEventos(subEvento.obtenerListaEventos());
                         } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null, "Ha ocurrido un error inesperado al eliminar la carrera: " + ex, "ERROR", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Ha ocurrido un error inesperado al eliminar el usuario: " + ex, "ERROR", JOptionPane.ERROR_MESSAGE);
                         }
                     }
 
@@ -113,9 +121,9 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
             }
         };
 
-        TableColumnModel modeloColumnas = this.tblCarrera.getColumnModel();
-        modeloColumnas.getColumn(4).setCellRenderer(new JButtonRenderer("Eliminar"));
-        modeloColumnas.getColumn(4).setCellEditor(new JButtonCellEditor("Eliminar", onEliminarClickListener));
+        TableColumnModel modeloColumnas = this.tblEvento.getColumnModel();
+        modeloColumnas.getColumn(8).setCellRenderer(new JButtonRenderer("Eliminar"));
+        modeloColumnas.getColumn(8).setCellEditor(new JButtonCellEditor("Eliminar", onEliminarClickListener));
     }
 
     private void botonEditarEnTabla() {
@@ -134,10 +142,10 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
                  
                  String titulo = (String) modeloTabla.getValueAt(filaSeleccionada, 0); // Titulo en la columna 1
                  String descripcion = (String) modeloTabla.getValueAt(filaSeleccionada, 1); // Descripción en la columna 2
-                 Date fechaInicioDate = (Date) modeloTabla.getValueAt(filaSeleccionada, 2); // Fecha de inicio en la columna 3
-                 Date fechaFinDate = (Date) modeloTabla.getValueAt(filaSeleccionada, 3); // Fecha de finalización en la columna 4
+                 Date fechaInicio = (Date) modeloTabla.getValueAt(filaSeleccionada, 2); // Fecha de inicio en la columna 3
+                 Date fechaFinal = (Date) modeloTabla.getValueAt(filaSeleccionada, 3); // Fecha de finalización en la columna 4
                  String horaInicio = (String) modeloTabla.getValueAt(filaSeleccionada, 4); // Hora de inicio en la columna 5
-                 String horaFin = (String) modeloTabla.getValueAt(filaSeleccionada, 5); // Hora de finalización en la columna 6
+                 String horaFinal = (String) modeloTabla.getValueAt(filaSeleccionada, 5); // Hora de finalización en la columna 6
                  String campus = (String) modeloTabla.getValueAt(filaSeleccionada, 6); // Campus en la columna 7
                  String categoria = (String) modeloTabla.getValueAt(filaSeleccionada, 7); // Categoría en la columna 8
 
@@ -146,10 +154,10 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
                 
                  evento.setTitulo(titulo);
                  evento.setDescripcion(descripcion);
-                 evento.setFechaInicio(fechaInicioDate);
-                 evento.setFechaFinal(fechaFinDate);
+                 evento.setFechaInicio(fechaInicio);
+                 evento.setFechaFinal(fechaFinal);
                  evento.setHoraInicio(horaInicio);
-                 evento.setHoraFinal(horaFin);
+                 evento.setHoraFinal(horaFinal);
                  evento.setCampus(campus);
                  evento.setCategoria(categoria);
 
@@ -212,17 +220,17 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
 
         tblEvento.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Titulo", "Descripcion", "Fecha inicio", "Fecha fin", "Hora inicio", "Hora fin", "Campus", "Categoria"
+                "Titulo", "Descripcion", "Fecha inicio", "Fecha final", "Hora inicio", "Hora final", "Campus", "Categoria", "editar", "eliminar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -269,20 +277,21 @@ public class FrmAdminMenuEventos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmAdminMenuEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmAdminMenuEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmAdminMenuEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmAdminMenuEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarEventos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmAdminMenuEventos().setVisible(true);
+                new FrmGestionarEventos().setVisible(true);
             }
         });
     }

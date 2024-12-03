@@ -4,6 +4,7 @@
  */
 package subsistemaEvento;
 
+import dto.EventoDTO;
 import entidades.Evento;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface IEvento {
      * 
      * @param evento el evento a agregar
      */
-    void agregarEvento(Evento evento);
+    public void agregarEvento(EventoDTO evento);
 
     /**
      * Modifica un evento existente en el sistema.
@@ -26,17 +27,12 @@ public interface IEvento {
      * @param evento el evento original
      * @param eventoModificado el evento con los nuevos datos
      */
-    void modificarEvento(Evento evento, Evento eventoModificado);
+    public void modificarEvento(EventoDTO evento, EventoDTO eventoModificado);
 
-    /**
-     * Obtiene un evento por su título.
-     * 
-     * @param titulo el título del evento a buscar
-     * @return el evento encontrado
-     */
-    Evento obtenerEvento(String titulo);
+
+    public EventoDTO obtenerEvento(String titulo);
     
-    boolean eliminarEvento(String titulo);
+    public void eliminarEvento(EventoDTO evento);
     
     public List<Evento> obtenerListaEventos();
     
