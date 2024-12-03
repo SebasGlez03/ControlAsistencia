@@ -81,7 +81,7 @@ public class FrmModificarAlumnos extends javax.swing.JFrame {
 
         lblAdministrarUsuarios1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblAdministrarUsuarios1.setForeground(new java.awt.Color(255, 255, 255));
-        lblAdministrarUsuarios1.setText("Agregar Usuario");
+        lblAdministrarUsuarios1.setText("Modificar Alumno");
 
         lblMatricula.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblMatricula.setForeground(new java.awt.Color(255, 255, 255));

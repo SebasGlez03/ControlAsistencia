@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion.admin.alumnos;
+package presentacion.admin.maestro;
 
+import presentacion.admin.alumnos.*;
 import presentacion.admin.usuarios.*;
 import dto.UsuarioDTO;
 import java.util.HashMap;
@@ -17,16 +18,31 @@ import javax.swing.*;
  *
  * @author PC
  */
-public class FrmAgregarAlumno extends javax.swing.JFrame {
+public class FrmModificarMaestro extends javax.swing.JFrame {
 
     IUsuario subsUsuario = new FachadaUsuario();
+    UsuarioDTO usuarioRecibido = new UsuarioDTO();
 
     /**
      * Creates new form FrmAgregarUsuario
      */
-    public FrmAgregarAlumno() {
+    public FrmModificarMaestro() {
         initComponents();
         llenarComboBox(comboBoxRol);
+    }
+
+    public FrmModificarMaestro(UsuarioDTO usuarioRecibido) {
+        initComponents();
+        llenarComboBox(comboBoxRol);
+        this.usuarioRecibido = usuarioRecibido;
+
+        txtMatricula.setText(String.valueOf(usuarioRecibido.getMatricula()));
+        txtNombre.setText(usuarioRecibido.getNombre());
+        txtApellidoPaterno.setText(usuarioRecibido.getApellidoPaterno());
+        txtApellidoMaterno.setText(usuarioRecibido.getApellidoMaterno());
+        txtCorreo.setText(usuarioRecibido.getCorreo());
+        txtContrasenia.setText(usuarioRecibido.getContrasenia());
+
     }
 
     /**
@@ -66,7 +82,7 @@ public class FrmAgregarAlumno extends javax.swing.JFrame {
 
         lblAdministrarUsuarios1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         lblAdministrarUsuarios1.setForeground(new java.awt.Color(255, 255, 255));
-        lblAdministrarUsuarios1.setText("Agregar Alumno");
+        lblAdministrarUsuarios1.setText("Modificar Maestro");
 
         lblMatricula.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblMatricula.setForeground(new java.awt.Color(255, 255, 255));
@@ -79,11 +95,6 @@ public class FrmAgregarAlumno extends javax.swing.JFrame {
         txtNombre.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         txtMatricula.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtMatricula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMatriculaActionPerformed(evt);
-            }
-        });
 
         lblApellidoPaterno.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblApellidoPaterno.setForeground(new java.awt.Color(255, 255, 255));
@@ -242,30 +253,30 @@ public class FrmAgregarAlumno extends javax.swing.JFrame {
             objectIdMap.put("Admin", new ObjectId("674b87f4549a4c0c82072f8c"));
 
             // Crear el objeto UsuarioDTO
-            UsuarioDTO usuario = new UsuarioDTO();
-            usuario.setMatricula(Integer.parseInt(txtMatricula.getText()));
-            usuario.setNombre(txtNombre.getText());
-            usuario.setApellidoPaterno(txtApellidoPaterno.getText());
-            usuario.setApellidoMaterno(txtApellidoMaterno.getText());
-            usuario.setCorreo(txtCorreo.getText());
-            usuario.setContrasenia(txtContrasenia.getText()); // Encriptar la contraseña
+            UsuarioDTO usuarioModificado = new UsuarioDTO();
+            usuarioModificado.setMatricula(Integer.parseInt(txtMatricula.getText()));
+            usuarioModificado.setNombre(txtNombre.getText());
+            usuarioModificado.setApellidoPaterno(txtApellidoPaterno.getText());
+            usuarioModificado.setApellidoMaterno(txtApellidoMaterno.getText());
+            usuarioModificado.setCorreo(txtCorreo.getText());
+            usuarioModificado.setContrasenia(txtContrasenia.getText()); // Encriptar la contraseña
 
             // Obtener el rol seleccionado
             String selectedRole = (String) comboBoxRol.getSelectedItem(); // Etiqueta seleccionada
             ObjectId selectedRoleId = objectIdMap.get(selectedRole);      // ObjectId asociado
 
             // Establecer el rol como el ObjectId en el UsuarioDTO
-            usuario.setRol(selectedRoleId);
+            usuarioModificado.setRol(selectedRoleId);
 
             // Confirmación en consola (opcional)
-            System.out.println("Usuario creado: " + usuario);
+            System.out.println("Usuario creado para modificar: " + usuarioModificado);
             System.out.println("Rol seleccionado: " + selectedRole + " -> ObjectId: " + selectedRoleId);
 
-            subsUsuario.agregarUsuario(usuario);
+            subsUsuario.modificarUsuario(usuarioRecibido, usuarioModificado);
 
-            JOptionPane.showMessageDialog(this, "El usuario se ha agregado correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            FrmGestionarAlumnos gestionarAlumnos = new FrmGestionarAlumnos();
-            gestionarAlumnos.setVisible(true);
+            JOptionPane.showMessageDialog(this, "El usuario se ha modificado correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            FrmGestionarMaestro frmGestionarUsuarios = new FrmGestionarMaestro();
+            frmGestionarUsuarios.setVisible(true);
             this.dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado: " + e, "Ha ocurrido un Error", JOptionPane.ERROR_MESSAGE);
@@ -298,14 +309,10 @@ public class FrmAgregarAlumno extends javax.swing.JFrame {
     }
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        FrmGestionarAlumnos gestionarAlumnos = new FrmGestionarAlumnos();
-        gestionarAlumnos.setVisible(true);
+        FrmGestionarMaestro gestionarUsuarios = new FrmGestionarMaestro();
+        gestionarUsuarios.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void txtMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatriculaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMatriculaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,14 +331,42 @@ public class FrmAgregarAlumno extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmAgregarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarMaestro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmAgregarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarMaestro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmAgregarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarMaestro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmAgregarAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarMaestro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -340,7 +375,7 @@ public class FrmAgregarAlumno extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmAgregarAlumno().setVisible(true);
+                new FrmModificarMaestro().setVisible(true);
             }
         });
     }
