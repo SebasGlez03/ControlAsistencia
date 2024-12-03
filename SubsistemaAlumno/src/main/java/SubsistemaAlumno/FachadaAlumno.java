@@ -63,28 +63,4 @@ public class FachadaAlumno implements IAlumno {
         controlAlumno.modificarAlumno(alumno, alumnoModificado);
     }
 
-    /**
-     * Metodo que convierte un AlumnoDTO a un AlumnoEntidad
-     *
-     * @param dto AlumnoDTO que se transformara a AlumnoEntidad
-     * @return Alumno de tipo Entidad
-     */
-    public Alumno convertirAlumnoDTOaEntidad(AlumnoDTO dto) {
-
-        Alumno alumno = new Alumno();
-
-        alumno.setMatricula(dto.getMatricula());
-        alumno.setNombre(dto.getNombre());
-        alumno.setApellidoPaterno(dto.getApellidoPaterno());
-        alumno.setApellidoMaterno(dto.getApellidoMaterno());
-        alumno.setCorreo(dto.getCorreo());
-        alumno.setContrasenia(dto.getContrasenia());
-        alumno.setRol(dto.getRol());
-        alumno.setSemestre(dto.getSemestre());
-        alumno.setPromedio(dto.getPromedio());
-        alumno.setEstadoAsistencia(dto.getEstadoAsistencia());
-
-        return alumno;
-    }
-
 }

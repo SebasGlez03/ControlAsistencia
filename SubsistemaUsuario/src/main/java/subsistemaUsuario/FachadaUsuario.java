@@ -7,6 +7,7 @@ package subsistemaUsuario;
 import dto.UsuarioDTO;
 import entidades.Usuario;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -52,6 +53,17 @@ public class FachadaUsuario implements IUsuario {
     @Override
     public String getRolUsuario(int id) {
         return controlUsuario.getRolUsuario(id);
+    }
+
+    /**
+     * Metodo que obtiene el nombre del rol del usuario mediante su ObjectId
+     *
+     * @param rolId ObjectId del rol
+     * @return Nombre del rol del usuario
+     */
+    @Override
+    public String getRolUsuarioViaObjectId(ObjectId rolId) {
+        return controlUsuario.getRolUsuarioViaObjectId(rolId);
     }
 
     /**

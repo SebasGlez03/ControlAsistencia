@@ -56,6 +56,23 @@ public class UsuarioDAO {
     }
 
     /**
+     * Metodo que obtiene el nombre de el rol del usuario en forma de string
+     *
+     * @param rolId Id del rol del usuario
+     * @return Nombre del rol en forma de String
+     */
+    public String obtenerNombreRol(ObjectId rolId) {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("rolesUsuario");
+
+        Document rolQuery = new Document("_id", rolId);
+        Document rolDoc = collection.find(rolQuery).first();
+
+        return (rolDoc != null) ? rolDoc.getString("rol") : "Rol no encontrado";
+    }
+
+    /**
      * Metodo que obtiene todos los usuarios de la base de datos
      *
      * @return Lista de objetos tipo Usuario obtenidos
@@ -91,6 +108,51 @@ public class UsuarioDAO {
         mongoClient.close();
 
         return listaUsuarios;
+    }
+
+    /**
+     * Metodo que obtiene todos los usuarios de la base de datos con sus roles
+     * como Strings.
+     *
+     * @return Lista de documentos con los datos de los usuarios y sus roles
+     * como Strings.
+     */
+    public List<Document> obtenerTodosUsuariosConRolString() {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> usuariosCollection = database.getCollection("usuarios");
+
+        // Crear la consulta de agregación
+        List<Bson> pipeline = new ArrayList<>();
+
+        // Realizar el lookup para enlazar la colección "rolesUsuario" con los usuarios
+        pipeline.add(Aggregates.lookup(
+                "rolesUsuario", // Nombre de la colección con los roles
+                "rol", // Campo local en "usuarios" (ObjectId del rol)
+                "_id", // Campo remoto en "rolesUsuario" (ObjectId)
+                "detalles_rol" // Alias para el resultado del lookup
+        ));
+
+        // Descomponer el array "detalles_rol" (debería tener un solo elemento)
+        pipeline.add(Aggregates.unwind("$detalles_rol"));
+
+        // Proyección para seleccionar los campos deseados
+        pipeline.add(Aggregates.project(Projections.fields(
+                Projections.excludeId(), // Excluir el _id original del usuario
+                Projections.include("matricula", "nombre", "apellidoPaterno", "apellidoMaterno",
+                        "correo", "contrasenia", "detalles_rol.rol") // Incluir datos relevantes
+        )));
+
+        // Ejecutar la consulta de agregación
+        AggregateIterable<Document> result = usuariosCollection.aggregate(pipeline);
+
+        // Convertir el resultado a una lista
+        List<Document> usuariosConRol = new ArrayList<>();
+        for (Document usuario : result) {
+            usuariosConRol.add(usuario);
+        }
+
+        return usuariosConRol;
     }
 
     /**

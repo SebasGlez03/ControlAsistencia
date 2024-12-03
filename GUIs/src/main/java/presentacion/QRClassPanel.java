@@ -5,6 +5,8 @@
 package presentacion;
 
 import entidades.Alumno;
+import entidades.Clase;
+import entidades.Maestro;
 import entidades.Usuario;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,6 +15,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
+import org.bson.types.ObjectId;
 import subsubsistemaqr.FachadaQR;
 import subsubsistemaqr.IQR;
 
@@ -77,7 +80,14 @@ public class QRClassPanel extends javax.swing.JPanel {
     }
 
     private void mostrarQR() {
-        iqr.generarQR();
+        List<String> materiasPrueba = new ArrayList<>();
+        materiasPrueba.add("ClasePrueba");
+        Maestro maestroPrueba = new Maestro(materiasPrueba, 665544, "NombrePreuba", "ApelPrue", "PrueApell", "correo@gmail.com", "contrasenia", new ObjectId());
+        Clase clasePrueba = new Clase("ClasePrueba", 5);
+        clasePrueba.setId(new ObjectId());
+        
+        
+        iqr.generarQR(clasePrueba, maestroPrueba);
 
         try {
             BufferedImage qrImage = ImageIO.read(new File(iqr.obtenerPathQR()));

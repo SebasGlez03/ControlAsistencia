@@ -1,3 +1,4 @@
+dao\QrDAO.class
 persistencia\IPersistencia.class
 dao\AlumnoDAO.class
 dao\ClaseDAO.class

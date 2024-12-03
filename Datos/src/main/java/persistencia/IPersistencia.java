@@ -6,8 +6,8 @@ package persistencia;
 
 import entidades.*;
 import java.util.List;
-import javax.swing.JComboBox;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  * Interfaz IPersistencia que define los métodos para realizar operaciones de
@@ -26,11 +26,27 @@ public interface IPersistencia {
     public Usuario obtenerUsuario(int matricula);
 
     /**
+     * Obtiene el rol del usuario en forma de String para mostrarlo
+     *
+     * @param rolId El id del rol a obtener su nombre
+     * @return Nombre del rol en forma de string obtenido
+     */
+    public String obtenerNombreRol(ObjectId rolId);
+
+    /**
      * Metodo que obtiene todos los usuarios de la base de datos
      *
      * @return Lista de objetos tipo Usuario obtenidos
      */
     public List<Usuario> obtenerTodosUsuarios();
+
+    /**
+     * Metodo que obtiene todos los usuarios con su rol de forma String de la
+     * base de datos
+     *
+     * @return Lista de documentos obtenidos
+     */
+    public List<Document> obtenerTodosUsuariosConRolString();
 
     /**
      * Obtiene el nombre del rol de un usuario del sistema.
@@ -161,6 +177,13 @@ public interface IPersistencia {
     public Clase obtenerClase(Clase clase);
 
     /**
+     * Obtiene la lista de todas las clases del sistema
+     *
+     * @return Lista con objetos tipo Clase de todas las clases
+     */
+    public List<Clase> obtenerTodasClases();
+
+    /**
      * Agrega una nueva clase al sistema.
      *
      * @param clase El objeto Clase que se desea agregar.
@@ -204,5 +227,36 @@ public interface IPersistencia {
      * @return Sesion con la informacion de los alumnos y su asistencia.
      */
     public List<Document> obtenerAlumnosSesion(Sesion sesion);
+
+    /**
+     * Metodo que obtiene un qr de la base de datos
+     *
+     * @param qr QR a obtener de la base de datos
+     * @return QR obtenido
+     */
+    public QR obtenerQR(QR qr);
+
+    /**
+     * Metodo que agrega un qr a la base de datos
+     *
+     * @param qr QR a agregar a la base de datos
+     */
+    public void agregarQR(QR qr);
+    
+    /**
+     * Guarda un QR en la base de datos.
+     *
+     * @param qr Objeto QR que se desea guardar.
+     */
+    public void guardarQR(QR qr);
+    
+    /**
+     * Crea una nueva sesión vinculada a un QR en la base de datos.
+     *
+     * @param idSesion ID de la sesión.
+     * @param clase Clase asociada a la sesión.
+     * @param maestro Maestro asociado a la sesión.
+     */
+    public void crearSesion(ObjectId idSesion, Clase clase, Maestro maestro);
 
 }

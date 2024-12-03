@@ -93,27 +93,4 @@ public class FachadaMaestro implements IMaestro {
         controlMaestro.modificarMaestro(maestro, maestroModificado);
     }
 
-    /**
-     * Metodo que convierte un MaestroDTO a un MaestroEntidad
-     *
-     * @param dto MaestroDTO que se transfotrma a MaestroEntidad
-     * @return Maestro de tipo Entidad
-     */
-    public Maestro convertirMaestroDTOaEntidad(MaestroDTO dto) {
-
-        Maestro maestro = new Maestro();
-
-        maestro.setMatricula(dto.getMatricula());
-        maestro.setNombre(dto.getNombre());
-        maestro.setApellidoPaterno(dto.getApellidoPaterno());
-        maestro.setApellidoMaterno(dto.getApellidoMaterno());
-        maestro.setCorreo(dto.getCorreo());
-        maestro.setContrasenia(dto.getContrasenia());
-        maestro.setRol(dto.getRol());
-        maestro.setMaterias(dto.getMaterias());
-
-        return maestro;
-
-    }
-
 }

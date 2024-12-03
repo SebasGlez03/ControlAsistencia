@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package presentacion.admin.alumnos;
+package presentacion.admin.clases;
 
-import presentacion.admin.usuarios.*;
+import dto.ClaseDTO;
 import dto.UsuarioDTO;
-import entidades.Usuario;
+import entidades.Clase;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -15,7 +15,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import org.bson.types.ObjectId;
 import presentacion.admin.FrmAdminMenu;
-import subsistemaUsuario.*;
+import subsistemaClases.FachadaClase;
+import subsistemaClases.IClase;
 import utilerias.JButtonCellEditor;
 import utilerias.JButtonRenderer;
 
@@ -23,28 +24,28 @@ import utilerias.JButtonRenderer;
  *
  * @author PC
  */
-public class FrmGestionarAlumnos extends javax.swing.JFrame {
+public class FrmGestionarClase extends javax.swing.JFrame {
 
-    IUsuario subsUsuario = new FachadaUsuario();
+    IClase subsClase = new FachadaClase();
 
     /**
      * Creates new form FrmEliminarUsuarioTabla
      */
-    public FrmGestionarAlumnos() {
+    public FrmGestionarClase() {
         initComponents();
-        llenarTablaUsuarios(subsUsuario.obtenerListaUsuarios());
+        llenarTablaClases(subsClase.obtenerTodasClases());
         botonEliminarEnTabla();
         botonEditarEnTabla();
     }
 
     /**
-     * Metodo que llena la tabla de usuarios con la informacion de la base de
+     * Metodo que llena la tabla de clases con la informacion de la base de
      * datos
      *
-     * @param listaUsuarios lista de usuarios proveniente de la base de datos.
+     * @param listaClases lista de clases proveniente de la base de datos.
      */
-    public void llenarTablaUsuarios(List<Usuario> listaUsuarios) {
-        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblUsuarios.getModel();
+    public void llenarTablaClases(List<Clase> listaClases) {
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblClases.getModel();
 
         if (modeloTabla.getRowCount() > 0) {
             for (int i = modeloTabla.getRowCount() - 1; i > -1; i--) {
@@ -52,17 +53,12 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
             }
         }
 
-        if (listaUsuarios != null) {
-            listaUsuarios.forEach(row -> {
-                Object[] fila = new Object[10]; // Eran 7, pero se pusieron 10 para agregar el rol donde no lo vea el usuario
-                fila[0] = row.getMatricula();
+        if (listaClases != null) {
+            listaClases.forEach(row -> {
+                Object[] fila = new Object[3];
+                fila[0] = row.getId();
                 fila[1] = row.getNombre();
-                fila[2] = row.getApellidoPaterno();
-                fila[3] = row.getApellidoMaterno();
-                fila[4] = row.getCorreo();
-                fila[5] = row.getContrasenia();
-                fila[6] = subsUsuario.getRolUsuarioViaObjectId(row.getRol());
-                fila[9] = row.getRol(); // Esto no se mostrara al usuario, es solo para utilizarlo en el btn y que obtenga este valor
+                fila[2] = row.getSemestre();
 
                 modeloTabla.addRow(fila);
             });
@@ -80,35 +76,27 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Obtén la fila seleccionada
-                int filaSeleccionada = tblUsuarios.getSelectedRow();
+                int filaSeleccionada = tblClases.getSelectedRow();
 
                 if (filaSeleccionada != -1) { // Verifica que haya una fila seleccionada
-                    // Usa el modelo para obtener los datos del estudiante en esa fila
-                    DefaultTableModel modeloTabla = (DefaultTableModel) tblUsuarios.getModel();
+                    // Usa el modelo para obtener los datos de la clase en esa fila
+                    DefaultTableModel modeloTabla = (DefaultTableModel) tblClases.getModel();
 
-                    int matricula = (Integer) modeloTabla.getValueAt(filaSeleccionada, 0); // Suponiendo que el ID esté en la columna 0
+                    ObjectId id = (ObjectId) modeloTabla.getValueAt(filaSeleccionada, 0);
                     String nombre = (String) modeloTabla.getValueAt(filaSeleccionada, 1);
-                    String apellidoPaterno = (String) modeloTabla.getValueAt(filaSeleccionada, 2);
-                    String apellidoMaterno = (String) modeloTabla.getValueAt(filaSeleccionada, 3);
-                    String correo = (String) modeloTabla.getValueAt(filaSeleccionada, 4);
-                    String contrasenia = (String) modeloTabla.getValueAt(filaSeleccionada, 5);
-                    ObjectId rol = (ObjectId) modeloTabla.getValueAt(filaSeleccionada, 9);
+                    int semestre = (Integer) modeloTabla.getValueAt(filaSeleccionada, 2);
 
-                    // Crea un EstudianteDTO usando los datos obtenidos de la fila
-                    UsuarioDTO usuario = new UsuarioDTO();
-                    usuario.setMatricula(matricula);
-                    usuario.setNombre(nombre);
-                    usuario.setApellidoPaterno(apellidoPaterno);
-                    usuario.setApellidoMaterno(apellidoMaterno);
-                    usuario.setCorreo(correo);
-                    usuario.setContrasenia(contrasenia);
-                    usuario.setRol(rol);
+                    // Crea una ClaseDTO usando los datos obtenidos de la fila
+                    ClaseDTO clase = new ClaseDTO();
+                    clase.setId(id);
+                    clase.setNombre(nombre);
+                    clase.setSemestre(semestre);
 
                     // Aquí puedes implementar la lógica de eliminación o cualquier otra acción
 //                    System.out.println("Estudiante a eliminar: " + estudiante.toString());
                     int respuesta = JOptionPane.showConfirmDialog(
                             null,
-                            "¿Está seguro de que desea eliminar este usuario?",
+                            "¿Está seguro de que desea eliminar esta clase?",
                             "Confirmar eliminación",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE
@@ -116,12 +104,12 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
 
                     if (respuesta == JOptionPane.YES_OPTION) {
                         try {
-                            subsUsuario.eliminarUsuario(usuario);
-                            JOptionPane.showMessageDialog(null, "El usuario se ha eliminado correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+                            subsClase.eliminarClase(clase);
+                            JOptionPane.showMessageDialog(null, "La clase se ha eliminado correctamente", "Aviso", JOptionPane.INFORMATION_MESSAGE);
                             modeloTabla.setRowCount(0);
-                            llenarTablaUsuarios(subsUsuario.obtenerListaUsuarios());
+                            llenarTablaClases(subsClase.obtenerTodasClases());
                         } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null, "Ha ocurrido un error inesperado al eliminar el usuario: " + ex, "ERROR", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Ha ocurrido un error inesperado al eliminar la clase: " + ex, "ERROR", JOptionPane.ERROR_MESSAGE);
                         }
                     }
 
@@ -129,9 +117,9 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
             }
         };
 
-        TableColumnModel modeloColumnas = this.tblUsuarios.getColumnModel();
-        modeloColumnas.getColumn(7).setCellRenderer(new JButtonRenderer("Eliminar"));
-        modeloColumnas.getColumn(7).setCellEditor(new JButtonCellEditor("Eliminar", onEliminarClickListener));
+        TableColumnModel modeloColumnas = this.tblClases.getColumnModel();
+        modeloColumnas.getColumn(3).setCellRenderer(new JButtonRenderer("Eliminar"));
+        modeloColumnas.getColumn(3).setCellEditor(new JButtonCellEditor("Eliminar", onEliminarClickListener));
     }
 
     /**
@@ -145,32 +133,24 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Obtén la fila seleccionada
-                int filaSeleccionada = tblUsuarios.getSelectedRow();
+                int filaSeleccionada = tblClases.getSelectedRow();
 
                 if (filaSeleccionada != -1) { // Verifica que haya una fila seleccionada
-                    // Usa el modelo para obtener los datos del estudiante en esa fila
-                    DefaultTableModel modeloTabla = (DefaultTableModel) tblUsuarios.getModel();
+                    // Usa el modelo para obtener los datos de la clase en esa fila
+                    DefaultTableModel modeloTabla = (DefaultTableModel) tblClases.getModel();
 
-                    int matricula = (Integer) modeloTabla.getValueAt(filaSeleccionada, 0); // Suponiendo que el ID esté en la columna 0
+                    ObjectId id = (ObjectId) modeloTabla.getValueAt(filaSeleccionada, 0);
                     String nombre = (String) modeloTabla.getValueAt(filaSeleccionada, 1);
-                    String apellidoPaterno = (String) modeloTabla.getValueAt(filaSeleccionada, 2);
-                    String apellidoMaterno = (String) modeloTabla.getValueAt(filaSeleccionada, 3);
-                    String correo = (String) modeloTabla.getValueAt(filaSeleccionada, 4);
-                    String contrasenia = (String) modeloTabla.getValueAt(filaSeleccionada, 5);
-                    ObjectId rol = (ObjectId) modeloTabla.getValueAt(filaSeleccionada, 9);
+                    int semestre = (Integer) modeloTabla.getValueAt(filaSeleccionada, 2);
 
-                    // Crea un EstudianteDTO usando los datos obtenidos de la fila
-                    UsuarioDTO usuario = new UsuarioDTO();
-                    usuario.setMatricula(matricula);
-                    usuario.setNombre(nombre);
-                    usuario.setApellidoPaterno(apellidoPaterno);
-                    usuario.setApellidoMaterno(apellidoMaterno);
-                    usuario.setCorreo(correo);
-                    usuario.setContrasenia(contrasenia);
-                    usuario.setRol(rol);
+                    // Crea una ClaseDTO usando los datos obtenidos de la fila
+                    ClaseDTO clase = new ClaseDTO();
+                    clase.setId(id);
+                    clase.setNombre(nombre);
+                    clase.setSemestre(semestre);
 
-                    FrmModificarAlumnos modificarUsuario = new FrmModificarAlumnos(usuario);
-                    modificarUsuario.setVisible(true);
+                    FrmModificarClase modificarClase = new FrmModificarClase(clase);
+                    modificarClase.setVisible(true);
                     dispose();
 
                     // Aquí puedes implementar la lógica de eliminación o cualquier otra acción
@@ -196,9 +176,9 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
             }
         };
 
-        TableColumnModel modeloColumnas = this.tblUsuarios.getColumnModel();
-        modeloColumnas.getColumn(8).setCellRenderer(new JButtonRenderer("Modificar"));
-        modeloColumnas.getColumn(8).setCellEditor(new JButtonCellEditor("Modificar", onEliminarClickListener));
+        TableColumnModel modeloColumnas = this.tblClases.getColumnModel();
+        modeloColumnas.getColumn(4).setCellRenderer(new JButtonRenderer("Modificar"));
+        modeloColumnas.getColumn(4).setCellEditor(new JButtonCellEditor("Modificar", onEliminarClickListener));
     }
 
     /**
@@ -211,9 +191,9 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
     private void initComponents() {
 
         agregarUsuario = new javax.swing.JPanel();
-        lblEliminarUsuarios = new javax.swing.JLabel();
+        lblGestionarClases = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblUsuarios = new javax.swing.JTable();
+        tblClases = new javax.swing.JTable();
         btnAgregar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
 
@@ -224,41 +204,36 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
         agregarUsuario.setBackground(new java.awt.Color(27, 57, 166));
         agregarUsuario.setForeground(new java.awt.Color(27, 57, 166));
 
-        lblEliminarUsuarios.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        lblEliminarUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        lblEliminarUsuarios.setText("Gestionar Usuarios");
+        lblGestionarClases.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        lblGestionarClases.setForeground(new java.awt.Color(255, 255, 255));
+        lblGestionarClases.setText("Gestionar Clases");
 
-        tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+        tblClases.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Matricula", "Nombre", "Apellido Paterno", "Apellido Materno", "Correo", "Contraseña", "Rol", "Eliminar", "Modificar", "IdRol Oculto"
+                "Id", "Nombre", "Semestre impartida", "Eliminar", "Modificar"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true, true, true
+                false, false, false, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblUsuarios);
-        if (tblUsuarios.getColumnModel().getColumnCount() > 0) {
-            tblUsuarios.getColumnModel().getColumn(0).setResizable(false);
-            tblUsuarios.getColumnModel().getColumn(1).setResizable(false);
-            tblUsuarios.getColumnModel().getColumn(2).setResizable(false);
-            tblUsuarios.getColumnModel().getColumn(3).setResizable(false);
-            tblUsuarios.getColumnModel().getColumn(4).setResizable(false);
-            tblUsuarios.getColumnModel().getColumn(5).setResizable(false);
-            tblUsuarios.getColumnModel().getColumn(6).setResizable(false);
-            tblUsuarios.getColumnModel().getColumn(9).setMinWidth(0);
-            tblUsuarios.getColumnModel().getColumn(9).setPreferredWidth(0);
-            tblUsuarios.getColumnModel().getColumn(9).setMaxWidth(0);
+        jScrollPane1.setViewportView(tblClases);
+        if (tblClases.getColumnModel().getColumnCount() > 0) {
+            tblClases.getColumnModel().getColumn(0).setMinWidth(0);
+            tblClases.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblClases.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblClases.getColumnModel().getColumn(1).setResizable(false);
+            tblClases.getColumnModel().getColumn(2).setResizable(false);
         }
 
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -287,7 +262,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
                 .addGroup(agregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(agregarUsuarioLayout.createSequentialGroup()
                         .addGap(341, 341, 341)
-                        .addComponent(lblEliminarUsuarios))
+                        .addComponent(lblGestionarClases))
                     .addGroup(agregarUsuarioLayout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addGroup(agregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +277,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
             agregarUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarUsuarioLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(lblEliminarUsuarios)
+                .addComponent(lblGestionarClases)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
@@ -319,7 +294,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        FrmAgregarAlumno frmAgregarUsuario = new FrmAgregarAlumno();
+        FrmAgregarClase frmAgregarUsuario = new FrmAgregarClase();
         frmAgregarUsuario.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -347,13 +322,13 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmGestionarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarClase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmGestionarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarClase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmGestionarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarClase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmGestionarAlumnos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmGestionarClase.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -375,7 +350,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmGestionarAlumnos().setVisible(true);
+                new FrmGestionarClase().setVisible(true);
             }
         });
     }
@@ -385,7 +360,7 @@ public class FrmGestionarAlumnos extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblEliminarUsuarios;
-    private javax.swing.JTable tblUsuarios;
+    private javax.swing.JLabel lblGestionarClases;
+    private javax.swing.JTable tblClases;
     // End of variables declaration//GEN-END:variables
 }

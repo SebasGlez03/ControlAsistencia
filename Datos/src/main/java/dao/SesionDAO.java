@@ -24,8 +24,6 @@ import org.bson.conversions.Bson;
  */
 public class SesionDAO {
 
-    AlumnoDAO alumnoDAO = new AlumnoDAO();
-
     // Esta hay que probarla
     public Sesion obtenerSesion(Sesion sesion) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);

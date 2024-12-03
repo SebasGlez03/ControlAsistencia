@@ -4,6 +4,8 @@
  */
 package subsubsistemaqr;
 
+import entidades.Clase;
+import entidades.Maestro;
 import entidades.QR;
 
 /**
@@ -64,7 +66,17 @@ public class FachadaQR implements IQR {
     public int obtenerPIN() {
         return cQR.getPin();
     }
-    
-    
+
+    /**
+     * Genera un QR y crea una sesión vinculada.
+     *
+     * @param clase La clase asociada a la sesión.
+     * @param maestro El maestro asociado a la sesión.
+     * @return El QR generado.
+     */
+    @Override
+    public QR generarQR(Clase clase, Maestro maestro) {
+        return cQR.generarQR(clase, maestro);
+    }
 
 }

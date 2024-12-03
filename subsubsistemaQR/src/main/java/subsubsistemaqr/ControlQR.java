@@ -9,12 +9,17 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import entidades.Clase;
+import entidades.Maestro;
 import entidades.QR;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import org.bson.types.ObjectId;
+import persistencia.FachadaPersistencia;
+import persistencia.IPersistencia;
 
 /**
  *
@@ -24,6 +29,7 @@ public class ControlQR {
 
     private String tempFilePath;
     private int pin;
+    IPersistencia datos = new FachadaPersistencia();
 
     public String getTempFilePath() {
         return tempFilePath;
@@ -84,6 +90,46 @@ public class ControlQR {
         }
 
         return new QR(contenido, fechaCreacion);
+    }
+
+    /**
+     * Genera un QR y crea una sesión vinculada.
+     *
+     * @param clase La clase asociada a la sesión.
+     * @param maestro El maestro asociado a la sesión.
+     * @return El QR generado.
+     */
+    public QR generarQR(Clase clase, Maestro maestro) {
+        String contenido = transformarIntAString(generarPIN());
+        Date fechaCreacion = new Date();
+        ObjectId idSesion = new ObjectId(); // Generar el ObjectId que compartirá QR y sesión
+
+        try {
+            // Generar el código QR
+            String QRtext = contenido + "  |  " + transformarDateAString(fechaCreacion);
+            Path tempFile = Files.createTempFile("CodigoQR", ".jpg");
+            String tempFilePath = tempFile.toAbsolutePath().toString();
+            setTempFilePath(tempFilePath);
+
+            BitMatrix matrix = new MultiFormatWriter().encode(QRtext, BarcodeFormat.QR_CODE, 295, 295);
+            MatrixToImageWriter.writeToPath(matrix, "jpg", tempFile);
+
+            System.out.println("Código QR generado correctamente en la dirección: " + tempFile);
+
+            // Crear el QR y la sesión en la base de datos
+            QR qr = new QR(contenido, fechaCreacion);
+            qr.setIdSesion(idSesion);
+            datos.guardarQR(qr); // Guardar el QR
+            datos.crearSesion(idSesion, clase, maestro); // Crear la sesión
+
+            return qr;
+        } catch (WriterException we) {
+            System.out.println("Ocurrió un error al generar el QR: " + we.getMessage());
+        } catch (IOException ioe) {
+            System.out.println("Ocurrió un error al generar el QR: " + ioe.getMessage());
+        }
+
+        return null;
     }
 
     /**
