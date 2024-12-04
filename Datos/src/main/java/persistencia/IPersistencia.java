@@ -6,6 +6,7 @@ package persistencia;
 
 import entidades.*;
 import java.util.List;
+import java.util.Map;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -295,5 +296,13 @@ public interface IPersistencia {
      * @param aviso
      */
     public void eliminarAviso(Aviso aviso);
+
+    /**
+     * Agrega una respuesta a un aviso.
+     *
+     * @param aviso
+     * @param respuesta
+     */
+    public void responderAviso(Aviso aviso, Map<ObjectId, String> respuesta);
 
 }
