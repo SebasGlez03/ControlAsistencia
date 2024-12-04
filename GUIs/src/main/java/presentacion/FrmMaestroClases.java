@@ -4,20 +4,24 @@
  */
 package presentacion;
 
+import entidades.Clase;
 import entidades.Usuario;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.Document;
+import subsistemaMaestro.FachadaMaestro;
+import subsistemaMaestro.IMaestro;
 
 /**
  *
  * @author Ragzard
  */
 public class FrmMaestroClases extends javax.swing.JPanel {
-
+    
     MainWindow mainWindow;
     InicioPanel inicioPanel;
     Usuario usuario;
+    
+    IMaestro subsMaestro = new FachadaMaestro();
 
     /**
      * Creates new form QRClassPanel
@@ -30,39 +34,40 @@ public class FrmMaestroClases extends javax.swing.JPanel {
         this.usuario = usuario;
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
-
-
+        
+        llenarTablaClases(subsMaestro.obtenerMateriasImpartidasMaestro(usuario.getMatricula()));
+        
     }
-
+    
     public void llenarTablaClases(List<Clase> listaClases) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tablaAlumnos.getModel();
-
+        
         if (modeloTabla.getRowCount() > 0) {
             for (int i = modeloTabla.getRowCount() - 1; i > -1; i--) {
                 modeloTabla.removeRow(i);
             }
         }
-
+        
         if (listaClases != null) {
             listaClases.forEach(row -> {
                 Object[] fila = new Object[7];
-                fila[0] = row.();
-                fila[1] = row.getNombre();
-
+                fila[0] = row.getNombre();
+                fila[1] = row.getId();
+                fila[2] = row.getSemestre();
+                
                 modeloTabla.addRow(fila);
             });
         }
-
+        
     }
-
+    
     public Usuario getUsuario() {
         return usuario;
     }
-
+    
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,17 +133,17 @@ public class FrmMaestroClases extends javax.swing.JPanel {
 
         tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Clase", "idClase", "QR Asistencia"
+                "Clase", "idClase", "semestreClase", "QR Asistencia"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -151,6 +156,9 @@ public class FrmMaestroClases extends javax.swing.JPanel {
             tablaAlumnos.getColumnModel().getColumn(1).setMinWidth(0);
             tablaAlumnos.getColumnModel().getColumn(1).setPreferredWidth(0);
             tablaAlumnos.getColumnModel().getColumn(1).setMaxWidth(0);
+            tablaAlumnos.getColumnModel().getColumn(2).setMinWidth(0);
+            tablaAlumnos.getColumnModel().getColumn(2).setPreferredWidth(0);
+            tablaAlumnos.getColumnModel().getColumn(2).setMaxWidth(0);
         }
 
         ContentPanel.add(tblClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 690, 460));
