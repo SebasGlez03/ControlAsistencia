@@ -5,19 +5,29 @@
 package presentacion;
 
 import dto.MaestroDTO;
+import dto.SesionDTO;
 import entidades.Alumno;
 import entidades.Clase;
 import entidades.Maestro;
+import entidades.Sesion;
 import entidades.Usuario;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import java.util.Timer;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+import org.bson.types.ObjectId;
 import subsistemaMaestro.FachadaMaestro;
 import subsistemaMaestro.IMaestro;
+import subsistemaSesion.FachadaSesion;
+import subsistemaSesion.ISesion;
 import subsubsistemaqr.FachadaQR;
 import subsubsistemaqr.IQR;
 
@@ -31,16 +41,21 @@ public class QRClassPanel extends javax.swing.JPanel {
     InicioPanel inicioPanel;
     Usuario usuario;
     Clase clase;
+    ObjectId sesionId;
     IQR iqr = new FachadaQR();
     IMaestro subsMaestro = new FachadaMaestro();
+    ISesion subsSesion = new FachadaSesion();
 
-    List<Alumno> listaAlumnosMock = new ArrayList<>();
+    Timer timer;
+
+    List<Alumno> listaAlumnos = new ArrayList<>();
 
     /**
-     * Creates new form QRClassPanel
      *
      * @param mainwindow
      * @param inicioPanel
+     * @param usuario
+     * @param clase
      */
     public QRClassPanel(MainWindow mainwindow, InicioPanel inicioPanel, Usuario usuario, Clase clase) {
         initComponents();
@@ -52,11 +67,14 @@ public class QRClassPanel extends javax.swing.JPanel {
         lblClassName1.setText(clase.getNombre());
 
         mostrarQR();
+        //listaAlumnos = subsSesion.obtenerSesionAlumnosNoDocumento(obtenerSesionDTO());
+        //llenarTablaAlumnos(listaAlumnos);
         this.lblPIN.setText(String.valueOf(iqr.obtenerPIN()));
+        iniciarRefrescoTabla();
 
     }
 
-    public void llenarTablaUsuariosMock(List<Alumno> listaMock) {
+    public final void llenarTablaAlumnos(List<Alumno> listaAlumnos) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tablaAlumnos.getModel();
 
         if (modeloTabla.getRowCount() > 0) {
@@ -65,17 +83,52 @@ public class QRClassPanel extends javax.swing.JPanel {
             }
         }
 
-        if (listaMock != null) {
-            listaMock.forEach(row -> {
-                Object[] fila = new Object[7];
+        if (listaAlumnos != null) {
+            listaAlumnos.forEach(row -> {
+                Object[] fila = new Object[4];
                 fila[0] = row.getMatricula();
                 fila[1] = row.getNombre();
                 fila[2] = row.getApellidoPaterno();
+                fila[3] = row.getEstadoAsistencia();
 
                 modeloTabla.addRow(fila);
             });
         }
 
+    }
+
+    public final SesionDTO obtenerSesionDTO() {
+        Sesion sesion = subsSesion.obtenerSesion(sesionId);
+
+        SesionDTO dto = new SesionDTO();
+        dto.setId(sesionId);
+        dto.setFecha(sesion.getFecha());
+        dto.setIdClase(sesion.getIdClase());
+        dto.setMatriculaMaestro(sesion.getMatriculaMaestro());
+        dto.setAlumnos(sesion.getAlumnos());
+
+        return dto;
+    }
+
+    public final void iniciarRefrescoTabla() {
+        timer = new Timer();
+        TimerTask tarea = new TimerTask() {
+            @Override
+            public void run() {
+                List<Alumno> alumnosActualizados = subsSesion.obtenerSesionAlumnosNoDocumento(obtenerSesionDTO());
+                SwingUtilities.invokeLater(() -> llenarTablaAlumnos(alumnosActualizados));
+                System.out.println("Se actualizo");
+            }
+        };
+        timer.scheduleAtFixedRate(tarea, 0, 5000);
+    }
+
+    public final void detenerRefrescoTabla() {
+        if (timer != null) {
+            timer.cancel(); // Detener el temporizador
+            timer = null; // Liberar la referencia
+            System.out.println("El refresco de la tabla se ha detenido.");
+        }
     }
 
     public Usuario getUsuario() {
@@ -112,8 +165,17 @@ public class QRClassPanel extends javax.swing.JPanel {
         return maestro;
     }
 
+    public ObjectId getSesionId() {
+        return sesionId;
+    }
+
+    public void setSesionId(ObjectId sesionId) {
+        this.sesionId = sesionId;
+    }
+
     private void mostrarQR() {
         iqr.generarQR(clase, convertirMaestroDTOaEntidad(obtenerMaestroDelUsuario(usuario.getMatricula())));
+        setSesionId(iqr.obtenerIdSesion());
 
         try {
             BufferedImage qrImage = ImageIO.read(new File(iqr.obtenerPathQR()));
@@ -200,17 +262,17 @@ public class QRClassPanel extends javax.swing.JPanel {
 
         tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Matricula", "Nombre", "Apellido Paterno"
+                "Matricula", "Nombre", "Apellido Paterno", "Asistencia"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -219,7 +281,7 @@ public class QRClassPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tablaAlumnos);
 
-        ContentPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 180, 340, 490));
+        ContentPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 410, 490));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -256,6 +318,7 @@ public class QRClassPanel extends javax.swing.JPanel {
 
     private void btnReturn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReturn1MouseClicked
         mainWindow.changeContentPane(inicioPanel);
+        detenerRefrescoTabla();
         inicioPanel.setPin(iqr.obtenerPIN());
         inicioPanel.setUsuario(usuario);
         System.out.println("Se regreso el pin: " + iqr.obtenerPIN() + " de la clase QRClassPanel a la clase: " + inicioPanel.getClass());

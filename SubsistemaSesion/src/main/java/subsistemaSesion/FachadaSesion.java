@@ -5,8 +5,11 @@
 package subsistemaSesion;
 
 import dto.SesionDTO;
+import entidades.Alumno;
+import entidades.Sesion;
 import java.util.List;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -25,6 +28,17 @@ public class FachadaSesion implements ISesion {
     @Override
     public SesionDTO obtenerSesion(SesionDTO sesion) {
         return controlSesion.obtenerSesion(sesion);
+    }
+
+    /**
+     * Metodo que obtiene la sesion de la base de datos mediante un ObjectId
+     *
+     * @param idSesion ObjectId de la sesion a buscar en la base de datos
+     * @return Objeto Sesion obtenido
+     */
+    @Override
+    public Sesion obtenerSesion(ObjectId idSesion) {
+        return controlSesion.obtenerSesion(idSesion);
     }
 
     /**
@@ -48,6 +62,18 @@ public class FachadaSesion implements ISesion {
     @Override
     public List<Document> obtenerSesionAlumnos(SesionDTO sesion) {
         return controlSesion.obtenerSesionAlumnos(sesion);
+    }
+
+    /**
+     * Metodo que obtiene la lista de asistencia de los alumnos en la sesion en
+     * forma de lista de alumnos
+     *
+     * @param sesion Objeto SesionDTO con la sesion
+     * @return Lista de alumnos de la sesion
+     */
+    @Override
+    public List<Alumno> obtenerSesionAlumnosNoDocumento(SesionDTO sesion) {
+        return controlSesion.obtenerSesionAlumnosNoDocumento(sesion);
     }
 
 }

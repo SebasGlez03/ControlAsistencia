@@ -223,6 +223,14 @@ public interface IPersistencia {
     public Sesion obtenerSesion(Sesion sesion);
 
     /**
+     * Metodo que obtiene la sesion de la base de datos mediante un ObjectId
+     *
+     * @param sesion ObjectId de la sesion a buscar en la base de datos
+     * @return Objeto Sesion obtenido
+     */
+    public Sesion obtenerSesion(ObjectId sesion);
+
+    /**
      * Agrega una nueva sesion al sistema.
      *
      * @param sesion El objeto Sesion que desea agregar.
@@ -236,6 +244,8 @@ public interface IPersistencia {
      * @return Sesion con la informacion de los alumnos y su asistencia.
      */
     public List<Document> obtenerAlumnosSesion(Sesion sesion);
+
+    public List<Alumno> obtenerSesionAlumnosNoDocumento(Sesion sesion); //asdasdadasasddadasasddadasasddadasasddadasasddadasasd
 
     /**
      * Metodo que obtiene un qr de la base de datos

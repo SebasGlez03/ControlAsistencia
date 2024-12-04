@@ -17,7 +17,7 @@ public class Sesion {
     private ObjectId id;
     private Date fecha;
     private ObjectId idClase;
-    private ObjectId idMaestro;
+    private int matriculaMaestro;
     private List<Alumno> alumnos;
 
     /**
@@ -31,14 +31,14 @@ public class Sesion {
      *
      * @param fecha Fecha de la sesion
      * @param idClase ID de la clase de la sesion
-     * @param idMaestro ID del maestro que imparte la sesion
+     * @param matriculaMaestro Matricula del maestro que imparte la sesion
      * @param alumnos Lista de alumnos que contiene el ID del alumno y su estado
      * de asistencia
      */
-    public Sesion(Date fecha, ObjectId idClase, ObjectId idMaestro, List<Alumno> alumnos) {
+    public Sesion(Date fecha, ObjectId idClase, int matriculaMaestro, List<Alumno> alumnos) {
         this.fecha = fecha;
         this.idClase = idClase;
-        this.idMaestro = idMaestro;
+        this.matriculaMaestro = matriculaMaestro;
         this.alumnos = alumnos;
     }
 
@@ -99,19 +99,20 @@ public class Sesion {
     /**
      * Metodo que obtiene el ID de el maestro que imparte la sesion
      *
-     * @return ID del maestro que imparte la sesion obtenido
+     * @return Matricula del maestro que imparte la sesion obtenido
      */
-    public ObjectId getIdMaestro() {
-        return idMaestro;
+    public int getMatriculaMaestro() {
+        return matriculaMaestro;
     }
 
     /**
      * Metodo que establece el ID de el maestro que imparte la seion
      *
-     * @param idMaestro ID del maestro que imparte la sesion a establecer
+     * @param matriculaMaestro Matricula del maestro que imparte la sesion a
+     * establecer
      */
-    public void setIdMaestro(ObjectId idMaestro) {
-        this.idMaestro = idMaestro;
+    public void setMatriculaMaestro(int matriculaMaestro) {
+        this.matriculaMaestro = matriculaMaestro;
     }
 
     /**
@@ -144,7 +145,7 @@ public class Sesion {
      */
     @Override
     public String toString() {
-        return "Sesion{" + "id=" + id + ", fecha=" + fecha + ", idClase=" + idClase + ", idMaestro=" + idMaestro + ", alumnos=" + alumnos + '}';
+        return "Sesion{" + "id=" + id + ", fecha=" + fecha + ", idClase=" + idClase + ", matriculaMaestro=" + matriculaMaestro + ", alumnos=" + alumnos + '}';
     }
 
 }

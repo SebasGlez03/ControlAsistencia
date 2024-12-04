@@ -5,9 +5,11 @@
 package subsistemaSesion;
 
 import dto.SesionDTO;
+import entidades.Alumno;
 import entidades.Sesion;
 import java.util.List;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import persistencia.FachadaPersistencia;
 import persistencia.IPersistencia;
 
@@ -16,7 +18,7 @@ import persistencia.IPersistencia;
  * @author PC
  */
 public class ControlSesion {
-
+    
     IPersistencia datos = new FachadaPersistencia();
 
     /**
@@ -28,14 +30,24 @@ public class ControlSesion {
     public SesionDTO obtenerSesion(SesionDTO sesion) {
         Sesion sesionObtenida = new Sesion();
         SesionDTO sesionRegresar = new SesionDTO();
-
+        
         sesionRegresar.setId(sesionObtenida.getId());
         sesionRegresar.setIdClase(sesionObtenida.getIdClase());
-        sesionRegresar.setIdMaestro(sesionObtenida.getIdMaestro());
+        sesionRegresar.setMatriculaMaestro(sesionObtenida.getMatriculaMaestro());
         sesionRegresar.setFecha(sesionObtenida.getFecha());
         sesionRegresar.setAlumnos(sesionObtenida.getAlumnos());
-
+        
         return sesionRegresar;
+    }
+
+    /**
+     * Metodo que obtiene la sesion de la base de datos mediante un ObjectId
+     *
+     * @param idSesion ObjectId de la sesion a buscar en la base de datos
+     * @return Objeto Sesion obtenido
+     */
+    public Sesion obtenerSesion(ObjectId idSesion) {
+        return datos.obtenerSesion(idSesion);
     }
 
     /**
@@ -60,6 +72,17 @@ public class ControlSesion {
     }
 
     /**
+     * Metodo que obtiene la lista de asistencia de los alumnos en la sesion en
+     * forma de lista de alumnos
+     *
+     * @param sesion Objeto SesionDTO con la sesion
+     * @return Lista de alumnos de la sesion
+     */
+    public List<Alumno> obtenerSesionAlumnosNoDocumento(SesionDTO sesion) {
+        return datos.obtenerSesionAlumnosNoDocumento(convertirDTOaEntidad(sesion));
+    }
+
+    /**
      * Metodo que convierte un objeto SesionDTO a Entidad
      *
      * @param dto Objeto SesionDTO a convertir
@@ -67,14 +90,14 @@ public class ControlSesion {
      */
     public Sesion convertirDTOaEntidad(SesionDTO dto) {
         Sesion sesion = new Sesion();
-
+        
         sesion.setId(dto.getId());
         sesion.setIdClase(dto.getIdClase());
-        sesion.setIdMaestro(dto.getIdMaestro());
+        sesion.setMatriculaMaestro(dto.getMatriculaMaestro());
         sesion.setFecha(dto.getFecha());
         sesion.setAlumnos(dto.getAlumno());
-
+        
         return sesion;
     }
-
+    
 }

@@ -45,6 +45,8 @@ public class AlumnoDAO {
 
         Alumno alumnoObtenido = new Alumno(semestre, (float) promedio, matriculaObtener, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
 
+        mongoClient.close();
+
         return alumnoObtenido;
 
     }
@@ -71,6 +73,8 @@ public class AlumnoDAO {
         documentAlumno.append("rol", alumno.getRol());
 
         collection.insertOne(documentAlumno);
+
+        mongoClient.close();
     }
 
     /**
@@ -102,6 +106,8 @@ public class AlumnoDAO {
         collection.updateOne(query, update);
 
         System.out.println("Alumno modificado correctamente");
+
+        mongoClient.close();
     }
 
 }

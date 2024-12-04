@@ -26,23 +26,24 @@ import persistencia.IPersistencia;
  * @author Ragzard
  */
 public class ControlQR {
-
+    
     private String tempFilePath;
     private int pin;
+    private ObjectId sesionIdGenerada;
     IPersistencia datos = new FachadaPersistencia();
-
+    
     public String getTempFilePath() {
         return tempFilePath;
     }
-
+    
     public void setTempFilePath(String tempFilePath) {
         this.tempFilePath = tempFilePath;
     }
-
+    
     public int getPin() {
         return pin;
     }
-
+    
     public void setPin(int pin) {
         this.pin = pin;
     }
@@ -54,11 +55,11 @@ public class ControlQR {
      */
     public int generarPIN() {
         int pin = (int) ((Math.random() * 10));
-
+        
         for (int i = 0; i < 3; i++) {
             pin = adjuntarNumerosEnteros(pin, (int) ((Math.random() * 10)));
         }
-
+        
         setPin(pin);
         return pin;
     }
@@ -71,25 +72,33 @@ public class ControlQR {
     public QR generarQR() {
         String contenido = transformarIntAString(generarPIN());
         Date fechaCreacion = new Date();
-
+        
         try {
             String QRtext = contenido + "  |  " + transformarDateAString(fechaCreacion);
             Path tempFile = Files.createTempFile("CodigoQR", ".jpg");
             String tempFilePath = tempFile.toAbsolutePath().toString();
             setTempFilePath(tempFilePath);
-
+            
             BitMatrix matrix = new MultiFormatWriter().encode(QRtext, BarcodeFormat.QR_CODE, 295, 295);
-
+            
             MatrixToImageWriter.writeToPath(matrix, "jpg", tempFile);
-
+            
             System.out.println("Codigo QR generado correctamente en la direccion: " + tempFile);
         } catch (WriterException we) {
             System.out.println("Ocurrio un error al generar el QR: " + we.getMessage());
         } catch (IOException ioe) {
             System.out.println("Ocurrio un error al generar el QR: " + ioe.getMessage());
         }
-
+        
         return new QR(contenido, fechaCreacion);
+    }
+    
+    public ObjectId getSesionIdGenerada() {
+        return sesionIdGenerada;
+    }
+    
+    public void setSesionIdGenerada(ObjectId sesionIdGenerada) {
+        this.sesionIdGenerada = sesionIdGenerada;
     }
 
     /**
@@ -110,15 +119,16 @@ public class ControlQR {
             Path tempFile = Files.createTempFile("CodigoQR", ".jpg");
             String tempFilePath = tempFile.toAbsolutePath().toString();
             setTempFilePath(tempFilePath);
-
+            
             BitMatrix matrix = new MultiFormatWriter().encode(QRtext, BarcodeFormat.QR_CODE, 295, 295);
             MatrixToImageWriter.writeToPath(matrix, "jpg", tempFile);
-
+            
             System.out.println("Código QR generado correctamente en la dirección: " + tempFile);
 
             // Crear el QR y la sesión en la base de datos
             QR qr = new QR(contenido, fechaCreacion);
             qr.setIdSesion(idSesion);
+            setSesionIdGenerada(idSesion);
             datos.guardarQR(qr); // Guardar el QR
             datos.crearSesion(idSesion, clase, maestro); // Crear la sesión
 
@@ -128,7 +138,7 @@ public class ControlQR {
         } catch (IOException ioe) {
             System.out.println("Ocurrió un error al generar el QR: " + ioe.getMessage());
         }
-
+        
         return null;
     }
 
@@ -176,7 +186,7 @@ public class ControlQR {
      */
     private int adjuntarNumerosEnteros(int base, int num2) {
         String cadena = String.valueOf(base) + String.valueOf(num2);
-
+        
         return Integer.parseInt(cadena);
     }
 

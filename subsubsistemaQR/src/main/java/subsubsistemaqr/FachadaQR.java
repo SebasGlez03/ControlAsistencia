@@ -7,6 +7,7 @@ package subsubsistemaqr;
 import entidades.Clase;
 import entidades.Maestro;
 import entidades.QR;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -26,6 +27,16 @@ public class FachadaQR implements IQR {
 
         return cQR.generarQR();
 
+    }
+    
+    /**
+     * Metodo que obtiene la ID de la sesion creada por el QR
+     *
+     * @return ID de la sesion creada
+     */
+    @Override
+    public ObjectId obtenerIdSesion(){
+        return cQR.getSesionIdGenerada();
     }
 
     /**

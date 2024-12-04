@@ -7,6 +7,7 @@ package subsubsistemaqr;
 import entidades.Clase;
 import entidades.Maestro;
 import entidades.QR;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -20,6 +21,13 @@ public interface IQR {
      * @return
      */
     public QR generarQR();
+
+    /**
+     * Metodo que obtiene la ID de la sesion creada por el QR
+     *
+     * @return ID de la sesion creada
+     */
+    public ObjectId obtenerIdSesion();
 
     /**
      * Genera un nuevo QR validando que no sea igual al qr anterior.
@@ -44,13 +52,14 @@ public interface IQR {
      * @return direccion de tipo String del QR generado
      */
     public String obtenerPathQR();
-    
+
     /**
      * Metodo que obtiene el pin de el QR generado
+     *
      * @return pin generado del QR
      */
     public int obtenerPIN();
-    
+
     /**
      * Genera un QR y crea una sesión vinculada.
      *

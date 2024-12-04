@@ -86,6 +86,8 @@ public class MaestroDAO {
         // Crear y devolver el objeto Maestro
         Maestro maestroObtenido = new Maestro(materias, matriculaObtenida, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
 
+        mongoClient.close();
+
         return maestroObtenido;
     }
 
@@ -120,6 +122,8 @@ public class MaestroDAO {
         documentMaestro.append("rol", maestro.getRol());
 
         collection.insertOne(documentMaestro);
+
+        mongoClient.close();
     }
 
     /**
@@ -160,6 +164,8 @@ public class MaestroDAO {
         collection.updateOne(query, update);
 
         System.out.println("Maestro modificado correctamente");
+
+        mongoClient.close();
     }
 
     /**
@@ -197,11 +203,16 @@ public class MaestroDAO {
                 listaClases.add(clase); // Agregar a la lista
             }
 
+            mongoClient.close();
+
             return listaClases;
         } else {
             System.out.println("No se encontró el maestro o no tiene materias asignadas.");
+            mongoClient.close();
             return new ArrayList<>();
+
         }
+
     }
 
 }

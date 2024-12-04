@@ -43,6 +43,8 @@ public class ClaseDAO {
         Clase claseObtenida = new Clase(nombre, semestre);
         claseObtenida.setId(id);
 
+        mongoClient.close();
+
         return claseObtenida;
 
     }
@@ -67,6 +69,8 @@ public class ClaseDAO {
 
         Clase claseObtenida = new Clase(nombre, semestre);
         claseObtenida.setId(id);
+
+        mongoClient.close();
 
         return claseObtenida;
     }
@@ -123,6 +127,8 @@ public class ClaseDAO {
 
         collection.insertOne(documentClase);
 
+        mongoClient.close();
+
     }
 
     /**
@@ -138,6 +144,8 @@ public class ClaseDAO {
         Document query = new Document("_id", clase.getId());
 
         collection.deleteOne(query);
+
+        mongoClient.close();
 
     }
 
@@ -164,5 +172,7 @@ public class ClaseDAO {
         collection.updateOne(query, update);
 
         System.out.println("Clase modificada correctamente");
+
+        mongoClient.close();
     }
 }

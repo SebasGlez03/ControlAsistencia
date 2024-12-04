@@ -328,6 +328,18 @@ public class FachadaPersistencia implements IPersistencia {
     }
 
     /**
+     * Metodo que obtiene la sesion de la base de datos mediante un ObjectId
+     *
+     * @param idSesion ObjectId de la sesion a buscar en la base de datos
+     * @return Objeto Sesion obtenido
+     */
+    @Override
+    public Sesion obtenerSesion(ObjectId idSesion) {
+        SesionDAO sesionDAO = new SesionDAO();
+        return sesionDAO.obtenerSesion(idSesion);
+    }
+
+    /**
      * Agrega una nueva sesion al sistema.
      *
      * @param sesion El objeto Sesion que desea agregar.
@@ -348,6 +360,12 @@ public class FachadaPersistencia implements IPersistencia {
     public List<Document> obtenerAlumnosSesion(Sesion sesion) {
         SesionDAO sesionDAO = new SesionDAO();
         return sesionDAO.obtenerSesionAlumnos(sesion);
+    }
+
+    @Override
+    public List<Alumno> obtenerSesionAlumnosNoDocumento(Sesion sesion) { //adsadsasdasdasadsadsasdasdasadsadsasdasdasadsadsasdasdasadsadsasdasdas
+        SesionDAO sesionDAO = new SesionDAO();
+        return sesionDAO.obtenerSesionAlumnosNoDocumento(sesion);
     }
 
     /**
@@ -467,6 +485,5 @@ public class FachadaPersistencia implements IPersistencia {
         AvisoDAO avisoDAO = new AvisoDAO();
         avisoDAO.responderAviso(aviso, respuesta);
     }
-
 
 }

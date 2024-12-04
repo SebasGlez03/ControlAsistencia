@@ -31,7 +31,10 @@ public class QrDAO {
         documentQr.append("fechaCreacion", qr.getFechaCreacion());
         documentQr.append("idSesion", qr.getIdSesion());
 
+        mongoClient.close();
+
         return qr;
+
     }
 
     public void agregarQR(QR qr) {
@@ -45,6 +48,8 @@ public class QrDAO {
         documentQr.append("idSesion", qr.getIdSesion());
 
         collection.insertOne(documentQr);
+
+        mongoClient.close();
     }
 
     /**
@@ -61,6 +66,8 @@ public class QrDAO {
         qrDocument.append("contenido", qr.getContenido());
         qrDocument.append("fechaCreacion", qr.getFechaCreacion());
         qrCollection.insertOne(qrDocument);
+
+        mongoClient.close();
     }
 
     /**
@@ -81,6 +88,8 @@ public class QrDAO {
         sesionDocument.append("matriculaMaestro", maestro.getMatricula());
         sesionDocument.append("listaAsistencia", new ArrayList<>()); // Lista de asistencia vacía
         sesionesCollection.insertOne(sesionDocument);
+
+        mongoClient.close();
     }
 
 }

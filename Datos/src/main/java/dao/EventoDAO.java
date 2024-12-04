@@ -52,6 +52,8 @@ public class EventoDAO {
         // Crear el objeto Evento
         Evento eventoObtenido = new Evento(titulo, descripcion, fechaInicio, fechaFinal, horaInicio, horaFinal, campus, categoria);
 
+        mongoClient.close();
+
         return eventoObtenido;
 
     }
@@ -78,6 +80,8 @@ public class EventoDAO {
         documentEvento.append("categoria", evento.getCategoria());
 
         collection.insertOne(documentEvento);
+
+        mongoClient.close();
 
     }
 
@@ -112,6 +116,8 @@ public class EventoDAO {
 
         System.out.println("Evento modificado correctamente");
 
+        mongoClient.close();
+
     }
 
     public Evento obtenerEventoPorTitulo(String titulo) {
@@ -134,6 +140,8 @@ public class EventoDAO {
         String horaFinal = eventos.getString("horaFinal");
         String campus = eventos.getString("campus");
         String categoria = eventos.getString("categoria");
+
+        mongoClient.close();
 
         // Crear el objeto Evento
         return new Evento(titulo, descripcion, fechaInicio, fechaFinal, horaInicio, horaFinal, campus, categoria);
@@ -163,6 +171,8 @@ public class EventoDAO {
             Evento evento = new Evento(titulo, descripcion, fechaInicio, fechaFinal, horaInicio, horaFinal, campus, categoria);
             eventos.add(evento);
         }
+
+        mongoClient.close();
 
         return eventos;
     }

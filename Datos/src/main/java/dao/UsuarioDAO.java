@@ -51,6 +51,8 @@ public class UsuarioDAO {
 
         Usuario usuarioObtenido = new Usuario(matriculaObtener, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
 
+        mongoClient.close();
+
         return usuarioObtenido;
 
     }
@@ -68,6 +70,8 @@ public class UsuarioDAO {
 
         Document rolQuery = new Document("_id", rolId);
         Document rolDoc = collection.find(rolQuery).first();
+
+        mongoClient.close();
 
         return (rolDoc != null) ? rolDoc.getString("rol") : "Rol no encontrado";
     }
@@ -152,6 +156,8 @@ public class UsuarioDAO {
             usuariosConRol.add(usuario);
         }
 
+        mongoClient.close();
+
         return usuariosConRol;
     }
 
@@ -193,8 +199,10 @@ public class UsuarioDAO {
         // Si se encuentra el rol, obtener el nombre del rol
         if (result.iterator().hasNext()) {
             Document rolDocument = result.iterator().next();
+            mongoClient.close();
             return rolDocument.getString("rol");
         } else {
+            mongoClient.close();
             return "Rol no encontrado";
         }
 
@@ -220,6 +228,8 @@ public class UsuarioDAO {
         documentUsuario.append("rol", usuario.getRol());
 
         collection.insertOne(documentUsuario);
+
+        mongoClient.close();
     }
 
     /**
@@ -235,6 +245,8 @@ public class UsuarioDAO {
         Document query = new Document("matricula", usuario.getMatricula());
 
         collection.deleteOne(query);
+
+        mongoClient.close();
     }
 
     /**
@@ -264,6 +276,8 @@ public class UsuarioDAO {
         collection.updateOne(query, update);
 
         System.out.println("Usuario modificado correctamente");
+
+        mongoClient.close();
     }
 
 }

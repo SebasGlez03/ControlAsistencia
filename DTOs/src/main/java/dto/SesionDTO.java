@@ -20,7 +20,7 @@ public class SesionDTO {
     private ObjectId id;
     private Date fecha;
     private ObjectId idClase;
-    private ObjectId idMaestro;
+    private int matricula;
     private List<Alumno> alumnos;
 
     /**
@@ -34,13 +34,13 @@ public class SesionDTO {
      *
      * @param fecha Fecha de la sesion
      * @param idClase ID de la clase de la sesion
-     * @param idMaestro ID de el maestro que imparte la sesion
+     * @param matricula Matricula de el maestro que imparte la sesion
      * @param alumnos Lista de alumnos y su estado de asistencia de la sesion
      */
-    public SesionDTO(Date fecha, ObjectId idClase, ObjectId idMaestro, List<Alumno> alumnos) {
+    public SesionDTO(Date fecha, ObjectId idClase, int matricula, List<Alumno> alumnos) {
         this.fecha = fecha;
         this.idClase = idClase;
-        this.idMaestro = idMaestro;
+        this.matricula = matricula;
         this.alumnos = alumnos;
     }
 
@@ -54,7 +54,7 @@ public class SesionDTO {
         this.id = sesion.getId();
         this.fecha = sesion.getFecha();
         this.idClase = sesion.getIdClase();
-        this.idMaestro = sesion.getIdMaestro();
+        this.matricula = sesion.getMatriculaMaestro();
         this.alumnos = sesion.getAlumnos();
     }
 
@@ -115,19 +115,19 @@ public class SesionDTO {
     /**
      * Metodo que obtiene el ID de el maestro que imparte la sesion
      *
-     * @return ID del maestro que imparte la sesion obtenido
+     * @return Matricula del maestro que imparte la sesion obtenido
      */
-    public ObjectId getIdMaestro() {
-        return idMaestro;
+    public int getMatriculaMaestro() {
+        return matricula;
     }
 
     /**
      * Metodo que establece el ID de el maestro que imparte la seion
      *
-     * @param idMaestro ID del maestro que imparte la sesion a establecer
+     * @param matricula Matricula del maestro que imparte la sesion a establecer
      */
-    public void setIdMaestro(ObjectId idMaestro) {
-        this.idMaestro = idMaestro;
+    public void setMatriculaMaestro(int matricula) {
+        this.matricula = matricula;
     }
 
     /**
