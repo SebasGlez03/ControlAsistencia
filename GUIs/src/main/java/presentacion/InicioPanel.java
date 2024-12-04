@@ -4,10 +4,14 @@
  */
 package presentacion;
 
+import dto.AvisoDTO;
 import entidades.Usuario;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import subsistemaAviso.FachadaAviso;
+import subsistemaAviso.IAviso;
 
 /**
  *
@@ -17,6 +21,7 @@ public class InicioPanel extends javax.swing.JPanel {
 
     MainWindow mainWindow;
     Usuario usuario;
+    IAviso avisos;
     int pin;
 
     /**
@@ -28,6 +33,9 @@ public class InicioPanel extends javax.swing.JPanel {
 
         this.mainWindow = mainwindow;
         this.mainMenuContentPanel.setVisible(false);
+
+        this.avisos = new FachadaAviso();
+        llenarListaAvisos();
 
     }
 
@@ -45,6 +53,36 @@ public class InicioPanel extends javax.swing.JPanel {
 
         this.lblId.setText(String.valueOf(usuario.getMatricula()));
         this.lblNombre.setText(usuario.getNombre());
+
+        this.avisos = new FachadaAviso();
+        llenarListaAvisos();
+
+    }
+
+    private void llenarListaAvisos() {
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        modelo.addColumn("Titulo");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Mensaje");
+        modelo.addColumn("ID Maestro");
+        modelo.addColumn("Lista Respuestas");
+
+        for (AvisoDTO a : avisos.consultarListaAvisos()) {
+            modelo.addRow(new Object[]{
+                a.getTitulo(),
+                a.getFechaHora(),
+                a.getMensaje(),
+                a.getIdMaestro(),
+                a.getListaRespuestas()});
+        }
+
+        this.jTable1.setModel(modelo);
+
+    }
+
+    public void actualizarTabla() {
+        llenarListaAvisos();
     }
 
     public int getPin() {
@@ -95,6 +133,9 @@ public class InicioPanel extends javax.swing.JPanel {
         lblNombre = new javax.swing.JLabel();
         lblId = new javax.swing.JLabel();
         btnMenu = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         fondo = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -124,6 +165,18 @@ public class InicioPanel extends javax.swing.JPanel {
             }
         });
         add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, -1, -1));
+
+        jButton1.setText("Nuevo Aviso");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, -1, 30));
+
+        jScrollPane2.setViewportView(jTable1);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 397, 920, 300));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/InicioBG.jpg"))); // NOI18N
         fondo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -158,10 +211,19 @@ public class InicioPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_mainMenuContentPanelMouseExited
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        FrmAviso avisoView = new FrmAviso(this);
+
+        avisoView.setVisible(true);
+    }//GEN-LAST:event_jButton1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnMenu;
     private javax.swing.JLabel fondo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JPanel mainMenuContentPanel;
