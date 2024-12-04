@@ -1,10 +1,11 @@
 
-C:\Users\PC\Desktop\Cosas\Git Repositories\ControlAsistencia\Datos\src\main\java\dao\QrDAO.java
-C:\Users\PC\Desktop\Cosas\Git Repositories\ControlAsistencia\Datos\src\main\java\dao\AlumnoDAO.java
-C:\Users\PC\Desktop\Cosas\Git Repositories\ControlAsistencia\Datos\src\main\java\dao\MaestroDAO.java
-C:\Users\PC\Desktop\Cosas\Git Repositories\ControlAsistencia\Datos\src\main\java\persistencia\IPersistencia.java
-C:\Users\PC\Desktop\Cosas\Git Repositories\ControlAsistencia\Datos\src\main\java\dao\SesionDAO.java
-C:\Users\PC\Desktop\Cosas\Git Repositories\ControlAsistencia\Datos\src\main\java\persistencia\FachadaPersistencia.java
-C:\Users\PC\Desktop\Cosas\Git Repositories\ControlAsistencia\Datos\src\main\java\dao\ClaseDAO.java
-C:\Users\PC\Desktop\Cosas\Git Repositories\ControlAsistencia\Datos\src\main\java\dao\EventoDAO.java
-C:\Users\PC\Desktop\Cosas\Git Repositories\ControlAsistencia\Datos\src\main\java\dao\UsuarioDAO.java
+C:\Users\Ragzard\Documents\GitHub\ControlAsistencia\Datos\src\main\java\dao\AlumnoDAO.java
+C:\Users\Ragzard\Documents\GitHub\ControlAsistencia\Datos\src\main\java\dao\ClaseDAO.java
+C:\Users\Ragzard\Documents\GitHub\ControlAsistencia\Datos\src\main\java\dao\QrDAO.java
+C:\Users\Ragzard\Documents\GitHub\ControlAsistencia\Datos\src\main\java\dao\SesionDAO.java
+C:\Users\Ragzard\Documents\GitHub\ControlAsistencia\Datos\src\main\java\dao\MaestroDAO.java
+C:\Users\Ragzard\Documents\GitHub\ControlAsistencia\Datos\src\main\java\persistencia\FachadaPersistencia.java
+C:\Users\Ragzard\Documents\GitHub\ControlAsistencia\Datos\src\main\java\dao\AvisoDAO.java
+C:\Users\Ragzard\Documents\GitHub\ControlAsistencia\Datos\src\main\java\dao\EventoDAO.java
+C:\Users\Ragzard\Documents\GitHub\ControlAsistencia\Datos\src\main\java\persistencia\IPersistencia.java
+C:\Users\Ragzard\Documents\GitHub\ControlAsistencia\Datos\src\main\java\dao\UsuarioDAO.java
