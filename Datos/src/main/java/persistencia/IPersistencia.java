@@ -263,6 +263,16 @@ public interface IPersistencia {
     public void agregarQR(QR qr);
 
     /**
+     * Agrega un alumno a la lista de asistencia basado en el PIN de un QR.
+     *
+     * @param alumno Alumno que se agregará a la lista de asistencia.
+     * @param pin PIN del QR para encontrar la sesión.
+     * @return boolean Verdadero si la operación fue exitosa, falso en caso
+     * contrario.
+     */
+    public boolean agregarAlumnoASesion(Alumno alumno, String pin);
+
+    /**
      * Guarda un QR en la base de datos.
      *
      * @param qr Objeto QR que se desea guardar.
@@ -332,5 +342,34 @@ public interface IPersistencia {
      * @param respuesta
      */
     public void responderAviso(Aviso aviso, Map<ObjectId, String> respuesta);
+
+    /**
+     * Busca un QR por PIN y determina el estado de asistencia basado en la
+     * fecha de creación.
+     *
+     * @param pin PIN del QR.
+     * @return Estado de asistencia (1: PRESENTE, 2: RETARDO).
+     * @throws IllegalArgumentException Si el QR no existe o el tiempo excede el
+     * límite.
+     */
+    public int determinarEstadoAsistencia(String pin) throws IllegalArgumentException;
+
+    /**
+     * Método para obtener el ID de la sesión a partir del PIN.
+     *
+     * @param pin El PIN del QR.
+     * @return El ObjectId de la sesión correspondiente.
+     * @throws IllegalArgumentException Si no se encuentra el QR o el PIN no es
+     * válido.
+     */
+    public ObjectId obtenerIdSesionDesdeQR(String pin);
+
+    /**
+     * Método que agrega un alumno a la lista de asistencia de una sesión.
+     *
+     * @param idSesion El ObjectId de la sesión donde se va a agregar al alumno.
+     * @param alumno El objeto Alumno que contiene la información del alumno.
+     */
+    public void agregarAlumnoASesion(ObjectId idSesion, Alumno alumno);
 
 }

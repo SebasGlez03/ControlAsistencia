@@ -392,6 +392,20 @@ public class FachadaPersistencia implements IPersistencia {
     }
 
     /**
+     * Agrega un alumno a la lista de asistencia basado en el PIN de un QR.
+     *
+     * @param alumno Alumno que se agregará a la lista de asistencia.
+     * @param pin PIN del QR para encontrar la sesión.
+     * @return boolean Verdadero si la operación fue exitosa, falso en caso
+     * contrario.
+     */
+    @Override
+    public boolean agregarAlumnoASesion(Alumno alumno, String pin) {
+        QrDAO qrDAO = new QrDAO();
+        return qrDAO.agregarAlumnoASesion(alumno, pin);
+    }
+
+    /**
      * Guarda un QR en la base de datos.
      *
      * @param qr Objeto QR que se desea guardar.
@@ -484,6 +498,47 @@ public class FachadaPersistencia implements IPersistencia {
     public void responderAviso(Aviso aviso, Map<ObjectId, String> respuesta) {
         AvisoDAO avisoDAO = new AvisoDAO();
         avisoDAO.responderAviso(aviso, respuesta);
+    }
+
+    /**
+     * Busca un QR por PIN y determina el estado de asistencia basado en la
+     * fecha de creación.
+     *
+     * @param pin PIN del QR.
+     * @return Estado de asistencia (1: PRESENTE, 2: RETARDO).
+     * @throws IllegalArgumentException Si el QR no existe o el tiempo excede el
+     * límite.
+     */
+    @Override
+    public int determinarEstadoAsistencia(String pin) throws IllegalArgumentException {
+        QrDAO qrDao = new QrDAO();
+        return qrDao.determinarEstadoAsistencia(pin);
+    }
+
+    /**
+     * Método para obtener el ID de la sesión a partir del PIN.
+     *
+     * @param pin El PIN del QR.
+     * @return El ObjectId de la sesión correspondiente.
+     * @throws IllegalArgumentException Si no se encuentra el QR o el PIN no es
+     * válido.
+     */
+    @Override
+    public ObjectId obtenerIdSesionDesdeQR(String pin) {
+        QrDAO qrDao = new QrDAO();
+        return qrDao.obtenerIdSesionDesdeQR(pin);
+    }
+
+    /**
+     * Método que agrega un alumno a la lista de asistencia de una sesión.
+     *
+     * @param idSesion El ObjectId de la sesión donde se va a agregar al alumno.
+     * @param alumno El objeto Alumno que contiene la información del alumno.
+     */
+    @Override
+    public void agregarAlumnoASesion(ObjectId idSesion, Alumno alumno) {
+        QrDAO qrDao = new QrDAO();
+        qrDao.agregarAlumnoASesion(idSesion, alumno);
     }
 
 }

@@ -4,9 +4,11 @@
  */
 package presentacion;
 
+import entidades.Alumno;
 import entidades.Usuario;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
+import org.bson.types.ObjectId;
 import subsubsistemaqr.FachadaQR;
 import subsubsistemaqr.IQR;
 
@@ -19,6 +21,11 @@ public class ScanQRPanel extends javax.swing.JPanel {
     MainWindow mainWindow;
     Usuario usuario;
     InicioPanel inicioPanel;
+
+    IQR subsQR = new FachadaQR();
+
+    static final int PRESENTE = 1;
+    static final int RETARDO = 2;
 
     IQR iqr = new FachadaQR();
     int pin;
@@ -45,6 +52,39 @@ public class ScanQRPanel extends javax.swing.JPanel {
 
     public void setPin(int pin) {
         this.pin = pin;
+    }
+
+    public Alumno obtenerAlumnoDeUsuario(Usuario usuario) {
+        Alumno alumno = new Alumno();
+        alumno.setMatricula(usuario.getMatricula());
+        alumno.setNombre(usuario.getNombre());
+        alumno.setApellidoPaterno(usuario.getApellidoPaterno());
+        alumno.setApellidoMaterno(usuario.getApellidoMaterno());
+
+        return alumno;
+
+    }
+
+    public void procesarPin(String pin, Alumno alumno) {
+        try {
+            // Determinar el estado de asistencia
+            int estado = iqr.determinarEstadoAsistencia(pin);
+
+            // Actualizar el estado del alumno
+            if (estado == PRESENTE) {
+                alumno.setEstadoAsistencia("Presente");
+            } else if (estado == RETARDO) {
+                alumno.setEstadoAsistencia("Retardo");
+            }
+
+            // Agregar el alumno a la sesión
+            ObjectId idSesion = subsQR.obtenerIdSesionDesdeQR(pin); // Método adicional para obtener la sesión
+            subsQR.agregarAlumnoASesion(idSesion, alumno);
+
+            System.out.println("Asistencia registrada: " + alumno.getEstadoAsistencia());
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
 
     /**
@@ -154,16 +194,7 @@ public class ScanQRPanel extends javax.swing.JPanel {
 
     private void txtPINKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPINKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            // Aquí pones el código que quieres ejecutar cuando se presiona Enter
-            if (Integer.parseInt(txtPIN.getText()) == pin) {
-                JOptionPane.showMessageDialog(this, "Se ha registrado su asistencia", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-            } else if (txtPIN.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Ingresa el codigo en el campo", "Error", JOptionPane.ERROR_MESSAGE);
-            } else if (txtPIN.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Ingresa el codigo en el campo", "Error", JOptionPane.ERROR_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Pin no valido", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            procesarPin(txtPIN.getText(), obtenerAlumnoDeUsuario(usuario));
         }
 
     }//GEN-LAST:event_txtPINKeyPressed
