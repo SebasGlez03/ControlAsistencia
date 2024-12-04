@@ -4,6 +4,7 @@
  */
 package presentacion;
 
+import dto.MaestroDTO;
 import entidades.Alumno;
 import entidades.Clase;
 import entidades.Maestro;
@@ -15,7 +16,8 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
-import org.bson.types.ObjectId;
+import subsistemaMaestro.FachadaMaestro;
+import subsistemaMaestro.IMaestro;
 import subsubsistemaqr.FachadaQR;
 import subsubsistemaqr.IQR;
 
@@ -24,13 +26,14 @@ import subsubsistemaqr.IQR;
  * @author Ragzard
  */
 public class QRClassPanel extends javax.swing.JPanel {
-    
+
     MainWindow mainWindow;
     InicioPanel inicioPanel;
     Usuario usuario;
     Clase clase;
     IQR iqr = new FachadaQR();
-    
+    IMaestro subsMaestro = new FachadaMaestro();
+
     List<Alumno> listaAlumnosMock = new ArrayList<>();
 
     /**
@@ -45,66 +48,78 @@ public class QRClassPanel extends javax.swing.JPanel {
         this.clase = clase;
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
-        
+
         lblClassName1.setText(clase.getNombre());
-        
+
         mostrarQR();
         this.lblPIN.setText(String.valueOf(iqr.obtenerPIN()));
-        
+
     }
-    
+
     public void llenarTablaUsuariosMock(List<Alumno> listaMock) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tablaAlumnos.getModel();
-        
+
         if (modeloTabla.getRowCount() > 0) {
             for (int i = modeloTabla.getRowCount() - 1; i > -1; i--) {
                 modeloTabla.removeRow(i);
             }
         }
-        
+
         if (listaMock != null) {
             listaMock.forEach(row -> {
                 Object[] fila = new Object[7];
                 fila[0] = row.getMatricula();
                 fila[1] = row.getNombre();
                 fila[2] = row.getApellidoPaterno();
-                
+
                 modeloTabla.addRow(fila);
             });
         }
-        
+
     }
-    
+
     public Usuario getUsuario() {
         return usuario;
     }
-    
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
+
     public Clase getClase() {
         return clase;
     }
-    
+
     public void setClase(Clase clase) {
         this.clase = clase;
     }
-    
+
+    public MaestroDTO obtenerMaestroDelUsuario(int matricula) {
+        return subsMaestro.obtenerMaestro(matricula);
+    }
+
+    public Maestro convertirMaestroDTOaEntidad(MaestroDTO dto) {
+        Maestro maestro = new Maestro();
+        maestro.setMatricula(dto.getMatricula());
+        maestro.setNombre(dto.getNombre());
+        maestro.setApellidoPaterno(dto.getApellidoPaterno());
+        maestro.setApellidoMaterno(dto.getApellidoMaterno());
+        maestro.setCorreo(dto.getCorreo());
+        maestro.setContrasenia(dto.getContrasenia());
+        maestro.setRol(dto.getRol());
+        maestro.setMaterias(dto.getMaterias());
+
+        return maestro;
+    }
+
     private void mostrarQR() {
-        List<String> materiasPrueba = new ArrayList<>();
-        materiasPrueba.add("ClasePrueba");
-        Maestro maestroPrueba = new Maestro(materiasPrueba, 665544, "NombrePreuba", "ApelPrue", "PrueApell", "correo@gmail.com", "contrasenia", new ObjectId());
-        Clase clasePrueba = new Clase("ClasePrueba", 5);
-        clasePrueba.setId(new ObjectId());
-        
-        iqr.generarQR(clasePrueba, maestroPrueba);
-        
+        iqr.generarQR(clase, convertirMaestroDTOaEntidad(obtenerMaestroDelUsuario(usuario.getMatricula())));
+
         try {
             BufferedImage qrImage = ImageIO.read(new File(iqr.obtenerPathQR()));
-            
+
             ImageIcon qrIcon = new ImageIcon(qrImage);
-            
+
             imgQR.setIcon(qrIcon);
         } catch (Exception e) {
             e.printStackTrace();

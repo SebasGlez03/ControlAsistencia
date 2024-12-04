@@ -33,33 +33,60 @@ public class MaestroDAO {
         MongoDatabase database = mongoClient.getDatabase("cia");
         MongoCollection<Document> collection = database.getCollection("usuarios");
 
+        // Consultamos al maestro por su matrícula
         Document query = new Document("matricula", matricula);
-        Document maestros = collection.find(query).first();
+        Document maestroDoc = collection.find(query).first();
 
-        System.out.println("Maestro leido: " + maestros.toJson());
+        if (maestroDoc == null) {
+            System.out.println("No se encontró un maestro con esa matrícula.");
+            return null;  // Manejar el caso de que no se encuentre el maestro
+        }
 
-        int matriculaObtener = maestros.getInteger("matricula");
-        String nombre = maestros.getString("nombre");
-        String apellidoPaterno = maestros.getString("apellidoPaterno");
-        String apellidoMaterno = maestros.getString("apellidoMaterno");
-        String correo = maestros.getString("correo");
-        String contrasenia = maestros.getString("contrasenia");
-        ObjectId rol = maestros.getObjectId("rol");
-        List<Document> clasesImpartidas = maestros.getList("clasesImpartidas", Document.class);
+        // Obtener la información del maestro
+        int matriculaObtenida = maestroDoc.getInteger("matricula");
+        String nombre = maestroDoc.getString("nombre");
+        String apellidoPaterno = maestroDoc.getString("apellidoPaterno");
+        String apellidoMaterno = maestroDoc.getString("apellidoMaterno");
+        String correo = maestroDoc.getString("correo");
+        String contrasenia = maestroDoc.getString("contrasenia");
+        ObjectId rol = maestroDoc.getObjectId("rol");
 
-        List<String> materias = new ArrayList<>();
+        // Obtener el campo 'materiasImpartidas', que es una lista de documentos con id_materia
+        List<Document> materiasImpartidas = (List<Document>) maestroDoc.get("materiasImpartidas");
 
-        for (Document clase : clasesImpartidas) {
-            String nombreClase = clase.getString("nombreClase");
-            if (nombreClase != null) {
-                materias.add(nombreClase);
+        // Verificar si la lista es null o vacía
+        if (materiasImpartidas == null || materiasImpartidas.isEmpty()) {
+            System.out.println("El maestro no tiene materias impartidas.");
+            materiasImpartidas = new ArrayList<>();  // Asignamos una lista vacía si no hay materias
+        }
+
+        List<Clase> materias = new ArrayList<>();
+
+        // Iterar sobre cada elemento de 'materiasImpartidas' y obtener el ObjectId
+        for (Document materia : materiasImpartidas) {
+            ObjectId idMateria = materia.getObjectId("id_materia");
+
+            if (idMateria != null) {
+                // Aquí, si deseas más detalles de la materia, podrías hacer otra consulta.
+                // Por ejemplo, obtener el nombre de la materia de una colección 'materias'
+                Document materiaDoc = database.getCollection("clases").find(new Document("_id", idMateria)).first();
+
+                if (materiaDoc != null) {
+                    ObjectId idClase = materiaDoc.getObjectId("_id");
+                    String nombreMateria = materiaDoc.getString("nombre");  // Suponiendo que 'materias' tiene un campo 'nombre'
+                    int semestre = materiaDoc.getInteger("semestre");
+                    // Crear un objeto Clase (que debe tener el nombre de la materia o cualquier otro dato necesario)
+                    Clase claseObj = new Clase(nombreMateria, semestre);
+                    claseObj.setId(idClase);
+                    materias.add(claseObj);
+                }
             }
         }
 
-        Maestro maestroObtenido = new Maestro(materias, matriculaObtener, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
+        // Crear y devolver el objeto Maestro
+        Maestro maestroObtenido = new Maestro(materias, matriculaObtenida, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
 
         return maestroObtenido;
-
     }
 
     /**
@@ -75,7 +102,7 @@ public class MaestroDAO {
 
         List<Document> clasesLista = new ArrayList();
 
-        for (String clase : maestro.getMaterias()) {
+        for (Clase clase : maestro.getMaterias()) {
             Document documentClase = new Document();
             documentClase.append("id", new ObjectId());
             documentClase.append("nombreClase", clase);
@@ -89,7 +116,7 @@ public class MaestroDAO {
         documentMaestro.append("apellidoMaterno", maestro.getApellidoMaterno());
         documentMaestro.append("correo", maestro.getCorreo());
         documentMaestro.append("contrasenia", maestro.getContrasenia());
-        documentMaestro.append("clasesImpartidas", clasesLista);
+        documentMaestro.append("materiasImpartidas", clasesLista);
         documentMaestro.append("rol", maestro.getRol());
 
         collection.insertOne(documentMaestro);
@@ -111,7 +138,7 @@ public class MaestroDAO {
         List<Document> clasesLista = new ArrayList();
 
 //        maestro.getMaterias().clear();
-        for (String clase : maestroModificado.getMaterias()) {
+        for (Clase clase : maestroModificado.getMaterias()) {
             Document documentClase = new Document();
             documentClase.append("id", new ObjectId());
             documentClase.append("nombreClase", clase);
@@ -125,7 +152,7 @@ public class MaestroDAO {
                 .append("apellidoMaterno", maestroModificado.getApellidoMaterno())
                 .append("correo", maestroModificado.getCorreo())
                 .append("contrasenia", maestroModificado.getContrasenia())
-                .append("clasesImpartidas", clasesLista)
+                .append("materiasImpartidas", clasesLista)
                 .append("rol", maestroModificado.getRol())
         );
 

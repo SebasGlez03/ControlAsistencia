@@ -15,7 +15,7 @@ import org.bson.types.ObjectId;
  */
 public class Maestro extends Usuario {
 
-    private List<String> materias; // Lista de materias que el maestro imparte
+    private List<Clase> materias; // Lista de materias que el maestro imparte
 
     // Constructor por defecto
     public Maestro() {
@@ -34,7 +34,7 @@ public class Maestro extends Usuario {
      * @param contrasenia Contrasenia del usuario
      * @param rol Rol del usuario
      */
-    public Maestro(List<String> materias, int matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia, ObjectId rol) {
+    public Maestro(List<Clase> materias, int matricula, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia, ObjectId rol) {
         super(matricula, nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
         this.materias = materias;
     }
@@ -51,17 +51,8 @@ public class Maestro extends Usuario {
      * @param contrasenia Contrasenia del usuario
      * @param rol Rol del usuario
      */
-    public Maestro(List<String> materias, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia, ObjectId rol) {
+    public Maestro(List<Clase> materias, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String contrasenia, ObjectId rol) {
         super(nombre, apellidoPaterno, apellidoMaterno, correo, contrasenia, rol);
-        this.materias = materias;
-    }
-
-    /**
-     * Constructor que inicializa el maestro con una lista de materias.
-     *
-     * @param materias Lista de materias que el maestro impartirá.
-     */
-    public Maestro(List<String> materias) {
         this.materias = materias;
     }
 
@@ -70,7 +61,7 @@ public class Maestro extends Usuario {
      *
      * @return Lista de materias del maestro.
      */
-    public List<String> getMaterias() {
+    public List<Clase> getMaterias() {
         return materias;
     }
 
@@ -79,7 +70,7 @@ public class Maestro extends Usuario {
      *
      * @param materias Lista de materias a asignar al maestro.
      */
-    public void setMaterias(List<String> materias) {
+    public void setMaterias(List<Clase> materias) {
         this.materias = materias;
     }
 

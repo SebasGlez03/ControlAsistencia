@@ -42,25 +42,6 @@ public class ControlMaestro {
     }
 
     /**
-     * Asigna una clase al maestro Verifica que la materia no sea nula ni vacia
-     * y que sea una materia valida
-     *
-     * @param materia Nombre de la materia a impartir
-     * @throws IllegalArgumentException si la materia es nula o vacia o ya esta
-     * en la lista de materias del maestro
-     */
-    public void impartirClase(String materia) {
-        if (materia == null || materia.isEmpty()) {
-            throw new IllegalArgumentException("La materia no puede ser nula o vacia");
-        }
-        if (maestro.getMaterias().contains(materia)) {
-            throw new IllegalArgumentException("La materia ya esta asignada al maestro");
-        }
-        maestro.getMaterias().add(materia); // Agrega la materia a la lista
-        System.out.println("Clase de " + materia + " impartida");
-    }
-
-    /**
      * Metodo que obtiene un maestro del sistema
      *
      * @param matricula Matricula del maestro a obtener
