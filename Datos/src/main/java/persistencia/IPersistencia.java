@@ -258,6 +258,16 @@ public interface IPersistencia {
      * @param maestro Maestro asociado a la sesión.
      */
     public void crearSesion(ObjectId idSesion, Clase clase, Maestro maestro);
+    
+    /**
+     * Obtiene la lista de materias impartidas por un maestro con sus nombres e
+     * IDs.
+     *
+     * @param matricula Matricula del maestro.
+     * @return Lista de objetos Clase que contienen el ID y nombre de las
+     * materias.
+     */
+    public List<Clase> obtenerMateriasConNombresPorMaestro(int matricula);
 
     /**
      * Agrega un Aviso a la base de datos.

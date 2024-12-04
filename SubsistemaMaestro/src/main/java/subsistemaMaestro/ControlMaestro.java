@@ -5,7 +5,9 @@
 package subsistemaMaestro;
 
 import dto.MaestroDTO;
+import entidades.Clase;
 import entidades.Maestro;
+import java.util.List;
 import persistencia.FachadaPersistencia;
 import persistencia.IPersistencia;
 
@@ -114,6 +116,16 @@ public class ControlMaestro {
         Maestro maestroInfoMod = convertirMaestroDTOaEntidad(maestroModificado);
 
         datos.modificarMaestro(maestroModificar, maestroInfoMod);
+    }
+    
+    /**
+     * Obtiene la lista de clases que imparte el maestro
+     *
+     * @param matricula Matricula del maestro
+     * @return Lista de clases que imparte el maestro
+     */
+    public List<Clase> obtenerMateriasImpartidasMaestro(int matricula){
+        return datos.obtenerMateriasConNombresPorMaestro(matricula);
     }
 
     /**

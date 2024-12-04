@@ -6,6 +6,8 @@ package subsistemaMaestro;
 
 import entidades.Maestro;
 import dto.MaestroDTO;
+import entidades.Clase;
+import java.util.List;
 
 /**
  *
@@ -15,6 +17,13 @@ public class FachadaMaestro implements IMaestro {
 
     private Maestro maestro; // Instancia de Maestro a gestionar
     ControlMaestro controlMaestro = new ControlMaestro();
+
+    /**
+     * Constructor por omision
+     */
+    public FachadaMaestro() {
+
+    }
 
     /**
      * Constructor que inicializa la Fachada con una instancia de Maestro
@@ -91,6 +100,11 @@ public class FachadaMaestro implements IMaestro {
     @Override
     public void modificarMaestro(MaestroDTO maestro, MaestroDTO maestroModificado) {
         controlMaestro.modificarMaestro(maestro, maestroModificado);
+    }
+
+    @Override
+    public List<Clase> obtenerMateriasImpartidasMaestro(int matricula) {
+        return controlMaestro.obtenerMateriasImpartidasMaestro(matricula);
     }
 
 }

@@ -6,6 +6,9 @@ package presentacion;
 
 import entidades.Usuario;
 import java.awt.Color;
+import java.awt.Cursor;
+import javax.swing.JOptionPane;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -17,6 +20,15 @@ public class InicioMenu extends javax.swing.JPanel {
     InicioPanel inicioPanel;
     Usuario usuario;
     int pin;
+
+    // Datos estaticos
+    private static final ObjectId ROL_ALUMNO = new ObjectId("674b87f4549a4c0c82072f8b");
+    private static final ObjectId ROL_MAESTRO = new ObjectId("674b87f4549a4c0c82072f8a");
+    private static final ObjectId ROL_EGRESADO = new ObjectId("674b87f4549a4c0c82072f8d");
+    private static final int ALUMNO = 1;
+    private static final int MAESTRO = 2;
+    private static final int EGRESADO = 3;
+    private static final int DESCONOCIDO = 4;
 
     Color transparente = new Color(0, 0, 0, 0);
     Color opacidad = new Color(0, 0, 0, 50);
@@ -33,6 +45,8 @@ public class InicioMenu extends javax.swing.JPanel {
         this.usuario = usuario;
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
+
+        mostrarOBloquearOpcionesMenu(obtenerTipoUsuario(usuario));
 
         //this.jLabel1.setBorder(new );
     }
@@ -52,8 +66,49 @@ public class InicioMenu extends javax.swing.JPanel {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    
+
+    public final void mostrarOBloquearOpcionesMenu(int tipoUsuario) {
+        switch (tipoUsuario) {
+            case ALUMNO -> {
+                btnAsistencia.setEnabled(true);
+                blockAsistencia.setEnabled(true);
+                btnClases.setEnabled(false);
+                blockClases.setEnabled(false);
+                blockClases.setOpaque(true);
+                System.out.println("El usuario es ALUMNO");
+            }
+            case EGRESADO -> {
+                btnClases.setEnabled(false);
+                System.out.println("El usuario es EGRESADO");
+            }
+            case MAESTRO -> {
+                btnClases.setEnabled(true);
+                btnClases.setEnabled(true);
+                btnAsistencia.setEnabled(false);
+                blockAsistencia.setEnabled(false);
+                blockAsistencia.setOpaque(true);
+                System.out.println("El usuario es MAESTRO");
+            }
+            default -> {
+                JOptionPane.showMessageDialog(null, "Se desconoce el rol del usuario", "ERROR", JOptionPane.ERROR_MESSAGE);
+                mainWindow.dispose();
+            }
+        }
+    }
+
+    public final int obtenerTipoUsuario(Usuario usuario) {
+
+        if (ROL_ALUMNO.equals(usuario.getRol())) {
+            return ALUMNO;
+        } else if (ROL_MAESTRO.equals(usuario.getRol())) {
+            return MAESTRO;
+        } else if (ROL_EGRESADO.equals(usuario.getRol())) {
+            return EGRESADO;
+        } else {
+            return DESCONOCIDO;
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,6 +119,8 @@ public class InicioMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        blockAsistencia = new javax.swing.JPanel();
+        blockClases = new javax.swing.JPanel();
         btnAsistencia = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JLabel();
         btnCloseMenu = new javax.swing.JLabel();
@@ -71,8 +128,19 @@ public class InicioMenu extends javax.swing.JPanel {
         btnClases = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setForeground(new java.awt.Color(255, 255, 0));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        blockAsistencia.setBackground(new java.awt.Color(27, 57, 166));
+        blockAsistencia.setForeground(new java.awt.Color(27, 57, 166));
+        blockAsistencia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        blockAsistencia.setOpaque(false);
+        add(blockAsistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 270, 40));
+
+        blockClases.setBackground(new java.awt.Color(27, 57, 166));
+        blockClases.setForeground(new java.awt.Color(27, 57, 166));
+        blockClases.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        blockClases.setOpaque(false);
+        add(blockClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 270, 40));
 
         btnAsistencia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAsistencia.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -119,10 +187,12 @@ public class InicioMenu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAsistenciaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAsistenciaMouseClicked
-        ScanQRPanel scanQR = new ScanQRPanel(mainWindow, inicioPanel, getUsuario());
-        scanQR.setPin(pin);
-        System.out.println("Se mando el pin: " + pin + " a la clase: " + scanQR.getClass());
-        mainWindow.changeContentPane(scanQR);
+        if (btnAsistencia.isEnabled()) {
+            ScanQRPanel scanQR = new ScanQRPanel(mainWindow, inicioPanel, getUsuario());
+            scanQR.setPin(pin);
+            System.out.println("Se mando el pin: " + pin + " a la clase: " + scanQR.getClass());
+            mainWindow.changeContentPane(scanQR);
+        }
 
     }//GEN-LAST:event_btnAsistenciaMouseClicked
 
@@ -145,12 +215,16 @@ public class InicioMenu extends javax.swing.JPanel {
 
     private void btnClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasesMouseClicked
         // TODO add your handling code here:
-        QRClassPanel qrPanel = new QRClassPanel(mainWindow, inicioPanel, usuario);
-        mainWindow.changeContentPane(qrPanel);
+        if (btnClases.isEnabled()) {
+            FrmMaestroClases frmMaestro = new FrmMaestroClases(mainWindow, inicioPanel, usuario);
+            mainWindow.changeContentPane(frmMaestro);
+        }
     }//GEN-LAST:event_btnClasesMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel blockAsistencia;
+    private javax.swing.JPanel blockClases;
     private javax.swing.JLabel btnAsistencia;
     private javax.swing.JLabel btnCalendario;
     private javax.swing.JLabel btnCerrarSesion;

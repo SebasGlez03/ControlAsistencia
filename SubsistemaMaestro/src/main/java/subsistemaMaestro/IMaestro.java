@@ -5,6 +5,8 @@
 package subsistemaMaestro;
 
 import dto.MaestroDTO;
+import entidades.Clase;
+import java.util.List;
 
 /**
  *
@@ -45,5 +47,13 @@ public interface IMaestro {
      * @param maestroModificado Maestro con la nueva informacion a agregar.
      */
     public void modificarMaestro(MaestroDTO maestro, MaestroDTO maestroModificado);
+
+    /**
+     * Obtiene la lista de clases que imparte el maestro
+     *
+     * @param matricula Matricula del maestro
+     * @return Lista de clases que imparte el maestro
+     */
+    public List<Clase> obtenerMateriasImpartidasMaestro(int matricula);
 
 }

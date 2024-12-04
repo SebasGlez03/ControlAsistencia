@@ -24,12 +24,13 @@ import subsubsistemaqr.IQR;
  * @author Ragzard
  */
 public class QRClassPanel extends javax.swing.JPanel {
-
+    
     MainWindow mainWindow;
     InicioPanel inicioPanel;
     Usuario usuario;
+    Clase clase;
     IQR iqr = new FachadaQR();
-
+    
     List<Alumno> listaAlumnosMock = new ArrayList<>();
 
     /**
@@ -38,47 +39,58 @@ public class QRClassPanel extends javax.swing.JPanel {
      * @param mainwindow
      * @param inicioPanel
      */
-    public QRClassPanel(MainWindow mainwindow, InicioPanel inicioPanel, Usuario usuario) {
+    public QRClassPanel(MainWindow mainwindow, InicioPanel inicioPanel, Usuario usuario, Clase clase) {
         initComponents();
         this.usuario = usuario;
+        this.clase = clase;
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
-
+        
+        lblClassName1.setText(clase.getNombre());
+        
         mostrarQR();
         this.lblPIN.setText(String.valueOf(iqr.obtenerPIN()));
-
+        
     }
-
+    
     public void llenarTablaUsuariosMock(List<Alumno> listaMock) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tablaAlumnos.getModel();
-
+        
         if (modeloTabla.getRowCount() > 0) {
             for (int i = modeloTabla.getRowCount() - 1; i > -1; i--) {
                 modeloTabla.removeRow(i);
             }
         }
-
+        
         if (listaMock != null) {
             listaMock.forEach(row -> {
                 Object[] fila = new Object[7];
                 fila[0] = row.getMatricula();
                 fila[1] = row.getNombre();
                 fila[2] = row.getApellidoPaterno();
-
+                
                 modeloTabla.addRow(fila);
             });
         }
-
+        
     }
-
+    
     public Usuario getUsuario() {
         return usuario;
     }
-
+    
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
+    
+    public Clase getClase() {
+        return clase;
+    }
+    
+    public void setClase(Clase clase) {
+        this.clase = clase;
+    }
+    
     private void mostrarQR() {
         List<String> materiasPrueba = new ArrayList<>();
         materiasPrueba.add("ClasePrueba");
@@ -86,14 +98,13 @@ public class QRClassPanel extends javax.swing.JPanel {
         Clase clasePrueba = new Clase("ClasePrueba", 5);
         clasePrueba.setId(new ObjectId());
         
-        
         iqr.generarQR(clasePrueba, maestroPrueba);
-
+        
         try {
             BufferedImage qrImage = ImageIO.read(new File(iqr.obtenerPathQR()));
-
+            
             ImageIcon qrIcon = new ImageIcon(qrImage);
-
+            
             imgQR.setIcon(qrIcon);
         } catch (Exception e) {
             e.printStackTrace();
@@ -116,8 +127,6 @@ public class QRClassPanel extends javax.swing.JPanel {
         btnReturn1 = new javax.swing.JLabel();
         ItsonLogo1 = new javax.swing.JLabel();
         lblClassName1 = new javax.swing.JLabel();
-        lblCodeClass1 = new javax.swing.JLabel();
-        lblHourClass2 = new javax.swing.JLabel();
         imgQR = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
@@ -159,16 +168,6 @@ public class QRClassPanel extends javax.swing.JPanel {
         lblClassName1.setForeground(new java.awt.Color(255, 255, 255));
         lblClassName1.setText("Nombre clase");
         headerPanel1.add(lblClassName1, new org.netbeans.lib.awtextra.AbsoluteConstraints(101, 19, -1, -1));
-
-        lblCodeClass1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblCodeClass1.setForeground(new java.awt.Color(255, 255, 255));
-        lblCodeClass1.setText("01293924");
-        headerPanel1.add(lblCodeClass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 70, 140, -1));
-
-        lblHourClass2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        lblHourClass2.setForeground(new java.awt.Color(255, 255, 255));
-        lblHourClass2.setText("12:00 - 13:00");
-        headerPanel1.add(lblHourClass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
 
         ContentPanel.add(headerPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         ContentPanel.add(imgQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 190, 295, 295));
@@ -263,8 +262,6 @@ public class QRClassPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblClassName1;
-    private javax.swing.JLabel lblCodeClass1;
-    private javax.swing.JLabel lblHourClass2;
     private javax.swing.JLabel lblImgClass1;
     private javax.swing.JLabel lblPIN;
     private javax.swing.JTable tablaAlumnos;
