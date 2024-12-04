@@ -6,6 +6,12 @@ package subsistemaAviso;
 
 import dto.AvisoDTO;
 import entidades.Aviso;
+import java.lang.reflect.Array;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import org.bson.types.ObjectId;
 import persistencia.FachadaPersistencia;
 import persistencia.IPersistencia;
 
@@ -14,7 +20,7 @@ import persistencia.IPersistencia;
  * @author Ragzard
  */
 public class ControlAviso {
-    
+
     private Aviso aviso;
     private IPersistencia datos = new FachadaPersistencia();
 
@@ -22,7 +28,7 @@ public class ControlAviso {
      * Constructor vacio.
      */
     public void ControlAviso() {
-        
+
     }
 
     /**
@@ -51,16 +57,36 @@ public class ControlAviso {
      * @return
      */
     public AvisoDTO consultarAviso(AvisoDTO aviso) {
-        
+
         return convertEntidadToDTO(datos.obtenerAviso(convertDtoToEntidad(aviso)));
     }
-    
+
+    public List<AvisoDTO> consultarListaAvisos() {
+        List<AvisoDTO> avisosDTO = new ArrayList<>();
+        for (Aviso aviso : datos.obtenerListaAvisos()) {
+            avisosDTO.add(convertEntidadToDTO(aviso));
+        }
+
+        return avisosDTO;
+    }
+
     /**
      * Elimina un aviso de la base de datos.
-     * @param aviso 
+     *
+     * @param aviso
      */
     public void eliminarAviso(AvisoDTO aviso) {
         datos.eliminarAviso(convertDtoToEntidad(aviso));
+    }
+
+    /**
+     * Agrega una respuesta al aviso.
+     *
+     * @param aviso
+     * @param respuesta
+     */
+    public void responderAviso(AvisoDTO aviso, Map<ObjectId, String> respuesta) {
+        datos.responderAviso(convertDtoToEntidad(aviso), respuesta);
     }
 
     /**
@@ -80,7 +106,7 @@ public class ControlAviso {
     public void setAviso(Aviso aviso) {
         this.aviso = aviso;
     }
-    
+
     private Aviso convertDtoToEntidad(AvisoDTO dto) {
         return new Aviso(
                 dto.getId(),
@@ -90,7 +116,7 @@ public class ControlAviso {
                 dto.getIdMaestro(),
                 dto.getListaRespuestas());
     }
-    
+
     private AvisoDTO convertEntidadToDTO(Aviso aviso) {
         return new AvisoDTO(
                 aviso.getId(),
@@ -100,5 +126,5 @@ public class ControlAviso {
                 aviso.getIdMaestro(),
                 aviso.getListaRespuestas());
     }
-    
+
 }

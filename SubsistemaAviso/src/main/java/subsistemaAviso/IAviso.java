@@ -6,6 +6,9 @@ package subsistemaAviso;
 
 import dto.AvisoDTO;
 import entidades.Aviso;
+import java.util.List;
+import java.util.Map;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -32,8 +35,16 @@ public interface IAviso {
      * Método para ver / consultar un aviso existente en el sistema.
      *
      * @param aviso
+     * @return
      */
-    public void consultarAviso(AvisoDTO aviso);
+    public AvisoDTO consultarAviso(AvisoDTO aviso);
+
+    /**
+     * Obtiene la lista de Avisos.
+     *
+     * @return
+     */
+    public List<AvisoDTO> consultarListaAvisos();
 
     /**
      * Método para eliminar un aviso existente en el sistema.
@@ -48,6 +59,6 @@ public interface IAviso {
      * @param aviso
      * @param respuesta
      */
-    public void responderAviso(AvisoDTO aviso, String respuesta);
+    public void responderAviso(AvisoDTO aviso, Map<ObjectId, String> respuesta);
 
 }

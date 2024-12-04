@@ -91,6 +91,19 @@ public class AvisoDAO {
     public void eliminarAviso(Aviso aviso) {
         this.collection.deleteOne(new Document("_id", aviso.getId()));
     }
+    
+    public void responderAviso(Aviso aviso, Map<ObjectId, String> respuesta){
+        System.out.println("Entro a ResponderAviso [DAO]");
+        Aviso avisoActualizado = obtenerAviso(aviso);
+        
+        avisoActualizado.setListaRespuestas(respuesta);
+        
+        
+        
+        actualizarAviso(obtenerAviso(aviso), avisoActualizado);
+        
+        
+    }
 
     /**
      * Conexión a la base de datos.
@@ -141,8 +154,13 @@ public class AvisoDAO {
     private Document convertMapToDoc(Map<ObjectId, String> respuestas) {
         Document respuestasDoc = new Document();
 
-        for (Map.Entry<ObjectId, String> entry : respuestas.entrySet()) {
-            respuestasDoc.append(entry.getKey().toHexString(), entry.getValue());
+        if (respuestas == null) {
+            return null;
+        }else {
+            for (Map.Entry<ObjectId, String> entry : respuestas.entrySet()) {
+                respuestasDoc.append(entry.getKey().toHexString(), entry.getValue());
+            }
+        
         }
 
         return respuestasDoc;
