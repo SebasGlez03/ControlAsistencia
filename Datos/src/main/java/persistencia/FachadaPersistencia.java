@@ -27,7 +27,7 @@ public class FachadaPersistencia implements IPersistencia {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         return usuarioDAO.obtenerUsuario(matricula);
     }
-
+    
     @Override
     public String obtenerNombreRol(ObjectId rolId) {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -44,7 +44,7 @@ public class FachadaPersistencia implements IPersistencia {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         return usuarioDAO.obtenerTodosUsuarios();
     }
-
+    
     @Override
     public List<Document> obtenerTodosUsuariosConRolString() {
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -110,7 +110,7 @@ public class FachadaPersistencia implements IPersistencia {
     public Alumno obtenerAlumno(int matricula) {
         AlumnoDAO alumnoDAO = new AlumnoDAO();
         return alumnoDAO.obtenerAlumno(matricula);
-
+        
     }
 
     /**
@@ -148,7 +148,7 @@ public class FachadaPersistencia implements IPersistencia {
     public Maestro obtenerMaestro(int matricula) {
         MaestroDAO maestroDAO = new MaestroDAO();
         return maestroDAO.obtenerMaestro(matricula);
-
+        
     }
 
     /**
@@ -187,13 +187,13 @@ public class FachadaPersistencia implements IPersistencia {
         EventoDAO eventoDAO = new EventoDAO();
         return eventoDAO.obtenerEvento(evento);
     }
-
+    
     @Override
     public Evento obtenerEventoPorTitulo(String titulo) {
         EventoDAO eventoDAO = new EventoDAO();
         return eventoDAO.obtenerEventoPorTitulo(titulo);
     }
-
+    
     @Override
     public List<Evento> obtenerTodosLosEventos() {
         EventoDAO eventoDAO = new EventoDAO();
@@ -223,19 +223,19 @@ public class FachadaPersistencia implements IPersistencia {
         EventoDAO eventoDAO = new EventoDAO();
         eventoDAO.modificarEvento(evento, eventoModificado);
     }
-
+    
     @Override
     public void eliminarEvento(Evento evento) {
         EventoDAO eventoDAO = new EventoDAO();
         eventoDAO.eliminarEvento(evento);
     }
-
+    
     @Override
     public List<Evento> obtenerTodosEventos() {
         EventoDAO eventoDAO = new EventoDAO();
         return eventoDAO.obtenerTodosEventos();
     }
-    
+
     /**
      * Metodo que obtiene una clase de la base de datos
      *
@@ -247,7 +247,7 @@ public class FachadaPersistencia implements IPersistencia {
         ClaseDAO claseDAO = new ClaseDAO();
         return claseDAO.obtenerClase(clase);
     }
-
+    
     @Override
     public List<Clase> obtenerTodasClases() {
         ClaseDAO claseDAO = new ClaseDAO();
@@ -370,4 +370,63 @@ public class FachadaPersistencia implements IPersistencia {
         qrDAO.crearSesion(idSesion, clase, maestro);
     }
 
+    /**
+     * Agrega un nuevo aviso a la base de datos.
+     *
+     * @param aviso
+     */
+    @Override
+    public void agregarAviso(Aviso aviso) {
+        AvisoDAO avisoDAO = new AvisoDAO();
+        avisoDAO.agregarAviso(aviso);
+    }
+
+    /**
+     * Obtiene la primer coincidencia de la base de datos.
+     *
+     * @param aviso
+     * @return
+     */
+    @Override
+    public Aviso obtenerAviso(Aviso aviso) {
+        AvisoDAO avisoDAO = new AvisoDAO();
+        
+        return avisoDAO.obtenerAviso(aviso);
+    }
+
+    /**
+     * Obtiene la lista de todos los avisos en la base de datos.
+     *
+     * @return
+     */
+    @Override
+    public List<Aviso> obtenerListaAvisos() {
+        AvisoDAO avisoDAO = new AvisoDAO();
+        
+        return avisoDAO.obtenerListaAvisos();
+    }
+
+    /**
+     * Actualiza un aviso de la base de datos.
+     *
+     * @param aviso
+     * @param avisoActualizado
+     */
+    @Override
+    public void actualizarAviso(Aviso aviso, Aviso avisoActualizado) {
+        AvisoDAO avisoDAO = new AvisoDAO();
+        avisoDAO.actualizarAviso(aviso, avisoActualizado);
+    }
+
+    /**
+     * Elimina un aviso de la base de datos.
+     *
+     * @param aviso
+     */
+    @Override
+    public void eliminarAviso(Aviso aviso) {
+        AvisoDAO avisoDAO = new AvisoDAO();
+        avisoDAO.eliminarAviso(aviso);
+    }
+    
 }
