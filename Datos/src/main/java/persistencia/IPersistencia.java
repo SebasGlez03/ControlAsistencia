@@ -178,6 +178,14 @@ public interface IPersistencia {
     public Clase obtenerClase(Clase clase);
 
     /**
+     * Metodo que obtiene ua clase de la base de datos mediante su ObjectId
+     *
+     * @param claseId ObjectID de la clase a obtener de la base de datos
+     * @return Objeto tipo Clase obtenido
+     */
+    public Clase obtenerClasePorID(ObjectId claseId);
+
+    /**
      * Obtiene la lista de todas las clases del sistema
      *
      * @return Lista con objetos tipo Clase de todas las clases
@@ -259,7 +267,7 @@ public interface IPersistencia {
      * @param maestro Maestro asociado a la sesión.
      */
     public void crearSesion(ObjectId idSesion, Clase clase, Maestro maestro);
-    
+
     /**
      * Obtiene la lista de materias impartidas por un maestro con sus nombres e
      * IDs.

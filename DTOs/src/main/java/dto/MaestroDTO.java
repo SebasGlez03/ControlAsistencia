@@ -4,6 +4,7 @@
  */
 package dto;
 
+import entidades.Clase;
 import entidades.Maestro;
 import entidades.Usuario;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class MaestroDTO extends UsuarioDTO {
 
-    private List<String> materias; // Lista de materias que el maestro imparte
+    private List<Clase> materias; // Lista de materias que el maestro imparte
 
     /**
      * Constructor vacío para la clase MaestroDTO.
@@ -59,7 +60,7 @@ public class MaestroDTO extends UsuarioDTO {
      *
      * @param materias Lista de materias que el maestro imparte
      */
-    public MaestroDTO(List<String> materias) {
+    public MaestroDTO(List<Clase> materias) {
         this.materias = materias;
     }
 
@@ -68,7 +69,7 @@ public class MaestroDTO extends UsuarioDTO {
      *
      * @return Lista de materias del maestro
      */
-    public List<String> getMaterias() {
+    public List<Clase> getMaterias() {
         return materias;
     }
 
@@ -77,7 +78,7 @@ public class MaestroDTO extends UsuarioDTO {
      *
      * @param materias Lista de materias del maestro
      */
-    public void setMaterias(List<String> materias) {
+    public void setMaterias(List<Clase> materias) {
         this.materias = materias;
     }
 }

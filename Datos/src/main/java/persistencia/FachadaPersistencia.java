@@ -263,6 +263,18 @@ public class FachadaPersistencia implements IPersistencia {
         return claseDAO.obtenerClase(clase);
     }
 
+    /**
+     * Metodo que obtiene ua clase de la base de datos mediante su ObjectId
+     *
+     * @param claseId ObjectID de la clase a obtener de la base de datos
+     * @return Objeto tipo Clase obtenido
+     */
+    @Override
+    public Clase obtenerClasePorID(ObjectId claseId) {
+        ClaseDAO claseDAO = new ClaseDAO();
+        return claseDAO.obtenerClasePorID(claseId);
+    }
+
     @Override
     public List<Clase> obtenerTodasClases() {
         ClaseDAO claseDAO = new ClaseDAO();
@@ -455,5 +467,6 @@ public class FachadaPersistencia implements IPersistencia {
         AvisoDAO avisoDAO = new AvisoDAO();
         avisoDAO.responderAviso(aviso, respuesta);
     }
+
 
 }

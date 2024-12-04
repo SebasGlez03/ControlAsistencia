@@ -48,6 +48,30 @@ public class ClaseDAO {
     }
 
     /**
+     * Metodo que obtiene ua clase de la base de datos mediante su ObjectId
+     *
+     * @param claseId ObjectID de la clase a obtener de la base de datos
+     * @return Objeto tipo Clase obtenido
+     */
+    public Clase obtenerClasePorID(ObjectId claseId) {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("clases");
+
+        Document query = new Document("_id", claseId);
+        Document clases = collection.find(query).first();
+
+        ObjectId id = clases.getObjectId("_id");
+        String nombre = clases.getString("nombre");
+        int semestre = clases.getInteger("semestre");
+
+        Clase claseObtenida = new Clase(nombre, semestre);
+        claseObtenida.setId(id);
+
+        return claseObtenida;
+    }
+
+    /**
      * Metodo que obtiene la lista de todas las clases de la base de datos
      *
      * @return Lista con todas las clases de la base de datos
