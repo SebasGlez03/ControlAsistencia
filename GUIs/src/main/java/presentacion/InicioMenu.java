@@ -216,8 +216,8 @@ public class InicioMenu extends javax.swing.JPanel {
     private void btnClasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClasesMouseClicked
         // TODO add your handling code here:
         if (btnClases.isEnabled()) {
-            QRClassPanel qrPanel = new QRClassPanel(mainWindow, inicioPanel, usuario);
-            mainWindow.changeContentPane(qrPanel);
+            FrmMaestroClases frmMaestro = new FrmMaestroClases(mainWindow, inicioPanel, usuario);
+            mainWindow.changeContentPane(frmMaestro);
         }
     }//GEN-LAST:event_btnClasesMouseClicked
 

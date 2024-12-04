@@ -53,14 +53,15 @@ public class FrmGestionarUsuarios extends javax.swing.JFrame {
 
         if (listaUsuarios != null) {
             listaUsuarios.forEach(row -> {
-                Object[] fila = new Object[7];
+                Object[] fila = new Object[10]; // Eran 7 pero se pusieron 10 para agregar el rol donde no lo ve el usuario
                 fila[0] = row.getMatricula();
                 fila[1] = row.getNombre();
                 fila[2] = row.getApellidoPaterno();
                 fila[3] = row.getApellidoMaterno();
                 fila[4] = row.getCorreo();
                 fila[5] = row.getContrasenia();
-                fila[6] = row.getRol();
+                fila[6] = subsUsuario.getRolUsuarioViaObjectId(row.getRol());;
+                fila[9] = row.getRol();
 
                 modeloTabla.addRow(fila);
             });
@@ -90,7 +91,7 @@ public class FrmGestionarUsuarios extends javax.swing.JFrame {
                     String apellidoMaterno = (String) modeloTabla.getValueAt(filaSeleccionada, 3);
                     String correo = (String) modeloTabla.getValueAt(filaSeleccionada, 4);
                     String contrasenia = (String) modeloTabla.getValueAt(filaSeleccionada, 5);
-                    ObjectId rol = (ObjectId) modeloTabla.getValueAt(filaSeleccionada, 6);
+                    ObjectId rol = (ObjectId) modeloTabla.getValueAt(filaSeleccionada, 9);
 
                     // Crea un EstudianteDTO usando los datos obtenidos de la fila
                     UsuarioDTO usuario = new UsuarioDTO();
@@ -228,17 +229,17 @@ public class FrmGestionarUsuarios extends javax.swing.JFrame {
 
         tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Matricula", "Nombre", "Apellido Paterno", "Apellido Materno", "Correo", "Contraseña", "Rol", "Eliminar", "Modificar"
+                "Matricula", "Nombre", "Apellido Paterno", "Apellido Materno", "Correo", "Contraseña", "Rol", "Eliminar", "Modificar", "idRol Oculto"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true, true
+                false, false, false, false, false, false, false, true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -254,6 +255,9 @@ public class FrmGestionarUsuarios extends javax.swing.JFrame {
             tblUsuarios.getColumnModel().getColumn(4).setResizable(false);
             tblUsuarios.getColumnModel().getColumn(5).setResizable(false);
             tblUsuarios.getColumnModel().getColumn(6).setResizable(false);
+            tblUsuarios.getColumnModel().getColumn(9).setMinWidth(0);
+            tblUsuarios.getColumnModel().getColumn(9).setPreferredWidth(0);
+            tblUsuarios.getColumnModel().getColumn(9).setMaxWidth(0);
         }
 
         btnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

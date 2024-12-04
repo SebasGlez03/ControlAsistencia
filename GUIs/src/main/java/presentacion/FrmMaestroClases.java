@@ -4,23 +4,30 @@
  */
 package presentacion;
 
+import dto.UsuarioDTO;
 import entidades.Clase;
 import entidades.Usuario;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import org.bson.types.ObjectId;
 import subsistemaMaestro.FachadaMaestro;
 import subsistemaMaestro.IMaestro;
+import utilerias.JButtonCellEditor;
+import utilerias.JButtonRenderer;
 
 /**
  *
  * @author Ragzard
  */
 public class FrmMaestroClases extends javax.swing.JPanel {
-    
+
     MainWindow mainWindow;
     InicioPanel inicioPanel;
     Usuario usuario;
-    
+
     IMaestro subsMaestro = new FachadaMaestro();
 
     /**
@@ -34,37 +41,78 @@ public class FrmMaestroClases extends javax.swing.JPanel {
         this.usuario = usuario;
         this.mainWindow = mainwindow;
         this.inicioPanel = inicioPanel;
-        
+
+        lblMaestroNombre.setText(usuario.getNombre() + " " + usuario.getApellidoPaterno());
+        lblMatricula.setText(String.valueOf(usuario.getMatricula()));
+
         llenarTablaClases(subsMaestro.obtenerMateriasImpartidasMaestro(usuario.getMatricula()));
-        
+        botonMostrarQR();
+
     }
-    
-    public void llenarTablaClases(List<Clase> listaClases) {
-        DefaultTableModel modeloTabla = (DefaultTableModel) this.tablaAlumnos.getModel();
-        
+
+    public final void llenarTablaClases(List<Clase> listaClases) {
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblClases.getModel();
+
         if (modeloTabla.getRowCount() > 0) {
             for (int i = modeloTabla.getRowCount() - 1; i > -1; i--) {
                 modeloTabla.removeRow(i);
             }
         }
-        
+
         if (listaClases != null) {
             listaClases.forEach(row -> {
                 Object[] fila = new Object[7];
                 fila[0] = row.getNombre();
                 fila[1] = row.getId();
                 fila[2] = row.getSemestre();
-                
+
                 modeloTabla.addRow(fila);
             });
         }
-        
+
     }
-    
+
+    /**
+     * Metodo que agrega el boton en la tabla, que a su vez contiene la logica
+     * para eliminar el esutidante deseado
+     */
+    private void botonMostrarQR() {
+
+        ActionListener onMostrarQRClick = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Obtén la fila seleccionada
+                int filaSeleccionada = tblClases.getSelectedRow();
+
+                if (filaSeleccionada != -1) { // Verifica que haya una fila seleccionada
+                    // Usa el modelo para obtener los datos del estudiante en esa fila
+                    DefaultTableModel modeloTabla = (DefaultTableModel) tblClases.getModel();
+
+                    String nombreClase = (String) modeloTabla.getValueAt(filaSeleccionada, 0); // Suponiendo que el ID esté en la columna 0
+                    ObjectId idClase = (ObjectId) modeloTabla.getValueAt(filaSeleccionada, 1);
+                    int semestreClaseImpartida = (Integer) modeloTabla.getValueAt(filaSeleccionada, 2);
+
+                    Clase clase = new Clase(nombreClase, semestreClaseImpartida);
+                    clase.setId(idClase);
+
+                    // Crea un EstudianteDTO usando los datos obtenidos de la fila
+                    QRClassPanel qrClass = new QRClassPanel(mainWindow, inicioPanel, usuario, clase);
+                    mainWindow.changeContentPane(qrClass);
+
+                }
+            }
+        };
+
+        TableColumnModel modeloColumnas = this.tblClases.getColumnModel();
+        modeloColumnas.getColumn(3).setCellRenderer(new JButtonRenderer("Mostrar QR"));
+        modeloColumnas.getColumn(3).setCellEditor(new JButtonCellEditor("Mostrar QR", onMostrarQRClick));
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
-    
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
@@ -86,8 +134,8 @@ public class FrmMaestroClases extends javax.swing.JPanel {
         lblMaestroNombre = new javax.swing.JLabel();
         lblMatricula = new javax.swing.JLabel();
         lblClases = new javax.swing.JLabel();
-        tblClases = new javax.swing.JScrollPane();
-        tablaAlumnos = new javax.swing.JTable();
+        JscrollPane = new javax.swing.JScrollPane();
+        tblClases = new javax.swing.JTable();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -131,7 +179,7 @@ public class FrmMaestroClases extends javax.swing.JPanel {
         lblClases.setText("Clases");
         ContentPanel.add(lblClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 140, -1, -1));
 
-        tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+        tblClases.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -143,25 +191,26 @@ public class FrmMaestroClases extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        tblClases.setViewportView(tablaAlumnos);
-        if (tablaAlumnos.getColumnModel().getColumnCount() > 0) {
-            tablaAlumnos.getColumnModel().getColumn(0).setPreferredWidth(400);
-            tablaAlumnos.getColumnModel().getColumn(1).setMinWidth(0);
-            tablaAlumnos.getColumnModel().getColumn(1).setPreferredWidth(0);
-            tablaAlumnos.getColumnModel().getColumn(1).setMaxWidth(0);
-            tablaAlumnos.getColumnModel().getColumn(2).setMinWidth(0);
-            tablaAlumnos.getColumnModel().getColumn(2).setPreferredWidth(0);
-            tablaAlumnos.getColumnModel().getColumn(2).setMaxWidth(0);
+        tblClases.setRowHeight(40);
+        JscrollPane.setViewportView(tblClases);
+        if (tblClases.getColumnModel().getColumnCount() > 0) {
+            tblClases.getColumnModel().getColumn(0).setPreferredWidth(400);
+            tblClases.getColumnModel().getColumn(1).setMinWidth(0);
+            tblClases.getColumnModel().getColumn(1).setPreferredWidth(0);
+            tblClases.getColumnModel().getColumn(1).setMaxWidth(0);
+            tblClases.getColumnModel().getColumn(2).setMinWidth(0);
+            tblClases.getColumnModel().getColumn(2).setPreferredWidth(0);
+            tblClases.getColumnModel().getColumn(2).setMaxWidth(0);
         }
 
-        ContentPanel.add(tblClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 690, 460));
+        ContentPanel.add(JscrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 690, 460));
 
         add(ContentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 720));
     }// </editor-fold>//GEN-END:initComponents
@@ -175,13 +224,13 @@ public class FrmMaestroClases extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Panel ContentPanel;
     private javax.swing.JLabel ItsonLogo1;
+    private javax.swing.JScrollPane JscrollPane;
     private javax.swing.JLabel btnReturn1;
     private javax.swing.JPanel headerPanel1;
     private javax.swing.JLabel lblClases;
     private javax.swing.JLabel lblImgClass1;
     private javax.swing.JLabel lblMaestroNombre;
     private javax.swing.JLabel lblMatricula;
-    private javax.swing.JTable tablaAlumnos;
-    private javax.swing.JScrollPane tblClases;
+    private javax.swing.JTable tblClases;
     // End of variables declaration//GEN-END:variables
 }
