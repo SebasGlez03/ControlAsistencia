@@ -5,9 +5,12 @@
 package dao;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import entidades.Evento;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -110,7 +113,7 @@ public class EventoDAO {
         System.out.println("Evento modificado correctamente");
 
     }
-    
+
     public Evento obtenerEventoPorTitulo(String titulo) {
         MongoClient mongoClient = new MongoClient("localhost", 27017);
         MongoDatabase database = mongoClient.getDatabase("cia");
@@ -135,7 +138,7 @@ public class EventoDAO {
         // Crear el objeto Evento
         return new Evento(titulo, descripcion, fechaInicio, fechaFinal, horaInicio, horaFinal, campus, categoria);
     }
-    
+
     public List<Evento> obtenerTodos() {
         // Conexión a la base de datos
         MongoClient mongoClient = new MongoClient("localhost", 27017);
@@ -162,5 +165,65 @@ public class EventoDAO {
         }
 
         return eventos;
+    }
+
+    public void eliminarEvento(Evento evento) {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("eventos");
+
+        Document query = new Document("titulo", evento.getTitulo());
+
+        collection.deleteOne(query);
+    }
+
+    public List<Evento> obtenerTodosEventos() {
+        // Crear una lista para almacenar los usuarios obtenidos
+        List<Evento> listaEventos = new ArrayList<>();
+
+        // Conexión con la base de datos MongoDB
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        MongoDatabase database = mongoClient.getDatabase("cia");
+        MongoCollection<Document> collection = database.getCollection("eventos");
+
+        // Recuperar todos los documentos de la colección
+        FindIterable<Document> documentos = collection.find();
+
+        // Iterar sobre cada documento y mapearlo a un objeto Usuario
+        for (Document doc : documentos) {
+            String titulo = doc.getString("titulo");
+            String descripcion = doc.getString("descripcion");
+            Date fechaInicio = doc.getDate("fechaInicio");
+            Date fechaFin = doc.getDate("fechaFinal");
+            String horaInicio = doc.getString("horaInicio");
+            String horaFin = doc.getString("horaFinal");
+            String campus = doc.getString("campus");
+            String categoria = doc.getString("categoria");
+
+//            SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+//
+//            // Convertir la cadena a Date
+//            try {
+//                // Intentar parsear las fechas
+//                Date fechaInicioParsed = formato.parse(fechaInicio);
+//                Date fechaFinParsed = formato.parse(fechaFin);
+//
+//                // Crear un objeto Evento y agregarlo a la lista
+//                Evento evento = new Evento(titulo, descripcion, fechaInicioParsed, fechaFinParsed, horaInicio, horaFin, campus, categoria);
+//                listaEventos.add(evento);
+//            } catch (ParseException e) {
+//                e.printStackTrace(); // Imprime el error para depuración
+//                // Opcional: manejar el caso de error (por ejemplo, omitir este evento)
+//            }
+            // Crear un objeto Evento y agregarlo a la lista
+            Evento evento = new Evento(titulo, descripcion, fechaInicio, fechaFin, horaInicio, horaFin, campus, categoria);
+            listaEventos.add(evento);
+
+        }
+
+        // Cerrar el cliente MongoDB
+        mongoClient.close();
+
+        return listaEventos;
     }
 }

@@ -164,6 +164,10 @@ public interface IPersistencia {
      */
     void modificarEvento(Evento evento, Evento eventoModificado);
 
+    void eliminarEvento(Evento evento);
+
+    public List<Evento> obtenerTodosEventos();
+
     /**
      * Obtiene una clase del sistema.
      *
@@ -238,14 +242,14 @@ public interface IPersistencia {
      * @param qr QR a agregar a la base de datos
      */
     public void agregarQR(QR qr);
-    
+
     /**
      * Guarda un QR en la base de datos.
      *
      * @param qr Objeto QR que se desea guardar.
      */
     public void guardarQR(QR qr);
-    
+
     /**
      * Crea una nueva sesión vinculada a un QR en la base de datos.
      *
@@ -264,5 +268,42 @@ public interface IPersistencia {
      * materias.
      */
     public List<Clase> obtenerMateriasConNombresPorMaestro(int matricula);
+
+    /**
+     * Agrega un Aviso a la base de datos.
+     *
+     * @param aviso
+     */
+    public void agregarAviso(Aviso aviso);
+
+    /**
+     * Obtiene el aviso del parametro de la base de datos.
+     *
+     * @param aviso
+     * @return
+     */
+    public Aviso obtenerAviso(Aviso aviso);
+
+    /**
+     * Obtiene la lista de todos los avisos de la base de datos.
+     *
+     * @return
+     */
+    public List<Aviso> obtenerListaAvisos();
+
+    /**
+     * Actualiza un aviso de la base de datos
+     *
+     * @param aviso aviso que se quiere actualizar.
+     * @param avisoActualizado
+     */
+    public void actualizarAviso(Aviso aviso, Aviso avisoActualizado);
+
+    /**
+     * Elimina un aviso de la base de datos.
+     *
+     * @param aviso
+     */
+    public void eliminarAviso(Aviso aviso);
 
 }

@@ -1,6 +1,7 @@
 dao\QrDAO.class
 persistencia\IPersistencia.class
 dao\AlumnoDAO.class
+dao\AvisoDAO.class
 dao\ClaseDAO.class
 dao\UsuarioDAO.class
 dao\MaestroDAO.class

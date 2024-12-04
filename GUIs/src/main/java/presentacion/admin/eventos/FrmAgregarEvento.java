@@ -87,6 +87,7 @@ public class FrmAgregarEvento extends javax.swing.JFrame {
         comboBoxCategoria = new javax.swing.JComboBox<>();
         btnAgregar = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JLabel();
+        btnRegresar = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -163,6 +164,15 @@ public class FrmAgregarEvento extends javax.swing.JFrame {
         });
         getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 690, -1, -1));
 
+        btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/btnReturn.png"))); // NOI18N
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRegresarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 700, -1, -1));
+
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/FrmEvento.png"))); // NOI18N
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -198,7 +208,8 @@ public class FrmAgregarEvento extends javax.swing.JFrame {
         Date fechaFinPacifico = convertirFechaAPacifico(fechaFin);
 
         // Crear el objeto Evento
-        Evento nuevoEvento = new Evento(titulo, descripcion, fechaInicio, fechaFin, horaInicio, horaFin, campus, categoria);
+//        Evento nuevoEvento = new Evento(titulo, descripcion, fechaInicio, fechaFin, horaInicio, horaFin, campus, categoria);
+        Evento nuevoEvento = new Evento(titulo, descripcion, fechaInicioPacifico, fechaFinPacifico, horaInicio, horaFin, campus, categoria);
 
         // Enviar el objeto a la capa de persistencia
         FachadaPersistencia fachada = new FachadaPersistencia();
@@ -211,8 +222,16 @@ public class FrmAgregarEvento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        dispose();
     }//GEN-LAST:event_btnCancelarMouseClicked
+
+    private void btnRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegresarMouseClicked
+        // TODO add your handling code here:
+        FrmGestionarEventos fr = new FrmGestionarEventos();
+        fr.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -254,6 +273,7 @@ public class FrmAgregarEvento extends javax.swing.JFrame {
     private javax.swing.JLabel Titulo;
     private javax.swing.JLabel btnAgregar;
     private javax.swing.JLabel btnCancelar;
+    private javax.swing.JLabel btnRegresar;
     private com.toedter.calendar.JDateChooser campoDateFechaFin;
     private com.toedter.calendar.JDateChooser campoDateFechaInicio;
     private javax.swing.JTextField campoTextoDescripcion;

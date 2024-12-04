@@ -4,7 +4,9 @@
  */
 package subsistemaEvento;
 
+import dto.EventoDTO;
 import entidades.Evento;
+import java.util.List;
 
 /**
  *
@@ -12,23 +14,30 @@ import entidades.Evento;
  */
 public class FachadaEvento implements IEvento{
 
-    private IEvento controlEvento;  // Interfaz IEvento que puede ser implementada por ControlEvento
-
+    private ControlEvento controlEvento = new ControlEvento();; // Interfaz IEvento que puede ser implementada por ControlEvento
+    
     @Override
-    public void agregarEvento(Evento evento) {
+    public void agregarEvento(EventoDTO evento) {
         controlEvento.agregarEvento(evento);
     }
 
     @Override
-    public void modificarEvento(Evento evento, Evento eventoModificado) {
+    public void modificarEvento(EventoDTO evento, EventoDTO eventoModificado) {
         controlEvento.modificarEvento(evento, eventoModificado);
     }
 
     @Override
-    public Evento obtenerEvento(String titulo) {
+    public EventoDTO obtenerEvento(String titulo) {
         return controlEvento.obtenerEvento(titulo);
     }
-    
+    public void eliminarEvento(EventoDTO evento) {
+          controlEvento.eliminarEvento(evento);
+    }
+
+    @Override
+    public List<Evento> obtenerListaEventos() {
+       return controlEvento.obtenerListaEventos();
+    }
     
     
 }
